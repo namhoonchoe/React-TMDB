@@ -1,13 +1,15 @@
 import React from "react";
 import Router from "./Router"
+import { ChakraProvider } from "@chakra-ui/react"
 
 import GlobalStyles from "../Styles/GlobalStyles"
 
 function App() {
   return <>
-   <Router />
-   <GlobalStyles />
-  
+  <ChakraProvider>
+    <Router />
+    <GlobalStyles />
+  </ChakraProvider>
   </>
 }
 

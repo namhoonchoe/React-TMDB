@@ -13,11 +13,11 @@ const MovieContainer:React.FC = () => {
         nowPlaying:null,
         upComing:null,
         popular:null})
-    const [error,setError] = useState<string|null>(null)
+    const [error,setError] = useState<boolean>(false)
     const [loading,setLoading] = useState<boolean>(true)
 
     useEffect(() =>{
-    const movieData = async() =>{
+    const getMovieData = async() =>{
         try { 
         const { 
             data:{ results:nowPlaying } 
@@ -34,12 +34,12 @@ const MovieContainer:React.FC = () => {
             setMovie({...movie,nowPlaying,upComing,popular})
 
         } catch {   
-            setError("can't find movie data")
+            setError(true)
         } finally {
             setLoading(false)
         }
     } 
-    movieData()
+    getMovieData()
 
     },[movie])
     const {nowPlaying,upComing,popular} = movie
@@ -50,7 +50,7 @@ const MovieContainer:React.FC = () => {
                 upComing={upComing}
                 popular={popular}
                 error={error}
-                loading={loading}
+                loading={loading}   
             />
         </div>
     )
