@@ -6,7 +6,7 @@ interface IMovieData {
     nowPlaying:null,
     upComing:null,
     popular:null
-    }
+}
 
 const MovieContainer:React.FC = () => {
     const [movie,setMovie] = useState<IMovieData>({ 
@@ -30,7 +30,6 @@ const MovieContainer:React.FC = () => {
         const {
             data: { results: popular },
             } = await movieApi.popular();
-
             setMovie({...movie,nowPlaying,upComing,popular})
 
         } catch {   

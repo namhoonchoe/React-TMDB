@@ -1,7 +1,6 @@
 import React from "react";
-import { Grid,Box,Text } from "@chakra-ui/react"
-
-type IMovieData = []
+import Section from "../../Components/Section"
+import LoadingSpinner from "../../Components/LoadingSpinner"
 
 interface IMovieProps {
   nowPlaying:null|IMovieData,
@@ -15,28 +14,31 @@ const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error
   return (
     <>
       { loading 
-      ? <span role="img" aria-label="Loading"> ⏰ </span>
+      ?<LoadingSpinner/> 
       : null }
 
       { error ? "An error has occured" : null }
 
       { nowPlaying !== null && nowPlaying.length > 0 
-      ? <>
-          <Text fontSize="2xl">NowPlaying</Text>
-          <Grid>
-            
-          </Grid>
-        </>
+      ? <Section 
+        title={"NowPlaying"}
+        sectionInfos={nowPlaying}/>
       :null
       }
 
       { upComing !== null && upComing.length > 0 
-      ?  <Text fontSize="2xl">UpComing</Text>  
+      ? <Section 
+      title={"UpComing"}
+      sectionInfos={upComing}
+      />
       :null
       }
 
       { popular !== null && popular.length > 0 
-      ?  <Text fontSize="2xl">Popular</Text>  
+      ? <Section 
+        title={"Popular"}
+        sectionInfos={popular}
+        />
       :null
       }
       

@@ -1,10 +1,25 @@
 import React from 'react'
-import { Container  } from "@chakra-ui/react"
+import { Grid ,Text, List} from "@chakra-ui/react"
+import InfoCard from './InfoCard'
 
-export default function Section() {
+
+interface ISectionInfo {
+    title:String
+    sectionInfos:IMovieData
+}
+
+
+
+const Section:React.FC<ISectionInfo> = ({title,sectionInfos}) => {
     return (
         <>
-            
+        <Text fontSize="2xl" mx={2}>{title}</Text>
+        {sectionInfos.map((movie:any) => (<InfoCard 
+            title={movie.title}
+            posterPath={movie.poster_path}
+            />))}
         </>
     )
 }
+
+export default Section
