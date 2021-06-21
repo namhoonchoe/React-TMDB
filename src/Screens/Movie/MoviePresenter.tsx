@@ -17,7 +17,7 @@ const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error
       ?<LoadingSpinner/> 
       : null }
 
-      { error ? "An error has occured" : null }
+      { error ? <p>"An error has occured"</p>: null }
 
       { nowPlaying !== null && nowPlaying.length > 0 
       ? <Section 
