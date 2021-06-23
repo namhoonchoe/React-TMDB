@@ -15,7 +15,7 @@ const Section:React.FC<ISectionInfo> = ({title,sectionInfos}) => {
   <>
     <Box mx={3} mt={4} p={2}>
       <Text fontSize="2xl" >{title}</Text>
-      <Grid templateColumns="repeat(4, 1fr)" >
+      <Grid templateColumns="repeat(5, 1fr)" >
           {sectionInfos.map((movie:any) => (<InfoCard
           title={movie.original_title}
           posterPath={movie.poster_path}

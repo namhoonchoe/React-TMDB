@@ -1,19 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import SearchBox from "./SearchBox";
+import { Flex, Spacer,Text,Box } from "@chakra-ui/react"
 
-
-const HeaderBox = styled.header`
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:12rem;
-`
-const List = styled.ul`
-  margin:2.5px 5px;
-  display:flex;
-  justify-content:flex-start
-
-`
 
 interface Path {
   current:boolean
@@ -21,43 +11,54 @@ interface Path {
 
 
 const StyledNav = styled.li`
-  width:100vw;
+  list-style:none;
   font-size:15px;
   margin: 0 5px;
   border-bottom: 3px solid
   ${(props:Path) => (props.current ? "#3498db" : "transparent")};  
-
 `
 
 const StyledLink = styled(Link)`
-
-
 `
 
-
-
-const Header = () => {
+const Header:React.FC = () => {
   const path =  useLocation().pathname
 
   return (
-    <HeaderBox>
-      <List>
-        <StyledNav current = {path ===  "/movie"} >          
-          <StyledLink to="/movie">Movies</StyledLink>
-        </StyledNav>
-        <StyledNav current = {path ===  "/tv"}>          
-          <StyledLink to="/tv">TV</StyledLink>
-        </StyledNav>
-        <StyledNav current = {path === "/person"}>          
-          <StyledLink to="/person">Person</StyledLink>
-        </StyledNav>
-      </List>
-      <List>
-        <StyledNav current = {path === "/search"}>          
-          <StyledLink to="/search">Search</StyledLink>
-        </StyledNav>
-      </List>
-    </HeaderBox>
+    <>
+      <Box display="flex" alignItems="center" mx={5} mt={2.5} >
+        <Flex justify="flex-start" align="center">
+          <StyledNav current = {path ===  "/"} >          
+            <StyledLink to="/">
+              <Text fontSize="lg" decoration="none">Home</Text>
+            </StyledLink>
+          </StyledNav>
+          <StyledNav current = {path ===  "/movie"}>          
+            <StyledLink to="/movie">
+              <Text fontSize="lg">Movies</Text>
+            </StyledLink>
+          </StyledNav>
+          <StyledNav current = {path ===  "/tv"} >          
+            <StyledLink to="/tv">
+              <Text fontSize="lg">TV</Text>
+            </StyledLink>
+          </StyledNav>
+          <StyledNav current = {path ===  "/person"} >          
+            <StyledLink to="/person">
+              <Text fontSize="lg">Person</Text>
+            </StyledLink>
+          </StyledNav>
+        </Flex>
+        <Spacer/>
+        <Box> 
+          <StyledNav current = {path ===  "/search"} >          
+            <StyledLink to="/search">
+              <SearchBox/>
+            </StyledLink>
+          </StyledNav>        
+        </Box>
+      </Box>
+    </>
   )
 };
 
