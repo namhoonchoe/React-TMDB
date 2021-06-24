@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import SearchBox from "./SearchBox";
@@ -51,11 +50,7 @@ const Header:React.FC = () => {
         </Flex>
         <Spacer/>
         <Box> 
-          <StyledNav current = {path ===  "/search"} >          
-            <StyledLink to="/search">
-              <SearchBox/>
-            </StyledLink>
-          </StyledNav>        
+          <SearchBox/>
         </Box>
       </Box>
     </>
