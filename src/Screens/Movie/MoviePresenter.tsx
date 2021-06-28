@@ -4,9 +4,9 @@ import { Flex } from "@chakra-ui/react"
 import LoadingSpinner from "../../Components/LoadingSpinner"
 
 interface IMovieProps {
-  nowPlaying:null|IMovieData,
-  upComing:null|IMovieData,
-  popular:null|IMovieData,
+  nowPlaying:null|MovieData,
+  upComing:null|MovieData,
+  popular:null|MovieData,
   error:boolean,
   loading:boolean
 }

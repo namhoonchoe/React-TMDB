@@ -1,2 +1,2 @@
-type IMovieData = []
+type MovieData = []
 
