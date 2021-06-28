@@ -24,36 +24,36 @@ const Header:React.FC = () => {
   const path =  useLocation().pathname
 
   return (
-    <>
-      <Box display="flex" alignItems="center" mx={5} mt={2.5} >
-        <Flex justify="flex-start" align="center">
-          <StyledNav current = {path ===  "/"} >          
-            <StyledLink to="/">
-              <Text fontSize="lg" decoration="none">Home</Text>
-            </StyledLink>
-          </StyledNav>
-          <StyledNav current = {path ===  "/movie"}>          
-            <StyledLink to="/movie">
-              <Text fontSize="lg">Movies</Text>
-            </StyledLink>
-          </StyledNav>
-          <StyledNav current = {path ===  "/tv"} >          
-            <StyledLink to="/tv">
-              <Text fontSize="lg">TV</Text>
-            </StyledLink>
-          </StyledNav>
-          <StyledNav current = {path ===  "/person"} >          
-            <StyledLink to="/person">
-              <Text fontSize="lg">Person</Text>
-            </StyledLink>
-          </StyledNav>
-        </Flex>
-        <Spacer/>
-        <Box> 
-          <SearchBox/>
-        </Box>
+  <>
+    <Box display="flex" alignItems="center" mx={5} mt={2.5} >
+      <Flex justify="flex-start" align="center">
+        <StyledNav current = {path ===  "/"} >          
+          <StyledLink to="/">
+            <Text fontSize="lg" decoration="none">Home</Text>
+          </StyledLink>
+        </StyledNav>
+        <StyledNav current = {path ===  "/movie"}>          
+          <StyledLink to="/movie">
+            <Text fontSize="lg">Movies</Text>
+          </StyledLink>
+        </StyledNav>
+        <StyledNav current = {path ===  "/tv"} >          
+          <StyledLink to="/tv">
+            <Text fontSize="lg">TV</Text>
+          </StyledLink>
+        </StyledNav>
+        <StyledNav current = {path ===  "/tag"} >          
+          <StyledLink to="/tag">
+            <Text fontSize="lg">Tag</Text>
+          </StyledLink>
+        </StyledNav>
+      </Flex>
+      <Spacer/>
+      <Box> 
+        <SearchBox/>
       </Box>
-    </>
+    </Box>
+  </>
   )
 };
 

@@ -1,3 +1,3 @@
-import PersonPresenter from "./PersonPresenter";
+import PersonContainer from "./PersonContainer";
 
-export default PersonPresenter
+export default PersonContainer

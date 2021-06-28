@@ -13,38 +13,39 @@ interface IMovieProps {
 
 const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error,loading}) => {
   return (
-    <>
-		  <Flex direction="column" justify="center" ml={5} width="100vw">
-        { loading 
-        ?<LoadingSpinner/> 
-        : null }
+  <>
+	  <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
+      { loading 
+      ?<LoadingSpinner/> 
+      : null }
 
-        { error ? <p>"An error has occured"</p>: null }
+      { error ? <p>"An error has occured"</p>: null }
 
-        { nowPlaying !== null && nowPlaying.length > 0 
-        ? <Section 
-          title={"NowPlaying"}
-          sectionInfos={nowPlaying}/>
-        :null
-        }
-
-        { upComing !== null && upComing.length > 0 
-        ? <Section 
-        title={"UpComing"}
-        sectionInfos={upComing}
+      { popular !== null && popular.length > 0 
+      ? <Section 
+        title={"Popular"}
+        sectionInfos={popular}
         />
-        :null
-        }
+      :null
+      }
 
-        { popular !== null && popular.length > 0 
-        ? <Section 
-          title={"Popular"}
-          sectionInfos={popular}
-          />
-        :null
-        }
-		  </Flex>
-    </>
+      { nowPlaying !== null && nowPlaying.length > 0 
+      ? <Section 
+        title={"NowPlaying"}
+        sectionInfos={nowPlaying}/>
+      :null
+      }
+      
+      { upComing !== null && upComing.length > 0 
+      ? <Section 
+      title={"UpComing"}
+      sectionInfos={upComing}
+      />
+      :null
+      }
+      
+	  </Flex>
+  </>
 
   )
   

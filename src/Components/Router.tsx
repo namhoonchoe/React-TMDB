@@ -17,6 +17,7 @@ const RoootRouter: React.FC = () => {
           <Route path="/" exact component={Home} />
           <Route path="/tv" component={TV} />
           <Route path="/search" component={Search} />
+          <Route path="/tag" component={Search} />
           <Route path="/person" component={Person} />
           <Route path="/movie/" component={Movie} />
         </Switch>

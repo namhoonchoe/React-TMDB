@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from "react-router-dom";
 import { Search2Icon,CloseIcon } from '@chakra-ui/icons'
 import { InputGroup,Input,Flex } from '@chakra-ui/react'
 
@@ -16,9 +17,9 @@ const SearchBox:React.FC= () => {
       <Flex justify="center" align="center" >
         {
           clicked ? 
-          <InputGroup display="flex" alignItems="center"  h={4} >
-            <Input placeholder="Search" size="sm" mr={2} /> <CloseIcon onClick={toggleClick}/>
-          </InputGroup>
+            <InputGroup display="flex" alignItems="center"  h={4} >          
+              <Input placeholder="Search" size="sm" mr={2}/> <CloseIcon onClick={toggleClick}/>
+            </InputGroup>
           : <Search2Icon onClick={toggleClick} w={4} h={4}/>
         }
       </Flex>
