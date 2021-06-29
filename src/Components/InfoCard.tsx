@@ -20,18 +20,21 @@ const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
 		boxSize="12rem"
 		>
 			<Box >
-		  	<Image 
-		  		boxSize="12rem"
-		  		height="35vh"
-		  		borderTopRadius="md"
-		  		src={`https://image.tmdb.org/t/p/w300${posterPath}`}
+				<Image 
+					boxSize="12rem"
+					height="35vh"
+					borderTopRadius="md"
+					src={`https://image.tmdb.org/t/p/w300${posterPath}`}
 				/>
 			</Box>
-			<Box boxSize="12rem" my={1.5} px={1}
-			  borderBottomRightRadius="md">
-			  <Text fontSize="md" color="gray.300">
-			    {title}
-			  </Text>	
+			<Box 
+			boxSize="12rem" my={1.5} px={1}
+			borderBottomRightRadius="md">
+				<Text 
+					fontSize="md" 
+					color="gray.300">
+				{title}
+				</Text>	
 			</Box>
 		</Flex>
   </>

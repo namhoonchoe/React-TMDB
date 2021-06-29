@@ -1,7 +1,11 @@
 import React from "react";
 
 const DetailPresenter = () => {
-  return <div>this is detail</div>;
+  return(
+  <>
+  <div></div>
+  </>
+  )
 };
 
 export default DetailPresenter;

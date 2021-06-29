@@ -29,7 +29,7 @@ const Header:React.FC = () => {
       <Flex justify="flex-start" align="center">
         <StyledNav current = {path ===  "/"} >          
           <StyledLink to="/">
-            <Text fontSize="lg" decoration="none">Home</Text>
+            <Text fontSize="lg" decoration="none">KinoGuide</Text>
           </StyledLink>
         </StyledNav>
         <StyledNav current = {path ===  "/movie"}>          

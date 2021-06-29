@@ -13,9 +13,9 @@ export const movieApi = {
   nowPlaying: () => api.get("movie/now_playing"),
   upComing: () => api.get("movie/upcoming"),
   popular: () => api.get("movie/popular"),
-  movieDetail: (id:string) => api.get(`movie/${id}`),
-  similar: (id:string) => api.get(`/movie/${id}/similar`),
-  credits: (id:string) => api.get(`/movie/${id}/credits`),
+  movieDetail: (id:number) => api.get(`movie/${id}`),
+  similar: (id:number) => api.get(`/movie/${id}/similar`),
+  credits: (id:number) => api.get(`/movie/${id}/credits`),
   movieSearch: (term:string) =>
     api.get("search/movie", {
       params: {
@@ -28,9 +28,9 @@ export const tvApi = {
   topRated: () => api.get("tv/top_rated"),
   popular: () => api.get("tv/popular"),
   airingToday: () => api.get("tv/airing_today"),
-  tvDetail: (id:string) => api.get(`tv/${id}`),
-  similar: (id:string) => api.get(`/tv/${id}/similar`),
-  credits: (id:string) => api.get(`/tv/${id}/credits`),
+  tvDetail: (id:number) => api.get(`tv/${id}`),
+  similar: (id:number) => api.get(`/tv/${id}/similar`),
+  credits: (id:number) => api.get(`/tv/${id}/credits`),
 
   tvSearch: (term:string) =>
     api.get("search/tv", {
@@ -42,13 +42,13 @@ export const tvApi = {
 
 export const personApi = {
   popular: () => api.get("person/popular"),
-  peopleDetail: (id:string) =>
+  peopleDetail: (id:number) =>
     api.get(`person/${id}`, {
       params: {
         append_to_response: "images",
       },
     }),
-  credits: (id:string) => api.get(`person/${id}/movie_credits`),
+  credits: (id:number) => api.get(`person/${id}/movie_credits`),
 };
 
 export const trendingApi = {
