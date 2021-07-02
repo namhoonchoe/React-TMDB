@@ -1,6 +1,6 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-//import Detail from "../Screens/Detail";
+import Detail from "../Screens/Detail";
 import Header from "./Header";
 import Home from "../Screens/Home";
 import Movie from "../Screens/Movie";
@@ -19,6 +19,9 @@ const RoootRouter: React.FC = () => {
           <Route path="/search" component={Search} />
           <Route path="/tag" component={Search} />
           <Route path="/person" component={Person} />
+          <Route path="/movie/:id" component={Detail} />
+          <Route path="/tv/:id" component={Detail} />
+          <Route path="/person/:id" component={Detail} />
           <Route path="/movie/" component={Movie} />
         </Switch>
       </>
