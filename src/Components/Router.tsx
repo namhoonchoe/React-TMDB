@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch,Redirect } from "react-router-dom";
 import Detail from "../Screens/Detail";
 import Header from "./Header";
 import Home from "../Screens/Home";
@@ -15,14 +15,15 @@ const RoootRouter: React.FC = () => {
       <Header/>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/tv" component={TV} />
           <Route path="/search" component={Search} />
           <Route path="/tag" component={Search} />
-          <Route path="/person" component={Person} />
           <Route path="/movie/:id" component={Detail} />
           <Route path="/tv/:id" component={Detail} />
           <Route path="/person/:id" component={Detail} />
-          <Route path="/movie/" component={Movie} />
+          <Route path="/movie" component={Movie} />
+          <Route path="/tv" component={TV} />
+          <Route path="/person" component={Person} />
+          <Redirect from="*" to="/" />
         </Switch>
       </>
     </Router>

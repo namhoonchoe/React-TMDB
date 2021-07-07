@@ -19,7 +19,6 @@ const PersonContainer:React.FC = () => {
       const {
         data: { results: popular },
         } = await personApi.popular();
-  
         setPerson({...person,popular})
       } catch {   
         setError(true)
