@@ -57,7 +57,7 @@ export default function DetailContainer() {
   const { movie, series, person } = detail
   return (
     <>
-      { movie ? <MovieDetail/> : null }
+      { movie ?  <MovieDetail /> : null }
       { series ? <SeriesDetail/> : null }
       { person ? <PersonDetail/> : null }
     </>

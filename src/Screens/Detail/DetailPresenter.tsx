@@ -6,8 +6,8 @@ interface IDetailProps {
   detail:null|DetailData
   cast:null|DetailData
   similar:null|DetailData
-  loading:boolean
-  error:boolean
+  loading:undefined|boolean
+  error:undefined|boolean
 }
 
 const DetailPresenter:React.FC<IDetailProps> = ({ detail,cast,similar,error,loading }) => {
