@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "@chakra-ui/react"
-import LoadingSpinner from "../../Components/LoadingSpinner"
+import LoadingSpinner from "@components/LoadingSpinner"
 
 interface IDetailProps {
   detail:null|DetailData

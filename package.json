@@ -5,6 +5,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
     "@chakra-ui/react": "^1.6.3",
+    "@craco/craco": "^6.2.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/open-sans": "^4.5.0",
@@ -35,9 +36,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -58,8 +59,7 @@
       "last 1 safari version"
     ]
   },
-  "main": "index.js",
-  "repository": "https://github.com/namhoonchoe/React-TMDB.git",
-  "author": "namhoonchoe <sysynh2012@gmail.com>",
-  "license": "MIT"
+  "devDependencies": {
+    "craco-alias": "^3.0.1"
+  }
 }

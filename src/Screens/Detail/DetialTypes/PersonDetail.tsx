@@ -13,6 +13,7 @@ const PersonDetail:React.FC = () => {
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
   let { id } = useParams() as any
+  
   useEffect(() => {
     const getSeriesDetail = async () => {
       try {
