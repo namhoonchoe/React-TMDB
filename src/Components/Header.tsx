@@ -1,52 +1,31 @@
-import { Link, useLocation } from "react-router-dom";
-import styled from "styled-components";
+import { Link,/* useLocation */} from "react-router-dom";
 import SearchBox from "./SearchBox";
-import { Flex, Spacer,Text,Box } from "@chakra-ui/react"
+import { Flex, Spacer,Text,Box, Heading } from "@chakra-ui/react"
 
 
-interface Path {
+/*interface Path {
   current:boolean
-}
-
-
-const StyledNav = styled.li`
-  list-style:none;
-  font-size:15px;
-  margin: 0 5px;
-  border-bottom: 3px solid
-  ${(props:Path) => (props.current ? "#3498db" : "transparent")};  
-`
-
-const StyledLink = styled(Link)`
-`
+}*/
 
 const Header:React.FC = () => {
-  const path =  useLocation().pathname
+ // const path =  useLocation().pathname
 
   return (
   <>
     <Box display="flex" alignItems="center" mx={5} mt={2.5} >
-      <Flex justify="flex-start" align="center">
-        <StyledNav current = {path ===  "/"} >          
-          <StyledLink to="/">
-            <Text fontSize="lg" decoration="none">KinoGuide</Text>
-          </StyledLink>
-        </StyledNav>
-        <StyledNav current = {path ===  "/movie"}>          
-          <StyledLink to="/movie">
-            <Text fontSize="lg">Movies</Text>
-          </StyledLink>
-        </StyledNav>
-        <StyledNav current = {path ===  "/tv"} >          
-          <StyledLink to="/tv">
-            <Text fontSize="lg">TV</Text>
-          </StyledLink>
-        </StyledNav>
-        <StyledNav current = {path ===  "/tag"} >          
-          <StyledLink to="/tag">
-            <Text fontSize="lg">Tag</Text>
-          </StyledLink>
-        </StyledNav>
+      <Flex justify="flex-start" align="center" >
+        <Link to="/">
+          <Heading fontSize="md" decoration="none" pr={1} >Kino guide</Heading>
+        </Link>
+        <Link to="/movie">
+          <Text fontSize="lg" pr={1}>Movies</Text>
+        </Link>
+        <Link to="/tv">
+          <Text fontSize="lg" pr={1}>TV</Text>
+        </Link>
+        <Link to="/tag">
+          <Text fontSize="lg" pr={1}>Tag</Text>
+        </Link>
       </Flex>
       <Spacer/>
       <Box> 

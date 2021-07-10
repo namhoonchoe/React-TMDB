@@ -7,6 +7,8 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@fontsource/open-sans": "^4.5.0",
+    "@fontsource/ubuntu": "^4.5.0",
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -17,10 +19,10 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9",
     "autoprefixer": "^10.2.6",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
+    "focus-visible": "^5.2.0",
     "framer-motion": "^4",
     "persist": "^0.2.7",
     "react": "^17.0.2",
@@ -29,8 +31,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
-    "styled-components": "^5.3.0",
-    "styled-reset": "^4.3.4",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -57,5 +57,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/namhoonchoe/React-TMDB.git",
+  "author": "namhoonchoe <sysynh2012@gmail.com>",
+  "license": "MIT"
 }

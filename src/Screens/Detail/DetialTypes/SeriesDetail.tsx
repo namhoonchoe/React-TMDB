@@ -5,7 +5,7 @@ import DetailPresenter from "../DetailPresenter"
 
 
 
-const  SeriesDetail:React.FC = () => {
+const SeriesDetail:React.FC = () => {
   const [detail,setDetail] = useState<IDetailInfos>({
     detailInfo:null,
     credits:null,

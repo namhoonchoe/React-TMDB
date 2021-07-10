@@ -1,3 +1,3 @@
-import MyListPresenter from "./MyListPresenter"
+import MyListContainer from "./MyListContainer"
 
-export default MyListPresenter
+export default MyListContainer

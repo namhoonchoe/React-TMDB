@@ -1,6 +1,10 @@
 import React from "react";
 
-const MyListPresenter = () => {
+interface IListProps {
+
+}
+
+const MyListPresenter:React.FC<IListProps> = () => {
   return <div>THIS IS BOOKMARK</div>;
 };
 

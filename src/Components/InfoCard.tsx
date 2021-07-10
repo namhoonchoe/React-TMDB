@@ -4,9 +4,8 @@ import { Text ,Image,Box,Flex} from "@chakra-ui/react"
 interface IInfoProps {
   title:string
   posterPath:string
- 	rating:number
+  rating:number
 }
-
 
 const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
   return (

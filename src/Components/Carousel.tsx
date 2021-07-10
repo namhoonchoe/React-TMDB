@@ -3,7 +3,7 @@ import InfoCard from './InfoCard'
 import { Flex } from "@chakra-ui/react"
 
 
-type CarouselData =[]
+type CarouselData = []
 
 interface ICarouselProps {
 	carouselData:CarouselData

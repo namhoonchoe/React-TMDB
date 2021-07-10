@@ -4,7 +4,7 @@ import { personApi } from "../../../Api";
 import DetailPresenter from "../DetailPresenter"
 
 
-export default function PersonDetail() {
+const PersonDetail:React.FC = () => {
   const [detail,setDetail] = useState<IDetailInfos>({
     detailInfo:null,
     credits:null,
@@ -30,7 +30,7 @@ export default function PersonDetail() {
     }
     getSeriesDetail()  
   }, [detail,id])
-  const { detailInfo, credits, similars } =detail
+  const { detailInfo, credits, similars } = detail
 
   return (
     <>
@@ -45,3 +45,5 @@ export default function PersonDetail() {
     </>
   )
 }
+
+export default PersonDetail
