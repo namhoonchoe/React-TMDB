@@ -1,12 +1,12 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch,Redirect } from "react-router-dom";
-import Detail from "../Screens/Detail";
+import Detail from "@screens/Detail";
 import Header from "./Header";
-import Home from "../Screens/Home";
-import Movie from "../Screens/Movie";
-import Person from "../Screens/Person"
-import TV from "../Screens/TV";
-import Search from "../Screens/Search";
+import Home from "@screens/Home";
+import Movie from "@screens/Movie";
+import Person from "@screens/Person"
+import TV from "@screens/TV";
+import Search from "@screens/Search";
 
 const RoootRouter: React.FC = () => {
   return (

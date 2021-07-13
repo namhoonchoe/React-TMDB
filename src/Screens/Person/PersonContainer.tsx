@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import PersonPresenter from "./PersonPresenter";
-import { personApi } from "Api";
+import { personApi } from "@api";
 
 interface IPersonData {
   popular:null

@@ -63,7 +63,15 @@
     "craco-alias": "^3.0.1"
   },
   "main": "index.js",
-  "repository": "https://github.com/namhoonchoe/React-TMDB.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namhoonchoe/React-TMDB.git"
+  },
   "author": "namhoonchoe <sysynh2012@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/namhoonchoe/React-TMDB/issues"
+  },
+  "homepage": "https://github.com/namhoonchoe/React-TMDB#readme",
+  "description": ""
 }

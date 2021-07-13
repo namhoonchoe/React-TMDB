@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import TvPresenter from "./TvPresenter";
-import { tvApi } from "Api";
+import { tvApi } from "@api";
 
 interface ITvData {
 	topRated:null,

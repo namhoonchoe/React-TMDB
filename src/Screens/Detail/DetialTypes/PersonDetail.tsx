@@ -1,6 +1,6 @@
 import React, { useState ,useEffect } from 'react'
 import { useParams } from "react-router-dom";
-import { personApi } from "Api";
+import { personApi } from "@api";
 import DetailPresenter from "../DetailPresenter"
 
 
