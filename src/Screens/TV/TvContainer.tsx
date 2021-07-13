@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import TvPresenter from "./TvPresenter";
-import { tvApi } from "../../Api";
+import { tvApi } from "Api";
 
 interface ITvData {
 	topRated:null,
@@ -55,6 +55,5 @@ const TvContainer:React.FC = () => {
   </>
   )
 }
- 
 
 export default TvContainer

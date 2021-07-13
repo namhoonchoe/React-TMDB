@@ -1,16 +1,11 @@
 {
   "compilerOptions":{
-     "baseUrl":"./src",
-     "paths":{
-        "@app":[
-           "./App.tsx"
-        ],
-        "@screens/*":[
-           "./Screens/*"
-        ],
-        "@components/*":[
-           "./Components/*"
-        ]
-     }
+  "baseUrl":"./src",
+  "paths":{
+      "@app":["./App.tsx"],
+      "@screens/*":["./Screens/*"],
+      "@components/*":["./Components/*"],
+			"@redux/*":["./Redux/*"]
+  }
   }
 }

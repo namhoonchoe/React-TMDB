@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import MoviePresenter from "./MoviePresenter";
-import { movieApi } from "../../Api";
+import { movieApi } from "Api";
 
 interface IMovieData {
 	nowPlaying:null,

@@ -1,6 +1,6 @@
 import React, { useState ,useEffect } from 'react'
 import { useParams } from "react-router-dom";
-import { movieApi } from "../../../Api";
+import { movieApi } from "Api";
 import DetailPresenter from "../DetailPresenter"
 
 

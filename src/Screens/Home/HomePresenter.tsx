@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "../../Components/LoadingSpinner"
-import Carousel from "../../Components/Carousel";
+import LoadingSpinner from "@components/LoadingSpinner"
+import Carousel from "@components/Carousel";
 import { Flex,Text } from "@chakra-ui/react"
 
 interface IHomeProps {

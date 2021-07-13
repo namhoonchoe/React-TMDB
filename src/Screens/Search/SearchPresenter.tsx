@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchPresenter = () => {
+const SearchPresenter:React.FC = () => {
   return <div>This is search</div>;
 };
 

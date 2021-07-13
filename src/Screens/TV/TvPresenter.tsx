@@ -1,7 +1,7 @@
 import React from "react";
-import Section from "../../Components/Section"
+import Section from "@components/Section"
 import { Flex } from "@chakra-ui/react"
-import LoadingSpinner from "../../Components/LoadingSpinner"
+import LoadingSpinner from "@components/LoadingSpinner"
 
 interface ISerieseProps {
   topRated:null|SeriesData,

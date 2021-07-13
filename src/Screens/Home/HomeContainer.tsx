@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import HomePresenter from './HomePresenter'
-import { trendingApi } from '../../Api'
+import { trendingApi } from 'Api'
 
 interface IHomeData {
   trendingMovies:null,
