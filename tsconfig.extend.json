@@ -3,7 +3,7 @@
   "baseUrl":"./src",
   "paths":{
       "@app":["./App.tsx"],
-      "@api":["./Api/"],
+      "@api":["./Api"],
       "@screens/*":["./Screens/*"],
       "@components/*":["./Components/*"],
 			"@redux/*":["./Redux/*"]
