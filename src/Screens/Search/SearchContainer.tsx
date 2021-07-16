@@ -9,7 +9,6 @@ interface ISearchData {
   seriesResults:null|SearchData
 }
 
-
 const SearchContainer:React.FC = () => {
   const searchQuery = useSelector(selectSearch)
   const dispatch = useDispatch()
@@ -38,7 +37,12 @@ const SearchContainer:React.FC = () => {
       }
     } 
     getSearchResults()
-  }, [searchQuery,results])
+
+    return () => {
+      dispatch(getSearchTerm(""))
+    }
+
+  }, [searchQuery,results,dispatch])
 
   const { movieResults,seriesResults } = results
 
