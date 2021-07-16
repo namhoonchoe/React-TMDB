@@ -41,6 +41,8 @@ const HomeContainer:React.FC = () => {
     } 
     getHomeData()
     },[home])
+
+
     const {trendingMovies,trendingSeries,trendingPeople} = home
   return (
   <>

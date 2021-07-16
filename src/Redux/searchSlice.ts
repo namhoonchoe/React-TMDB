@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const state:ISearchSlice = {
-  searchTerm:""
-}
+import { RootState } from '@redux/store';
 
 const searchSlice = createSlice({
   name:"search",
-  initialState:state,
+  initialState:{
+    searchTerm:""
+  },
   reducers:{
     getSearchTerm: (state,action) => {
       state.searchTerm = action.payload
@@ -16,6 +15,7 @@ const searchSlice = createSlice({
 
 export const { getSearchTerm } = searchSlice.actions;
 
-export const selectSearch = (state:ISearchSlice) => state.searchTerm
+
+export const selectSearch = (state:RootState) => state.searchReducer.searchTerm
 
 export default searchSlice.reducer

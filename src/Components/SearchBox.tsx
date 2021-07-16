@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent, MouseEvent } from 'react'
 import { getSearchTerm } from '@redux/searchSlice'
 import {  useDispatch } from 'react-redux' 
 import { Search2Icon, CloseIcon } from '@chakra-ui/icons'
-import {  Input, Flex } from '@chakra-ui/react'
+import { Input, Flex } from '@chakra-ui/react'
 
 
 const SearchBox:React.FC = () => {
@@ -15,14 +15,13 @@ const SearchBox:React.FC = () => {
     setClicked(!clicked)
   }
 
-  const onChange =(e:ChangeEvent<HTMLInputElement> ) => {
+  const onChange = (e:ChangeEvent<HTMLInputElement> ) => {
     setTerm(e.target.value)
   }
 
-  
   const onSubmit = (e:FormEvent) => {
     e.preventDefault()
-    dispatch(getSearchTerm({payload:term}))
+    dispatch(getSearchTerm(term))
     setTerm("")
   } 
 
