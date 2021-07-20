@@ -25,10 +25,12 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
       ? <>
         <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
           <Flex align="flex-end" >
-            <Text fontSize="2xl" mr={2}>Today's Trending Movies</Text>
-            <Link to="/movie">
-              <Text>Explore Movies</Text>
-            </Link>
+            <Text fontSize="3xl" mr={2}>Today's Trending Movies</Text>
+            <Text py={1} >
+              <Link to="/movie">
+                Explore Movies
+              </Link>
+            </Text>
           </Flex>
           <Carousel carouselData={trendingMovies}/>
         </Flex>
@@ -40,10 +42,10 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
       ? <>
         <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
           <Flex align="flex-end" >
-            <Text fontSize="2xl" mr={2}>Today's Trending Series</Text>
-            <Link to="/tv">
-              <Text>Explore TvSeries</Text>
-            </Link>
+            <Text fontSize="3xl" mr={2}>Today's Trending Series</Text>
+            <Text py={1} > 
+              <Link to="/tv">Explore TvSeries</Link>
+            </Text>
           </Flex>
           <Carousel carouselData={trendingSeries}/>
         </Flex>
@@ -55,10 +57,12 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
       ? <>
         <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
           <Flex align="flex-end" >
-            <Text fontSize="2xl" mr={2}>Today's Trending People</Text>
-            <Link to="/person">
-              <Text>Explore People</Text>
-            </Link>
+            <Text fontSize="3xl" mr={2}>Today's Trending People</Text>
+            <Text py={1}> 
+              <Link to="/person">
+                Explore People
+              </Link>
+            </Text>
         </Flex>
           <Carousel carouselData={trendingPeople}/>
         </Flex>

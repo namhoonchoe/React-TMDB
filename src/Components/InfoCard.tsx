@@ -27,7 +27,7 @@ const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
 				/>
 			</Box>
 			<Box 
-			boxSize="12rem" my={1.5} px={1}
+			boxSize="12rem" my="1.5rem" px="1rem"
 			borderBottomRightRadius="md">
 				<Text 
 					fontSize="md" 
