@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "@components/LoadingSpinner"
-import Carousel from "@components/Carousel";
+import CarouseSlider from "@components/CarouseSlider";
 import { Flex,Text } from "@chakra-ui/react"
 
 interface IHomeProps {
@@ -32,7 +32,7 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               </Link>
             </Text>
           </Flex>
-          <Carousel carouselData={trendingMovies}/>
+          <CarouseSlider carouselData={trendingMovies}/>
         </Flex>
         </>
       : null
@@ -47,7 +47,7 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               <Link to="/tv">Explore TvSeries</Link>
             </Text>
           </Flex>
-          <Carousel carouselData={trendingSeries}/>
+          <CarouseSlider carouselData={trendingSeries}/>
         </Flex>
         </>
       : null
@@ -64,7 +64,7 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               </Link>
             </Text>
         </Flex>
-          <Carousel carouselData={trendingPeople}/>
+          <CarouseSlider carouselData={trendingPeople}/>
         </Flex>
         </>
       : null
