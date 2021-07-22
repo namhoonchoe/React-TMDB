@@ -13,17 +13,18 @@ interface ICarouselProps {
 
 const CarouseSlider:React.FC<ICarouselProps> = ({carouselData}) => {
 	const settings:Settings = {
-		dots: true,
+		dots: false,
 		infinite: false,
 		speed: 300,
-		slidesToShow: 3,
-		slidesToScroll:3
+		slidesToShow: 5,
+		slidesToScroll:5
 	}	
 	return (
 		<>
-			<Box maxWidth="1440px" height="200px"> 
+			<Box> 
 				<Slider {...settings} >
 					{carouselData.map((data:any) => (<InfoCard
+					size="6rem"
           title={data.original_title||data.original_name||data.name}
           posterPath={data.poster_path||data.profile_path}
           rating={data.vote_average}

@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import { Flex, 
-          Spacer,
-          Text,
-          Heading,
-          Drawer,
-          DrawerBody,
-          DrawerHeader,
-          DrawerOverlay,
-          DrawerContent,
-          useDisclosure  } from "@chakra-ui/react"
+        Spacer,
+        Text,
+        Heading,
+        Drawer,
+        DrawerBody,
+        DrawerHeader,
+        DrawerOverlay,
+        DrawerContent,
+        useDisclosure  } from "@chakra-ui/react"
 import { HamburgerIcon } from '@chakra-ui/icons'
 
 const Header:React.FC = () => {

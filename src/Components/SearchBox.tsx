@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent, MouseEvent } from 'react'
 import { getSearchTerm } from '@redux/searchSlice'
-import {  useDispatch } from 'react-redux' 
+import { useDispatch } from 'react-redux' 
 import { Search2Icon, CloseIcon } from '@chakra-ui/icons'
 import { Input, Flex } from '@chakra-ui/react'
 
