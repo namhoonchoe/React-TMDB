@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@components/Section"
-import { Flex } from "@chakra-ui/react"
+import { Box, VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 
 interface IMovieProps {
@@ -14,36 +14,35 @@ interface IMovieProps {
 const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error,loading}) => {
   return (
 	<>
-    { loading ?<LoadingSpinner/> : null }
+    { loading ? <LoadingSpinner/> 
+    : <VStack spacing="8" width="95%" align="center">
+        <Box>
+          { popular !== null && popular.length > 0 
+          ? <Section  
+              title={"Popular"}
+              sectionInfos={popular} 
+            />  
+          :null} </Box>
+        <Box>
+          { nowPlaying !== null && nowPlaying.length > 0 
+          ? <Section 
+              title={"NowPlaying"}
+              sectionInfos={nowPlaying}
+            />
+          :null } </Box>
+        <Box>
+          { upComing !== null && upComing.length > 0 
+          ? <Section 
+              title={"upComing"}
+              sectionInfos={upComing}
+            />
+        :null } </Box>
+      </VStack> 
+    }
 
     { error ? <p>"An error has occured"</p>: null }
 
-    { popular !== null && popular.length > 0 
-    ? <Section  
-        title={"Popular"}
-        imageType="poster" 
-        sectionInfos={popular} 
-      />
-    :null
-    }
-
-    { nowPlaying !== null && nowPlaying.length > 0 
-    ? <Section 
-        title={"NowPlaying"}
-        imageType="poster"
-        sectionInfos={nowPlaying}
-      />
-    :null
-    }
     
-    { upComing !== null && upComing.length > 0 
-    ? <Section 
-        title={"upComing"}
-        imageType="poster"
-        sectionInfos={upComing}
-      />
-    :null
-    }
 	</>
   )
 };

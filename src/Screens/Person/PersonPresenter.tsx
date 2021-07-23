@@ -21,9 +21,8 @@ const PersonPresenter:React.FC<IPersonProps> = ({popular,error,loading}) => {
 
     { popular !== null && popular.length > 0 
     ? <Section 
-      title={"Popular"}
-      imageType="portrait" 
-      sectionInfos={popular}
+        title={"Popular"}
+        sectionInfos={popular}
       />
     :null
     }

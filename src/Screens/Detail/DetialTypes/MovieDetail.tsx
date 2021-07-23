@@ -38,7 +38,6 @@ const MovieDetail:React.FC = () => {
   const { detailInfo, credits, similars } = detail
   return (
     <>  
-      <p>Movie Detail</p>
       <DetailPresenter
         detail={detailInfo}
         cast={credits}

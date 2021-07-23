@@ -25,7 +25,6 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
       { popular !== null && popular.length > 0 
       ? <Section 
         title={"Popular"}
-        imageType="poster" 
         sectionInfos={popular}
         />
       :null
@@ -34,16 +33,14 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
       { airingToday !== null && airingToday.length > 0 
       ? <Section 
         title={"AiringToday"}
-        imageType="poster" 
         sectionInfos={airingToday}/>
       :null
       }
 
       { topRated !== null && topRated.length > 0 
       ? <Section 
-      title={"TopRated"}
-      imageType="poster" 
-      sectionInfos={topRated}
+        title={"TopRated"}
+        sectionInfos={topRated}
       />
       :null
       }

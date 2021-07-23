@@ -32,7 +32,9 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
             </Text>
           </Flex>
           <Container maxW="container.xl">
-            <CarouseSlider carouselData={trendingMovies}/>
+            <CarouseSlider 
+              carouselData={trendingMovies}
+              carouselType="poster"/>
           </Container>
         </Flex>
       : null
@@ -47,14 +49,16 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
             </Text>
           </Flex>
           <Container maxW="container.xl">
-            <CarouseSlider carouselData={trendingSeries}/>
+            <CarouseSlider 
+              carouselData={trendingSeries}
+              carouselType="poster"/>
           </Container>
         </Flex>
       : null
     }
     
     { trendingPeople !== null && trendingPeople.length > 0 
-      ?  <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
+      ? <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
           <Flex align="flex-end" mb={4}>
             <Text fontSize="3xl" mr={2}>Today's Trending People</Text>
             <Text py={1}> 
@@ -62,10 +66,12 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
                 Explore People
               </Link>
             </Text>
-        </Flex>
-        <Container maxW="container.xl">
-          <CarouseSlider carouselData={trendingPeople}/>
-        </Container>
+          </Flex>
+          <Container maxW="container.xl">
+            <CarouseSlider 
+              carouselData={trendingPeople}
+              carouselType="portrait"/>
+          </Container>
         </Flex>
       : null
     }

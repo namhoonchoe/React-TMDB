@@ -6,14 +6,14 @@ import { Image, Box } from "@chakra-ui/react"
 interface IImageProps {
   borderRadius:string,
   imageType?:string,
-  imageSource:string|undefined
+  imageSource:string|undefined|null
 }
 
-const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource,imageType }) => {
+const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType }) => {
   
   return (
     <>
-      <Box >
+      <Box boxSize="inherit">
         {imageSource !== undefined && 
           <Image
             borderRadius={borderRadius}
@@ -23,7 +23,7 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource,imageType }
         {imageType === "poster" && imageSource === undefined && 
           <BrokenPoster/>
         }
-        {imageType === "portrait" && imageSource === undefined && 
+        {imageType === "portrait" && imageSource === null && 
           <BrokenPortrait/>
         }
 

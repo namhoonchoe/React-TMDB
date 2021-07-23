@@ -1,4 +1,4 @@
-type DetailData = []
+type DetailData = Array<any>
 
 interface IDetailInfos {
   detailInfo:null|DetailData,

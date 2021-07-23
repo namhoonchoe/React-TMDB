@@ -51,7 +51,7 @@ export default function DetailContainer() {
     return () => {
       checkDetail()
     }  
-  })
+  },[detailPath])
 
 
   const { movie, series, person } = detail

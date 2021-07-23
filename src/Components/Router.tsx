@@ -1,5 +1,6 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { Flex } from "@chakra-ui/react"
 import Detail from "@screens/Detail";
 import Header from "./Header";
 import Home from "@screens/Home";
@@ -15,8 +16,8 @@ const RoootRouter: React.FC = () => {
 
   return (
     <Router>
-      <>
       <Header/>
+      <Flex direction="column" align="center">
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/search" component={Search}/>
@@ -31,7 +32,7 @@ const RoootRouter: React.FC = () => {
         <Route path="/*">
           {searchTerm !=="" && <Redirect to="/search"/>}
         </Route>
-      </>
+      </Flex>
     </Router>
   );
 };
