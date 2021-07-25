@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import InfoImage from './InfoImage'
-import { Text, Box, Flex } from "@chakra-ui/react"
+import { Text, Box, Flex, VStack } from "@chakra-ui/react"
 import { useLocation } from "react-router-dom";
 
 
@@ -37,24 +37,24 @@ const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
 
   return (
   <>
-		<Flex 
-			direction="column" 
+		<VStack 
+			align="start"
 			borderRadius="md"
-			width={"12em"} height={"20em"}
-			mb={5}
+			width={"14rem"} 
+			mb={7}
 			>
-			<Box width={"12em"} height={"18em"}>
-				<InfoImage 
-					imageType={imageType}
-					borderRadius = {"md"}
-					imageSource={posterPath}/>
-			</Box>
-			<Flex flexWrap="wrap">
+			<InfoImage 
+				width={"14rem"}
+				height={"20rem"}
+				imageType={imageType}
+				borderRadius = {"md"}
+				imageSource={posterPath}/>
+			<Flex flexWrap="wrap" >
 				<Text fontSize="md" color="gray.300" p="2px">
 					{title}
 				</Text>
 			</Flex>
-		</Flex>
+		</VStack>
   </>
   )
 }

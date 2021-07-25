@@ -28,9 +28,11 @@ const TvContainer:React.FC = () => {
       const {
         data: { results: airingToday },
         } = await tvApi.airingToday();
+
       const {
         data: { results: popular },
         } = await tvApi.popular();
+        
         setSeries({...series,topRated,airingToday,popular})
       } catch {   
         setError(true)

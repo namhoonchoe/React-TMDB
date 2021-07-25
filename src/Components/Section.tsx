@@ -30,9 +30,9 @@ const Section:React.FC<ISectionInfo> = ({title,sectionInfos}) => {
 
   return (
   <>
-    <Box mx={3} >
-      <Text fontSize="2xl" mb={3} >{title}</Text>
-      <Grid templateColumns="repeat(6, 1fr)" gap="4" >
+    <Box>
+      <Text fontSize="2xl" mb={3} fontWeight="semibold" >{title}</Text>
+      <Grid templateColumns="repeat(6, 1fr)" gap="8" >
         {sectionInfos.map((data:any) => (
         <Link to={`/${sectionType}/${data.id}`}>
           <InfoCard

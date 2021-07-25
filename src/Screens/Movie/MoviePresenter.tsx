@@ -15,7 +15,7 @@ const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error
   return (
 	<>
     { loading ? <LoadingSpinner/> 
-    : <VStack spacing="8" width="95%" align="center">
+    : <VStack spacing="8" width="100%" >
         <Box>
           { popular !== null && popular.length > 0 
           ? <Section  
@@ -33,7 +33,7 @@ const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error
         <Box>
           { upComing !== null && upComing.length > 0 
           ? <Section 
-              title={"upComing"}
+              title={"UpComing"}
               sectionInfos={upComing}
             />
         :null } </Box>

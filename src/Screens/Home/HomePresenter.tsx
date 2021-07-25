@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "@components/LoadingSpinner"
 import CarouseSlider from "@components/CarouseSlider";
-import { Flex,Text, Container  } from "@chakra-ui/react"
+import { Flex, Text, Box, VStack } from "@chakra-ui/react"
 
 interface IHomeProps {
   trendingMovies:null|HomeData,
@@ -15,15 +15,15 @@ interface IHomeProps {
 const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trendingPeople,error,loading}) => {
   return (
   <>
-	<Flex direction="column" justify="center" ml={5} width="100vw" my={5}>
+	<VStack width="90vw" my={5}>
     { loading 
       ? <LoadingSpinner/> 
       : null }
     { error ? <p>"An error has occured"</p>: null }
     
     { trendingMovies !== null && trendingMovies.length > 0 
-      ? <Flex direction="column" justify="center" align="start" ml={5} width="100vw" mb={3}>
-          <Flex align="flex-end" mb={4} >
+      ? <VStack align="start">
+          <Flex align="flex-end" my={4} >
             <Text fontSize="3xl" mr={2}>Today's Trending Movies</Text>
             <Text py={1} >
               <Link to="/movie">
@@ -31,35 +31,35 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               </Link>
             </Text>
           </Flex>
-          <Container maxW="container.xl">
+          <Box width="90vw" align="center">
             <CarouseSlider 
               carouselData={trendingMovies}
               carouselType="poster"/>
-          </Container>
-        </Flex>
+          </Box>
+        </VStack>
       : null
     }
 
     { trendingSeries !== null && trendingSeries.length > 0 
-      ? <Flex direction="column" justify="center" ml={5} width="100vw" mb={3}>
-          <Flex align="flex-end" mb={4} >
+      ? <VStack align="start">
+          <Flex align="flex-end" my={4} >
             <Text fontSize="3xl" mr={2}>Today's Trending Series</Text>
             <Text py={1} > 
               <Link to="/tv">Explore TvSeries</Link>
             </Text>
           </Flex>
-          <Container maxW="container.xl">
+          <Box width="90vw" align="center">
             <CarouseSlider 
               carouselData={trendingSeries}
               carouselType="poster"/>
-          </Container>
-        </Flex>
+          </Box>
+        </VStack>
       : null
     }
     
     { trendingPeople !== null && trendingPeople.length > 0 
-      ? <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
-          <Flex align="flex-end" mb={4}>
+      ? <VStack align="start">
+          <Flex align="flex-end" my={4}>
             <Text fontSize="3xl" mr={2}>Today's Trending People</Text>
             <Text py={1}> 
               <Link to="/person">
@@ -67,15 +67,15 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               </Link>
             </Text>
           </Flex>
-          <Container maxW="container.xl">
+          <Box width="90vw" align="center">
             <CarouseSlider 
               carouselData={trendingPeople}
               carouselType="portrait"/>
-          </Container>
-        </Flex>
+          </Box>
+        </VStack>
       : null
     }
-  </Flex>
+  </VStack>
   </>
   )
 

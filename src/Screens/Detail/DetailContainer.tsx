@@ -1,8 +1,8 @@
 import React, { useReducer,useEffect } from 'react'
 import { useLocation } from "react-router-dom";
-import MovieDetail from "./DetialTypes/MovieDetail"
-import SeriesDetail from "./DetialTypes/SeriesDetail"
-import PersonDetail from "./DetialTypes/PersonDetail"
+import MovieDetail from "./DetailTypes/MovieDetail"
+import SeriesDetail from "./DetailTypes/SeriesDetail"
+import PersonDetail from "./DetailTypes/PersonDetail"
 
 interface IDetailTypes {
   movie:boolean,

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Box, } from "@chakra-ui/react"
 import InfoImage from './InfoImage'
 import Slider ,{ Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -17,21 +16,20 @@ const CarouseSlider:React.FC<ICarouselProps> = ({ carouselData, carouselType }) 
 		dots: false,
 		infinite: false,
 		speed: 300,
-		slidesToShow: 5,
-		slidesToScroll:5
+		slidesToShow: 6,
+		slidesToScroll:6
 	}	
 	return (
 		<>
-			<Box> 
-				<Slider {...settings} >
-					{carouselData.map((data:any) => (<InfoImage
-					borderRadius={"sm"}
-					imageType={carouselType}
-          imageSource={data.poster_path||data.profile_path}
-        />))}
-				</Slider>
-			</Box>
-			
+		<Slider {...settings} >
+			{carouselData.map((data:any) => (<InfoImage
+			height={"18rem"}
+			width={"12rem"}
+			borderRadius={"md"}
+			imageType={carouselType}
+      imageSource={data.poster_path||data.profile_path}
+    />))}
+		</Slider>
 		</>
 	)
 }
