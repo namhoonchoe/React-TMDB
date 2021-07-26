@@ -35,14 +35,13 @@ const PersonDetail:React.FC = () => {
 
   return (
     <>
-      <p>PersonDetail</p>
       <DetailPresenter
-      detail={detailInfo}
-      cast={credits}
-      similar={similars}
-      error={error}
-      loading={loading}
-    />
+        detail={detailInfo}
+        cast={credits}
+        similar={similars}
+        error={error}
+        loading={loading}
+      />
     </>
   )
 }

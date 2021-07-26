@@ -39,13 +39,12 @@ const SeriesDetail:React.FC = () => {
 
   return (
     <>
-      <p>Series Detail</p>
       <DetailPresenter
-      detail={detailInfo}
-      cast={credits}
-      similar={similars}
-      error={error}
-      loading={loading}
+        detail={detailInfo}
+        cast={credits}
+        similar={similars}
+        error={error}
+        loading={loading}
     />
     </>
   )

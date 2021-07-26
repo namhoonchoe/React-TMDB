@@ -1,8 +1,7 @@
 import React, { useState ,useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { movieApi } from "@api"
-import DetailPresenter from "../DetailPresenter"
-
+import DetailPresenter from '../DetailPresenter';
 
 const MovieDetail:React.FC = () => {
   const [detail,setDetail] = useState<IDetailInfos>({
@@ -44,7 +43,7 @@ const MovieDetail:React.FC = () => {
         similar={similars}
         error={error}
         loading={loading}
-    />
+      />
     </>
   )
 }
