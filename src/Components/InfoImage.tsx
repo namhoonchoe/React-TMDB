@@ -13,7 +13,6 @@ interface IImageProps {
 
 
 const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType, height ,width }) => {
-  
   return (
     <>
       <Box>
@@ -28,11 +27,19 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
         }
         
         {imageType === "poster" && imageSource === undefined && 
-          <BrokenPoster/>
+          <Box width={width} height={height}>
+            <BrokenPoster 
+              width={width}
+              height={height}/>
+          </Box> 
         }
 
         {imageType === "portrait" && imageSource === null && 
-          <BrokenPortrait/>
+          <Box>
+            <BrokenPortrait
+              width={width}
+              height={height}/>
+          </Box> 
         }
       </Box> 
     </>
