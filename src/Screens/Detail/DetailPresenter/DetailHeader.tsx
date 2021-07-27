@@ -9,7 +9,8 @@ import { Flex,
   Button } from "@chakra-ui/react"
 import InfoImage from "@components/InfoImage";
 import ModalBox from "@components/ModalBox";
-import AlertBox from "@components/AlertBox"
+import BookMark from "@components/BookMark"
+
 
 interface IHeaderProps {
   detail:any,
@@ -64,7 +65,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                   </Flex>
                   <Text>{detail.vote_average}/10</Text>
                 </VStack>
-                <AlertBox/>
+                <BookMark/>
               </HStack>
               <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
                 <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={[2,1]} p={[0.25, 0.5]} >

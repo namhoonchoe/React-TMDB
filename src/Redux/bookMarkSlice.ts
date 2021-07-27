@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from '@redux/store';
 
-const searchSlice = createSlice({
-  name:"search",
+const bookMarkSlice = createSlice({
+  name:"bookMark",
   initialState:{
     searchTerm:""
   },
@@ -13,8 +13,8 @@ const searchSlice = createSlice({
   }
 })
 
-export const { getSearchTerm } = searchSlice.actions;
+export const { getSearchTerm } = bookMarkSlice.actions;
 
-export const selectSearch = (state:RootState) => state.searchReducer.searchTerm
+export const selectBookMark = (state:RootState) => state.searchReducer.searchTerm
 
-export default searchSlice.reducer
+export default bookMarkSlice.reducer

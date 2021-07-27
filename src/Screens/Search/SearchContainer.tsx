@@ -44,7 +44,7 @@ const SearchContainer:React.FC = () => {
 
   }, [searchQuery,results,dispatch])
 
-  const { movieResults,seriesResults } = results
+  const { movieResults, seriesResults } = results
 
   return (
     <>
