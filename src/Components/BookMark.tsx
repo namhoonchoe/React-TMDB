@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Button, Text, useToast  } from '@chakra-ui/react'
 
 interface IBookMarkProps {
-  bookMarkId?:number
-  bookMarkType?:string
+  bookMarkDetail:any
+  bookMarkId:string
+  bookMarkType:string
 }
 
-const BookMark:React.FC<IBookMarkProps> = ({ bookMarkId, bookMarkType }) => {
+const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookMarkId }) => {
   const [bookMark, setBookMark] = useState<boolean>(false)
 
   const toast = useToast()

@@ -5,8 +5,8 @@ import { Flex,
   Box, 
   Container,
   Text, 
-  Spacer, 
-  Button } from "@chakra-ui/react"
+  Spacer } from "@chakra-ui/react"
+import { useLocation } from 'react-router';
 import InfoImage from "@components/InfoImage";
 import ModalBox from "@components/ModalBox";
 import BookMark from "@components/BookMark"
@@ -18,6 +18,9 @@ interface IHeaderProps {
 }
 
 const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
+  const uniqueId = detail.id
+  const bookMarkType:string = useLocation().pathname
+
   return (
   <>
     <Flex direction="column" width={"100vw"} height={"24rem"} >
@@ -65,7 +68,11 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                   </Flex>
                   <Text>{detail.vote_average}/10</Text>
                 </VStack>
-                <BookMark/>
+                <BookMark 
+                  bookMarkDetail={detail}
+                  bookMarkType={bookMarkType}
+                  bookMarkId={uniqueId}
+                />
               </HStack>
               <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
                 <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={[2,1]} p={[0.25, 0.5]} >

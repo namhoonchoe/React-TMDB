@@ -1,7 +1,10 @@
 import { combineReducers } from "redux";
 import searchReducer from "./searchSlice"
+import bookMarkReducer from "./bookMarkSlice"
 
-
-export default combineReducers({
-  searchReducer
+export const rootReducer = combineReducers({
+  search:searchReducer,
+  bookMark:bookMarkReducer
 })
+
+export type RootState = ReturnType<typeof rootReducer>
