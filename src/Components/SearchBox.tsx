@@ -15,7 +15,7 @@ const SearchBox:React.FC = () => {
     setClicked(!clicked)
   }
 
-  const onChange = (e:ChangeEvent<HTMLInputElement> ) => {
+  const onChange = (e:ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value)
   }
 

@@ -70,7 +70,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                 </VStack>
                 <BookMark 
                   bookMarkDetail={detail}
-                  bookMarkType={bookMarkType}
+                  bookMarkType={"movie"}
                   bookMarkId={uniqueId}
                 />
               </HStack>

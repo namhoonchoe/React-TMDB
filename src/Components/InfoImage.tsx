@@ -1,7 +1,7 @@
 import React from 'react'
 import BrokenPoster from './svgcomponents/BrokenPoster'
 import BrokenPortrait from './svgcomponents/BrokenPortrait'
-import { Image, Box } from "@chakra-ui/react"
+import { Image, Box, Flex } from "@chakra-ui/react"
 
 interface IImageProps {
   borderRadius:string,
@@ -10,7 +10,6 @@ interface IImageProps {
   width?:string,
   imageSource:string|undefined|null
 }
-
 
 const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType, height ,width }) => {
   return (
@@ -27,19 +26,19 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
         }
         
         {imageType === "poster" && imageSource === undefined && 
-          <Box width={width} height={height}>
+          <Flex justify="center" align="center" width={width} height={height}>
             <BrokenPoster 
-              width={width}
-              height={height}/>
-          </Box> 
+              width={"4rem"}
+              height={"4rem"}/>
+          </Flex>
         }
 
         {imageType === "portrait" && imageSource === null && 
-          <Box>
+          <Flex justify="center" align="center" width={width} height={height}>
             <BrokenPortrait
-              width={width}
-              height={height}/>
-          </Box> 
+              width={"4rem"}
+              height={"4rem"}/>
+          </Flex> 
         }
       </Box> 
     </>

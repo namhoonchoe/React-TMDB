@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from 'react'
 import { selectSearch, getSearchTerm } from '@redux/searchSlice'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { movieApi,tvApi } from '@api'
 import SearchPresenter from './SearchPresenter'
 
