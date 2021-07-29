@@ -6,7 +6,8 @@
       "@api":["./Api"],
       "@screens/*":["./Screens/*"],
       "@components/*":["./Components/*"],
-			"@redux/*":["./Redux/*"]
+			"@redux/*":["./Redux/*"],
+      "@hooks/*":["./Hooks/*"]
   }
   }
 }

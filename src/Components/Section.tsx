@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import InfoCard from './InfoCard'
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Grid ,Text, Box } from "@chakra-ui/react"
+import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 
 type MovieData = []
 
@@ -12,21 +13,24 @@ interface ISectionInfo {
 
 const Section:React.FC<ISectionInfo> = ({title,sectionInfos}) => {
   const [sectionType, setSectionType] = useState<string>("")
-	let location = useLocation().pathname
+	const pathType = usePathTypeCheck()
 
 	const imageTypeChecker = () => {
-		if (location.includes("movie")){
+		if (pathType === "movie") {
       setSectionType("movie")
-    } else if(location.includes("tv")){
-      setSectionType("series")
-    } else if(location.includes("person")){
+    } else if(pathType === "series"){
+      setSectionType("tv")
+    } else if(pathType === "person"){
       setSectionType("person")
     } 
 	}
 	
 	useEffect(() => {
     imageTypeChecker()
-  },[location])
+    return () => {
+      imageTypeChecker()
+    }
+  },[pathType])
 
   return (
   <>

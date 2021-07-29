@@ -15,7 +15,7 @@ const PersonDetail:React.FC = () => {
   let { id } = useParams() as any
   
   useEffect(() => {
-    const getSeriesDetail = async () => {
+    const getPersonDetail = async () => {
       try {
         const { data:personDetail } = await personApi.peopleDetail(id)
         const { data:casting } = await personApi.credits(id)
@@ -29,7 +29,11 @@ const PersonDetail:React.FC = () => {
         setLoading(false)
       }
     }
-    getSeriesDetail()  
+    getPersonDetail()
+    
+    return () => {
+      getPersonDetail()
+    }  
   }, [detail,id])
   const { detailInfo, credits, similars } = detail
 

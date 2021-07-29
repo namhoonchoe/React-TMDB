@@ -54,12 +54,14 @@ export default function DetailContainer() {
   },[detailPath])
 
 
+
+
   const { movie, series, person } = detail
   return (
     <>
-      { movie ?  <MovieDetail /> : null }
-      { series ? <SeriesDetail/> : null }
-      { person ? <PersonDetail/> : null }
+      { movie && <MovieDetail/>}
+      { series && <SeriesDetail/>}
+      { person && <PersonDetail/>}
     </>
   )
 }

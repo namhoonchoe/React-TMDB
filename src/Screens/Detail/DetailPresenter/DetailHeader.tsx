@@ -6,7 +6,7 @@ import { Flex,
   Container,
   Text, 
   Spacer } from "@chakra-ui/react"
-import { useLocation } from 'react-router';
+import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoImage from "@components/InfoImage";
 import ModalBox from "@components/ModalBox";
 import BookMark from "@components/BookMark"
@@ -19,7 +19,7 @@ interface IHeaderProps {
 
 const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
   const uniqueId = detail.id
-  const bookMarkType:string = useLocation().pathname
+  const bookMarkType = usePathTypeCheck()
 
   return (
   <>
@@ -70,7 +70,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                 </VStack>
                 <BookMark 
                   bookMarkDetail={detail}
-                  bookMarkType={"movie"}
+                  bookMarkType={bookMarkType}
                   bookMarkId={uniqueId}
                 />
               </HStack>

@@ -33,6 +33,10 @@ const SeriesDetail:React.FC = () => {
       }
     }
     getSeriesDetail()  
+
+    return () => {
+      getSeriesDetail()
+    }  
   }, [detail,id])
 
   const { detailInfo, credits, similars } = detail

@@ -30,7 +30,12 @@ const MovieDetail:React.FC = () => {
         setLoading(false)
       }
     }
-    getMovieDetail()  
+    getMovieDetail() 
+    
+    return () => {
+      getMovieDetail()
+    }  
+
   }, [detail,id])
 
 

@@ -47,11 +47,11 @@ const HomeContainer:React.FC = () => {
   return (
   <>
     <HomePresenter
-    trendingMovies={trendingMovies}
-    trendingSeries={trendingSeries}
-    trendingPeople={trendingPeople}
-    error={error}
-    loading={loading}
+      trendingMovies={trendingMovies}
+      trendingSeries={trendingSeries}
+      trendingPeople={trendingPeople}
+      error={error}
+      loading={loading}
     />
   </>
   )

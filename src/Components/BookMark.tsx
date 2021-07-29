@@ -14,6 +14,7 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
 
   const bookMarks = useSelector(selectBookMark)
 
+
   const bookMarkedCheck = () => {
     const { movieBookMark, seriesBookMark } = bookMarks
     if(bookMarkType==="movie") {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import InfoImage from './InfoImage'
 import { Text, Box, Flex, VStack } from "@chakra-ui/react"
-import { useLocation } from "react-router-dom";
+import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 
 
 interface IInfoProps {
@@ -14,17 +14,15 @@ interface IInfoProps {
 
 
 const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
+	const pathType = usePathTypeCheck()
 	const [imageType, setImageType] = useState<string>("")
-	let location = useLocation().pathname
 
 	const imageTypeChecker = () => {
-		if (location.includes("movie")){
-      setImageType("poster")
-    } else if(location.includes("tv")){
-      setImageType("poster")
-    } else if(location.includes("person")){
+		if (pathType === "person") {
       setImageType("portrait")
-    } 
+    } else {
+      setImageType("poster")
+    }  
 	}
 	
 	useEffect(() => {
@@ -32,7 +30,7 @@ const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
     return () => {
       imageTypeChecker()
     }  
-  },[])
+  },[pathType])
 
 
   return (
