@@ -15,6 +15,7 @@ const PersonDetail:React.FC = () => {
   let { id } = useParams() as any
   
   useEffect(() => {
+    let mounted = true;
     const getPersonDetail = async () => {
       try {
         const { data:personDetail } = await personApi.peopleDetail(id)
@@ -31,8 +32,12 @@ const PersonDetail:React.FC = () => {
     }
     getPersonDetail()
     
+    if(mounted) {
+      getPersonDetail() 
+    }
+    
     return () => {
-      getPersonDetail()
+      mounted = false;
     }  
   }, [detail,id])
   const { detailInfo, credits, similars } = detail

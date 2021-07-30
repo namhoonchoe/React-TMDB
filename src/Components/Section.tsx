@@ -7,32 +7,32 @@ import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 type MovieData = []
 
 interface ISectionInfo {
-  title?:String
+  title?:string
+  sectionInfoType?:string
   sectionInfos:MovieData
 }
 
-const Section:React.FC<ISectionInfo> = ({title,sectionInfos}) => {
-  const [sectionType, setSectionType] = useState<string>("")
+const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }) => {
+  const [sectionType, setSectionType] = useState<string|undefined>("")
 	const pathType = usePathTypeCheck()
-
-	const imageTypeChecker = () => {
-		if (pathType === "movie") {
-      setSectionType("movie")
-    } 
-    if(pathType === "series") {
-      setSectionType("series")
-    } 
-    if(pathType === "person") {
-      setSectionType("person")
-    } 
-	}
 	
 	useEffect(() => {
+	  const imageTypeChecker = () => {
+		  if (pathType === "movie") {
+        setSectionType("movie")
+      } 
+      if(pathType === "series") {
+        setSectionType("series")
+      } 
+      if(pathType === "person") {
+        setSectionType("person")
+      } 
+      if(pathType === "search") {
+        setSectionType(sectionInfoType)
+      } 
+	}
     imageTypeChecker()
-    return () => {
-      imageTypeChecker()
-    }
-  },[pathType])
+  },[pathType,sectionInfoType])
 
   return (
   <>

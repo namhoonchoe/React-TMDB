@@ -16,6 +16,7 @@ const SeriesDetail:React.FC = () => {
   let { id } = useParams() as any
   
   useEffect(() => {
+    let mounted = true;
     const getSeriesDetail = async () => {
       try {
         const { data:seriesDetail } = await tvApi.tvDetail(id)
@@ -32,10 +33,13 @@ const SeriesDetail:React.FC = () => {
         setLoading(false)
       }
     }
-    getSeriesDetail()  
-
+    
+    if(mounted) {
+      getSeriesDetail()  
+    }
+    
     return () => {
-      getSeriesDetail()
+      mounted = false;
     }  
   }, [detail,id])
 

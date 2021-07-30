@@ -26,7 +26,7 @@ const bookMarkSlice = createSlice({
     addBookMark:(state:IState ,action:PayloadAction<IBookMark>) => {
       const { movieBookMark, seriesBookMark } = state
       const contentType = action.payload.type
-      if(contentType ==="movie") {
+      if(contentType === "movie") {
         return {
           movieBookMark:[...movieBookMark,action.payload],
           seriesBookMark
@@ -41,7 +41,7 @@ const bookMarkSlice = createSlice({
     removeBookMark:(state:IState ,action:PayloadAction<IBookMark>) => {
       const contentType = action.payload.type
       const { movieBookMark, seriesBookMark } = state
-      if(contentType ==="movie") {
+      if(contentType === "movie") {
         return {
           movieBookMark:movieBookMark.filter((bookMark) => bookMark.id !== action.payload.id),
           seriesBookMark

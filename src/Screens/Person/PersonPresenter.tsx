@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@components/Section"
-import { Flex } from "@chakra-ui/react"
+import { VStack, Box } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 
 interface IPersonProps {
@@ -12,21 +12,19 @@ interface IPersonProps {
 const PersonPresenter:React.FC<IPersonProps> = ({popular,error,loading}) => {
   return (
   <>
-  <Flex direction="column" justify="center" ml={5} width="100vw" mb={5}>
     { loading 
     ?<LoadingSpinner/> 
-    : null }
+    : <VStack spacing="8" width="100%" >
+        <Box>
+          { popular !== null && popular.length > 0 
+          ? <Section 
+              title={"Popular"}
+              sectionInfos={popular}
+            />
+        :null } </Box>
+      </VStack> }
 
     { error ? <p>"An error has occured"</p>: null }
-
-    { popular !== null && popular.length > 0 
-    ? <Section 
-        title={"Popular"}
-        sectionInfos={popular}
-      />
-    :null
-    }
-	</Flex>
   </>
   )
 };

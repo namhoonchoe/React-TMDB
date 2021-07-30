@@ -19,6 +19,7 @@ const TvContainer:React.FC = () => {
   const [loading,setLoading] = useState<boolean>(true)
 
   useEffect(() =>{
+    let mounted = true;
     const getSeriesData = async() =>{
       try { 
       const { 
@@ -40,9 +41,12 @@ const TvContainer:React.FC = () => {
         setLoading(false)
       }
     } 
-    getSeriesData()
-  
-    },[series])
+    if (mounted){
+      getSeriesData()
+    }
+    return () => {
+      mounted = false
+    }},[series])
     const {topRated,airingToday,popular} = series
 
   return (

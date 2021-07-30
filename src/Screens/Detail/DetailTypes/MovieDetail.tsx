@@ -14,6 +14,7 @@ const MovieDetail:React.FC = () => {
   let { id } = useParams() as any
 
   useEffect(() => {
+    let mounted = true;
     const getMovieDetail = async () => {
       try {
         const { data:movieDetail } = await movieApi.movieDetail(id)
@@ -30,10 +31,12 @@ const MovieDetail:React.FC = () => {
         setLoading(false)
       }
     }
-    getMovieDetail() 
+    if(mounted) {
+      getMovieDetail() 
+    }
     
     return () => {
-      getMovieDetail()
+      mounted = false;
     }  
 
   }, [detail,id])

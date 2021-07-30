@@ -17,6 +17,7 @@ const MovieContainer:React.FC = () => {
   const [loading,setLoading] = useState<boolean>(true)
 
   useEffect(() => {
+  let mounted = true;
   const getMovieData = async() =>{
     try { 
     const { 
@@ -37,10 +38,14 @@ const MovieContainer:React.FC = () => {
     } finally {
       setLoading(false)
     }
-  } 
-  getMovieData()
-
-  },[movie])
+  }
+  if(mounted) {
+    getMovieData()
+  }
+  return () => {
+    mounted = false
+  }
+  }, [movie])
   const {nowPlaying,upComing,popular} = movie
   return (
   <>

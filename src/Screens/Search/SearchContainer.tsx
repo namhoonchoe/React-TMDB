@@ -21,6 +21,7 @@ const SearchContainer:React.FC = () => {
 
 
   useEffect(() => {
+    let mounted = true;
     const getSearchResults = async() => {
       try {
         const {
@@ -36,9 +37,12 @@ const SearchContainer:React.FC = () => {
         setLoading(false)
       }
     } 
-    getSearchResults()
+    if(mounted) {
+      getSearchResults()
+    }
 
     return () => {
+      mounted = false
       dispatch(getSearchTerm(""))
     }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import InfoImage from './InfoImage'
-import { Text, Box, Flex, VStack } from "@chakra-ui/react"
+import { Text, Flex, VStack } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 
 
@@ -16,20 +16,16 @@ interface IInfoProps {
 const InfoCard:React.FC<IInfoProps> =({title,posterPath,rating})=> {
 	const pathType = usePathTypeCheck()
 	const [imageType, setImageType] = useState<string>("")
-
-	const imageTypeChecker = () => {
-		if (pathType === "person") {
-      setImageType("portrait")
-    } else {
-      setImageType("poster")
-    }  
-	}
 	
 	useEffect(() => {
+		const imageTypeChecker = () => {
+			if (pathType === "person") {
+				setImageType("portrait")
+			} else {
+				setImageType("poster")
+			}  
+		}
     imageTypeChecker()
-    return () => {
-      imageTypeChecker()
-    }  
   },[pathType])
 
 

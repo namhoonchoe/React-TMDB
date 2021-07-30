@@ -18,6 +18,7 @@ const HomeContainer:React.FC = () => {
   const [loading,setLoading] = useState<boolean>(true)
 
   useEffect(() => {
+    let mounted = true;
     const getHomeData = async() => {
       try { 
       const { 
@@ -39,8 +40,13 @@ const HomeContainer:React.FC = () => {
         setLoading(false)
       }
     } 
-    getHomeData()
-    },[home])
+    if(mounted) {
+      getHomeData()
+    }
+    return() => {
+      mounted = false
+    }
+  },[home])
 
 
     const {trendingMovies,trendingSeries,trendingPeople} = home

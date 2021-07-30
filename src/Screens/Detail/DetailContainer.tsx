@@ -1,5 +1,5 @@
 import React, { useReducer,useEffect } from 'react'
-import { useLocation } from "react-router-dom";
+import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import MovieDetail from "./DetailTypes/MovieDetail"
 import SeriesDetail from "./DetailTypes/SeriesDetail"
 import PersonDetail from "./DetailTypes/PersonDetail"
@@ -33,25 +33,25 @@ const detailReucer = (state:IDetailTypes,action:Actions) => {
 }
 
 export default function DetailContainer() {
-  const detailPath:string =  useLocation().pathname
+	const pathType = usePathTypeCheck()
   const [detail,dispatch] = useReducer(detailReucer,initialState)
   
-  const checkDetail = () => {
-    if (detailPath.includes("movie")){
-      dispatch({type:"checkMovie"})
-    } else if(detailPath.includes("series")){
-      dispatch({type:"checkSeries"})
-    } else if(detailPath.includes("person")){
-      dispatch({type:"checkPerson"})
-    } 
-  }
-
   useEffect(() => {
+    const checkDetail = () => {
+      if (pathType === "movie") {
+        dispatch({type:"checkMovie"})
+      } 
+  
+      if(pathType === "series") {
+        dispatch({type:"checkSeries"})
+      } 
+  
+      if(pathType === "person") {
+        dispatch({type:"checkPerson"})
+      } 
+    }
     checkDetail()
-    return () => {
-      checkDetail()
-    }  
-  },[detailPath])
+  },[pathType])
 
 
 

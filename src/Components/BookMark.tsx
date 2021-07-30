@@ -14,22 +14,6 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
 
   const bookMarks = useSelector(selectBookMark)
 
-
-  const bookMarkedCheck = () => {
-    const { movieBookMark, seriesBookMark } = bookMarks
-    if(bookMarkType==="movie") {
-      const bookMarkIDs = movieBookMark.map((bookMark) => bookMark['id'])
-      if(bookMarkIDs.includes(bookMarkId)) {
-        setIsBookMarked(true)
-      }
-    } else {      
-      const bookMarkIDs = seriesBookMark.map((bookMark) =>  bookMark['id'])
-      if(bookMarkIDs.includes(bookMarkId)) {
-        setIsBookMarked(true)
-      }
-    }
-  }
-
   const payload = { type:bookMarkType, id:bookMarkId, bookMarkInfo:bookMarkDetail }
 
   const dispatch = useDispatch()
@@ -41,8 +25,23 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
   }
 
   useEffect(() => {
-    bookMarkedCheck()
-  }, [])
+    const bookMarkedCheck = () => {
+      const { movieBookMark, seriesBookMark } = bookMarks
+      if(bookMarkType==="movie") {
+        const bookMarkIDs = movieBookMark.map((bookMark) => bookMark['id'])
+        if(bookMarkIDs.includes(bookMarkId)) {
+          setIsBookMarked(true)
+        }
+      } else {      
+        const bookMarkIDs = seriesBookMark.map((bookMark) =>  bookMark['id'])
+        if(bookMarkIDs.includes(bookMarkId)) {
+          setIsBookMarked(true)
+        }
+      }
+    }
+    
+    bookMarkedCheck() 
+    }, [ bookMarkDetail, bookMarkType, bookMarkId, bookMarks])
 
   const bookMarkEvent = () => {
     if(isbookMarked) {
@@ -50,8 +49,8 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
         title: "BookMark Removed.",
         description: "We've removed this from bookmark.",
         position:"top",
-        status: "success",
-        duration: 3000,
+        status: "info",
+        duration: 5000,
         isClosable: true,
       })
       toggleBookMark()
@@ -62,7 +61,7 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
         description: "We've Added this to bookmark.",
         position:"top",
         status: "success",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       })
       toggleBookMark()

@@ -14,6 +14,7 @@ const PersonContainer:React.FC = () => {
   const [loading,setLoading] = useState<boolean>(true)
 
   useEffect(() => {
+    let mounted = true;
     const getPersonData = async() => {
       try { 
       const {
@@ -26,8 +27,12 @@ const PersonContainer:React.FC = () => {
         setLoading(false)
       }
     } 
-    getPersonData()
-    },[person])
+    if(mounted) {
+      getPersonData()
+    }
+    return () => {
+      mounted = false
+    }},[person])
     const { popular }  = person
   return (
   <>

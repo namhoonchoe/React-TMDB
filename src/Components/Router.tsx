@@ -5,7 +5,7 @@ import Detail from "@screens/Detail";
 import Header from "./Header";
 import Home from "@screens/Home";
 import Movie from "@screens/Movie";
-import Person from "@screens/Person"
+import Person from "@screens/Person";
 import TV from "@screens/TV";
 import Search from "@screens/Search";
 import { useSelector } from "react-redux";
