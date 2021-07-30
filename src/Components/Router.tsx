@@ -23,10 +23,10 @@ const RoootRouter: React.FC = () => {
           <Route path="/search" component={Search}/>
           <Route path="/tag" component={Search} />
           <Route path="/movie/:id" component={Detail} />
-          <Route path="/tv/:id" component={Detail} />
+          <Route path="/series/:id" component={Detail} />
           <Route path="/person/:id" component={Detail} />
           <Route path="/movie" component={Movie} />
-          <Route path="/tv" component={TV} />
+          <Route path="/series" component={TV} />
           <Route path="/person" component={Person} />
         </Switch>
         <Route path="/*">

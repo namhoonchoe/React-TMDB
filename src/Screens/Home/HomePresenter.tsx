@@ -45,7 +45,7 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
           <Flex align="flex-end" my={4} >
             <Text fontSize="3xl" mr={2}>Today's Trending Series</Text>
             <Text py={1} > 
-              <Link to="/tv">Explore TvSeries</Link>
+              <Link to="/series">Explore TvSeries</Link>
             </Text>
           </Flex>
           <Box width="90vw" align="center">

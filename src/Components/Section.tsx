@@ -18,9 +18,11 @@ const Section:React.FC<ISectionInfo> = ({title,sectionInfos}) => {
 	const imageTypeChecker = () => {
 		if (pathType === "movie") {
       setSectionType("movie")
-    } else if(pathType === "series"){
-      setSectionType("tv")
-    } else if(pathType === "person"){
+    } 
+    if(pathType === "series") {
+      setSectionType("series")
+    } 
+    if(pathType === "person") {
       setSectionType("person")
     } 
 	}

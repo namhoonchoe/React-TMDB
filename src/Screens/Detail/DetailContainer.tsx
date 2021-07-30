@@ -39,7 +39,7 @@ export default function DetailContainer() {
   const checkDetail = () => {
     if (detailPath.includes("movie")){
       dispatch({type:"checkMovie"})
-    } else if(detailPath.includes("tv")){
+    } else if(detailPath.includes("series")){
       dispatch({type:"checkSeries"})
     } else if(detailPath.includes("person")){
       dispatch({type:"checkPerson"})

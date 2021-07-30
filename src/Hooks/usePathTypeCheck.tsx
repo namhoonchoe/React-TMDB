@@ -8,7 +8,7 @@ export const usePathTypeCheck = () => {
   const checkDetailType = () => {
     if(path.includes("movie")) {
       setPathType("movie")
-    } else if(path.includes("tv")) {
+    } else if(path.includes("series")) {
       setPathType("series")
     } else if(path.includes("person")) {
       setPathType("person")

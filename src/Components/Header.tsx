@@ -43,8 +43,8 @@ const Header:React.FC = () => {
                 <Link to="/movie">
                   <Text fontSize="lg" pr={1}>Movies</Text>
                 </Link>
-                <Link to="/tv">
-                  <Text fontSize="lg" pr={1}>TV</Text>
+                <Link to="/series">
+                  <Text fontSize="lg" pr={1}>Series</Text>
                 </Link>
                 <Link to="/tag">
                   <Text fontSize="lg" pr={1}>Tag</Text>
