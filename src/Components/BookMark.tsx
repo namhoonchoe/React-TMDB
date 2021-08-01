@@ -72,8 +72,8 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
 
   return (
     <>
-      { isbookMarked ?
-          <Button color="green.300" onClick={bookMarkEvent} >
+      { isbookMarked 
+        ? <Button color="green.300" onClick={bookMarkEvent} >
             <Text>Remove BookMark</Text>
           </Button>
         : <Button color="green.300" onClick={bookMarkEvent}>

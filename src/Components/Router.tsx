@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { selectSearch } from "@redux/searchSlice"
 
 const RoootRouter: React.FC = () => {
-  const searchTerm = useSelector(selectSearch)
+  const routeTrigger = useSelector(selectSearch).routeTrigger
 
   return (
     <Router>
@@ -30,7 +30,7 @@ const RoootRouter: React.FC = () => {
           <Route path="/person" component={Person} />
         </Switch>
         <Route path="/*">
-          {searchTerm !=="" && <Redirect to="/search"/>}
+          {routeTrigger !=="" && <Redirect to="/search"/>}
         </Route>
       </Flex>
     </Router>

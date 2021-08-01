@@ -18,6 +18,10 @@ export const usePathTypeCheck = () => {
       if(path.includes("person")) {
         setPathType("person")
       }
+
+      if(path.includes("search")) {
+        setPathType("search")
+      }
     } 
     checkDetailType()
   },[pathType,path])

@@ -12,7 +12,7 @@ interface ISearchpProps {
 
 const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,loading,error }) => {
   return(
-  <>
+  <> 
     { loading ? <LoadingSpinner/> 
     : <VStack spacing="8" width="100%" >
         <Box>
@@ -20,7 +20,7 @@ const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,lo
           ? <Section  
               title={"Results for Movies"}
               sectionInfos={movieResults}
-              sectionInfoType={"movie"}
+              sectionInfoType="movie"
             />  
           :null} </Box>
         <Box>
@@ -28,7 +28,7 @@ const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,lo
           ? <Section 
               title={"Results for series"}
               sectionInfos={seriesResults}
-              sectionInfoType={"series"}
+              sectionInfoType="series"
             />
           :null } </Box>
       </VStack> 

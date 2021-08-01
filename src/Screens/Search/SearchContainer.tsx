@@ -1,5 +1,5 @@
-import React , { useState, useEffect } from 'react'
-import { selectSearch, getSearchTerm } from '@redux/searchSlice'
+import React , { useState, useEffect, useRef } from 'react'
+import { selectSearch, resetRouteTrigger } from '@redux/searchSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { movieApi,tvApi } from '@api'
 import SearchPresenter from './SearchPresenter'
@@ -10,15 +10,20 @@ interface ISearchData {
 }
 
 const SearchContainer:React.FC = () => {
-  const searchQuery = useSelector(selectSearch)
+  const searchQuery = useSelector(selectSearch).searchQuery
+
   const dispatch = useDispatch()
+
   const [results, setResults] = useState<ISearchData>({
     movieResults:null,
     seriesResults:null
   })
-  const [error,setError] = useState<boolean>(false)
-  const [loading,setLoading] = useState<boolean>(true)
 
+  const [error,setError] = useState<boolean>(false)
+
+  const [loading,setLoading] = useState<boolean>(true)
+  
+  let searchRef = useRef<string>("")
 
   useEffect(() => {
     let mounted = true;
@@ -26,10 +31,10 @@ const SearchContainer:React.FC = () => {
       try {
         const {
           data: { results: movieResults },
-        } = await movieApi.movieSearch(searchQuery);
+        } = await movieApi.movieSearch(searchRef.current);
         const {
           data: { results: seriesResults },
-        } = await tvApi.tvSearch(searchQuery);
+        } = await tvApi.tvSearch(searchRef.current);
         setResults({ ...results, movieResults, seriesResults })
       } catch {
         setError(true)
@@ -38,12 +43,13 @@ const SearchContainer:React.FC = () => {
       }
     } 
     if(mounted) {
+      searchRef.current = searchQuery 
       getSearchResults()
     }
 
     return () => {
       mounted = false
-      dispatch(getSearchTerm(""))
+      dispatch(resetRouteTrigger(""))
     }
 
   }, [searchQuery,results,dispatch])
