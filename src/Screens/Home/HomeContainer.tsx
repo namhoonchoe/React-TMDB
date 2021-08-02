@@ -49,7 +49,7 @@ const HomeContainer:React.FC = () => {
   },[home])
 
 
-    const {trendingMovies,trendingSeries,trendingPeople} = home
+    const { trendingMovies, trendingSeries, trendingPeople } = home
   return (
   <>
     <HomePresenter

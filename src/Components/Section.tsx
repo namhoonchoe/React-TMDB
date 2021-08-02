@@ -18,7 +18,7 @@ const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }
 	
 	useEffect(() => {
 	  const imageTypeChecker = () => {
-		  if (pathType === "movie") {
+		  if(pathType === "movie") {
         setSectionType("movie")
       } 
       if(pathType === "series") {
@@ -29,7 +29,10 @@ const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }
       } 
       if(pathType === "search") {
         setSectionType(sectionInfoType)
-      } 
+      }
+      if(pathType === "bookmark") {
+        setSectionType(sectionInfoType)
+      }  
 	}
     imageTypeChecker()
   },[pathType,sectionInfoType])

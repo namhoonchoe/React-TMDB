@@ -26,14 +26,14 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
 
   useEffect(() => {
     const bookMarkedCheck = () => {
-      const { movieBookMark, seriesBookMark } = bookMarks
+      const { movieBookMarks, seriesBookMarks } = bookMarks
       if(bookMarkType==="movie") {
-        const bookMarkIDs = movieBookMark.map((bookMark) => bookMark['id'])
+        const bookMarkIDs = movieBookMarks.map((bookMark) => bookMark['id'])
         if(bookMarkIDs.includes(bookMarkId)) {
           setIsBookMarked(true)
         }
       } else {      
-        const bookMarkIDs = seriesBookMark.map((bookMark) =>  bookMark['id'])
+        const bookMarkIDs = seriesBookMarks.map((bookMark) => bookMark['id'])
         if(bookMarkIDs.includes(bookMarkId)) {
           setIsBookMarked(true)
         }
@@ -68,7 +68,6 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
       dispatch(addBookMark(payload))
     }
   }
-
 
   return (
     <>

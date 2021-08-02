@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectSearch } from "@redux/searchSlice"
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Flex } from "@chakra-ui/react"
 import Detail from "@screens/Detail";
@@ -8,8 +10,8 @@ import Movie from "@screens/Movie";
 import Person from "@screens/Person";
 import TV from "@screens/TV";
 import Search from "@screens/Search";
-import { useSelector } from "react-redux";
-import { selectSearch } from "@redux/searchSlice"
+import BookMark from "@screens/BookMark";
+
 
 const RoootRouter: React.FC = () => {
   const routeTrigger = useSelector(selectSearch).routeTrigger
@@ -28,6 +30,7 @@ const RoootRouter: React.FC = () => {
           <Route path="/movie" component={Movie} />
           <Route path="/series" component={TV} />
           <Route path="/person" component={Person} />
+          <Route path="/bookmark" component={BookMark} />
         </Switch>
         <Route path="/*">
           {routeTrigger !=="" && <Redirect to="/search"/>}

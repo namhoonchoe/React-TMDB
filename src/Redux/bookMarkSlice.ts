@@ -10,13 +10,13 @@ interface IBookMark {
 type bookMarkArray = Array<IBookMark>
 
 interface IState {
-  movieBookMark:bookMarkArray
-  seriesBookMark:bookMarkArray
+  movieBookMarks:bookMarkArray
+  seriesBookMarks:bookMarkArray
 }
 
 const bookMarkState:IState = {
-  movieBookMark:[] as bookMarkArray,
-  seriesBookMark:[] as bookMarkArray
+  movieBookMarks:[] as bookMarkArray,
+  seriesBookMarks:[] as bookMarkArray
 }
 
 const bookMarkSlice = createSlice({
@@ -24,32 +24,32 @@ const bookMarkSlice = createSlice({
   initialState:bookMarkState, 
   reducers:{
     addBookMark:(state:IState ,action:PayloadAction<IBookMark>) => {
-      const { movieBookMark, seriesBookMark } = state
+      const { movieBookMarks, seriesBookMarks } = state
       const contentType = action.payload.type
       if(contentType === "movie") {
         return {
-          movieBookMark:[...movieBookMark,action.payload],
-          seriesBookMark
+          movieBookMarks:[...movieBookMarks,action.payload],
+          seriesBookMarks
         }
       } else {
         return {
-          movieBookMark:movieBookMark,
-          seriesBookMark:[...seriesBookMark,action.payload]
+          movieBookMarks:movieBookMarks,
+          seriesBookMarks:[...seriesBookMarks,action.payload]
         }
       }
     },
     removeBookMark:(state:IState ,action:PayloadAction<IBookMark>) => {
       const contentType = action.payload.type
-      const { movieBookMark, seriesBookMark } = state
+      const { movieBookMarks, seriesBookMarks } = state
       if(contentType === "movie") {
         return {
-          movieBookMark:movieBookMark.filter((bookMark) => bookMark.id !== action.payload.id),
-          seriesBookMark
+          movieBookMarks:movieBookMarks.filter((bookMark) => bookMark.id !== action.payload.id),
+          seriesBookMarks
         }
       } else {
         return {
-          movieBookMark:movieBookMark,
-          seriesBookMark:seriesBookMark.filter((bookMark) => bookMark.id !== action.payload.id)
+          movieBookMarks:movieBookMarks,
+          seriesBookMarks:seriesBookMarks.filter((bookMark) => bookMark.id !== action.payload.id)
         }
       }
     }
@@ -59,5 +59,12 @@ const bookMarkSlice = createSlice({
 export const { addBookMark, removeBookMark } = bookMarkSlice.actions;
 
 export const selectBookMark = (state:RootState) => state.bookMark
+
+export const selectMovieBookMarks =  (state:RootState) => {
+  return state.bookMark.movieBookMarks.map((movieBookMark) => movieBookMark['bookMarkInfo'])
+}
+export const selectSeriesBookMarks =  (state:RootState) => {
+  return state.bookMark.seriesBookMarks.map((seiresBookMark) => seiresBookMark['bookMarkInfo'])
+}
 
 export default bookMarkSlice.reducer

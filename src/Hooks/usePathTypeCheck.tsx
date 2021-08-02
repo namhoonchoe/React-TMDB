@@ -22,6 +22,10 @@ export const usePathTypeCheck = () => {
       if(path.includes("search")) {
         setPathType("search")
       }
+
+      if(path.includes("bookmark")) {
+        setPathType("bookmark")
+      }
     } 
     checkDetailType()
   },[pathType,path])
