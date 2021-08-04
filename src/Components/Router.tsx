@@ -10,6 +10,7 @@ import Movie from "@screens/Movie";
 import Person from "@screens/Person";
 import TV from "@screens/TV";
 import Search from "@screens/Search";
+import Discover from "@screens/Discover";
 import BookMark from "@screens/BookMark";
 
 
@@ -23,7 +24,8 @@ const RoootRouter: React.FC = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/search" component={Search}/>
-          <Route path="/tag" component={Search} />
+          <Route path="/discover/movie" component={Discover} />
+          <Route path="/discover/series" component={Discover} />
           <Route path="/movie/:id" component={Detail} />
           <Route path="/series/:id" component={Detail} />
           <Route path="/person/:id" component={Detail} />

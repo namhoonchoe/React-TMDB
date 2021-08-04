@@ -16,6 +16,7 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 
 const Header:React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
   <>
     <Flex 
@@ -48,10 +49,10 @@ const Header:React.FC = () => {
                 </Link>
                 <Link to="/bookmark">
                   <Text fontSize="lg" pr={1}>BookMark</Text>
-                </Link> 
-                <Link to="/tag">
-                  <Text fontSize="lg" pr={1}>Tag</Text>
-                </Link> 
+                </Link>
+                <Link to="/discover/movie">
+                  <Text fontSize="lg" pr={1}>Discover</Text>
+                </Link>
               </Flex>
             </DrawerBody>
           </DrawerContent>

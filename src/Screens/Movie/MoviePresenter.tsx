@@ -37,8 +37,7 @@ const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error
               sectionInfos={upComing}
             />
         :null } </Box>
-      </VStack> 
-    }
+      </VStack> }
 
     { error ? <p>"An error has occured"</p>: null }
 

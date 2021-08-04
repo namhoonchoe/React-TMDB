@@ -1,8 +1,8 @@
 import React, { useReducer,useEffect } from 'react'
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
-import MovieDetail from "./DetailTypes/MovieDetail"
-import SeriesDetail from "./DetailTypes/SeriesDetail"
-import PersonDetail from "./DetailTypes/PersonDetail"
+import MovieDetail from "./MovieDetail"
+import SeriesDetail from "./SeriesDetail"
+import PersonDetail from "./PersonDetail"
 
 interface IDetailTypes {
   movie:boolean,

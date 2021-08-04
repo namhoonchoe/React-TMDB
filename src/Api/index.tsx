@@ -54,3 +54,14 @@ export const personApi = {
 export const trendingApi = {
   trending: (type:string) => api.get(`trending/${type}/day`),
 };
+
+export const discoverApi = {
+  discoverMovie: () => api.get("discover/movie"),
+  discoverSeries: () => api.get("discover/tv")
+}
+
+export const genreApi = {
+  movieGenres: () => api.get("genre/movie/list"),
+  seriesGenres: () => api.get("genre/tv/list")
+}
+
