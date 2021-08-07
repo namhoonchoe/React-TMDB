@@ -29,9 +29,8 @@ const SearchBox:React.FC = () => {
   return (
   <>
     <Flex justify="center" align="center" width="max"> 
-      {
-        clicked ? 
-          <form onSubmit={onSubmit}>
+      { clicked 
+        ? <form onSubmit={onSubmit}>
             <Flex justify="center" alignItems="center" h={4} >
               <Input 
                 value={term}
@@ -41,8 +40,7 @@ const SearchBox:React.FC = () => {
               <CloseIcon onClick={toggleClick}/>
             </Flex> 
           </form>
-        : <Search2Icon onClick={toggleClick} w={4} h={4}/>
-      }
+        : <Search2Icon onClick={toggleClick} w={4} h={4}/> }
     </Flex>
   </>
   )

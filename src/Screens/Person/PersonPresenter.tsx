@@ -21,10 +21,11 @@ const PersonPresenter:React.FC<IPersonProps> = ({popular,error,loading}) => {
               title={"Popular"}
               sectionInfos={popular}
             />
-        :null } </Box>
+          :null } 
+        </Box>
       </VStack> }
 
-    { error ? <p>"An error has occured"</p>: null }
+    { error ? <p>An error has occured</p>: null }
   </>
   )
 };

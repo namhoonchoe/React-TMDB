@@ -1,1 +1,1 @@
-type discoverInfo = []|null
+type discoverInfo = null|[]

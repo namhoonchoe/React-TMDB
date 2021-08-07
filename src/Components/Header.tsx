@@ -25,7 +25,7 @@ const Header:React.FC = () => {
       m={"0"}
       p={[3,2.5]}
       zIndex={"10"} 
-      position="relative"
+      position="sticky"
       top={"0"}
       left={"0"}>
       <VStack justify="center" >

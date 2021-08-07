@@ -15,6 +15,7 @@ const BookMarkPresenter:React.FC<IBookMarkProps> = ({ movieBookMark, seriesBookM
         { movieBookMark.length === 0 && seriesBookMark.length === 0 &&
           <p>book mark whatever you want</p>
         }
+
         { movieBookMark.length !== 0 &&
           <Section 
             title={"BookMarked Movies"}
@@ -22,6 +23,7 @@ const BookMarkPresenter:React.FC<IBookMarkProps> = ({ movieBookMark, seriesBookM
             sectionInfos={movieBookMark}
           />
         }
+        
         { seriesBookMark.length !== 0 &&
           <Section 
           title={"BookMarked Series"}

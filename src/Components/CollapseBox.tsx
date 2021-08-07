@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { useDisclosure } from '@chakra-ui/hooks'
-import { Text, VStack, Flex, Spacer, Collapse, Box } from '@chakra-ui/react'
+import { Text, Flex, Spacer, Collapse, Box } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 interface ICollapseBoxProps {
   title?:string
-  body?:any
 }
 
-const CollapseBox:React.FC<ICollapseBoxProps> = ({ title, body }) => {
+const CollapseBox:React.FC<ICollapseBoxProps> = ({ title, children }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -22,17 +21,7 @@ const CollapseBox:React.FC<ICollapseBoxProps> = ({ title, body }) => {
           }
       </Flex>
       <Collapse in={isOpen}>
-      <Box
-        p="40px"
-        color="white"
-        mt="4"
-        mx={3}
-        bg="teal.500"
-        rounded="md"
-        shadow="md"
-      >
-      Fade
-      </Box>
+        {children}
       </Collapse>
     </>
   )

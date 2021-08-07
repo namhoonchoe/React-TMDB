@@ -19,7 +19,7 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
     { loading 
       ? <LoadingSpinner/> 
       : null }
-    { error ? <p>"An error has occured"</p>: null }
+    { error ? <p>An error has occured</p>: null }
     
     { trendingMovies !== null && trendingMovies.length > 0 
       ? <VStack align="start">
