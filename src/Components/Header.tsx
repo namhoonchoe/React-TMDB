@@ -23,7 +23,10 @@ const Header:React.FC = () => {
       justify="flex-start" 
       align="center" 
       m={"0"}
-      p={[3,2.5]}
+      mb={"2"}
+      bgColor="black"
+      px={3}
+      py={4}
       zIndex={"10"} 
       position="sticky"
       top={"0"}

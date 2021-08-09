@@ -13,7 +13,7 @@ const TvContainer:React.FC = () => {
   const [series,setSeries] = useState<ITvData>({ 
     topRated:null,
     popular:null,
-  	airingToday:null
+    airingToday:null
   })
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)

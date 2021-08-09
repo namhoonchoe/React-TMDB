@@ -17,6 +17,7 @@ const DiscoverContainer:React.FC = () => {
   const [loading,setLoading] = useState<boolean>(true)
   let pathType = usePathTypeCheck()  
 
+  
   useEffect(() => {
     let mounted = true
     const getDiscoverInfo = () => {

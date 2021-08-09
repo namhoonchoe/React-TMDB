@@ -27,7 +27,7 @@ const DetailPresenter:React.FC<IDetailProps> = ({ detail ,cast ,similar ,error, 
         </Flex>)
       }
 
-      { error ? <p>"An error has occured"</p>: null }
+      { error ? <p>An error has occured</p>: null }
     </>
   )
 }

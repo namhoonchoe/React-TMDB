@@ -15,67 +15,62 @@ interface IHomeProps {
 const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trendingPeople,error,loading}) => {
   return (
   <>
-	<VStack width="90vw" my={5}>
     { loading 
       ? <LoadingSpinner/> 
-      : null }
-    { error ? <p>An error has occured</p>: null }
-    
-    { trendingMovies !== null && trendingMovies.length > 0 
-      ? <VStack align="start">
-          <Flex align="flex-end" my={4} >
-            <Text fontSize="3xl" mr={2}>Today's Trending Movies</Text>
-            <Text py={1} >
-              <Link to="/movie">
-                Explore Movies
-              </Link>
-            </Text>
-          </Flex>
-          <Box width="90vw" align="center">
-            <CarouseSlider 
-              carouselData={trendingMovies}
-              carouselType="poster"/>
-          </Box>
-        </VStack>
-      : null
-    }
+      : <VStack width="90vw" my={5}> 
+        { trendingMovies !== null && trendingMovies.length > 0 
+        ? <VStack align="start">
+            <Flex align="flex-end" my={4} >
+              <Text fontSize="3xl" mr={2}>Today's Trending Movies</Text>
+              <Text py={1} >
+                <Link to="/movie">
+                  Explore Movies
+                </Link>
+              </Text>
+            </Flex>
+            <Box width="90vw" align="center">
+              <CarouseSlider 
+                carouselData={trendingMovies}
+                carouselType="poster"/>
+            </Box>
+          </VStack>
+        : null }
 
-    { trendingSeries !== null && trendingSeries.length > 0 
-      ? <VStack align="start">
-          <Flex align="flex-end" my={4} >
-            <Text fontSize="3xl" mr={2}>Today's Trending Series</Text>
-            <Text py={1} > 
-              <Link to="/series">Explore TvSeries</Link>
-            </Text>
-          </Flex>
-          <Box width="90vw" align="center">
-            <CarouseSlider 
-              carouselData={trendingSeries}
-              carouselType="poster"/>
-          </Box>
-        </VStack>
-      : null
-    }
-    
-    { trendingPeople !== null && trendingPeople.length > 0 
-      ? <VStack align="start">
-          <Flex align="flex-end" my={4}>
-            <Text fontSize="3xl" mr={2}>Today's Trending People</Text>
-            <Text py={1}> 
-              <Link to="/person">
-                Explore People
-              </Link>
-            </Text>
-          </Flex>
-          <Box width="90vw" align="center">
-            <CarouseSlider 
-              carouselData={trendingPeople}
-              carouselType="portrait"/>
-          </Box>
-        </VStack>
-      : null
-    }
-  </VStack>
+        { trendingSeries !== null && trendingSeries.length > 0 
+        ? <VStack align="start">
+            <Flex align="flex-end" my={4} >
+              <Text fontSize="3xl" mr={2}>Today's Trending Series</Text>
+              <Text py={1} > 
+                <Link to="/series">Explore TvSeries</Link>
+              </Text>
+            </Flex>
+            <Box width="90vw" align="center">
+              <CarouseSlider 
+                carouselData={trendingSeries}
+                carouselType="poster"/>
+            </Box>
+          </VStack>
+        : null }
+
+        { trendingPeople !== null && trendingPeople.length > 0 
+        ? <VStack align="start">
+            <Flex align="flex-end" my={4}>
+              <Text fontSize="3xl" mr={2}>Today's Trending People</Text>
+              <Text py={1}> 
+                <Link to="/person">
+                  Explore People
+                </Link>
+              </Text>
+            </Flex>
+            <Box width="90vw" align="center">
+              <CarouseSlider 
+                carouselData={trendingPeople}
+                carouselType="portrait"/>
+            </Box>
+          </VStack>
+        : null }
+      </VStack>}
+    { error ? <p>An error has occured</p>: null }
   </>
   )
 

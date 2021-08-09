@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@components/Section"
-import { VStack, Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 
 interface IPersonProps {
@@ -13,17 +13,15 @@ const PersonPresenter:React.FC<IPersonProps> = ({popular,error,loading}) => {
   return (
   <>
     { loading 
-    ?<LoadingSpinner/> 
-    : <VStack spacing="8" width="100%" >
-        <Box>
-          { popular !== null && popular.length > 0 
-          ? <Section 
-              title={"Popular"}
-              sectionInfos={popular}
-            />
-          :null } 
-        </Box>
-      </VStack> }
+    ? <LoadingSpinner/> 
+    :  <Box width="100%"> 
+      { popular !== null && popular.length > 0 
+      ? <Section 
+          title={"Popular"}
+          sectionInfos={popular}
+        />
+      :null } 
+      </Box> }
 
     { error ? <p>An error has occured</p>: null }
   </>

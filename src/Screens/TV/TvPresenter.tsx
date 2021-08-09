@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@components/Section"
-import { VStack, Box } from "@chakra-ui/react"
+import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 
 interface ISerieseProps {
@@ -17,27 +17,26 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
     { loading 
       ?<LoadingSpinner/> 
       : <VStack spacing="8" width="100%" >
-          <Box>
-            { popular !== null && popular.length > 0 
-            ? <Section  
-                title={"Popular"}
-                sectionInfos={popular} 
-              />  
-            :null} </Box>
-          <Box>
-            { airingToday !== null && airingToday.length > 0 
-            ? <Section 
-                title={"Airing Today"}
-                sectionInfos={airingToday}
-              />
-            :null } </Box>
-          <Box>
-            { topRated !== null && topRated.length > 0 
-            ? <Section 
-                title={"TopRated"}
-                sectionInfos={topRated}
-              />
-          :null } </Box>
+        { popular !== null && popular.length > 0 
+        ? <Section  
+            title={"Popular"}
+            sectionInfos={popular} 
+          />  
+        :null } 
+
+        { airingToday !== null && airingToday.length > 0 
+        ? <Section 
+            title={"Airing Today"}
+            sectionInfos={airingToday}
+          />
+        :null } 
+
+        { topRated !== null && topRated.length > 0 
+        ? <Section 
+            title={"TopRated"}
+            sectionInfos={topRated}
+          />
+        :null }
         </VStack> }
       
       { error ? <p>"An error has occured"</p>: null }

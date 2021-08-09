@@ -13,26 +13,27 @@ interface ISearchpProps {
 const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,loading,error }) => {
   return(
   <> 
-    { loading ? <LoadingSpinner/> 
+    { loading 
+    ? <LoadingSpinner/> 
     : <VStack spacing="8" width="100%" >
-        <Box>
-          { movieResults !== null && movieResults.length > 0 
-          ? <Section  
-              title={"Results for Movies"}
-              sectionInfos={movieResults}
-              sectionInfoType="movie"
-            />  
-          :null} </Box>
-        <Box>
-          { seriesResults !== null && seriesResults.length > 0 
-          ? <Section 
-              title={"Results for series"}
-              sectionInfos={seriesResults}
-              sectionInfoType="series"
-            />
-          :null } </Box>
+        { movieResults !== null && movieResults.length > 0 
+        ? <Section  
+            title={"Results for Movies"}
+            sectionInfos={movieResults}
+            sectionInfoType="movie"
+          />  
+        :null } 
+
+        { seriesResults !== null && seriesResults.length > 0 
+        ? <Section 
+            title={"Results for series"}
+            sectionInfos={seriesResults}
+            sectionInfoType="series"
+          />
+        :null } 
       </VStack> 
     }
+
     { error ? <p>"An error has occured"</p>: null }
   </>
   )

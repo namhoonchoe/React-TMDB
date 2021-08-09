@@ -51,7 +51,6 @@ const HomeContainer:React.FC = () => {
 
     const { trendingMovies, trendingSeries, trendingPeople } = home
   return (
-  <>
     <HomePresenter
       trendingMovies={trendingMovies}
       trendingSeries={trendingSeries}
@@ -59,7 +58,6 @@ const HomeContainer:React.FC = () => {
       error={error}
       loading={loading}
     />
-  </>
   )
 }
 
