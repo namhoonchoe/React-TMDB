@@ -13,11 +13,23 @@ const DiscoverContainer:React.FC = () => {
     discoverList:null,
     discoverGenres:null
   })
+  const [genreFilters, setGenreFilter] = useState<Array<any>>([])
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
   let pathType = usePathTypeCheck()  
 
-  
+  const addToFilter = (genre:any) => {
+    setGenreFilter([...genreFilters,genre])
+  }
+
+  const removeFromFilter = (genre:any) => {
+    setGenreFilter(genreFilters.filter((genreFilter) => genreFilter.id !== genre.id ))
+  }
+
+  const resetFilter = () => {
+    setGenreFilter([])
+  }
+
   useEffect(() => {
     let mounted = true
     const getDiscoverInfo = () => {
@@ -35,6 +47,7 @@ const DiscoverContainer:React.FC = () => {
             setLoading(false)
           }
         }
+        resetFilter()
         getDiscoverMovieInfo()
       }
 
@@ -52,6 +65,7 @@ const DiscoverContainer:React.FC = () => {
             setLoading(false)
           }
         }
+        resetFilter()
         getDiscoverSeiresInfo()
       }
     }
@@ -63,13 +77,16 @@ const DiscoverContainer:React.FC = () => {
     return () => {
       mounted = false
     }
-  }, [pathType,discoverInfo])
+  }, [pathType])
   
   const { discoverList, discoverGenres } = discoverInfo
   return (
     <DiscoverPresenter
       genres={discoverGenres}
       infos={discoverList}
+      filterList={genreFilters}
+      addToFilter={addToFilter}
+      removeFromFilter={removeFromFilter}
       error={error}
       loading={loading}/>
   )

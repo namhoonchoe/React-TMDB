@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookMark, removeBookMark, selectBookMark } from '@redux/bookMarkSlice'
-import { Button, Text, useToast  } from '@chakra-ui/react'
+import { Button, Text, useToast } from '@chakra-ui/react'
 
 interface IBookMarkProps {
   bookMarkDetail:any
@@ -11,13 +11,9 @@ interface IBookMarkProps {
 
 const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookMarkId }) => {  
   const [isbookMarked, setIsBookMarked] = useState<boolean>(false)
-
   const bookMarks = useSelector(selectBookMark)
-
   const payload = { type:bookMarkType, id:bookMarkId, bookMarkInfo:bookMarkDetail }
-
   const dispatch = useDispatch()
-
   const toast = useToast()
 
   const toggleBookMark = () => {
