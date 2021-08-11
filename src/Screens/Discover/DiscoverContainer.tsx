@@ -8,12 +8,19 @@ interface IDiscoverInfo {
   discoverGenres:null
 }
 
+interface IGenre {
+  info:any,
+  type:string
+}
+
+type genreFilters = Array<IGenre>
+
 const DiscoverContainer:React.FC = () => {
   const [discoverInfo,setDiscoverInfo] = useState<IDiscoverInfo>({
     discoverList:null,
     discoverGenres:null
   })
-  const [genreFilters, setGenreFilter] = useState<Array<any>>([])
+  const [genreFilters, setGenreFilter] = useState<genreFilters>([])
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
   let pathType = usePathTypeCheck()  
@@ -23,7 +30,7 @@ const DiscoverContainer:React.FC = () => {
   }
 
   const removeFromFilter = (genre:any) => {
-    setGenreFilter(genreFilters.filter((genreFilter) => genreFilter.id !== genre.id ))
+    setGenreFilter(genreFilters.filter((genreFilter) => genreFilter.info.id !== genre.info.id ))
   }
 
   const resetFilter = () => {

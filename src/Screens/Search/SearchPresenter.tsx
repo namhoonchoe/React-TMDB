@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@components/Section"
-import { Box, VStack } from "@chakra-ui/react"
+import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 
 interface ISearchpProps {

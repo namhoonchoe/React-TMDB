@@ -11,18 +11,14 @@ interface ISearchData {
 
 const SearchContainer:React.FC = () => {
   const searchQuery = useSelector(selectSearch).searchQuery
-
-  const dispatch = useDispatch()
-
   const [results, setResults] = useState<ISearchData>({
     movieResults:null,
     seriesResults:null
   })
-
   const [error,setError] = useState<boolean>(false)
+  const [loading,setLoading] = useState<boolean>(true)  
+  const dispatch = useDispatch()
 
-  const [loading,setLoading] = useState<boolean>(true)
-  
   let searchRef = useRef<string>("")
 
   useEffect(() => {

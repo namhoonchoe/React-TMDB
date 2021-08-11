@@ -1,10 +1,10 @@
 import React  from 'react'
 import { useDisclosure } from '@chakra-ui/hooks'
-import { Text, Flex, Spacer, Collapse, Box } from '@chakra-ui/react'
+import { Text, Flex, Spacer, Collapse } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 interface ICollapseBoxProps {
-  title?:string
+  title:string
 }
 
 const CollapseBox:React.FC<ICollapseBoxProps> = ({ title, children }) => {
@@ -12,8 +12,8 @@ const CollapseBox:React.FC<ICollapseBoxProps> = ({ title, children }) => {
 
   return (
     <>
-      <Flex direction="row" align="center" justify="start" my={2} px={2}>
-        <Text>{title}</Text>
+      <Flex direction="row" align="center" justify="start" my={2}>
+        <Text fontSize="lg">{title}</Text>
         <Spacer/>
           { isOpen 
             ? <ChevronUpIcon onClick={onToggle}/>
