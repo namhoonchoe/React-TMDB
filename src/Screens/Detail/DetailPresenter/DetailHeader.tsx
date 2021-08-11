@@ -9,7 +9,8 @@ import { Flex,
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoImage from "@components/InfoImage";
 import ModalBox from "@components/ModalBox";
-import BookMark from "@components/BookMark"
+import BookMark from "@components/BookMark";
+import StarRating from "@components/StarRating"
 
 
 interface IHeaderProps {
@@ -66,7 +67,10 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                     <Text mr={2}>{detail.release_date}</Text>
                     <Text>{detail.status}</Text>
                   </Flex>
-                  <Text>{detail.vote_average}/10</Text>
+                  <Flex justify="start" align="center">
+                    <StarRating rating={detail.vote_average}/>
+                    <Text ml={2}>{detail.vote_average}/10</Text>
+                  </Flex>
                 </VStack>
                 <BookMark 
                   bookMarkDetail={detail}
