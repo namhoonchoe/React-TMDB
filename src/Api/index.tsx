@@ -56,7 +56,14 @@ export const trendingApi = {
 };
 
 export const discoverApi = {
-  discoverMovie: () => api.get("discover/movie"),
+  discoverMovie:(sort?:string, genreInclude?:string, genreExclude?:string, page?:number) => api.get("discover/movie", {
+    params: {
+      sort_by:sort,
+      with_genres:genreInclude,
+      without_genres:genreExclude,
+      page:page
+    }
+  }),
   discoverSeries: () => api.get("discover/tv")
 }
 

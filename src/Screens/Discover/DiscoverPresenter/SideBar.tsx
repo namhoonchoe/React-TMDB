@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import CollapseBox from '@components/CollapseBox'
 import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade, Switch } from "@chakra-ui/react"
@@ -14,15 +14,63 @@ interface ISideBarProps {
   filterList: Array<IGenreFilter>
   addToFilter:(arg:any) => void
   removeFromFilter:(arg:any) => void
+  discoverTrigger:(sort:any,genreInclude:any,genreExclude:any) => void
 }
 
-const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, removeFromFilter }) => {
+const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, removeFromFilter, discoverTrigger }) => {
   const [value, setValue] = useState<string>("1")
   const [orderDescending, setOrderDescending] = useState<boolean>(true)
+  const [sortQuery, setSortQuery] = useState<string>("")
   const excludeFilter = filterList.filter((filter) => filter.type === "exclude")
   const includeFilter = filterList.filter((filter) => filter.type === "include")
   const excludeIds = excludeFilter.map((genre) => genre.info['id'])
   const includeIds = includeFilter.map((genre) => genre.info['id'])
+
+  useEffect(() => {
+    let mounted = true
+
+    const sort = () => {
+      if(orderDescending) {
+        switch(value) {
+          case "4":
+            setSortQuery("revenue.desc")
+            break
+          case "3":
+            setSortQuery("vote_average.desc")
+            break
+          case "2":
+            setSortQuery("release_date.desc")
+            break
+          case "1":
+            setSortQuery("popularity.desc")
+            break
+        }
+      } else {
+        switch(value) {
+          case "4":
+            setSortQuery("revenue.asc")
+            break
+          case "3":
+            setSortQuery("vote_average.asc")
+            break
+          case "2":
+            setSortQuery("release_date.asc")
+            break
+          case "1":
+            setSortQuery("popularity.asc")
+            break
+        }
+      }
+    }
+
+    if(mounted) {
+      sort()
+    }
+
+    return () => {
+      mounted = false
+    }
+  }, [value,orderDescending])
 
   return (  
     <Flex direction="column" justify="space-between" position="absolute" top="0" bottom="0" ml={2}  width="17vw">
@@ -116,14 +164,14 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
         </CollapseBox>
         { orderDescending
         ? <Flex boxSize="max-content" 
-                mt={3} 
+                my={3} 
                 justify="start" align="center"
                 onClick={() => setOrderDescending(!orderDescending)}>
             <Text fontWeight="thin" py={1} pr={1} mr={2}>Order Descending</Text>
             <Switch colorScheme="teal" size="md" isChecked={true}/>
           </Flex>
         : <Flex boxSize="max-content" 
-                mt={3} 
+                my={3} 
                 justify="start" align="center"
                 onClick={() => setOrderDescending(!orderDescending)}>
             <Text fontWeight="thin" py={1} pr={1} mr={2}>Order Aescending</Text>
@@ -131,9 +179,9 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
           </Flex> }
       </Flex>
       <Spacer/>
-      <SlideFade in={(filterList.length > 0) === true} offsetY="20px">
+      <SlideFade in={(filterList.length > 0) === true}>
         <Flex justify="center">
-          <Button width="15vw">
+          <Button width="15vw" onClick={() => discoverTrigger(sortQuery, includeIds.toString(),excludeIds.toString())}>
             <Text>Discover</Text>
           </Button>
         </Flex>
@@ -141,6 +189,5 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
     </Flex>
   )
 }
-
 
 export default SideBar

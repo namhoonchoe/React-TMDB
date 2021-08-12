@@ -13,6 +13,12 @@ interface IGenre {
   type:string
 }
 
+interface IDiscoverQuery {
+  sort:undefined | string,
+  genreInclude:undefined | string,
+  genreExclude:undefined | string
+}
+
 type genreFilters = Array<IGenre>
 
 const DiscoverContainer:React.FC = () => {
@@ -23,14 +29,22 @@ const DiscoverContainer:React.FC = () => {
   const [genreFilters, setGenreFilter] = useState<genreFilters>([])
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
+  const [discoverQuery, setDiscoverQuery] = useState<IDiscoverQuery>({
+    sort:undefined,
+    genreInclude:undefined,
+    genreExclude:undefined
+  })
+
+  const { sort, genreInclude, genreExclude } = discoverQuery
+  const [page, setPage] = useState<number>(1)
+
   let pathType = usePathTypeCheck()  
 
-  const addToFilter = (genre:any) => {
-    setGenreFilter([...genreFilters,genre])
-  }
-
-  const removeFromFilter = (genre:any) => {
-    setGenreFilter(genreFilters.filter((genreFilter) => genreFilter.info.id !== genre.info.id ))
+  const genreFunctions:IGenreFunctions = {
+    addToFilter:(genre:any) => setGenreFilter([...genreFilters,genre]),
+    removeFromFilter:(genre:any) => setGenreFilter(genreFilters.filter((genreFilter) => genreFilter.info.id !== genre.info.id )),
+    discoverTrigger:(sort:string, include:any, exclude:any) =>  setDiscoverQuery({ sort:sort,  genreInclude:include,  genreExclude:exclude }),
+    fetchMore:() => setPage(page+1)
   }
 
   const resetFilter = () => {
@@ -39,11 +53,12 @@ const DiscoverContainer:React.FC = () => {
 
   useEffect(() => {
     let mounted = true
+
     const getDiscoverInfo = () => {
       if(pathType === "movie") {
         const getDiscoverMovieInfo = async() => {
           try {
-            const { data:{ results } } = await discoverApi.discoverMovie()
+            const { data:{ results } } = await discoverApi.discoverMovie(sort,genreInclude,genreExclude,page)
             const { data:{ genres } } = await genreApi.movieGenres()
             setDiscoverInfo({ ...discoverInfo,
               discoverList:results,
@@ -84,7 +99,7 @@ const DiscoverContainer:React.FC = () => {
     return () => {
       mounted = false
     }
-  }, [pathType])
+  }, [pathType,page,genreInclude])
   
   const { discoverList, discoverGenres } = discoverInfo
   return (
@@ -92,8 +107,7 @@ const DiscoverContainer:React.FC = () => {
       genres={discoverGenres}
       infos={discoverList}
       filterList={genreFilters}
-      addToFilter={addToFilter}
-      removeFromFilter={removeFromFilter}
+      genreFunctions={genreFunctions}
       error={error}
       loading={loading}/>
   )
