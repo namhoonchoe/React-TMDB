@@ -48,16 +48,16 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                     : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> 
                   }
                 </VStack>
-                : <VStack>
-                    <Spacer/>
-                    <Box maxWidth="xs">
-                    {detail.overview.length > 100 
-                    ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
-                        <ModalBox modalcontent={detail.overview}/>
-                      </Box>
-                    : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> }
+              : <VStack>
+                  <Spacer/>
+                  <Box maxWidth="xs">
+                  {detail.overview.length > 100 
+                  ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
+                      <ModalBox modalcontent={detail.overview}/>
                     </Box>
-                  </VStack>
+                  : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> }
+                  </Box>
+                </VStack>
                 }              
             </Container>
             <Container maxW="sm">

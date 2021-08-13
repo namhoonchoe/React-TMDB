@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent, MouseEvent } from 'react'
 import { getSearchTerm } from '@redux/searchSlice'
 import { useDispatch } from 'react-redux' 
 import { Search2Icon, CloseIcon } from '@chakra-ui/icons'
-import { Input, Flex } from '@chakra-ui/react'
+import { Input, Flex, Tooltip } from '@chakra-ui/react'
 
 
 const SearchBox:React.FC = () => {
@@ -40,7 +40,10 @@ const SearchBox:React.FC = () => {
               <CloseIcon onClick={toggleClick}/>
             </Flex> 
           </form>
-        : <Search2Icon onClick={toggleClick} w={4} h={4}/> }
+        : <Tooltip label="Search Movies or Series" aria-label="A tooltip">
+            <Search2Icon onClick={toggleClick} w={4} h={4}/> 
+          </Tooltip>
+      }
     </Flex>
   </>
   )

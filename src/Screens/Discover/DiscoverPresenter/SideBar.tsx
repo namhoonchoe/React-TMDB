@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import CollapseBox from '@components/CollapseBox'
-import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade, Switch } from "@chakra-ui/react"
-import { MinusIcon, AddIcon } from '@chakra-ui/icons'
+import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade } from "@chakra-ui/react"
+import { MinusIcon, AddIcon, TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons'
+import MovieIcon from '@components/svgcomponents/MovieIcon'
+import SeriesIcon from '@components/svgcomponents/SeriesIcon'
+
 
 interface IGenreFilter {
   info:any,
@@ -73,54 +76,59 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
   }, [value,orderDescending])
 
   return (  
-    <Flex direction="column" justify="space-between" position="absolute" top="0" bottom="0" ml={2}  width="17vw">
-      <Flex direction="row" justify="space-between" align="center" mx={4}>
+    <Flex direction="column" justify="space-between"
+          position="absolute" top="0" bottom="0" 
+          ml={2}  width="100%" 
+          border="1px" borderRadius="md" borderColor="gray.300">
+      <Flex direction="row" justify="space-around" align="center" >
         <Link to="/discover/movie">
-          <Box fontSize="xl" fontWeight="semibold">
-            <Text>Movies</Text>
-          </Box>
+          <Flex fontSize="xl" fontWeight="semibold" align="center" p={1}>
+            <MovieIcon/>
+            <Text ml={1}>Movies</Text>
+          </Flex>
         </Link>
         <Link to="/discover/series">
-          <Box fontSize="xl" fontWeight="semibold">
-            <Text>Series</Text>
-          </Box>
+          <Flex fontSize="xl" fontWeight="semibold"  align="center" p={1}>
+            <SeriesIcon/>
+            <Text ml={1}>Series</Text>
+          </Flex>
         </Link>
       </Flex>
-      <Flex direction="column" overflowY="auto" mx={2} >
+      <Flex direction="column" p={1} overflowX="unset" overflowY="auto" >
         {genres !== null && genres.length > 0 && (
         <CollapseBox title="Genres">
-          <Flex direction="column" justify="center" align="start" m={2} >
+          <Flex direction="column" justify="center" align="start" m={2}>
             { genres.map((genre:any) => (
               <Flex direction="row" width="full" flexWrap="wrap" >
-                <Flex justify="space-between" align="center" width="95%" m={1}>
-                { includeIds.includes(genre.id) === false && excludeIds.includes(genre.id) === false 
-                  && <>
-                      <MinusIcon onClick={()=> addToFilter({info:genre,type:"exclude"})}/>
-                      <Box>
-                        <Text fontSize="md">{genre.name}</Text>
-                      </Box>
-                      <AddIcon onClick={()=> addToFilter({info:genre,type:"include"})} /> 
-                    </>                                            
+                <Flex justify="space-between" align="center" width="95%" m={1} textColor="gray.400">
+                { includeIds.includes(genre.id) === false && excludeIds.includes(genre.id) === false &&
+                <>
+                  <MinusIcon onClick={()=> addToFilter({info:genre,type:"exclude"})}/>
+                  <Box>
+                    <Text fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
+                  </Box>
+                  <AddIcon onClick={()=> addToFilter({info:genre,type:"include"})} /> 
+                </>                                            
                 }
 
-                { includeIds.includes(genre.id) && excludeIds.includes(genre.id) === false 
-                  && <>
-                      <MinusIcon onClick={()=> addToFilter({info:genre,type:"exclude"})}/>
-                      <Box>
-                        <Text>{genre.name}</Text>
-                      </Box>
-                      <AddIcon onClick={()=> removeFromFilter({info:genre,type:"include"})} color="green.300"/> 
-                    </>
+                { includeIds.includes(genre.id) && excludeIds.includes(genre.id) === false &&
+                <>
+                  <MinusIcon onClick={()=> addToFilter({info:genre,type:"exclude"})}/>
+                  <Box>
+                    <Text fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
+                  </Box>
+                  <AddIcon onClick={()=> removeFromFilter({info:genre,type:"include"})} color="green.300"/> 
+                </>
                 }
                   
-                { includeIds.includes(genre.id) === false && excludeIds.includes(genre.id) 
-                  && <>
-                      <MinusIcon onClick={()=> removeFromFilter({info:genre,type:"exclude"})} color="red.300"/>
-                      <Box>
-                        <Text>{genre.name}</Text>
-                      </Box>
-                      <AddIcon onClick={()=> addToFilter({info:genre,type:"include"})} /> 
-                    </>     
+                { includeIds.includes(genre.id) === false && excludeIds.includes(genre.id) &&
+                <>
+                  <MinusIcon onClick={()=> removeFromFilter({info:genre,type:"exclude"})} color="red.300"/>
+                  <Box>
+                    <Text  fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
+                  </Box>
+                  <AddIcon onClick={()=> addToFilter({info:genre,type:"include"})} /> 
+                </>     
                 }    
                 </Flex> 
               </Flex>))} 
@@ -153,30 +161,32 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
         </CollapseBox>
         }
         <CollapseBox title="Sort by">
-        <RadioGroup onChange={setValue} value={value}>
-          <VStack align="flex-start" p={2}>
-            <Radio value="1">Popularity</Radio>
-            <Radio value="2">Release Date</Radio>
-            <Radio value="3">Rating</Radio>
-            <Radio value="4">Revenue</Radio>
-          </VStack>
-        </RadioGroup>
+          <>
+          { orderDescending
+          ? <Flex boxSize="max-content" 
+                  my={3} 
+                  justify="start" align="center"
+                  onClick={() => setOrderDescending(!orderDescending)}>
+              <Text fontWeight="thin" py={1} pr={1} mr={2}>Order Descending</Text>
+              <TriangleDownIcon/>
+            </Flex>
+          : <Flex boxSize="max-content" 
+                  my={3} 
+                  justify="start" align="center"
+                  onClick={() => setOrderDescending(!orderDescending)}>
+              <Text fontWeight="thin" py={1} pr={1} mr={2}>Order Aescending</Text>
+              <TriangleUpIcon/>
+            </Flex> }
+          <RadioGroup onChange={setValue} value={value}>
+            <VStack align="flex-start" p={2}>
+              <Radio value="1">Popularity</Radio>
+              <Radio value="2">Release Date</Radio>
+              <Radio value="3">Rating</Radio>
+              <Radio value="4">Revenue</Radio>
+            </VStack>
+          </RadioGroup>
+          </>
         </CollapseBox>
-        { orderDescending
-        ? <Flex boxSize="max-content" 
-                my={3} 
-                justify="start" align="center"
-                onClick={() => setOrderDescending(!orderDescending)}>
-            <Text fontWeight="thin" py={1} pr={1} mr={2}>Order Descending</Text>
-            <Switch colorScheme="teal" size="md" isChecked={true}/>
-          </Flex>
-        : <Flex boxSize="max-content" 
-                my={3} 
-                justify="start" align="center"
-                onClick={() => setOrderDescending(!orderDescending)}>
-            <Text fontWeight="thin" py={1} pr={1} mr={2}>Order Aescending</Text>
-            <Switch colorScheme="teal" size="md" />
-          </Flex> }
       </Flex>
       <Spacer/>
       <SlideFade in={(filterList.length > 0) === true}>

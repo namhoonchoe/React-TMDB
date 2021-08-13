@@ -17,29 +17,29 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
     { loading 
       ?<LoadingSpinner/> 
       : <VStack spacing="8" width="100%" >
-        { popular !== null && popular.length > 0 
-        ? <Section  
-            title={"Popular"}
-            sectionInfos={popular} 
-          />  
-        :null } 
+        { airingToday !== null && airingToday.length > 0 && 
+        <Section 
+          title={"Airing Today"}
+          sectionInfos={airingToday}
+        />
+        } 
 
-        { airingToday !== null && airingToday.length > 0 
-        ? <Section 
-            title={"Airing Today"}
-            sectionInfos={airingToday}
-          />
-        :null } 
+        { popular !== null && popular.length > 0 && 
+        <Section  
+          title={"Popular Series"}
+          sectionInfos={popular} 
+        />  
+        } 
 
-        { topRated !== null && topRated.length > 0 
-        ? <Section 
-            title={"TopRated"}
-            sectionInfos={topRated}
-          />
-        :null }
+        { topRated !== null && topRated.length > 0 && 
+        <Section 
+          title={"TopRated Series"}
+          sectionInfos={topRated}
+        />
+        }
         </VStack> }
       
-      { error ? <p>"An error has occured"</p>: null }
+      { error ? <p>An error has occured</p>: null }
   </>
   )
 };

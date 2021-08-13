@@ -12,7 +12,7 @@ const CollapseBox:React.FC<ICollapseBoxProps> = ({ title, children }) => {
 
   return (
     <>
-      <Flex direction="row" align="center" justify="start" my={2}>
+      <Flex direction="row" align="center" justify="start" my={2} px={2}>
         <Text fontSize="lg">{title}</Text>
         <Spacer/>
           { isOpen 

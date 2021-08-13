@@ -16,25 +16,23 @@ const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,lo
     { loading 
     ? <LoadingSpinner/> 
     : <VStack spacing="8" width="100%" >
-        { movieResults !== null && movieResults.length > 0 
-        ? <Section  
-            title={"Results for Movies"}
-            sectionInfos={movieResults}
-            sectionInfoType="movie"
-          />  
-        :null } 
+        { movieResults !== null && movieResults.length > 0 && 
+        <Section  
+          title={"Results for Movies"}
+          sectionInfos={movieResults}
+          sectionInfoType="movie"
+        /> }   
 
-        { seriesResults !== null && seriesResults.length > 0 
-        ? <Section 
-            title={"Results for series"}
-            sectionInfos={seriesResults}
-            sectionInfoType="series"
-          />
-        :null } 
+        { seriesResults !== null && seriesResults.length > 0 && 
+        <Section 
+          title={"Results for series"}
+          sectionInfos={seriesResults}
+          sectionInfoType="series"
+        /> } 
       </VStack> 
     }
 
-    { error ? <p>"An error has occured"</p>: null }
+    { error ? <p>An error has occured</p>: null }
   </>
   )
 };

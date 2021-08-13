@@ -27,7 +27,8 @@ const Main:React.FC<IMainProps> = ({ mainInfo, fetchMore }) => {
   },[pathType])
 
   return (
-    <Flex direction="column" align="center" justify="start" mx={3}>
+    <Flex direction="column" align="center" justify="start" 
+          mx={3} px={3} border="1px" borderRadius="md" borderColor="gray.300">
       <Text fontSize="2xl" mt={1} mb={3} fontWeight="normal" alignSelf="start">Discover</Text>
       <Flex alignSelf="start">
         { mainInfo !== null && mainInfo.length > 0 &&

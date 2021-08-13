@@ -2,12 +2,12 @@ import { extendTheme } from "@chakra-ui/react"
 import "@fontsource/open-sans"
 import "@fontsource/ubuntu"
 
+const customTheme = extendTheme({
+  config:{
+    initialColorMode:"light",
+    useSystemColorMode: false,  
+  }, 
 
-const theme = extendTheme({
-  config: {
-    useSystemColorMode: true,
-    initialColorMode: "dark",
-  },
   fonts: {
     body:"Ubuntu",
     heading: "Open Sans",
@@ -15,4 +15,4 @@ const theme = extendTheme({
   
 });
 
-export default theme
+export default customTheme

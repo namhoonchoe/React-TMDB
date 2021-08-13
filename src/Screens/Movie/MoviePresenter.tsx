@@ -11,36 +11,34 @@ interface IMovieProps {
   loading:boolean
 }
 
-const MoviePresenter:React.FC<IMovieProps> = ({nowPlaying,upComing,popular,error,loading}) => {
+const MoviePresenter:React.FC<IMovieProps> = ({ nowPlaying,upComing,popular,error,loading }) => {
   return (
 	<>
     { loading ? <LoadingSpinner/> 
     : <VStack spacing="8" width="100%" >
-        { popular !== null && popular.length > 0 
-        ? <Section  
-            title={"Popular"}
-            sectionInfos={popular} 
-          />  
-        :null }
+        { nowPlaying !== null && nowPlaying.length > 0 && 
+        <Section 
+          title={"NowPlaying"}
+          sectionInfos={nowPlaying}
+        />
+        }
 
-        { nowPlaying !== null && nowPlaying.length > 0 
-        ? <Section 
-            title={"NowPlaying"}
-            sectionInfos={nowPlaying}
-          />
-        :null }
+        { popular !== null && popular.length > 0 && 
+        <Section  
+          title={"Popular Movies"}
+          sectionInfos={popular} 
+        />  
+        }
         
-        { upComing !== null && upComing.length > 0 
-        ? <Section 
-            title={"UpComing"}
-            sectionInfos={upComing}
-          />
-        :null } 
+        { upComing !== null && upComing.length > 0 && 
+        <Section 
+          title={"UpComing Movies"}
+          sectionInfos={upComing}
+        />
+        } 
       </VStack> }
 
-    { error ? <p>"An error has occured"</p>: null }
-
-    
+    { error ? <p>An error has occured</p>: null }
 	</>
   )
 };

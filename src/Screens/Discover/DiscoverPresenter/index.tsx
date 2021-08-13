@@ -19,8 +19,8 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ genres, infos, loading, er
     <>
       { loading 
         ? <LoadingSpinner/> 
-        : <Grid h="100vh" w="100%" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" gap={3} overflowY="hidden">
-            <GridItem colSpan={1} rowSpan={2} m={1}  position="relative" bottom="0"> 
+        : <Grid maxH="100vh" w="100%" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" gap={8} overflowY="hidden">
+            <GridItem colSpan={1} rowSpan={2} m={1} maxH="max" position="relative" bottom="0"> 
               <SideBar 
                 genres={genres} 
                 filterList={filterList}
@@ -29,7 +29,7 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ genres, infos, loading, er
                 discoverTrigger={genreFunctions.discoverTrigger}
               />
             </GridItem>
-            <GridItem colSpan={4} rowSpan={2} bg="black.200" overflowY="auto">
+            <GridItem colSpan={4} rowSpan={2} overflowY="auto">
               <Main 
                 mainInfo={infos}
                 fetchMore={genreFunctions.fetchMore}
