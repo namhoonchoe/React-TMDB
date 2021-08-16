@@ -8,7 +8,7 @@ interface IStarRatingProps {
   rating:number
 } 
 
-const StarRating:React.FC<IStarRatingProps> = ({rating}) => {
+const StarRating:React.FC<IStarRatingProps> = ({ rating }) => {
   return (
     <>
       { rating < 1 && 

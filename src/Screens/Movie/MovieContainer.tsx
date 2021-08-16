@@ -46,7 +46,7 @@ const MovieContainer:React.FC = () => {
     mounted = false
   }
   }, [movie])
-  const {nowPlaying,upComing,popular} = movie
+  const { nowPlaying, upComing, popular } = movie
   return (
   <>
     <MoviePresenter

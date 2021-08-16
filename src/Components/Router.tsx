@@ -20,7 +20,7 @@ const RoootRouter: React.FC = () => {
   return (
     <Router>
       <Header/>
-      <Flex direction="column" align="center">
+      <Flex direction="column" align="center" >
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/search" component={Search}/>

@@ -47,7 +47,18 @@ const DiscoverContainer:React.FC = () => {
     fetchMore:() => setPage(page+1)
   }
 
-  const resetFilter = () => {
+  const resetDatas = () => {
+    setDiscoverInfo({
+      discoverList:null,
+      discoverGenres:null
+    })
+
+    setDiscoverQuery({
+      sort:undefined,
+      genreInclude:undefined,
+      genreExclude:undefined
+    })
+
     setGenreFilter([])
   }
 
@@ -69,14 +80,14 @@ const DiscoverContainer:React.FC = () => {
             setLoading(false)
           }
         }
-        resetFilter()
+        resetDatas()
         getDiscoverMovieInfo()
       }
 
       if(pathType === "series") {
         const getDiscoverSeiresInfo = async() => {
           try {
-            const { data:{ results} }  = await discoverApi.discoverSeries()
+            const { data:{ results} }  = await discoverApi.discoverSeries(sort,genreInclude,genreExclude,page)
             const { data:{ genres } } = await genreApi.seriesGenres()
             setDiscoverInfo({ ...discoverInfo,
                               discoverList:results,
@@ -87,7 +98,7 @@ const DiscoverContainer:React.FC = () => {
             setLoading(false)
           }
         }
-        resetFilter()
+        resetDatas()
         getDiscoverSeiresInfo()
       }
     }
@@ -99,7 +110,7 @@ const DiscoverContainer:React.FC = () => {
     return () => {
       mounted = false
     }
-  }, [pathType,page,genreInclude])
+  }, [pathType,page,sort,genreInclude,genreExclude])
   
   const { discoverList, discoverGenres } = discoverInfo
   return (

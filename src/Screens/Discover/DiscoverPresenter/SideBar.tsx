@@ -76,9 +76,8 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
   }, [value,orderDescending])
 
   return (  
-    <Flex direction="column" justify="space-between"
-          position="absolute" top="0" bottom="0" 
-          ml={2}  width="100%" 
+    <Flex direction="column" justify="space-between" 
+          width="15vw" height="90vh" ml={2} 
           border="1px" borderRadius="md" borderColor="gray.300">
       <Flex direction="row" justify="space-around" align="center" >
         <Link to="/discover/movie">
@@ -184,13 +183,13 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
               <Radio value="3">Rating</Radio>
               <Radio value="4">Revenue</Radio>
             </VStack>
-          </RadioGroup>
+          </RadioGroup> 
           </>
         </CollapseBox>
       </Flex>
       <Spacer/>
       <SlideFade in={(filterList.length > 0) === true}>
-        <Flex justify="center">
+        <Flex justify="center" p={1}>
           <Button width="15vw" onClick={() => discoverTrigger(sortQuery, includeIds.toString(),excludeIds.toString())}>
             <Text>Discover</Text>
           </Button>

@@ -64,7 +64,14 @@ export const discoverApi = {
       page:page
     }
   }),
-  discoverSeries: () => api.get("discover/tv")
+  discoverSeries:(sort?:string, genreInclude?:string, genreExclude?:string, page?:number) => api.get("discover/tv", {
+    params: {
+      sort_by:sort,
+      with_genres:genreInclude,
+      without_genres:genreExclude,
+      page:page
+    }
+  })
 }
 
 export const genreApi = {
