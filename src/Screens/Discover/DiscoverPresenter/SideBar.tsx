@@ -69,7 +69,7 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
     if(mounted) {
       sort()
     }
-
+    
     return () => {
       mounted = false
     }

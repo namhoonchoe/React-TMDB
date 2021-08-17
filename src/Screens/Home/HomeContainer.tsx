@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{ useState, useEffect } from 'react'
 import HomePresenter from './HomePresenter'
 import { trendingApi } from '@api'
 
@@ -26,7 +26,7 @@ const HomeContainer:React.FC = () => {
         } = await trendingApi.trending("movie");
   
       const {
-        data: { results: trendingSeries },
+        data: { results:trendingSeries },
         } = await trendingApi.trending("tv");
 
       const {
@@ -46,7 +46,7 @@ const HomeContainer:React.FC = () => {
     return() => {
       mounted = false
     }
-  },[home])
+  },[])
 
 
     const { trendingMovies, trendingSeries, trendingPeople } = home

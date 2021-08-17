@@ -45,7 +45,7 @@ const MovieContainer:React.FC = () => {
   return () => {
     mounted = false
   }
-  }, [movie])
+  }, [])
   const { nowPlaying, upComing, popular } = movie
   return (
   <>

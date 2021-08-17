@@ -79,7 +79,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                 />
               </HStack>
               <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
-                <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={[2,1]} p={[0.25, 0.5]} >
+                <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={2} p={0.25} >
                   <Text>{genre.name.toString()}</Text>
                 </Box>))}
                 </Flex>

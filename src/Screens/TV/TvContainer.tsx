@@ -46,7 +46,7 @@ const TvContainer:React.FC = () => {
     }
     return () => {
       mounted = false
-    }},[series])
+    }},[])
     const {topRated,airingToday,popular} = series
 
   return (
