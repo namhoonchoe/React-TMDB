@@ -1,5 +1,5 @@
 import React , { useState, useEffect, useRef } from 'react'
-import { selectSearch, resetRouteTrigger } from '@redux/searchSlice'
+import { resetRouteTrigger, selectSearch } from '@redux/searchSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { movieApi,tvApi } from '@api'
 import SearchPresenter from './SearchPresenter'

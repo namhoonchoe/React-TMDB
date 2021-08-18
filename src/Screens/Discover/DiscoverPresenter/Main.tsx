@@ -1,24 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectDiscoverInfoList, fetchMore,} from '@redux/discoverSlice';
 import { Link } from "react-router-dom";
 import { Grid ,Text, Flex, Button } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoCard from '@components/InfoCard'
 
-interface IMainProps {
-  mainInfo:discoverInfo
-  fetchMore:() => void
-}
-
-
-const Main:React.FC<IMainProps> = ({ mainInfo, fetchMore }) => {
+const Main:React.FC = () => {
   const [sectionType, setSectionType] = useState<string|undefined>("")
-  const [memoization, setMemoization] = useState<discoverInfo>(null)
+  const mainInfo = useSelector(selectDiscoverInfoList)
 	const pathType = usePathTypeCheck()
-  
-  let discoverRef = useRef<any>(null)
   let pathRef = useRef<string>("")
-
- 
+  
+  const dispatch = useDispatch()
 
 	useEffect(() => {
     let mounted = true
@@ -33,40 +27,31 @@ const Main:React.FC<IMainProps> = ({ mainInfo, fetchMore }) => {
 
     const pathChangeDetector = () => {
       if(pathType !== pathRef.current) {
-        return discoverRef.current = null
+        return null
       }
     }
   
-    const stateMemoization = () => {
-      if(discoverRef.current === null) {
-        return setMemoization(mainInfo)
-      } else {
-        return setMemoization(discoverRef.current)
-      }
-    }
 
     if(mounted) {
       imageTypeChecker()
       pathChangeDetector()
-      stateMemoization()
     }
 
     return () => {
       mounted = false
-      discoverRef.current = mainInfo
       pathRef.current = pathType
     }
 
-  },[memoization,mainInfo,pathType])
+  },[pathType])
 
   return (
     <Flex direction="column" align="center" justify="start" 
         mx={3} px={3} border="1px" borderRadius="md" borderColor="gray.300">
       <Text fontSize="2xl" mt={1} mb={3} fontWeight="normal" alignSelf="start">Discover</Text>
       <Flex alignSelf="start">
-        { memoization !== null && memoization.length > 0 &&
+        { mainInfo !== null && mainInfo.length > 0 &&
           <Grid templateColumns="repeat(6, 1fr)" gap="8" >  
-            {memoization.map((data:any) => (
+            {mainInfo.map((data:any) => (
             <Link to={`/${sectionType}/${data.id}`}>
               <InfoCard
                 key={data.id}
@@ -79,7 +64,7 @@ const Main:React.FC<IMainProps> = ({ mainInfo, fetchMore }) => {
           </Grid>
         }
       </Flex>
-      <Button size="lg" my={2} alignSelf="center" onClick={()=> fetchMore()}>
+      <Button size="lg" my={2} alignSelf="center" onClick={()=> dispatch(fetchMore())}>
         <Text>Fetch More</Text>
       </Button>
     </Flex>  

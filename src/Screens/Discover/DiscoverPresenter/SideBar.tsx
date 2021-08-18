@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { selectDiscoverInfoGenres, selectGenreFilters, addToFilter, removeFromFilter, discoverTrigger } from '@redux/discoverSlice';
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import CollapseBox from '@components/CollapseBox'
 import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade } from "@chakra-ui/react"
@@ -6,24 +8,14 @@ import { MinusIcon, AddIcon, TriangleUpIcon, TriangleDownIcon } from '@chakra-ui
 import MovieIcon from '@components/svgcomponents/MovieIcon'
 import SeriesIcon from '@components/svgcomponents/SeriesIcon'
 
-
-interface IGenreFilter {
-  info:any,
-  type:string
-}
-
-interface ISideBarProps {
-  genres:discoverInfo
-  filterList: Array<IGenreFilter>
-  addToFilter:(arg:any) => void
-  removeFromFilter:(arg:any) => void
-  discoverTrigger:(sort:any,genreInclude:any,genreExclude:any) => void
-}
-
-const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, removeFromFilter, discoverTrigger }) => {
+const SideBar:React.FC = () => {
+  const dispatch = useDispatch()
   const [value, setValue] = useState<string>("1")
   const [orderDescending, setOrderDescending] = useState<boolean>(true)
   const [sortQuery, setSortQuery] = useState<string>("")
+  
+  const discoverGenres = useSelector(selectDiscoverInfoGenres)
+  const filterList = useSelector(selectGenreFilters)
   const excludeFilter = filterList.filter((filter) => filter.type === "exclude")
   const includeFilter = filterList.filter((filter) => filter.type === "include")
   const excludeIds = excludeFilter.map((genre) => genre.info['id'])
@@ -94,39 +86,39 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
         </Link>
       </Flex>
       <Flex direction="column" p={1} overflowX="unset" overflowY="auto" >
-        {genres !== null && genres.length > 0 && (
+        {discoverGenres !== null && discoverGenres.length > 0 && (
         <CollapseBox title="Genres">
           <Flex direction="column" justify="center" align="start" m={2}>
-            { genres.map((genre:any) => (
+            { discoverGenres.map((genre:any) => (
               <Flex direction="row" width="full" flexWrap="wrap" >
                 <Flex justify="space-between" align="center" width="95%" m={1} textColor="gray.400">
                 { includeIds.includes(genre.id) === false && excludeIds.includes(genre.id) === false &&
                 <>
-                  <MinusIcon onClick={()=> addToFilter({info:genre,type:"exclude"})}/>
+                  <MinusIcon onClick={()=> dispatch(addToFilter({info:genre,type:"exclude"}))}/>
                   <Box>
                     <Text fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
                   </Box>
-                  <AddIcon onClick={()=> addToFilter({info:genre,type:"include"})} /> 
+                  <AddIcon onClick={()=> dispatch(addToFilter({info:genre,type:"include"}))} /> 
                 </>                                            
                 }
 
                 { includeIds.includes(genre.id) && excludeIds.includes(genre.id) === false &&
                 <>
-                  <MinusIcon onClick={()=> addToFilter({info:genre,type:"exclude"})}/>
+                  <MinusIcon onClick={()=> dispatch(addToFilter({info:genre,type:"exclude"}))}/>
                   <Box>
                     <Text fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
                   </Box>
-                  <AddIcon onClick={()=> removeFromFilter({info:genre,type:"include"})} color="green.300"/> 
+                  <AddIcon onClick={()=> dispatch(removeFromFilter({info:genre,type:"include"}))} color="green.300"/> 
                 </>
                 }
                   
                 { includeIds.includes(genre.id) === false && excludeIds.includes(genre.id) &&
                 <>
-                  <MinusIcon onClick={()=> removeFromFilter({info:genre,type:"exclude"})} color="red.300"/>
+                  <MinusIcon onClick={()=> dispatch(removeFromFilter({info:genre,type:"exclude"}))} color="red.300"/>
                   <Box>
                     <Text  fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
                   </Box>
-                  <AddIcon onClick={()=> addToFilter({info:genre,type:"include"})} /> 
+                  <AddIcon onClick={()=> dispatch(addToFilter({info:genre,type:"include"}))} /> 
                 </>     
                 }    
                 </Flex> 
@@ -141,7 +133,7 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
                 <Text fontSize="sm" as="em">Include</Text>
                 <Flex justify="start" align="center" flexWrap="wrap">
                 { includeFilter.map((filter:any) => (
-                  <Box onClick={()=> removeFromFilter({info:filter.info,type:"include"})} >
+                  <Box onClick={()=> dispatch(removeFromFilter({info:filter.info,type:"include"}))} >
                     <Text fontSize="md" fontWeight="light" mx={2} my={1}>{filter.info.name}</Text>
                   </Box>))}
                 </Flex>
@@ -150,7 +142,7 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
                 <Text fontSize="sm" as="em">Exclude</Text>
                 <Flex justify="start" align="center" flexWrap="wrap">
                 { excludeFilter.map((filter:any) => (
-                  <Box onClick={()=> removeFromFilter({info:filter.info,type:"exclude"})} >
+                  <Box onClick={()=> dispatch(removeFromFilter({info:filter.info,type:"exclude"}))} >
                     <Text fontSize="md" fontWeight="light" mx={2} my={1}>{filter.info.name}</Text>
                   </Box>))}    
                 </Flex> 
@@ -190,7 +182,10 @@ const SideBar:React.FC<ISideBarProps> = ({ genres, filterList, addToFilter, remo
       <Spacer/>
       <SlideFade in={(filterList.length > 0) === true}>
         <Flex justify="center" p={1}>
-          <Button width="15vw" onClick={() => discoverTrigger(sortQuery, includeIds.toString(),excludeIds.toString())}>
+          <Button width="15vw" onClick={() => 
+            dispatch(discoverTrigger({ sort:sortQuery, 
+                                      genreInclude:includeIds.toString(), 
+                                      genreExclude:excludeIds.toString() }))}>
             <Text>Discover</Text>
           </Button>
         </Flex>
