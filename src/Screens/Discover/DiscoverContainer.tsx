@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { discoverApi, genreApi } from '@api'
-import DiscoverPresenter from './DiscoverPresenter'
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
-import { selectDiscoverQuery, getInfos } from '@redux/discoverSlice'
-
-
-interface IDiscoverInfo {
-  discoverList:null,
-  discoverGenres:null
-}
+import { selectDiscoverQuery, selectGenreFilters, getInfos } from '@redux/discoverSlice'
+import DiscoverPresenter from './DiscoverPresenter'
 
 const DiscoverContainer:React.FC = () => {
-  let pathType = usePathTypeCheck() 
-  const [discoverInfo, setDiscoverInfo] = useState<IDiscoverInfo>({
-    discoverList:null,
-    discoverGenres:null
-  })
+  let pathType = usePathTypeCheck()
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
-  const dispatch = useDispatch()
-
+  const filter = useSelector(selectGenreFilters)
   const { sort, genreInclude, genreExclude, page } = useSelector(selectDiscoverQuery)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     let mounted = true
@@ -55,9 +45,9 @@ const DiscoverContainer:React.FC = () => {
           }
         }
         getDiscoverSeiresInfo()
-        
       }
     }
+
 
     if(mounted) {
       getDiscoverInfo()
@@ -66,10 +56,10 @@ const DiscoverContainer:React.FC = () => {
     return () => {
       mounted = false
     }
-  }, [pathType,sort, genreInclude, genreExclude, page,dispatch])
+  }, [pathType, filter, sort, genreInclude, genreExclude, page ,dispatch])
 
   return (
-    <DiscoverPresenter error={error}  loading={loading}/>
+    <DiscoverPresenter error={error} loading={loading}/>
   )
 }
 

@@ -19,7 +19,12 @@ interface IDiscoverQuery {
 }
 
 type genreFilters = Array<IGenre>
-type genreArray = Array<any>
+
+interface ITriggerPayload {
+  sort:string|undefined, 
+  genreInclude:string|undefined, 
+  genreExclude:string|undefined, 
+}
 
 interface IState {
   discoverInfo:IDiscoverInfo
@@ -35,7 +40,8 @@ const discoverState:IState = {
                   genreExclude:undefined, 
                   page:1 },
 
-  genreFilters:[]
+  genreFilters:[],
+
 }
 
 const discoverSlice = createSlice({
@@ -43,10 +49,28 @@ const discoverSlice = createSlice({
   initialState:discoverState, 
   reducers: {
     getInfos:(state:IState, action:PayloadAction<any>) => {
-      const payload = action.payload
+      const infos = action.payload
       return {
-        ...state, discoverInfo:payload
+        ...state, discoverInfo:infos
       }
+    },
+
+    resetFilter: (state:IState, ) => {
+      return {
+        ...state, genreFilters:[]
+      }
+    },
+
+    resetQuery: (state:IState) => {
+      const target = state.discoverQuery
+      const reset = {  ...target,
+                      sort:undefined, 
+                      genreInclude:undefined, 
+                      genreExclude:undefined, 
+                      page:1 } 
+      return {
+        ...state, discoverQuery:reset 
+      } 
     },
 
     addToFilter:(state:IState, action:PayloadAction<IGenre>) => {
@@ -65,26 +89,10 @@ const discoverSlice = createSlice({
       }
     },
 
-    resetFilters: (state:IState) => {
-      const { discoverInfo, discoverQuery } = state
-      const resetInfo = { ...discoverInfo, discoverList:null, discoverGenres:null }
-      const resetQuery = { ...discoverQuery,  
-                          sort:undefined, 
-                          genreInclude:undefined, 
-                          genreExclude:undefined, 
-                          page:1  }
-      return {
-        ...state,
-        discoverInfo:resetInfo,
-        discoverQuery:resetQuery,
-        genreFilters:[]
-      }
-    },
-
-    discoverTrigger:(state:IState ,action:PayloadAction<any>) => {
+    discoverTrigger:(state:IState ,action:PayloadAction<ITriggerPayload>) => {
       const target = state.discoverQuery
       const triggerPayload = action.payload
-      const renewedQuery = { ...target, triggerPayload } 
+      const renewedQuery = { ...target, ...triggerPayload } 
       return { ...state, discoverQuery:renewedQuery }
     },
 
@@ -93,17 +101,21 @@ const discoverSlice = createSlice({
       const getNext = {...state.discoverQuery, page:nextPage}
       return { ...state,discoverQuery:getNext }
     },
-
   }
 
 })
 
-export const { getInfos, addToFilter, removeFromFilter, discoverTrigger, fetchMore, resetFilters } = discoverSlice.actions;
+export const { getInfos, addToFilter, removeFromFilter, discoverTrigger, fetchMore, resetFilter, resetQuery } = discoverSlice.actions;
 
 export const selectDiscoverInfoList = (state:RootState) => state.discover.discoverInfo.discoverList
 export const selectDiscoverInfoGenres = (state:RootState) => state.discover.discoverInfo.discoverGenres
 
 export const selectGenreFilters = (state:RootState) => state.discover.genreFilters
+export const selectExcludeFilter = (state:RootState) => state.discover.genreFilters.filter((filter) => filter.type === "exclude")
+export const selectIncludeFilter = (state:RootState) => state.discover.genreFilters.filter((filter) => filter.type === "include")
+
+export const selectExcludeId = (state:RootState) => state.discover.genreFilters.filter((filter) => filter.type === "exclude").map((genre) => genre.info['id'])
+export const selectIncludeId = (state:RootState) => state.discover.genreFilters.filter((filter) => filter.type === "include").map((genre) => genre.info['id'])
 
 export const selectDiscoverQuery = (state:RootState) => state.discover.discoverQuery
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { selectDiscoverInfoGenres, selectGenreFilters, addToFilter, removeFromFilter, discoverTrigger } from '@redux/discoverSlice';
+import { selectDiscoverInfoGenres, selectGenreFilters, selectExcludeFilter, selectIncludeFilter, selectExcludeId, selectIncludeId,
+        addToFilter, removeFromFilter, discoverTrigger, resetQuery, resetFilter } from '@redux/discoverSlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import CollapseBox from '@components/CollapseBox'
@@ -16,12 +17,17 @@ const SideBar:React.FC = () => {
   
   const discoverGenres = useSelector(selectDiscoverInfoGenres)
   const filterList = useSelector(selectGenreFilters)
-  const excludeFilter = filterList.filter((filter) => filter.type === "exclude")
-  const includeFilter = filterList.filter((filter) => filter.type === "include")
-  const excludeIds = excludeFilter.map((genre) => genre.info['id'])
-  const includeIds = includeFilter.map((genre) => genre.info['id'])
+  const excludeFilter = useSelector(selectExcludeFilter)
+  const includeFilter = useSelector(selectIncludeFilter)
+  const excludeIds = useSelector(selectExcludeId)
+  const includeIds = useSelector(selectIncludeId)
 
-  useEffect(() => {
+  const resetTrigger = () => {
+    dispatch(resetFilter())
+    dispatch(resetQuery())
+  }
+
+  useEffect(() => { 
     let mounted = true
 
     const sort = () => {
@@ -73,13 +79,13 @@ const SideBar:React.FC = () => {
           border="1px" borderRadius="md" borderColor="gray.300">
       <Flex direction="row" justify="space-around" align="center" >
         <Link to="/discover/movie">
-          <Flex fontSize="xl" fontWeight="semibold" align="center" p={1}>
+          <Flex fontSize="xl" fontWeight="semibold" align="center" p={1} onClick={() => resetTrigger()}>
             <MovieIcon/>
             <Text ml={1}>Movies</Text>
           </Flex>
         </Link>
         <Link to="/discover/series">
-          <Flex fontSize="xl" fontWeight="semibold"  align="center" p={1}>
+          <Flex fontSize="xl" fontWeight="semibold"  align="center" p={1} onClick={() => resetTrigger()}>
             <SeriesIcon/>
             <Text ml={1}>Series</Text>
           </Flex>

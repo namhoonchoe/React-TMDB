@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectDiscoverInfoList, fetchMore,} from '@redux/discoverSlice';
 import { Link } from "react-router-dom";
@@ -10,7 +10,6 @@ const Main:React.FC = () => {
   const [sectionType, setSectionType] = useState<string|undefined>("")
   const mainInfo = useSelector(selectDiscoverInfoList)
 	const pathType = usePathTypeCheck()
-  let pathRef = useRef<string>("")
   
   const dispatch = useDispatch()
 
@@ -25,21 +24,12 @@ const Main:React.FC = () => {
       }
 	  }
 
-    const pathChangeDetector = () => {
-      if(pathType !== pathRef.current) {
-        return null
-      }
-    }
-  
-
     if(mounted) {
       imageTypeChecker()
-      pathChangeDetector()
     }
 
     return () => {
       mounted = false
-      pathRef.current = pathType
     }
 
   },[pathType])
