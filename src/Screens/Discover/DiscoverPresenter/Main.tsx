@@ -13,6 +13,18 @@ const Main:React.FC = () => {
   
   const dispatch = useDispatch()
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
+
+  const getNextPage = () => {
+    dispatch(fetchMore())
+    scrollToTop()
+  }
+
 	useEffect(() => {
     let mounted = true
 	  const imageTypeChecker = () => {
@@ -30,6 +42,7 @@ const Main:React.FC = () => {
 
     return () => {
       mounted = false
+      scrollToTop()
     }
 
   },[pathType])
@@ -54,8 +67,8 @@ const Main:React.FC = () => {
           </Grid>
         }
       </Flex>
-      <Button size="lg" my={2} alignSelf="center" onClick={()=> dispatch(fetchMore())}>
-        <Text>Fetch More</Text>
+      <Button size="lg" my={2} alignSelf="center" onClick={()=> {getNextPage()}}>
+        <Text>Next Page</Text>
       </Button>
     </Flex>  
   )

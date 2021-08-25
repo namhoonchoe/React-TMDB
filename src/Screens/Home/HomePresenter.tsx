@@ -12,12 +12,12 @@ interface IHomeProps {
   loading:boolean
 }
 
-const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trendingPeople,error,loading}) => {
+const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, trendingPeople, error, loading }) => {
   return (
   <>
     { loading 
       ? <LoadingSpinner/> 
-      : <VStack width="90vw" mb={3}> 
+      : <VStack mb={3}> 
         { trendingMovies !== null && trendingMovies.length > 0 &&
         <VStack align="start">
           <Flex align="flex-end" my={4} >
@@ -28,10 +28,11 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               </Link>
             </Text>
           </Flex>
-          <Box width="90vw" align="center">
+          <Box width="92vw" align="center">
             <CarouseSlider 
               carouselData={trendingMovies}
-              carouselType="poster"/>
+              dataType="movie"
+              imageType="poster"/>
           </Box>
         </VStack>
         }
@@ -44,10 +45,11 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               <Link to="/series">Explore TvSeries</Link>
             </Text>
           </Flex>
-          <Box width="90vw" align="center">
+          <Box width="92vw" align="center">
             <CarouseSlider 
               carouselData={trendingSeries}
-              carouselType="poster"/>
+              dataType="series"
+              imageType="poster"/>
           </Box>
         </VStack>
         }
@@ -62,10 +64,11 @@ const HomePresenter:React.FC<IHomeProps> = ({trendingMovies,trendingSeries,trend
               </Link>
             </Text>
           </Flex>
-          <Box width="90vw" align="center">
+          <Box width="92vw" align="center">
             <CarouseSlider 
               carouselData={trendingPeople}
-              carouselType="portrait"/>
+              dataType="person"
+              imageType="portrait"/>
           </Box>
         </VStack>
         }

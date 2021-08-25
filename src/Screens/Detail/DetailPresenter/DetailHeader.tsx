@@ -19,7 +19,6 @@ interface IHeaderProps {
 }
 
 const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
-  const uniqueId = detail.id
   const bookMarkType = usePathTypeCheck()
 
   return (
@@ -75,11 +74,11 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
                 <BookMark 
                   bookMarkDetail={detail}
                   bookMarkType={bookMarkType}
-                  bookMarkId={uniqueId}
+                  bookMarkId={detail.id}
                 />
               </HStack>
               <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
-                <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={2} p={0.25} >
+                <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={2} p={1} >
                   <Text>{genre.name.toString()}</Text>
                 </Box>))}
                 </Flex>

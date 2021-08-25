@@ -24,9 +24,9 @@ const MoviePresenter:React.FC<IMovieProps> = ({ nowPlaying, upComing, popular, e
           {/* Side navigation */}
           <Box position="sticky" top="8%" >
           <GridItem colSpan={1} rowSpan={2} justifyContent="center">
-            <Box position="fixed" top="8%" left="2%" width="15rem" height="5rem" >
+            <Box position="fixed" top="8%" left="2%" width="15rem" height="5rem">
               <Menu isLazy>
-                <MenuButton>
+                <MenuButton justifySelf="flex-start">
                   <Text fontSize="2xl" textColor="gray.600" fontWeight="semibold">Contents</Text>
                 </MenuButton>
                 <MenuList>

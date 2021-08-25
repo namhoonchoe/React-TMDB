@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectSearch } from "@redux/searchSlice"
-import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Flex } from "@chakra-ui/react"
 import Detail from "@screens/Detail";
 import Header from "./Header";
@@ -13,10 +13,8 @@ import Search from "@screens/Search";
 import Discover from "@screens/Discover";
 import BookMark from "@screens/BookMark";
 
-
-const RoootRouter: React.FC = () => {
-  const routeTrigger = useSelector(selectSearch).routeTrigger
-
+const RootRouter:React.FC = () => {
+  const redirection = useSelector(selectSearch).redirection
   return (
     <Router>
       <Header/>
@@ -35,11 +33,11 @@ const RoootRouter: React.FC = () => {
           <Route path="/bookmark" component={BookMark} />
         </Switch>
         <Route path="/*">
-          {routeTrigger !=="" && <Redirect to="/search"/>}
+          {redirection !=="" && <Redirect to="/search"/>}
         </Route>
       </Flex>
     </Router>
   );
 };
 
-export default RoootRouter;
+export default RootRouter

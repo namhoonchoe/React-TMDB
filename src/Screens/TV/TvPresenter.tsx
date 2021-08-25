@@ -82,18 +82,10 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
         </Flex>
       {/* To the page top */}
       <ScrollToTop/>
-      
-      
-      
-      
-      
-      
-      
       </>
-      
     }
-      
-      { error ? <p>An error has occured</p>: null }
+    
+    { error ? <p>An error has occured</p>: null }
   </>
   )
 };

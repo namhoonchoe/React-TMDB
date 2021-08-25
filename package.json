@@ -25,7 +25,8 @@
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "focus-visible": "^5.2.0",
-    "framer-motion": "^4",
+    "framer-motion": "^4.1.17",
+    "keen-slider": "^5.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -64,5 +65,9 @@
   },
   "devDependencies": {
     "craco-alias": "^3.0.1"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/namhoonchoe/React-TMDB.git",
+  "author": "namhoonchoe <sysynh2012@gmail.com>",
+  "license": "MIT"
 }

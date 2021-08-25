@@ -1,5 +1,5 @@
 import React , { useState, useEffect, useRef } from 'react'
-import { resetRouteTrigger, selectSearch } from '@redux/searchSlice'
+import { resetRedirection, selectSearch } from '@redux/searchSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { movieApi,tvApi } from '@api'
 import SearchPresenter from './SearchPresenter'
@@ -45,7 +45,7 @@ const SearchContainer:React.FC = () => {
 
     return () => {
       mounted = false
-      dispatch(resetRouteTrigger(""))
+      dispatch(resetRedirection())
     }
 
   }, [searchQuery,results,dispatch])
