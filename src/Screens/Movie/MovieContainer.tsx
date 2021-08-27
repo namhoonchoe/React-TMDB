@@ -48,7 +48,6 @@ const MovieContainer:React.FC = () => {
   }, [])
   const { nowPlaying, upComing, popular } = movie
   return (
-  <>
     <MoviePresenter
       nowPlaying={nowPlaying}
       upComing={upComing}
@@ -56,7 +55,6 @@ const MovieContainer:React.FC = () => {
       error={error}
       loading={loading}   
     />
-  </>
   )
 }
 

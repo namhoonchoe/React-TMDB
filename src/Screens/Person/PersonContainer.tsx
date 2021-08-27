@@ -35,13 +35,11 @@ const PersonContainer:React.FC = () => {
     }},[person])
     const { popular }  = person
   return (
-  <>
     <PersonPresenter 
       popular={popular}
       error={error}
       loading={loading}
     />
-  </>
   )
 }
 

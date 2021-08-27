@@ -33,12 +33,10 @@ const BookMarkContainer:React.FC = () => {
 
   const { movieInfo, seriesInfo } = bookMarkInfo
   return (
-    <>
-      <BookMarkPresenter
-        movieBookMark={movieInfo}
-        seriesBookMark={seriesInfo}
-      />
-    </>
+    <BookMarkPresenter
+      movieBookMark={movieInfo}
+      seriesBookMark={seriesInfo}
+    />
   )
 }
 

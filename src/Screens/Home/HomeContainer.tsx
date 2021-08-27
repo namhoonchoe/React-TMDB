@@ -8,7 +8,6 @@ interface IHomeData {
   trendingPeople:null
 }
 
-
 const HomeContainer:React.FC = () => {
   const [home,setHome] = useState<IHomeData>({ 
     trendingMovies:null,
@@ -47,10 +46,8 @@ const HomeContainer:React.FC = () => {
       mounted = false
     }
   },[])
-
-
     const { trendingMovies, trendingSeries, trendingPeople } = home
-  return (
+    return (
     <HomePresenter
       trendingMovies={trendingMovies}
       trendingSeries={trendingSeries}

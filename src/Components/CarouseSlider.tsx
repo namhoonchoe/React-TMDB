@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import InfoCard from './InfoCard'
 import "../CarouselStyle.css"
+import InfoCard from './InfoCard'
 
 type CarouselData = []
 

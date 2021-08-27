@@ -50,7 +50,6 @@ const TvContainer:React.FC = () => {
     const {topRated,airingToday,popular} = series
 
   return (
-  <>
     <TvPresenter
       topRated={topRated}
       airingToday={airingToday}
@@ -58,7 +57,6 @@ const TvContainer:React.FC = () => {
       error={error}
       loading={loading}
     />
-  </>
   )
 }
 

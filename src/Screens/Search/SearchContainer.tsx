@@ -53,14 +53,12 @@ const SearchContainer:React.FC = () => {
   const { movieResults, seriesResults } = results
 
   return (
-    <>
-      <SearchPresenter
-        movieResults={movieResults}
-        seriesResults={seriesResults}
-        loading={loading}
-        error={error}
-      />
-    </>
+    <SearchPresenter
+      movieResults={movieResults}
+      seriesResults={seriesResults}
+      loading={loading}
+      error={error}
+    />
   )
 }
 

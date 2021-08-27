@@ -17,6 +17,22 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, carouselType })=> {
 	const [imageType, setImageType] = useState<string>("")
 	const [isLoaded, setIsLoaded] = useState(false)
 
+	const NomalTitle = () => {
+		return (
+			<Text fontSize="md" fontWeight="medium" m={1}>
+				{title}
+			</Text>
+		)
+	}
+
+	const ShortenedTitle = () => {
+		return (
+			<Text fontSize="md" fontWeight="medium" m={1}>
+				{ title.substring(0,30)}...
+			</Text>
+		)
+	}
+
 	useEffect(() => {
 		const imageTypeChecker = () => {
 			if (carouselType !== undefined) {
@@ -59,11 +75,12 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, carouselType })=> {
 				borderRadius = {"md"}
 				imageSource={posterPath}/>
 			</Skeleton>
-			<Flex flexWrap="wrap" >
+			<Flex wrap="wrap" width={"10.5rem"}>
 				<SkeletonText isLoaded={isLoaded} startColor={ colorMode === 'light' ? 'gray.300' : 'gray.600'}>
-				<Text fontSize="md" fontWeight="medium" m={1}>
-					{title}
-				</Text>
+					{title.length > 30 
+					?	<ShortenedTitle/>
+					: <NomalTitle/>
+					}
 				</SkeletonText>
 			</Flex>
 		</Flex>

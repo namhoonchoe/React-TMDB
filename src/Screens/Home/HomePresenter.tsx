@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Flex, Text, Box, VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import CarouseSlider from "@components/CarouseSlider";
-import { Flex, Text, Box, VStack } from "@chakra-ui/react"
+import LandingPortal from "@components/LandingPortal"
 
 interface IHomeProps {
   trendingMovies:null|HomeData,
@@ -17,7 +18,15 @@ const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, tr
   <>
     { loading 
       ? <LoadingSpinner/> 
-      : <VStack mb={3}> 
+      : <VStack mb={3}>
+        { trendingMovies && trendingSeries !== null && trendingMovies.length && trendingSeries.length > 0 &&
+        <Box width="92vw" height="60vh"> 
+          <LandingPortal 
+          trendingMovies={trendingMovies}
+          trendingSeries={trendingSeries}/>
+        </Box>
+        }
+
         { trendingMovies !== null && trendingMovies.length > 0 &&
         <VStack align="start">
           <Flex align="flex-end" my={4} >
