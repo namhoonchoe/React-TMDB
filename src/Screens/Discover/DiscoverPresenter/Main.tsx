@@ -4,7 +4,7 @@ import { selectDiscoverInfoList, fetchMore,} from '@redux/discoverSlice';
 import { Link } from "react-router-dom";
 import { Grid ,Text, Flex, Button } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
-import InfoCard from '@components/InfoCard'
+import InfoCard from '@components/Layout/InfoCard'
 
 const Main:React.FC = () => {
   const [sectionType, setSectionType] = useState<string|undefined>("")
@@ -49,7 +49,7 @@ const Main:React.FC = () => {
 
   return (
     <Flex direction="column" align="center" justify="start" 
-        mx={3} px={3} border="1px" borderRadius="md" borderColor="gray.300">
+        mx={3} my={2} px={3} border="1px" borderRadius="md" borderColor="gray.300">
       <Text fontSize="2xl" mt={1} mb={3} fontWeight="normal" alignSelf="start">Discover</Text>
       <Flex alignSelf="start">
         { mainInfo !== null && mainInfo.length > 0 &&

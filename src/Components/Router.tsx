@@ -4,7 +4,7 @@ import { selectSearch } from "@redux/searchSlice"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Flex } from "@chakra-ui/react"
 import Detail from "@screens/Detail";
-import Header from "./Header";
+import Header from "./Layout/Header";
 import Home from "@screens/Home";
 import Movie from "@screens/Movie";
 import Person from "@screens/Person";

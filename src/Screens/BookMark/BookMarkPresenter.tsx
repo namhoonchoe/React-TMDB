@@ -1,6 +1,6 @@
 import React from 'react'
 import { VStack, Text, Flex } from '@chakra-ui/react'
-import Section from '@components/Section'
+import Section from '@components/Layout/Section'
 
 interface IBookMarkProps {
   movieBookMark:bookMarks,

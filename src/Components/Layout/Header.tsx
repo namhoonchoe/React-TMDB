@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchBox from "./SearchBox";
+import SearchBox from "../SearchBox";
 import { Flex,
         VStack,
         Spacer,
@@ -16,12 +16,12 @@ import { Flex,
         useDisclosure,
         useColorMode  } from "@chakra-ui/react"
 import { HamburgerIcon } from '@chakra-ui/icons'
-import MovieIcon from "./svgcomponents/MovieIcon";
-import SeriesIcon from "./svgcomponents/SeriesIcon";
-import Collections from "./svgcomponents/CollectionsIcon";
-import DiscoverIcon from "./svgcomponents/DiscoverIcon";
-import DayLightMode from "./svgcomponents/DayLightMode";
-import DarkMode from "./svgcomponents/DarkMode";
+import MovieIcon from "../svgcomponents/MovieIcon";
+import SeriesIcon from "../svgcomponents/SeriesIcon";
+import Collections from "../svgcomponents/CollectionsIcon";
+import DiscoverIcon from "../svgcomponents/DiscoverIcon";
+import DayLightMode from "../svgcomponents/DayLightMode";
+import DarkMode from "../svgcomponents/DarkMode";
 
 const Header:React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -32,10 +32,9 @@ const Header:React.FC = () => {
     <Flex 
       justify="flex-start" 
       align="center"
-      bgColor={ colorMode === "light" ? "gray.100" : "black" }
-      pl={4} pr={8} py={3}  mb={2}
+      bgColor={ colorMode === "light" ? "gray.50" : "black" }
+      pl={4} pr={8} py={3}  
       zIndex={"10"}
-      opacity="0.9"
       position="sticky"
       width="100vw"
       top={0}

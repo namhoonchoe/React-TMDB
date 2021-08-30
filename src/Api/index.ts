@@ -52,7 +52,7 @@ export const personApi = {
 };
 
 export const trendingApi = {
-  trending: (type:string) => api.get(`trending/${type}/day`),
+  trending: (type:string) => api.get(`trending/${type}/week`),
 };
 
 export const discoverApi = {

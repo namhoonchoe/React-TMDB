@@ -1,5 +1,5 @@
 import React from "react";
-import Section from "@components/Section"
+import Section from "@components/Layout/Section"
 import { VStack, Grid, GridItem, Flex, Box, Text , Menu, MenuButton, MenuList, MenuItem  } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import ScrollToTop from "@components/ScrollToTop";

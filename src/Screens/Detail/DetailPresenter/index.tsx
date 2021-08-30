@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex } from "@chakra-ui/react"
+import { Flex, Fade } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import DetailHeader from './DetailHeader';
 import DetailBody from './DetailBody';
@@ -18,13 +18,17 @@ const DetailPresenter:React.FC<IDetailProps> = ({ detail ,cast ,similar ,error, 
     <>
       { loading 
       ? <LoadingSpinner/> 
-      : (<Flex direction="column" align="center" justify="center">
-          <DetailHeader 
-            detail={detail} 
-            cast={cast} />
-          <DetailBody/>
-          <DetailFooter/>
-        </Flex>)
+      : <Flex direction="column" align="center" justify="center">
+          <Fade in={loading === false} >
+            <DetailHeader detail={detail} />
+          </Fade>
+          <Fade in={loading === false} >
+            <DetailBody/>
+          </Fade>
+          <Fade in={loading === false} >
+            <DetailFooter/>
+          </Fade>
+        </Flex>
       }
 
       { error ? <p>An error has occured</p>: null }

@@ -3,7 +3,7 @@ import { selectDiscoverInfoGenres, selectGenreFilters, selectExcludeFilter, sele
         addToFilter, removeFromFilter, discoverTrigger, resetQuery, resetFilter } from '@redux/discoverSlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
-import CollapseBox from '@components/CollapseBox'
+import CollapseBox from '@components/Layout/CollapseBox'
 import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade } from "@chakra-ui/react"
 import { MinusIcon, AddIcon, TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons'
 import MovieIcon from '@components/svgcomponents/MovieIcon'

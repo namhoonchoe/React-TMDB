@@ -1,5 +1,5 @@
 import React from "react";
-import Section from "@components/Section"
+import Section from "@components/Layout/Section"
 import { Flex } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 

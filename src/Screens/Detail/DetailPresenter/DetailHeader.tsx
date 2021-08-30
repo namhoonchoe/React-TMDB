@@ -1,106 +1,104 @@
 import React from 'react'
-import { Flex, 
-  VStack,
-  HStack, 
-  Box, 
-  Container,
-  Text, 
-  Spacer } from "@chakra-ui/react"
+import { Flex, VStack, HStack,  Box, Container, Text, Spacer } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
-import InfoImage from "@components/InfoImage";
-import ModalBox from "@components/ModalBox";
+import InfoImage from "@components/Layout/InfoImage";
+import ModalBox from "@components/Layout/ModalBox";
 import BookMark from "@components/BookMark";
 import StarRating from "@components/StarRating"
 
 
 interface IHeaderProps {
   detail:any,
-  cast:any,
 }
 
-const DetailHeader:React.FC<IHeaderProps> = ({ detail, cast }) => {
+const DetailHeader:React.FC<IHeaderProps> = ({ detail }) => {
   const bookMarkType = usePathTypeCheck()
 
   return (
   <>
-    <Flex direction="column" width={"100vw"} height={"24rem"} >
-      <Flex justify="center" >
-        <InfoImage
-          borderRadius={"md"}
-          imageType={"poster"}
-          width={"15rem"}
-          height={"21rem"}
-          imageSource={detail.poster_path}
-        />
-        <VStack>
-          <Container maxW="sm">
-            <Text fontWeight="semibold" fontSize="3xl">{detail.original_title}</Text>
-          </Container>
-          <Container maxW="sm">
-            { detail.tagline !== "" 
-              ? <VStack align="start">
-                  <Text as="cite">"{detail.tagline}"</Text>                   
-                    {detail.overview.length > 100 
-                    ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
-                        <ModalBox modalcontent={detail.overview}/>
-                      </Box>
-                    : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> 
-                  }
-                </VStack>
-              : <VStack>
-                  <Spacer/>
-                  <Box maxWidth="xs">
+    <Flex width={"100vw"} height={"65vh"} position="absolute" top="0" zIndex="-10" >
+      <Box 
+        width="100%"
+        height="100%"
+        bgSize="cover"
+        bgColor="black"
+        boxShadow="21em 2px 30px 10px rgba(2,2,4,1) inset"
+        bgImage = {
+        detail.backdrop_path !== null 
+        ? `https://image.tmdb.org/t/p/original${detail.backdrop_path}`
+        : "none" }
+        filter="brightness(70%)"
+        bgPosition="20em 5%"
+        borderRadius="sm"
+        bgRepeat="no-repeat">
+      </Box>            
+    </Flex>
+    <Flex 
+      width={"100vw"} height={"85vh"} 
+      color="white"
+      pt="3em"
+      pl="10em"
+      >
+      <InfoImage
+        borderRadius={"md"}
+        imageType={"poster"}
+        width={"15rem"}
+        height={"21rem"}
+        imageSource={detail.poster_path}
+      />
+      <VStack>
+        <Container maxW="sm">
+          <Text fontWeight="semibold" fontSize="3xl">{detail.original_title||detail.name}</Text>
+        </Container>
+        <Container maxW="sm">
+          { detail.tagline !== "" 
+            ? <VStack align="start">
+                <Text as="cite">"{detail.tagline}"</Text>                   
                   {detail.overview.length > 100 
                   ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
                       <ModalBox modalcontent={detail.overview}/>
                     </Box>
-                  : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> }
+                  : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> 
+                }
+              </VStack>
+            : <VStack>
+                <Spacer/>
+                <Box maxWidth="xs">
+                {detail.overview.length > 100 
+                ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
+                    <ModalBox modalcontent={detail.overview}/>
                   </Box>
-                </VStack>
-                }              
-            </Container>
-            <Container maxW="sm">
-              <HStack justify="start">
-                <VStack>
-                  <Flex>
-                    <Text mr={2}>{detail.release_date}</Text>
-                    <Text>{detail.status}</Text>
-                  </Flex>
-                  <Flex justify="start" align="center">
-                    <StarRating rating={detail.vote_average}/>
-                    <Text ml={2}>{detail.vote_average}/10</Text>
-                  </Flex>
-                </VStack>
-                <BookMark 
-                  bookMarkDetail={detail}
-                  bookMarkType={bookMarkType}
-                  bookMarkId={detail.id}
-                />
-              </HStack>
-              <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
-                <Box border="1px" borderRadius="lg" borderColor="lightgrey" m={2} p={1} >
-                  <Text>{genre.name.toString()}</Text>
-                </Box>))}
+                : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> }
+                </Box>
+              </VStack>
+              }              
+          </Container>
+          <Container maxW="sm">
+            <HStack justify="start">
+              <VStack>
+                <Flex>
+                  <Text mr={2}>{detail.release_date || detail.first_air_date}</Text>
+                  <Text>{detail.status}</Text>
                 </Flex>
-            </Container>
-          </VStack>
+                <Flex justify="start" align="center">
+                  <StarRating rating={detail.vote_average}/>
+                  <Text ml={2}>{detail.vote_average}/10</Text>
+                </Flex>
+              </VStack>
+              <BookMark 
+                bookMarkDetail={detail}
+                bookMarkType={bookMarkType}
+                bookMarkId={detail.id}
+              />
+            </HStack>
+            <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
+              <Box borderRadius="lg" bgColor="white" m={2} p={1} >
+                <Text>{genre.name.toString()}</Text>
+              </Box>))}
+            </Flex>
+          </Container>
+        </VStack>
       </Flex>
-      <Box 
-        zIndex={"-1"}
-        position="fixed"
-        top={"0"}
-        left={"0"}
-        opacity={"0.15"}
-        width="100%"
-        height={"25rem"}
-        bgSize="cover"
-        bgImage = {
-          detail.backdrop_path !== null 
-          ? `https://image.tmdb.org/t/p/original${detail.backdrop_path}`
-          : "none" }
-        bgPosition="top"
-        bgRepeat="no-repeat"></Box>        
-    </Flex>
   </>
   )
 }

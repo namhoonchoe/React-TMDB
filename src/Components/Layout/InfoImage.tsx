@@ -1,6 +1,6 @@
 import React from 'react'
-import BrokenPoster from './svgcomponents/BrokenPoster'
-import BrokenPortrait from './svgcomponents/BrokenPortrait'
+import BrokenPoster from '../svgcomponents/BrokenPoster'
+import BrokenPortrait from '../svgcomponents/BrokenPortrait'
 import { Image, Flex } from "@chakra-ui/react"
 
 interface IImageProps {

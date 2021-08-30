@@ -5,14 +5,12 @@ import { trendingApi } from '@api'
 interface IHomeData {
   trendingMovies:null,
   trendingSeries:null,
-  trendingPeople:null
 }
 
 const HomeContainer:React.FC = () => {
   const [home,setHome] = useState<IHomeData>({ 
     trendingMovies:null,
-    trendingSeries:null,
-    trendingPeople:null})
+    trendingSeries:null})
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
 
@@ -28,11 +26,7 @@ const HomeContainer:React.FC = () => {
         data: { results:trendingSeries },
         } = await trendingApi.trending("tv");
 
-      const {
-        data: { results:trendingPeople },
-        } = await trendingApi.trending("person");
-
-        setHome({...home,trendingMovies,trendingSeries,trendingPeople})
+        setHome({...home,trendingMovies,trendingSeries})
       } catch {   
         setError(true)
       } finally {
@@ -46,12 +40,11 @@ const HomeContainer:React.FC = () => {
       mounted = false
     }
   },[])
-    const { trendingMovies, trendingSeries, trendingPeople } = home
+    const { trendingMovies, trendingSeries } = home
     return (
     <HomePresenter
       trendingMovies={trendingMovies}
       trendingSeries={trendingSeries}
-      trendingPeople={trendingPeople}
       error={error}
       loading={loading}
     />
