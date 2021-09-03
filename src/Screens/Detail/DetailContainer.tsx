@@ -4,7 +4,7 @@ import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import { movieApi, personApi, tvApi } from "@api"
 import DetailPresenter from './DetailPresenter';
 
-export default function DetailContainer() {
+const DetailContainer:React.FC = () => {
 	const pathType = usePathTypeCheck()
   const [detail,setDetail] = useState<IDetailInfos>({
     detailInfo:null,
@@ -23,7 +23,7 @@ export default function DetailContainer() {
           try {
             const { data:movieDetail } = await movieApi.movieDetail(id)
             const { data:casting } = await movieApi.credits(id)
-            const { data:similars } = await movieApi.similar(id)
+            const { data:{ results:similars } } = await movieApi.similar(id)
             setDetail({...detail,
                       detailInfo:movieDetail,
                       credits:casting,
@@ -43,7 +43,7 @@ export default function DetailContainer() {
           try {
             const { data:seriesDetail } = await tvApi.tvDetail(id)
             const { data:casting } = await tvApi.credits(id)
-            const { data:similars } = await tvApi.similar(id)
+            const { data:{ results:similars }} = await tvApi.similar(id)
             setDetail({...detail,
                       detailInfo:seriesDetail,
                       credits:casting,
@@ -83,18 +83,20 @@ export default function DetailContainer() {
     
     return () => {
       mounted = false
+      setLoading(true)
     }
 
-  },[pathType,detail,id])
+  },[pathType,id])
   const { detailInfo, credits, similars } = detail
 
   return (
-    <DetailPresenter
-      detail={detailInfo}
-      cast={credits}
-      similar={similars}
-      error={error}
-      loading={loading}/>
+  <DetailPresenter
+    detail={detailInfo}
+    credits={credits}
+    similar={similars}
+    error={error}
+    loading={loading}/>
   )
 }
 
+export default DetailContainer

@@ -63,7 +63,6 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, carouselType })=> {
 			direction="column" 
 			align="start"
 			borderRadius="md"
-			borderColor="gray.200"
 			width={"10.5rem"} 
 			mb={7}
 			>

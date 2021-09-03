@@ -39,14 +39,13 @@ const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }
 
   return (
   <>
-    <Box>
+    <Box width="100%">
       <Text fontSize="2xl" mb={3} fontWeight="semibold" >{title}</Text>
-      <Grid templateColumns="repeat(6, 1fr)" gap="8" >
+      <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" >
         {sectionInfos.map((data:any) => (
-        <Link to={`/${sectionType}/${data.id}`}>
+        <Link to={`/${sectionType}/${data.id}`} key={data.id}>
           <InfoCard
-            key={data.id}
-            title={data.original_title||data.original_name||data.name}
+            title={data.title||data.name}
             posterPath={data.poster_path||data.profile_path}
             rating={data.vote_average}
             />

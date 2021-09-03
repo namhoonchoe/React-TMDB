@@ -3,30 +3,24 @@ import { Flex, Fade } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import DetailHeader from './DetailHeader';
 import DetailBody from './DetailBody';
-import DetailFooter from './DetailFooter';
 
 interface IDetailProps {
   detail:any
-  cast:any
+  credits:any
   similar:any
   loading:boolean
   error:boolean
 }
 
-const DetailPresenter:React.FC<IDetailProps> = ({ detail ,cast ,similar ,error, loading }) => {
+const DetailPresenter:React.FC<IDetailProps> = ({ detail ,credits ,similar ,error, loading }) => {
   return (
     <>
       { loading 
       ? <LoadingSpinner/> 
-      : <Flex direction="column" align="center" justify="center">
-          <Fade in={loading === false} >
-            <DetailHeader detail={detail} />
-          </Fade>
-          <Fade in={loading === false} >
-            <DetailBody/>
-          </Fade>
-          <Fade in={loading === false} >
-            <DetailFooter/>
+      : <Flex direction="column" align="center" justify="center">        
+            <DetailHeader detail={detail} loading={loading}/>
+          <Fade in={loading === false}>
+            <DetailBody detail={detail} similars={similar} credits={credits}/>
           </Fade>
         </Flex>
       }

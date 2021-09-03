@@ -58,7 +58,7 @@ const Main:React.FC = () => {
             <Link to={`/${sectionType}/${data.id}`}>
               <InfoCard
                 key={data.id}
-                title={data.original_title||data.original_name||data.name}
+                title={data.title||data.name}
                 posterPath={data.poster_path||data.profile_path}
                 rating={data.vote_average}
                 />

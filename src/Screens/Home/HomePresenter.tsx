@@ -6,23 +6,28 @@ import CarouseSlider from "@components/Layout/CarouseSlider";
 import LandingPortal from "@components/Layout/LandingPortal"
 
 interface IHomeProps {
-  trendingMovies:null|HomeData,
-  trendingSeries:null|HomeData,
+  trendingMovies:null|HomeData
+  trendingSeries:null|HomeData
+  mediaType:string
+  randomIndex:number
   error:boolean,
   loading:boolean
 }
 
-const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, error, loading }) => {
+const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, randomIndex, mediaType, error, loading }) => {
   return (
   <>
     { loading 
       ? <LoadingSpinner/> 
-      : <VStack mb={3}>
+      : <VStack mb={3} overflowX="hidden">
         { trendingMovies && trendingSeries !== null && trendingMovies.length && trendingSeries.length > 0 &&
         <Box width="100vw" height="70vh"> 
-          <LandingPortal 
+          <LandingPortal
           trendingMovies={trendingMovies}
-          trendingSeries={trendingSeries}/>
+          trendingSeries={trendingSeries} 
+          randomIndex={randomIndex}
+          mediaType={mediaType}
+          loading={loading}/>
         </Box>
         }
 

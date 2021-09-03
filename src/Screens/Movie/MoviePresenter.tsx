@@ -56,7 +56,7 @@ const MoviePresenter:React.FC<IMovieProps> = ({ nowPlaying, upComing, popular, e
           </Box>
           <GridItem colSpan={4} rowSpan={2}>
             {/* Main Content */}
-            <VStack spacing="6">
+            <VStack spacing="6" width="70vw">
               { nowPlaying !== null && nowPlaying.length > 0 && 
               <Section 
                 title={"NowPlaying"}

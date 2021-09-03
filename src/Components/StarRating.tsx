@@ -11,7 +11,18 @@ interface IStarRatingProps {
 const StarRating:React.FC<IStarRatingProps> = ({ rating }) => {
   return (
     <>
-      { rating < 1 && 
+      { rating < 0.5 && 
+      <Flex justify="start" align="center">
+        <EmpthyStar/>
+        <EmpthyStar/>
+        <EmpthyStar/>
+        <EmpthyStar/>
+        <EmpthyStar/>
+      </Flex>   
+      }
+
+
+      { rating >= 0.5 && rating < 1 && 
       <Flex justify="start" align="center">
         <HalfStar/>
         <EmpthyStar/>

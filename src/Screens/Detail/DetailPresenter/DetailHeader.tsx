@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, VStack, HStack,  Box, Container, Text, Spacer } from "@chakra-ui/react"
+import { Flex, VStack, HStack,  Box, Container, Text, Spacer, Fade } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoImage from "@components/Layout/InfoImage";
 import ModalBox from "@components/Layout/ModalBox";
@@ -9,14 +9,16 @@ import StarRating from "@components/StarRating"
 
 interface IHeaderProps {
   detail:any,
+  loading:boolean
 }
 
-const DetailHeader:React.FC<IHeaderProps> = ({ detail }) => {
+const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
   const bookMarkType = usePathTypeCheck()
 
   return (
   <>
-    <Flex width={"100vw"} height={"65vh"} position="absolute" top="0" zIndex="-10" >
+    <Fade in={!loading}>
+    <Flex width={"100vw"} height={"70vh"} position="absolute" top="0" zIndex="-10" >
       <Box 
         width="100%"
         height="100%"
@@ -34,21 +36,19 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail }) => {
       </Box>            
     </Flex>
     <Flex 
-      width={"100vw"} height={"85vh"} 
+      width={"100vw"} height={"70vh"} 
       color="white"
       pt="3em"
-      pl="10em"
-      >
+      pl="10em">
       <InfoImage
         borderRadius={"md"}
         imageType={"poster"}
         width={"15rem"}
         height={"21rem"}
-        imageSource={detail.poster_path}
-      />
+        imageSource={detail.poster_path}/>
       <VStack>
         <Container maxW="sm">
-          <Text fontWeight="semibold" fontSize="3xl">{detail.original_title||detail.name}</Text>
+          <Text fontWeight="semibold" fontSize="3xl">{detail.title||detail.name}</Text>
         </Container>
         <Container maxW="sm">
           { detail.tagline !== "" 
@@ -99,6 +99,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail }) => {
           </Container>
         </VStack>
       </Flex>
+    </Fade>
   </>
   )
 }

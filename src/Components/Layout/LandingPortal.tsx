@@ -6,69 +6,44 @@ import StarRating from "@components/StarRating"
 interface ILandingProps {
 	trendingMovies: null|Array<any>
 	trendingSeries: null|Array<any>
-}
-
-interface IRandoms {
-	randomNunber:number,
+	mediaType:string
 	randomIndex:number
+	loading:boolean
 }
 
-const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries }) => {
-	const [infoType, setInfoType] = useState<string>("")
-	const [randNum, setRandNum] = useState<IRandoms>({
-		randomNunber:1,
-		randomIndex:1
-	})
-	const [selectedArray, setSelectedArray] = useState<null|Array<any>>(null)
+
+const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries, mediaType, randomIndex, loading }) => {
 	const [pickedInfo, setPickedInfo] = useState<any>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(() => {
 		let mounted = true
-		const genRandNum = (min:number, max:number) => {
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return setRandNum({ randomNunber:Math.floor(Math.random() * (max - min)) + min,
-									randomIndex:Math.floor(Math.random()*20)})
-		}
 
-		const toggleState = () => {
-			if(randNum.randomNunber%2 === 0){
-				setInfoType("series")
-				setSelectedArray(trendingSeries)
-			} else {
-				setInfoType("movie")
-				setSelectedArray(trendingMovies)
+		const pickOne = () => {
+			if(mediaType === "movie" && trendingMovies !== null) {
+				setPickedInfo(trendingMovies[randomIndex])
 			}
-		}
 
-		const pickOne = (selectedArray:null|Array<any>) => {
-			if(selectedArray !== null) {
-				setPickedInfo(selectedArray[randNum.randomIndex])
+			if(mediaType === "series" && trendingSeries !== null) {
+				setPickedInfo(trendingSeries[randomIndex])
 			}
 		}
 		
-		const skeletonController = () => {
-			setIsLoaded(true)
-		}
 
 		if(mounted){
-			genRandNum(1,9)
-			toggleState()
-			pickOne(selectedArray)
-			skeletonController()
+			pickOne()
 		}
 
 		return () => {
 			mounted = false
 		}
 	}
-	, [selectedArray])
+	, [mediaType,randomIndex])
 	return (
 		<>
-		{ pickedInfo !== null && selectedArray !== null &&
-			<Link to={`/${infoType}/${pickedInfo.id}`}>
-			<Skeleton isLoaded={isLoaded}>
+		{ pickedInfo !== null && 
+			<Link to={`/${mediaType}/${pickedInfo.id}`}>
+			<Skeleton isLoaded={!loading}>
 					{/* Info container */}
 					<Flex
 						align="start"
@@ -96,7 +71,7 @@ const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries 
 					</VStack>
 					</Flex>
 					{/* BackDrop Image container */}
-					<Flex Flex width={"100vw"} height={"75vh"} position="absolute" top="0" zIndex="-10">
+					<Flex Flex width={"100vw"} height={"75vh"} position="absolute" top="0" left="0" zIndex="-10">
 					<Box 
 						width="100%"
 						height="100%"

@@ -11,10 +11,10 @@ const BookMarkPresenter:React.FC<IBookMarkProps> = ({ movieBookMark, seriesBookM
 
   return (
     <>
-      <VStack position="relative">
+      <VStack position="relative" width="70vw">
         { movieBookMark.length === 0 && seriesBookMark.length === 0 &&
           <Flex position="absolute" top="32" boxSize="max-content">
-            <Text as="em" fontSize="3xl" >Bookmark whatever you want</Text>
+            <Text as="em" fontSize="3xl">Bookmark whatever you want</Text>
           </Flex>
         }
 

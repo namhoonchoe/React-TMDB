@@ -32,7 +32,8 @@ const Header:React.FC = () => {
     <Flex 
       justify="flex-start" 
       align="center"
-      bgColor={ colorMode === "light" ? "gray.50" : "black" }
+      bgColor={ colorMode === "light" ? "gray.100" : "black" }
+      opacity="0.9"
       pl={4} pr={8} py={3}  
       zIndex={"10"}
       position="sticky"

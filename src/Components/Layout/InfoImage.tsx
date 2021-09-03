@@ -16,15 +16,15 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
     <>
       { typeof imageSource === "string" && 
         <Image
-            width={width}
-            height={height}
-            borderRadius={borderRadius}
-            src={`https://image.tmdb.org/t/p/w300${imageSource}`}
+          width={width}
+          height={height}
+          borderRadius={borderRadius}
+          src={`https://image.tmdb.org/t/p/w300${imageSource}`}
           />
         }
         
         { imageType === "poster" && imageSource === undefined && 
-          <Flex justify="center" align="center" width={width} height={height} border="1px" borderColor="gray.300" borderRadius="md">
+          <Flex justify="center" align="center" width={width} height={height} border="1px" borderColor="gray.300"  borderRadius={borderRadius}>
             <BrokenPoster 
               width={"3rem"}
               height={"3rem"}/>
@@ -32,7 +32,7 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
         }
 
         { imageType === "portrait" && imageSource === null && 
-          <Flex justify="center" align="center" width={width} height={height} border="1px"  borderColor="gray.300" borderRadius="md">
+          <Flex justify="center" align="center" width={width} height={height} border="none"  >
             <BrokenPortrait
               width={"3rem"}
               height={"3rem"}/>

@@ -7,12 +7,28 @@ interface IHomeData {
   trendingSeries:null,
 }
 
+interface IRandoms {
+	randomNumber:number,
+	randomIndex:number
+}
+
+
 const HomeContainer:React.FC = () => {
   const [home,setHome] = useState<IHomeData>({ 
     trendingMovies:null,
     trendingSeries:null})
   const [error,setError] = useState<boolean>(false)
   const [loading,setLoading] = useState<boolean>(true)
+
+	const [randNum, setRandNum] = useState<IRandoms>({
+		randomNumber:1,
+		randomIndex:1
+	})  
+  
+  const [mediaType, setMediaType] = useState<string>("movie")
+
+  const { randomIndex, randomNumber } = randNum
+  const { trendingMovies, trendingSeries } = home
 
   useEffect(() => {
     let mounted = true;
@@ -33,18 +49,36 @@ const HomeContainer:React.FC = () => {
         setLoading(false)
       }
     } 
+
+    const genRandNum = (min:number, max:number) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return setRandNum({ randomNumber:Math.floor(Math.random() * (max - min)) + min,
+                  randomIndex:Math.floor(Math.random()*20)})
+    }
+  
+    const checkMediaType = () => {
+      if(randomNumber%2 === 0){
+        return setMediaType("series")
+      } 
+    }
+  
     if(mounted) {
+      genRandNum(1,9)
+			checkMediaType()
       getHomeData()
     }
+
     return() => {
       mounted = false
     }
-  },[])
-    const { trendingMovies, trendingSeries } = home
+  },[randomNumber])
     return (
     <HomePresenter
       trendingMovies={trendingMovies}
       trendingSeries={trendingSeries}
+      randomIndex={randomIndex}
+      mediaType={mediaType}
       error={error}
       loading={loading}
     />

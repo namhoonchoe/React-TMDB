@@ -58,7 +58,7 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
             </Box>
             <GridItem colSpan={4} rowSpan={2}>
               {/* Main Content */}
-              <VStack spacing="8" >
+              <VStack spacing="8"  width="70vw">
                 { airingToday !== null && airingToday.length > 0 && 
                 <Section 
                   title={"Airing Today"}
