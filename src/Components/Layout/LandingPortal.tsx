@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Container, VStack, HStack, Skeleton } from '@chakra-ui/react';
+import DateFormatter from '@components/DateFormatter';
 import StarRating from "@components/StarRating"
 
 interface ILandingProps {
@@ -14,7 +15,6 @@ interface ILandingProps {
 
 const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries, mediaType, randomIndex, loading }) => {
 	const [pickedInfo, setPickedInfo] = useState<any>(null)
-	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(() => {
 		let mounted = true
@@ -53,12 +53,12 @@ const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries,
 					<VStack color="white" pt={12} pl={4}>
 						<Container >
               <Text fontWeight="semibold"  fontSize="3xl">
-								{pickedInfo.original_title||pickedInfo.original_name}
+								{pickedInfo.title||pickedInfo.name}
 							</Text>
             </Container>
 						<Container >   
 							<HStack justify="start">
-                <Text mr={2}>{pickedInfo.release_date || pickedInfo.first_air_date}</Text>
+								<DateFormatter date={pickedInfo.release_date || pickedInfo.first_air_date}/>
                 <Flex justify="start" align="center">
                   <StarRating rating={pickedInfo.vote_average}/>
 									<Text ml={2}>{pickedInfo.vote_average}/10</Text>

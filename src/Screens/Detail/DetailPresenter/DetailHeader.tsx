@@ -4,6 +4,8 @@ import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoImage from "@components/Layout/InfoImage";
 import ModalBox from "@components/Layout/ModalBox";
 import BookMark from "@components/BookMark";
+import GenreGem from '@components/Layout/GenreGem';
+import DateFormatter from '@components/DateFormatter';
 import StarRating from "@components/StarRating"
 
 
@@ -13,7 +15,7 @@ interface IHeaderProps {
 }
 
 const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
-  const bookMarkType = usePathTypeCheck()
+  const pathType = usePathTypeCheck()
 
   return (
   <>
@@ -73,11 +75,11 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
               </VStack>
               }              
           </Container>
-          <Container maxW="sm">
+          <Container >
             <HStack justify="start">
               <VStack>
                 <Flex>
-                  <Text mr={2}>{detail.release_date || detail.first_air_date}</Text>
+                  <DateFormatter date={detail.release_date || detail.first_air_date}/>
                   <Text>{detail.status}</Text>
                 </Flex>
                 <Flex justify="start" align="center">
@@ -87,14 +89,15 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
               </VStack>
               <BookMark 
                 bookMarkDetail={detail}
-                bookMarkType={bookMarkType}
+                bookMarkType={pathType}
                 bookMarkId={detail.id}
               />
             </HStack>
-            <Flex flexWrap="wrap">{detail.genres.map((genre:any) => (
-              <Box borderRadius="lg" bgColor="white" m={2} p={1} >
-                <Text>{genre.name.toString()}</Text>
-              </Box>))}
+            <Flex align="center" justify="start">{detail.genres.map((genre:any) => (
+              <GenreGem
+                genreId={genre.id}
+                genreType={pathType}
+              />))}
             </Flex>
           </Container>
         </VStack>

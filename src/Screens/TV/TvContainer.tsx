@@ -8,7 +8,6 @@ interface ITvData {
 	airingToday:null
 }
 
-
 const TvContainer:React.FC = () => {
   const [series,setSeries] = useState<ITvData>({ 
     topRated:null,
