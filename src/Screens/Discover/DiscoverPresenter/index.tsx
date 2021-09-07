@@ -15,18 +15,18 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ loading, error }) => {
     <>
       { loading 
         ? <LoadingSpinner/> 
-        : <Flex justify="start" position="relative" w="100%">
-          <Grid  templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" gap={8} >
-            <Box position="sticky" top="8%" >
-            <GridItem colSpan={1} rowSpan={2} justifyContent="center">
-              <SideBar />
-            </GridItem>
-            </Box>
-            <GridItem colSpan={4} rowSpan={2} >
-              <Main />
-            </GridItem>
-          </Grid>
-          </Flex>
+        : <Flex position="relative" width="100%">
+            <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" gap={8} >
+              <Box position="sticky" top="8%" >
+              <GridItem colSpan={1} rowSpan={2} justifyContent="center" position="sticky" top="9%" left="1%" >
+                <SideBar />
+              </GridItem>
+              </Box>
+              <GridItem colSpan={4} rowSpan={2} >
+                <Main />
+              </GridItem>
+            </Grid>
+        </Flex>
       }
           
       { error ? <p>An error has occured</p>: null }

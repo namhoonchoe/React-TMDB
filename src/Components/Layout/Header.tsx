@@ -35,46 +35,45 @@ const Header:React.FC = () => {
       bgColor={ colorMode === "light" ? "gray.100" : "black" }
       opacity="0.9"
       pl={4} pr={8} py={3}  
-      zIndex={"10"}
       position="sticky"
+      zIndex="10"
       width="100vw"
       top={0}
       left={0}>
-      <VStack justify="center" >
+      <VStack justify="start" >
         <HamburgerIcon onClick={onOpen} width={5} height={5} mr={3} />
         <Drawer placement="left" onClose={onClose} isOpen={isOpen} size={"xs"} >
           <DrawerOverlay />
-          <DrawerContent width="full" m={3} borderRadius="lg">
-            <DrawerHeader borderBottomWidth="1px" px="1rem">       
+          <DrawerContent m={3} borderRadius="lg">
+            <DrawerHeader borderBottomWidth="1px" >       
               <SearchBox/>
             </DrawerHeader>
-            <DrawerBody px={"1rem"}>
+            <DrawerBody  >
               <Flex direction="column" 
-                    align="flex-start" 
-                    justify="center"
-                    width="fit-content">
+                    align="start" 
+                    justify="center">
                 <Link to="/movie">
-                  <Flex align="center" my={1}>
+                  <Flex align="center" width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
                     <MovieIcon/>
-                    <Text fontSize="xl" textColor="gray.600" fontWeight="hairline" ml={2}>Movies</Text>
+                    <Text fontSize="xl"  fontWeight="hairline" ml={2}>Movies</Text>
                   </Flex>
                 </Link>
                 <Link to="/series">
-                  <Flex align="center" my={1}>
+                  <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
                     <SeriesIcon/>
-                    <Text fontSize="xl" textColor="gray.600" fontWeight="hairline" ml={2}>Series</Text>
+                    <Text fontSize="xl" fontWeight="hairline" ml={2}>Series</Text>
                   </Flex>
                 </Link>
                 <Link to="/discover/movie">
-                  <Flex align="center" my={1}>
+                  <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
                     <DiscoverIcon/>
-                    <Text fontSize="xl" textColor="gray.600" fontWeight="hairline" ml={2}>Discover</Text>
+                    <Text fontSize="xl" fontWeight="hairline" ml={2}>Discover</Text>
                   </Flex>
                 </Link>
                 <Link to="/bookmark">
-                  <Flex align="center" my={1}>
+                  <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
                     <Collections/>
-                    <Text fontSize="xl" textColor="gray.600" fontWeight="hairline" ml={2}>Collections</Text>
+                    <Text fontSize="xl" fontWeight="hairline" ml={2}>Collections</Text>
                   </Flex>
                 </Link>
               </Flex>

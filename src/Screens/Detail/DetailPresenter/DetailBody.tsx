@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import { Flex, VStack, Grid, GridItem, Box, Container, Text, Fade } from "@chakra-ui/react"
-import Section from "@components/Layout/Section"
-import InfoImage from '@components/Layout/InfoImage';
+import { Flex, VStack, Grid, GridItem, Box, Text, Button, SlideFade , useColorMode } from "@chakra-ui/react"
+import CollapseSection from "@components/Layout/CollapseSection"
+import InfoImage from '@components/Layout/InfoImage'
+import DateFormatter from '@components/DateFormatter';
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 
 interface IBodyProps {
@@ -13,6 +14,8 @@ interface IBodyProps {
 
 const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
   const pathType = usePathTypeCheck()
+  const colorMode = useColorMode().colorMode
+  const [fullCast, setFullCast] = useState<boolean>(false)
   let history = useHistory()
 
   const toPerson = (path:string) => {
@@ -25,126 +28,175 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
       <Grid
         width="100%"
         templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(6, 1fr)"
-        >
+        templateColumns="repeat(6, 1fr)">
         <GridItem rowSpan={2} colSpan={5}>
           <VStack align="start">
             {/*casting*/}
-            <Flex direction="column" mb={"5%"}>
-            <Text fontSize="2xl" mb={3} fontWeight="semibold" >Cast</Text>
-            <Grid templateColumns="repeat(5, 1fr)" gap="8">
-              {credits.cast.map((data:any) => (
-                <>
-                  <Flex direction="column" 
-                      justify="stretch" 
-                      align="center" 
-                      key={data.id} 
-                      py={2} pt={3} 
-                      width="14rem" 
-                      height="13rem"
-                      backgroundColor="gray.200" 
-                      borderRadius="lg" 
-                      boxShadow="xl"
-                      onClick={() => toPerson(`/person/${data.id}`)}>
-                  <InfoImage
-                    width="7rem" 
-                    height="7rem"
-                    imageSource={data.profile_path}
-                    imageType="portrait"
-                    borderRadius="full"
-                  />
-                  <Flex direction="column" flexWrap="wrap" align="center" justify="center" p={1}>
-                    <Text fontSize="sm" fontWeight="semibold">{data.name}</Text>
-                    <Text fontSize="xs">as</Text>
-                    <Text fontSize="sm" fontWeight="hairline">{data.character}</Text>
-                  </Flex>
+            { credits.cast !== null && credits.cast.length >0 && 
+              <Flex direction="column" mb={"5%"} width="100%">
+                <Flex justify="space-between" align="baseline" mb={3} pr="1%">
+                  <Text fontSize="2xl" fontWeight="semibold">Cast</Text>
+                  {credits.cast.length > 5 &&
+                    <Button backgroundColor="transparent" onClick={() => setFullCast(!fullCast)}>
+                    {fullCast === true 
+                    ? <Text fontWeight="hairline">Collapse</Text> 
+                    : <Text fontWeight="hairline">See full Cast</Text>}
+                    </Button>}
                 </Flex>
-                </>
-              ))}
-            </Grid>
-            </Flex>
+              { fullCast 
+              ? <SlideFade in={fullCast}>
+                  <Grid templateColumns="repeat(auto-fit,minmax(14rem, 1fr))" gap="8">
+                    {credits.cast.map((data:any) => (
+                      <>
+                        <Flex direction="column" 
+                            justify="stretch" 
+                            align="center" 
+                            key={data.id} 
+                            py={2} pt={3} 
+                            width="14rem" 
+                            height="13rem"
+                            backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
+                            borderRadius="lg" 
+                            boxShadow="xl"
+                            _hover={{translateY:"2px"}}
+                            onClick={() => toPerson(`/person/${data.id}`)}>
+                        <InfoImage
+                          width="7rem" 
+                          height="7rem"
+                          imageSource={data.profile_path}
+                          imageType="portrait"
+                          borderRadius="full"
+                        />
+                        <Flex direction="column" flexWrap="wrap" align="center" justify="center" p={1}>
+                          <Text fontSize="sm" fontWeight="semibold">{data.name}</Text>
+                          <Text fontSize="xs">as</Text>
+                          <Text fontSize="sm" fontWeight="hairline">{data.character}</Text>
+                        </Flex>
+                      </Flex>
+                      </>
+                    ))}
+                  </Grid> 
+                </SlideFade > 
+              : <Grid templateColumns="repeat(auto-fit,minmax(14rem, 1fr))" gap="8">
+                  {credits.cast.slice(0,5).map((data:any) => (
+                    <>
+                      <Flex direction="column" 
+                          justify="stretch" 
+                          align="center" 
+                          key={data.id} 
+                          py={2} pt={3} 
+                          width="14rem" 
+                          height="13rem"
+                          backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
+                          borderRadius="lg" 
+                          boxShadow="xl"
+                          onClick={() => toPerson(`/person/${data.id}`)}>
+                      <InfoImage
+                        width="7rem" 
+                        height="7rem"
+                        imageSource={data.profile_path}
+                        imageType="portrait"
+                        borderRadius="full"
+                      />
+                      <Flex direction="column" flexWrap="wrap" align="center" justify="center" p={2}>
+                        <Text fontSize="sm" fontWeight="semibold">{data.name}</Text>
+                        <Text fontSize="xs">as</Text>
+                        <Text fontSize="sm" fontWeight="hairline">{data.character}</Text>
+                      </Flex>
+                    </Flex>
+                    </>
+                  ))}
+                </Grid> 
+              }
+              </Flex>
+            }
             {/*Similars*/}
-            <Section  
+            {similars !== null && similars.length > 0 &&
+            <CollapseSection  
               title={pathType === "movie" ? "Similar Movies" : "Similar Series"}
               sectionInfos={similars}
-              sectionInfoType={pathType === "movie" ? "movie" : "series"}/>        
+              sectionInfoType={pathType === "movie" ? "movie" : "series"}/>}
           </VStack>
         </GridItem>
-        <GridItem  rowSpan={2} colSpan={1} >
+        <GridItem rowSpan={2} colSpan={1} ml={6} >
           <Text fontSize="2xl" mb={3} fontWeight="semibold" >Info</Text>
           <Flex direction="column" align="start" justify="start" >
             {/*Futher infos*/}
-              <Flex direction="column" borderRadius="md" >
+              <Flex direction="column"  align="start" >
                 <Text p={1} fontWeight="semibold" >Original Title</Text>
                 <Text p={1}>{detail.original_title || detail.original_name}</Text>
               </Flex>
             { pathType === "movie" &&
               <>
-                <Flex direction="column" borderRadius="md" >
-                  <Text p={1} fontWeight="semibold">Director</Text>
-                  {credits.crew.filter((person:any) => person.job ==="Director").map((person:any) => person['name'])}
+                <Flex direction="column"  align="start" >
+                  <Text p={1}  fontWeight="semibold">Director</Text>
+                  <Text p={1}>{credits.crew.filter((person:any) => person.job ==="Director").map((person:any) => person['name'])}</Text>
                 </Flex>
-                <Flex >
+                <Flex align="center">
                   <Text p={1} fontWeight="semibold">Runtime</Text>
-                  <Text p={1}>{detail.runtime}'</Text>
+                  <Text p={1} fontSize="sm">{detail.runtime}'</Text>
                 </Flex>
-                <Flex >
+                <Flex align="center">
                   <Text p={1} fontWeight="semibold">Release Date</Text>
-                  <Text p={1}>{detail.release_date}</Text>  
+                  <DateFormatter date={detail.release_date}  fontSize="sm" fontWeight="medium"/>
                 </Flex>
               </>
             } 
             { pathType === "series" && 
               <>
               {detail.created_by !== null && detail.created_by.length > 0 &&
-                <Flex direction="column">
+                <Flex direction="column" align="start">
                   <Text p={1} fontWeight="semibold">Director</Text>
-                  <Text p={1}>{detail.created_by[0].name}</Text>
+                  <Text  p={1} fontSize="sm">{detail.created_by[0].name}</Text>
                 </Flex>
               }
-              <Flex>
+              <Flex align="center">
                 <Text p={1} fontWeight="semibold">Episode Runtime</Text>
                 <Flex>
                   {detail.episode_run_time.map((runtime:any) => (
-                  <Text p={1}>{runtime}'</Text>
+                  <Text p={1} fontSize="sm">{runtime}'</Text>
                   ))}
                 </Flex>
               </Flex>
-              <Flex>
+              <Flex align="center">
                 <Text p={1} fontWeight="semibold">Number of Seasons</Text>
-                <Text p={1}>{detail.number_of_seasons}</Text> 
+                <Text p={1} fontSize="sm">{detail.number_of_seasons}</Text> 
               </Flex>
               <Flex>
                 <Text p={1} fontWeight="semibold">Number of Episodes</Text  >
-                <Text p={1}>{detail.number_of_episodes  }</Text>
+                <Text p={1} fontSize="sm">{detail.number_of_episodes}</Text>
               </Flex>
-              <Flex>
+              <Flex align="center">
                 <Text p={1} fontWeight="semibold">First Air Date</Text>
-                <Text p={1}>{detail.first_air_date}</Text>
+                <DateFormatter date={detail.first_air_date} fontSize="sm" fontWeight="medium"/>
               </Flex>
-              <Flex>
+              <Flex align="center">
                 <Text p={1} fontWeight="semibold">Last Air Date</Text>
-                <Text p={1}>{detail.last_air_date}</Text>
+                <DateFormatter date={detail.last_air_date} fontSize="sm" fontWeight="medium"/>
               </Flex>
               </>
             }  
-            <Flex>
+            <Flex align="center">
               <Text p={1} fontWeight="semibold">Status</Text>
-              <Text p={1}>{detail.status}</Text>
+              <Text p={1} fontSize="sm">{detail.status}</Text>
             </Flex>
-            <Flex>
+            <Flex align="center">
               <Text p={1} fontWeight="semibold">Original Language</Text>
-              <Box  p={1} mr={2} boxSize="max-content" borderRadius="lg" backgroundColor="gray.400">{detail.original_language}</Box>
+              <Box  px={2} py={0.5} mr={2} boxSize="max-content" borderRadius="xl" backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700"}>
+                <Text fontSize="sm">{detail.original_language}</Text>
+              </Box>
             </Flex>
-            <Flex>
+            <Flex align="center">
               <Text p={1} fontWeight="semibold">Language</Text>
               <Flex align="center">
                 {detail.spoken_languages.map((language:any) =>
-                (<Box p={1} mr={2} boxSize="max-content" borderRadius="lg" backgroundColor="gray.400">{language.iso_639_1}</Box>))}
+                (<Box px={2} py={0.5} mr={2} boxSize="max-content" borderRadius="xl" backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700"}>
+                  <Text fontSize="sm">  {language.iso_639_1}</Text>
+                </Box>))}
               </Flex>                
             </Flex>
             { detail.revenue > 0 &&
-            <Flex>
+            <Flex align="center">
               <Text p={1} fontWeight="semibold">Revenue</Text>
               <Text p={1}>${detail.revenue}</Text>
             </Flex>

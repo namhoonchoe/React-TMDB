@@ -74,9 +74,7 @@ const SideBar:React.FC = () => {
   }, [value,orderDescending])
 
   return (  
-    <Flex direction="column" justify="space-between" 
-          width="15vw" height="90vh" ml={2} 
-          border="1px" borderRadius="md" borderColor="gray.300">
+    <Flex direction="column" justify="space-between" width="15vw" height="90vh" ml={2} >
       <Flex direction="row" justify="space-around" align="center" >
         <Link to="/discover/movie">
           <Flex fontSize="xl" fontWeight="semibold" align="center" p={1} onClick={() => resetTrigger()}>
@@ -91,7 +89,17 @@ const SideBar:React.FC = () => {
           </Flex>
         </Link>
       </Flex>
-      <Flex direction="column" p={1} overflowX="unset" overflowY="auto" >
+      <Flex direction="column" p={1} overflowX="unset" overflowY="auto" 
+            sx={{ '&::-webkit-scrollbar': {
+                    width: '8px',
+                    borderRadius: '8px',
+                    backgroundColor: `rgba(0, 0, 0, 0.1)`,
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    borderRadius: '4px',
+                    backgroundColor: `rgba(141,144, 150, 0.3)`,
+                  },
+                }} >
         {discoverGenres !== null && discoverGenres.length > 0 && (
         <CollapseBox title="Genres">
           <Flex direction="column" justify="center" align="start" m={2}>
@@ -102,7 +110,7 @@ const SideBar:React.FC = () => {
                 <>
                   <MinusIcon onClick={()=> dispatch(addToFilter({info:genre,type:"exclude"}))}/>
                   <Box>
-                    <Text fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
+                    <Text fontSize="md" fontWeight="thin" color="gray.600">{genre.name}</Text>
                   </Box>
                   <AddIcon onClick={()=> dispatch(addToFilter({info:genre,type:"include"}))} /> 
                 </>                                            
@@ -112,7 +120,7 @@ const SideBar:React.FC = () => {
                 <>
                   <MinusIcon onClick={()=> dispatch(addToFilter({info:genre,type:"exclude"}))}/>
                   <Box>
-                    <Text fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
+                    <Text fontSize="md" fontWeight="thin" color="gray.600">{genre.name}</Text>
                   </Box>
                   <AddIcon onClick={()=> dispatch(removeFromFilter({info:genre,type:"include"}))} color="green.300"/> 
                 </>
@@ -122,7 +130,7 @@ const SideBar:React.FC = () => {
                 <>
                   <MinusIcon onClick={()=> dispatch(removeFromFilter({info:genre,type:"exclude"}))} color="red.300"/>
                   <Box>
-                    <Text  fontSize="md" fontWeight="thin" textColor="gray.600">{genre.name}</Text>
+                    <Text fontSize="md" fontWeight="thin" color="gray.600">{genre.name}</Text>
                   </Box>
                   <AddIcon onClick={()=> dispatch(addToFilter({info:genre,type:"include"}))} /> 
                 </>     

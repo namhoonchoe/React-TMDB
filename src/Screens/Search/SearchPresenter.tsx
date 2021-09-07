@@ -15,7 +15,7 @@ const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,lo
   <> 
     { loading 
     ? <LoadingSpinner/> 
-    : <VStack spacing="8" width="100%" >
+    : <VStack spacing="8" width="90vw" >
         { movieResults !== null && movieResults.length > 0 && 
         <Section  
           title={"Results for Movies"}

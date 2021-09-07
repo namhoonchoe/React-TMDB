@@ -27,7 +27,7 @@ const ScrollToTop:React.FC= () => {
       { positionY < 400 
       ? null    
       : <Fade in={positionY >= 400}>
-          <Flex borderRadius="full" justify="center" align="center" boxSize="4rem" bgColor="blue.400" position="fixed"  bottom="5%" right="1.5%">
+          <Flex borderRadius="full" justify="center" align="center" boxSize="4rem" bgColor="blue.400" position="fixed"  bottom="5%" right="1.5%" zIndex="10">
             <ArrowUpIcon color="white" fontSize="2xl" fontWeight="extrabold" onClick={ToTheTop} />
           </Flex>
         </Fade>

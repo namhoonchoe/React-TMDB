@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { genreApi } from '@api'
-import LoadingSpinner from '@components/LoadingSpinner'
-import { Text, Box } from "@chakra-ui/react"
+import { Text, Box, Fade } from "@chakra-ui/react"
 
 interface IGenreProps {
   genreId:number
@@ -65,13 +64,14 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType }) => {
 
   return (
     <>
-      { loading 
-        ? <LoadingSpinner/> 
-        : <Box mx={1}>
-            <Text>{genre.name}</Text>
+      { loading === false && 
+        <Fade in={!loading} >
+          <Box mr={2} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" >
+            <Text >{genre.name}</Text>
           </Box>
+        </Fade>
       }
-          
+
       { error ? <p>An error has occured</p>: null }
     </>
   )

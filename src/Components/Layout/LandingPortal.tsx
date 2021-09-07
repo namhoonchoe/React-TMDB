@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import { Box, Flex, Text, Container, VStack, HStack, Skeleton } from '@chakra-ui/react';
+import { Box, Flex, Text, VStack, Spacer, Skeleton } from '@chakra-ui/react';
 import DateFormatter from '@components/DateFormatter';
 import StarRating from "@components/StarRating"
+import GenreGem from "@components/Layout/GenreGem"
 
 interface ILandingProps {
 	trendingMovies: null|Array<any>
@@ -50,24 +51,33 @@ const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries,
 						borderRadius="sm"
 						width={"100vw"} height={"75vh"}
 						>
-					<VStack color="white" pt={12} pl={4}>
-						<Container >
-              <Text fontWeight="semibold"  fontSize="3xl">
-								{pickedInfo.title||pickedInfo.name}
-							</Text>
-            </Container>
-						<Container >   
-							<HStack justify="start">
-								<DateFormatter date={pickedInfo.release_date || pickedInfo.first_air_date}/>
-                <Flex justify="start" align="center">
+					<VStack align="start" color="white" pt={12} pl={"5%"} height="100%">
+            <Text fontWeight="semibold"  fontSize="3xl">
+							{pickedInfo.title||pickedInfo.name}
+						</Text>
+						<Box height="45%"></Box>
+						<VStack align="start">
+							<Flex align="flex-end" mr={2}>
+								{ mediaType === "movie" 
+									? null
+									: <Text mr={2} fontSize="md" fontWeight="semibold">Since</Text>}
+									<DateFormatter date={pickedInfo.release_date || pickedInfo.first_air_date} fontSize="lg"/>
+								</Flex>
+							<Flex>
+								<Text fontWeight="semibold" mr={2}>User Score</Text>
+								<Flex justify="start" align="center" fontWeight="semibold">
                   <StarRating rating={pickedInfo.vote_average}/>
-									<Text ml={2}>{pickedInfo.vote_average}/10</Text>
+									<Text mx={1}>{pickedInfo.vote_average}/10</Text>
+									<Text>({pickedInfo.vote_count})</Text>
+									<Text ml={1}>votes</Text>
                 </Flex>
-              </HStack>
-							<Flex flexWrap="wrap">
-							
+							</Flex>
+							<Flex align="center" justify="start" boxSize="max-content">{pickedInfo.genre_ids.map((id:number) => (
+                <GenreGem
+                  genreId={id}
+                  genreType={mediaType}/>))}
               </Flex>
-            </Container>
+						</VStack>
 					</VStack>
 					</Flex>
 					{/* BackDrop Image container */}
@@ -78,7 +88,7 @@ const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries,
 						bgSize="cover"
 						bgColor="black"
 						boxShadow="15px 2px 45px 3px rgba(2,2,4,1) inset"
-						filter="brightness(85%)"
+						filter="brightness(75%)"
 						bgImage = {
 							pickedInfo.backdrop_path !== null 
 							? `https://image.tmdb.org/t/p/original${pickedInfo.backdrop_path}`

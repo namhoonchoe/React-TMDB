@@ -3,9 +3,11 @@ import { Text, Flex } from "@chakra-ui/react"
 
 interface IDateProps {
   date:string
+  fontSize:string
+  fontWeight?:string
 }
 
-const DateFormatter:React.FC<IDateProps> = ({ date }) => {
+const DateFormatter:React.FC<IDateProps> = ({ date, fontSize, fontWeight="semibold" }) => {
 
   const target = date.split("-")
 
@@ -46,7 +48,7 @@ const DateFormatter:React.FC<IDateProps> = ({ date }) => {
   const mmddyyyy = `${setMonthName(month)} ${day}, ${year}`
   return (
     <>
-      <Text mr={1} fontWeight="semibold">{mmddyyyy}</Text>
+      <Text mr={1} fontWeight={fontWeight} fontSize={fontSize}>{mmddyyyy}</Text>
     </>
   )
 }

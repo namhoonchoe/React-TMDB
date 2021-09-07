@@ -48,12 +48,11 @@ const Main:React.FC = () => {
   },[pathType])
 
   return (
-    <Flex direction="column" align="center" justify="start" 
-        mx={3} my={2} px={3} border="1px" borderRadius="md" borderColor="gray.300">
+    <Flex direction="column" align="center" justify="start" width="100%"
+        mx={3} my={2} px={3}>
       <Text fontSize="2xl" mt={1} mb={3} fontWeight="normal" alignSelf="start">Discover</Text>
-      <Flex alignSelf="start">
         { mainInfo !== null && mainInfo.length > 0 &&
-          <Grid templateColumns="repeat(6, 1fr)" gap="8" >  
+          <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" width="100%">  
             {mainInfo.map((data:any) => (
             <Link to={`/${sectionType}/${data.id}`}>
               <InfoCard
@@ -66,7 +65,6 @@ const Main:React.FC = () => {
               ))}
           </Grid>
         }
-      </Flex>
       <Button size="lg" my={2} alignSelf="center" onClick={()=> {getNextPage()}}>
         <Text>Next Page</Text>
       </Button>

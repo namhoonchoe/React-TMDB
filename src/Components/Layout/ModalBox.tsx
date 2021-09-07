@@ -1,5 +1,6 @@
 import React from 'react'
 import  { Button,
+          Text,
           Modal,
           ModalOverlay,
           ModalContent,
@@ -18,7 +19,9 @@ const ModalBox:React.FC<IModalProps> = ({ modalcontent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen}>More</Button>
+      <Button onClick={onOpen} backgroundColor="transparent" fontWeight="hairline">
+        <Text>More</Text>
+      </Button>
         <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -28,7 +31,9 @@ const ModalBox:React.FC<IModalProps> = ({ modalcontent }) => {
               {modalcontent}
             </ModalBody>
             <ModalFooter>
-              <Button onClick={onClose}>Close</Button>
+              <Button onClick={onClose} backgroundColor="transparent">
+                <Text>Close</Text>
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

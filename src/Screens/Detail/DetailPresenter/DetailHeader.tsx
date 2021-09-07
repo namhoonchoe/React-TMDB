@@ -41,25 +41,25 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
       width={"100vw"} height={"70vh"} 
       color="white"
       pt="3em"
-      pl="10em">
+      pl="3em">
       <InfoImage
         borderRadius={"md"}
         imageType={"poster"}
-        width={"15rem"}
-        height={"21rem"}
+        width={"18%"}
+        height={"75%"}
         imageSource={detail.poster_path}/>
-      <VStack>
-        <Container maxW="sm">
-          <Text fontWeight="semibold" fontSize="3xl">{detail.title||detail.name}</Text>
-        </Container>
-        <Container maxW="sm">
+      <VStack align="start">
+        <Text fontWeight="semibold" fontSize="3xl" ml="0.5em">{detail.title||detail.name}</Text>
+        <Container maxW="max-content">
           { detail.tagline !== "" 
             ? <VStack align="start">
                 <Text as="cite">"{detail.tagline}"</Text>                   
                   {detail.overview.length > 100 
-                  ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
-                      <ModalBox modalcontent={detail.overview}/>
-                    </Box>
+                  ? <Flex width="30%">
+                      <Text>
+                        {detail.overview.substring(0, 100)}... <ModalBox modalcontent={detail.overview}/>
+                      </Text>
+                    </Flex>
                   : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> 
                 }
               </VStack>
@@ -77,10 +77,10 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
           </Container>
           <Container >
             <HStack justify="start">
-              <VStack>
-                <Flex>
-                  <DateFormatter date={detail.release_date || detail.first_air_date}/>
-                  <Text>{detail.status}</Text>
+              <VStack align="start">
+                <Flex align="center">
+                  <DateFormatter date={detail.release_date || detail.first_air_date} fontSize="lg"/>
+                  <Text>({detail.status})</Text>
                 </Flex>
                 <Flex justify="start" align="center">
                   <StarRating rating={detail.vote_average}/>
