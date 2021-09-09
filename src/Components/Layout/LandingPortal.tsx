@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import { Box, Flex, Text, VStack, Spacer, Skeleton } from '@chakra-ui/react';
+import { Box, Flex, Text, VStack, Skeleton } from '@chakra-ui/react';
 import DateFormatter from '@components/DateFormatter';
 import StarRating from "@components/StarRating"
 import GenreGem from "@components/Layout/GenreGem"
@@ -49,9 +49,9 @@ const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries,
 					<Flex
 						align="start"
 						borderRadius="sm"
-						width={"100vw"} height={"75vh"}
+						width={"100%"} height={"75vh"}
 						>
-					<VStack align="start" color="white" pt={12} pl={"5%"} height="100%">
+					<Flex direction="column" align="start" color="white" pt={12} pl={"5%"} height="100%">
             <Text fontWeight="semibold"  fontSize="3xl">
 							{pickedInfo.title||pickedInfo.name}
 						</Text>
@@ -72,16 +72,17 @@ const LandingPortal:React.FC<ILandingProps> = ({ trendingMovies, trendingSeries,
 									<Text ml={1}>votes</Text>
                 </Flex>
 							</Flex>
-							<Flex align="center" justify="start" boxSize="max-content">{pickedInfo.genre_ids.map((id:number) => (
-                <GenreGem
-                  genreId={id}
-                  genreType={mediaType}/>))}
-              </Flex>
 						</VStack>
-					</VStack>
+						<Flex align="center" justify="start" boxSize="max-content" mt={4}>
+							{pickedInfo.genre_ids.map((id:number) => (
+              <GenreGem
+                genreId={id}
+                genreType={mediaType}/>))}
+            </Flex>
+					</Flex>
 					</Flex>
 					{/* BackDrop Image container */}
-					<Flex Flex width={"100vw"} height={"75vh"} position="absolute" top="0" left="0" zIndex="-10">
+					<Flex width={"100%"} height={"75vh"} position="absolute" top="0" left="0" zIndex="-10">
 					<Box 
 						width="100%"
 						height="100%"

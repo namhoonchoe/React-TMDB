@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { selectDiscoverInfoGenres, selectGenreFilters, selectExcludeFilter, selectIncludeFilter, selectExcludeId, selectIncludeId,
         addToFilter, removeFromFilter, discoverTrigger, resetQuery, resetFilter } from '@redux/discoverSlice';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { usePathTypeCheck } from '@hooks/usePathTypeCheck';
+import { useIconColor } from "@hooks/useIconColor";
 import CollapseBox from '@components/Layout/CollapseBox'
-import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade } from "@chakra-ui/react"
+import { Flex, Box, Text, Spacer, VStack, RadioGroup, Radio, Button, SlideFade, useColorMode } from "@chakra-ui/react"
 import { MinusIcon, AddIcon, TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons'
 import MovieIcon from '@components/svgcomponents/MovieIcon'
 import SeriesIcon from '@components/svgcomponents/SeriesIcon'
@@ -14,7 +16,10 @@ const SideBar:React.FC = () => {
   const [value, setValue] = useState<string>("1")
   const [orderDescending, setOrderDescending] = useState<boolean>(true)
   const [sortQuery, setSortQuery] = useState<string>("")
-  
+  const colorMode = useColorMode().colorMode
+  const iconColor = useIconColor()
+  const path = usePathTypeCheck()
+
   const discoverGenres = useSelector(selectDiscoverInfoGenres)
   const filterList = useSelector(selectGenreFilters)
   const excludeFilter = useSelector(selectExcludeFilter)
@@ -74,17 +79,21 @@ const SideBar:React.FC = () => {
   }, [value,orderDescending])
 
   return (  
-    <Flex direction="column" justify="space-between" width="15vw" height="90vh" ml={2} >
-      <Flex direction="row" justify="space-around" align="center" >
+    <Flex direction="column" justify="space-between" height="90vh" ml={2} mt={"1em"}>
+      <Flex direction="row" justify="space-around" align="center" width="100%">
         <Link to="/discover/movie">
-          <Flex fontSize="xl" fontWeight="semibold" align="center" p={1} onClick={() => resetTrigger()}>
-            <MovieIcon/>
+          <Flex fontSize="xl" fontWeight="semibold" align="center" px={3} borderRadius="md"
+                backgroundColor={ path === "movie" ? colorMode==="light" ? "gray.200" :"gray.600" : "transparent"}
+                onClick={() => resetTrigger()} >
+            <MovieIcon color={iconColor}/>
             <Text ml={1}>Movies</Text>
           </Flex>
         </Link>
         <Link to="/discover/series">
-          <Flex fontSize="xl" fontWeight="semibold"  align="center" p={1} onClick={() => resetTrigger()}>
-            <SeriesIcon/>
+          <Flex fontSize="xl" fontWeight="semibold"  align="center" px={3} borderRadius="md"
+                backgroundColor={ path === "series" ? colorMode==="light" ? "gray.200" :"gray.600" : "transparent"}
+                onClick={() => resetTrigger()}>
+            <SeriesIcon color={iconColor}/>
             <Text ml={1}>Series</Text>
           </Flex>
         </Link>
@@ -96,7 +105,7 @@ const SideBar:React.FC = () => {
                     backgroundColor: `rgba(0, 0, 0, 0.1)`,
                   },
                   '&::-webkit-scrollbar-thumb': {
-                    borderRadius: '4px',
+                    borderRadius: '8px',
                     backgroundColor: `rgba(141,144, 150, 0.3)`,
                   },
                 }} >
@@ -147,7 +156,9 @@ const SideBar:React.FC = () => {
                 <Text fontSize="sm" as="em">Include</Text>
                 <Flex justify="start" align="center" flexWrap="wrap">
                 { includeFilter.map((filter:any) => (
-                  <Box onClick={()=> dispatch(removeFromFilter({info:filter.info,type:"include"}))} >
+                  <Box onClick={()=> dispatch(removeFromFilter({info:filter.info,type:"include"}))} 
+                      _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}
+                      borderRadius="xl" border="2px" borderColor={colorMode === 'light' ? 'gray.400' : 'gray.600'} m="0.1em">
                     <Text fontSize="md" fontWeight="light" mx={2} my={1}>{filter.info.name}</Text>
                   </Box>))}
                 </Flex>
@@ -156,7 +167,9 @@ const SideBar:React.FC = () => {
                 <Text fontSize="sm" as="em">Exclude</Text>
                 <Flex justify="start" align="center" flexWrap="wrap">
                 { excludeFilter.map((filter:any) => (
-                  <Box onClick={()=> dispatch(removeFromFilter({info:filter.info,type:"exclude"}))} >
+                  <Box onClick={()=> dispatch(removeFromFilter({info:filter.info,type:"exclude"}))} 
+                      _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}
+                      borderRadius="xl" border="2px" borderColor={colorMode === 'light' ? 'gray.400' : 'gray.600'} m="0.1em">
                     <Text fontSize="md" fontWeight="light" mx={2} my={1}>{filter.info.name}</Text>
                   </Box>))}    
                 </Flex> 
@@ -183,12 +196,28 @@ const SideBar:React.FC = () => {
               <TriangleUpIcon/>
             </Flex> }
           <RadioGroup onChange={setValue} value={value}>
-            <VStack align="flex-start" p={2}>
-              <Radio value="1">Popularity</Radio>
-              <Radio value="2">Release Date</Radio>
-              <Radio value="3">Rating</Radio>
-              <Radio value="4">Revenue</Radio>
-            </VStack>
+            <Flex direction="column" align="start" p={2}>
+              <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
+                <Radio value="1">
+                  <Text fontSize="lg">Popularity</Text>
+                </Radio>
+              </Box>
+              <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
+                <Radio value="2">
+                  <Text fontSize="lg">Release Date</Text>
+                </Radio>
+              </Box>
+              <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
+                <Radio value="3">
+                  <Text fontSize="lg">Rating</Text>
+                </Radio>
+              </Box>
+              <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
+                <Radio value="4">
+                  <Text fontSize="lg">Revenue</Text>
+                </Radio>
+              </Box>
+            </Flex>
           </RadioGroup> 
           </>
         </CollapseBox>

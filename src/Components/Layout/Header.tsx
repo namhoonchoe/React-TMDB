@@ -16,6 +16,8 @@ import { Flex,
         useDisclosure,
         useColorMode  } from "@chakra-ui/react"
 import { HamburgerIcon } from '@chakra-ui/icons'
+import { useIconColor } from "@hooks/useIconColor";
+import PersonIcon from "@components/svgcomponents/PersonIcon";
 import MovieIcon from "../svgcomponents/MovieIcon";
 import SeriesIcon from "../svgcomponents/SeriesIcon";
 import Collections from "../svgcomponents/CollectionsIcon";
@@ -26,6 +28,7 @@ import DarkMode from "../svgcomponents/DarkMode";
 const Header:React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
+  const iconColor = useIconColor()
 
   return (
   <>
@@ -34,10 +37,10 @@ const Header:React.FC = () => {
       align="center"
       bgColor={ colorMode === "light" ? "gray.100" : "black" }
       opacity="0.9"
-      pl={4} pr={8} py={3}  
+      px={4} py={3}  
       position="sticky"
       zIndex="10"
-      width="100vw"
+      width="100%"
       top={0}
       left={0}>
       <VStack justify="start" >
@@ -54,25 +57,31 @@ const Header:React.FC = () => {
                     justify="center">
                 <Link to="/movie">
                   <Flex align="center" width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
-                    <MovieIcon/>
+                    <MovieIcon color={iconColor}/>
                     <Text fontSize="xl"  fontWeight="hairline" ml={2}>Movies</Text>
                   </Flex>
                 </Link>
                 <Link to="/series">
                   <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
-                    <SeriesIcon/>
+                    <SeriesIcon color={iconColor}/>
                     <Text fontSize="xl" fontWeight="hairline" ml={2}>Series</Text>
+                  </Flex>
+                </Link>
+                <Link to="/person">
+                  <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
+                    <PersonIcon color={iconColor}/>
+                    <Text fontSize="xl" fontWeight="hairline" ml={2}>Person</Text>
                   </Flex>
                 </Link>
                 <Link to="/discover/movie">
                   <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
-                    <DiscoverIcon/>
+                    <DiscoverIcon color={iconColor}/>
                     <Text fontSize="xl" fontWeight="hairline" ml={2}>Discover</Text>
                   </Flex>
                 </Link>
                 <Link to="/bookmark">
                   <Flex align="center"  width="2xs" my={1} px={2} borderRadius="lg" _hover={{backgroundColor:colorMode === "light" ? "gray.200" : "gray.600" }}>
-                    <Collections/>
+                    <Collections color={iconColor}/>
                     <Text fontSize="xl" fontWeight="hairline" ml={2}>Collections</Text>
                   </Flex>
                 </Link>

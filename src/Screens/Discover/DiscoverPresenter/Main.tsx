@@ -15,7 +15,7 @@ const Main:React.FC = () => {
 
   const scrollToTop = () => {
     window.scrollTo({
-      top: 0,
+      top:0,
       behavior: "smooth"
     })
   }
@@ -48,9 +48,8 @@ const Main:React.FC = () => {
   },[pathType])
 
   return (
-    <Flex direction="column" align="center" justify="start" width="100%"
-        mx={3} my={2} px={3}>
-      <Text fontSize="2xl" mt={1} mb={3} fontWeight="normal" alignSelf="start">Discover</Text>
+    <Flex direction="column" align="center" width="100%" height="90vh" mx={3} mt={2} px={3}>
+      <Text fontSize="2xl" mb={3} fontWeight="semibold" alignSelf="start">Discover</Text>
         { mainInfo !== null && mainInfo.length > 0 &&
           <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" width="100%">  
             {mainInfo.map((data:any) => (
@@ -65,7 +64,7 @@ const Main:React.FC = () => {
               ))}
           </Grid>
         }
-      <Button size="lg" my={2} alignSelf="center" onClick={()=> {getNextPage()}}>
+      <Button size="lg" my={2} p={3} alignSelf="center" onClick={()=> {getNextPage()}} height="max-content">
         <Text>Next Page</Text>
       </Button>
     </Flex>  

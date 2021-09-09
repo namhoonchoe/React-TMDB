@@ -1,7 +1,7 @@
 import React from 'react'
 import BrokenPoster from '../svgcomponents/BrokenPoster'
 import BrokenPortrait from '../svgcomponents/BrokenPortrait'
-import { Image, Flex } from "@chakra-ui/react"
+import { Image, Flex, useColorMode } from "@chakra-ui/react"
 
 interface IImageProps {
   borderRadius:string,
@@ -12,6 +12,8 @@ interface IImageProps {
 }
 
 const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType, height ,width }) => {
+  const colorMode = useColorMode().colorMode
+
   return (
     <>
       { typeof imageSource === "string" && 
@@ -27,7 +29,8 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
           <Flex justify="center" align="center" width={width} height={height} border="1px" borderColor="gray.300"  borderRadius={borderRadius}>
             <BrokenPoster 
               width={"3rem"}
-              height={"3rem"}/>
+              height={"3rem"}
+              color={colorMode==="light" ? "#A0AEC0" : "#F7FAFC"}/>
           </Flex>
         }
 
@@ -35,7 +38,8 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
           <Flex justify="center" align="center" width={width} height={height} border="none"  >
             <BrokenPortrait
               width={"3rem"}
-              height={"3rem"}/>
+              height={"3rem"}
+              color={colorMode==="light" ? "#A0AEC0" : "#F7FAFC"}/>
           </Flex> 
         }
     </>

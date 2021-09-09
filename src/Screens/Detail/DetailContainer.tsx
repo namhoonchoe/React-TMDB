@@ -66,6 +66,7 @@ const DetailContainer:React.FC = () => {
             setDetail({...detail,
                       detailInfo:personDetail,
                       credits:casting,
+                      similars:null
             })
           } catch {
             setError(true)

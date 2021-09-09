@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, VStack, HStack,  Box, Container, Text, Spacer, Fade } from "@chakra-ui/react"
+import { Flex, VStack, HStack,  Box, Text, Fade } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoImage from "@components/Layout/InfoImage";
 import ModalBox from "@components/Layout/ModalBox";
@@ -19,8 +19,8 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
 
   return (
   <>
-    <Fade in={!loading}>
-    <Flex width={"100vw"} height={"70vh"} position="absolute" top="0" zIndex="-10" >
+  <Fade in={!loading}>
+    <Flex width={"100%"} height={"70vh"} position="absolute" top="0" left="0" zIndex="-10" >
       <Box 
         width="100%"
         height="100%"
@@ -38,68 +38,66 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
       </Box>            
     </Flex>
     <Flex 
-      width={"100vw"} height={"70vh"} 
+      width={"100%"} height={"70vh"}
+      position="relative"
+      left="-12em"
       color="white"
-      pt="3em"
-      pl="3em">
+      pt="3%">
       <InfoImage
         borderRadius={"md"}
         imageType={"poster"}
-        width={"18%"}
+        width={"27%"}
         height={"75%"}
         imageSource={detail.poster_path}/>
-      <VStack align="start">
-        <Text fontWeight="semibold" fontSize="3xl" ml="0.5em">{detail.title||detail.name}</Text>
-        <Container maxW="max-content">
-          { detail.tagline !== "" 
-            ? <VStack align="start">
-                <Text as="cite">"{detail.tagline}"</Text>                   
-                  {detail.overview.length > 100 
-                  ? <Flex width="30%">
-                      <Text>
-                        {detail.overview.substring(0, 100)}... <ModalBox modalcontent={detail.overview}/>
-                      </Text>
-                    </Flex>
-                  : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> 
-                }
-              </VStack>
-            : <VStack>
-                <Spacer/>
-                <Box maxWidth="xs">
-                {detail.overview.length > 100 
-                ? <Box maxWidth="xs" maxHeight="xs">{detail.overview.substring(0, 100)}... 
-                    <ModalBox modalcontent={detail.overview}/>
-                  </Box>
-                : <Box maxWidth="xs" maxHeight="xs">{detail.overview}</Box> }
-                </Box>
-              </VStack>
-              }              
-          </Container>
-          <Container >
-            <HStack justify="start">
+      <VStack align="start" justify="space-between" spacing="3" width="25%" height="75%" ml="1em">
+        <Flex direction="column">
+          <Text fontWeight="bold" fontSize="3xl" mb={"3%"}>{detail.title||detail.name}</Text>
+          { detail.tagline !== "" &&
+            <Text as="cite" fontWeight="semibold" mt={1}>"{detail.tagline}"</Text> } 
+        </Flex>
+          <Flex direction="column" justify="start" width="100%"  >
+          <Box width="100%">
+            {detail.overview.length > 100 
+              ? <Flex direction="column" align="start">
+                  <Flex direction="row" justify="space-between" align="baseline">
+                    <Text fontSize="lg" fontWeight="semibold">storyline</Text>
+                    <ModalBox modalcontent={detail.overview}/> 
+                  </Flex>
+                  <Text >
+                    {detail.overview.substring(0, 100)}...
+                  </Text>
+                </Flex>
+              : <Box>
+                  <Text>
+                  {detail.overview}
+                  </Text>
+                </Box> }         
+          </Box>
+            <HStack justify="start"mt={1}>
               <VStack align="start">
-                <Flex align="center">
-                  <DateFormatter date={detail.release_date || detail.first_air_date} fontSize="lg"/>
-                  <Text>({detail.status})</Text>
+                <Flex align="baseline">
+                  <DateFormatter date={detail.release_date || detail.first_air_date} fontSize="xl"/>
+                  <Text fontWeight="medium">({detail.status})</Text>
                 </Flex>
                 <Flex justify="start" align="center">
                   <StarRating rating={detail.vote_average}/>
-                  <Text ml={2}>{detail.vote_average}/10</Text>
+                  <Text ml={2}>{detail.vote_average.toFixed(1)}/10</Text>
+                  <BookMark 
+                    bookMarkDetail={detail}
+                    bookMarkType={pathType}
+                    bookMarkId={detail.id}
+                    />
                 </Flex>
               </VStack>
-              <BookMark 
-                bookMarkDetail={detail}
-                bookMarkType={pathType}
-                bookMarkId={detail.id}
-              />
             </HStack>
-            <Flex align="center" justify="start">{detail.genres.map((genre:any) => (
+            <Flex align="center" justify="start" mt={2} pb={3}>
+              {detail.genres.map((genre:any) => (
               <GenreGem
                 genreId={genre.id}
                 genreType={pathType}
               />))}
             </Flex>
-          </Container>
+          </Flex>
         </VStack>
       </Flex>
     </Fade>

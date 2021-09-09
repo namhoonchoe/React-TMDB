@@ -28,13 +28,13 @@ const MoviePresenter:React.FC<IMovieProps> = ({ nowPlaying, upComing, popular, e
 
           { popular !== null && popular.length > 0 && 
           <CollapseSection 
-            title="Popular"
+            title="Popular Movies"
             sectionInfos={popular} /> 
           } 
 
           { upComing !== null && upComing.length > 0 && 
           <CollapseSection 
-            title="UpComing"
+            title="UpComing Movies"
             sectionInfos={upComing}/> 
           }
         </VStack>

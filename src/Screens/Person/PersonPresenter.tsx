@@ -1,7 +1,9 @@
 import React from "react";
-import Section from "@components/Layout/Section"
-import { Flex } from "@chakra-ui/react"
+import InfoCard from "@components/Layout/InfoCard"
+import { Link } from "react-router-dom";
+import { Flex, Text, Grid  } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
+
 
 interface IPersonProps {
   popular:null|PersonData,
@@ -9,18 +11,25 @@ interface IPersonProps {
   loading:boolean
 }
 
-const PersonPresenter:React.FC<IPersonProps> = ({popular,error,loading}) => {
+const PersonPresenter:React.FC<IPersonProps> = ({ popular, error, loading }) => {
   return (
   <>
     { loading 
     ? <LoadingSpinner/> 
-    :  <Flex justify="center" align="center" width="100%"> 
-      { popular !== null && popular.length > 0 &&
-      <Section 
-        title={"Popular"}
-        sectionInfos={popular}
-      /> } 
-      </Flex> 
+    :   <Flex direction="column" align="center" justify="start" width="92vw" mx={3} my={2} px={3}>
+        <Text fontSize="2xl" mt={1} mb={3} fontWeight="semibold" alignSelf="start">Popular people</Text>
+        { popular !== null && popular.length > 0 &&
+          <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" width="100%">  
+            {popular.map((data:any) => (
+            <Link to={`/person/${data.id}`}>
+              <InfoCard
+                key={data.id}
+                title={data.title||data.name}
+                posterPath={data.poster_path||data.profile_path}
+                rating={data.vote_average}/>
+              </Link>))}
+          </Grid> }
+      </Flex>  
     }
 
     { error ? <p>An error has occured</p>: null }

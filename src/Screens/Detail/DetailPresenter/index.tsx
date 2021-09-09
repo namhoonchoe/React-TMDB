@@ -17,8 +17,8 @@ const DetailPresenter:React.FC<IDetailProps> = ({ detail ,credits ,similar ,erro
     <>
       { loading 
       ? <LoadingSpinner/> 
-      : <Flex direction="column" align="center" justify="center">        
-            <DetailHeader detail={detail} loading={loading}/>
+      : <Flex direction="column" align="center" justify="center" >        
+          <DetailHeader detail={detail} loading={loading}/>
           <Fade in={loading === false}>
             <DetailBody detail={detail} similars={similar} credits={credits}/>
           </Fade>

@@ -19,7 +19,7 @@ const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, ra
   <>
     { loading 
       ? <LoadingSpinner/> 
-      : <VStack mb={3} width="100vw">
+      : <VStack mb={3} width="100%" overscroll="none">
         { trendingMovies && trendingSeries !== null && trendingMovies.length && trendingSeries.length > 0 &&
         <Box width="100%" height="70vh"> 
           <LandingPortal
@@ -28,27 +28,26 @@ const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, ra
           randomIndex={randomIndex}
           mediaType={mediaType}
           loading={loading}/>
-        </Box>
-        }
+        </Box> }
 
         { trendingMovies !== null && trendingMovies.length > 0 &&
         <VStack align="start">
           <Flex align="flex-end" my={4} >
             <Text fontSize="3xl" mr={2}>Today's Trending Movies</Text>
-            <Text py={1} >
+            <Text pb={1.5} fontWeight="semibold" fontSize="sm" >
               <Link to="/movie">
                 Explore Movies
               </Link>
             </Text>
           </Flex>
           <Box width="96vw">
-            <Flex width="100%" overflowX="scroll" height="max-content" justify="start" align="start" 
+            <Flex width="100%" overflowX="scroll" height="fit-content" justify="start" align="start" 
               sx={{ '&::-webkit-scrollbar': {
-                    scrollbaridth: 'thin',
                     borderRadius: '16px',
                     backgroundColor: `rgba(0, 0, 0, 0)`,
                   },
                   '&::-webkit-scrollbar-thumb': {
+                    scrollbarWidth: '2px',
                     borderRadius: '16px',
                     backgroundColor: `rgba(141,144, 150, 0.3)`,
                   },
@@ -71,22 +70,24 @@ const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, ra
         <VStack align="start">
           <Flex align="flex-end" my={4} >
             <Text fontSize="3xl" mr={2}>Today's Trending Series</Text>
-            <Text py={1} > 
+            <Text pb={1.5} fontWeight="semibold" fontSize="sm"> 
               <Link to="/series">Explore TvSeries</Link>
             </Text>
           </Flex>
           <Box width="96vw">
-          <Flex width="100%" overflowX="scroll" height="max-content" justify="start" align="start" 
-              sx={{ '&::-webkit-scrollbar': {
-                    width: '16px',
-                    borderRadius: '8px',
-                    backgroundColor: `rgba(0, 0, 0, 0)`,
-                  },
-                  '&::-webkit-scrollbar-thumb': {
-                    borderRadius: '8px',
-                    backgroundColor: `rgba(141,144, 150, 0.3)`,
-                  },
-                }}> 
+          <Flex width="100%" overflowX="scroll" height="fit-content"  justify="start" align="start" 
+              css={{
+                '&::-webkit-scrollbar': {
+                  width: '4px',
+                },
+                '&::-webkit-scrollbar-track': {
+                  width: '6px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: `rgba(141,144, 150, 0.3)`,
+                  borderRadius: '24px',
+                },
+              }}> 
             {trendingSeries.map((data:any) => (
             <Link to={`/${"series"}/${data.id}`} key={data.id}>
               <Box mx={3}>

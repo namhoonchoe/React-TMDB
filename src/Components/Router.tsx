@@ -17,8 +17,8 @@ const RootRouter:React.FC = () => {
   const redirection = useSelector(selectSearch).redirection
   return (
     <Router>
+      <Flex direction="column" align="center" overflowX="hidden">
       <Header/>
-      <Flex direction="column" align="center" >
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/search" component={Search}/>
@@ -26,7 +26,6 @@ const RootRouter:React.FC = () => {
           <Route path="/discover/series" component={Discover} />
           <Route path="/movie/:id" component={Detail} />
           <Route path="/series/:id" component={Detail} />
-          <Route path="/person/:id" component={Detail} />
           <Route path="/movie" component={Movie} />
           <Route path="/series" component={TV} />
           <Route path="/person" component={Person} />

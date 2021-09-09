@@ -66,8 +66,8 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType }) => {
     <>
       { loading === false && 
         <Fade in={!loading} >
-          <Box mr={2} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" >
-            <Text >{genre.name}</Text>
+          <Box mr={2} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" _hover={{backgroundColor:"gray.200"}} >
+            <Text _hover={{color:"gray.600"}} fontSize="md" fontWeight="hairline">{genre.name}</Text>
           </Box>
         </Fade>
       }

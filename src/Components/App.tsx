@@ -8,7 +8,7 @@ const App:React.FC = () => {
   return (
   <>
     <ChakraProvider theme={customTheme}>
-      <Router />
+      <Router/>
     </ChakraProvider>
   </>
   ) 
