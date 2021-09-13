@@ -12,6 +12,7 @@ import TV from "@screens/TV";
 import Search from "@screens/Search";
 import Discover from "@screens/Discover";
 import BookMark from "@screens/BookMark";
+import Profile from "@screens/Profile";
 
 const RootRouter:React.FC = () => {
   const redirection = useSelector(selectSearch).redirection
@@ -29,6 +30,7 @@ const RootRouter:React.FC = () => {
           <Route path="/movie" component={Movie} />
           <Route path="/series" component={TV} />
           <Route path="/person" component={Person} />
+          <Route path="/profile/:id" component={Profile} />
           <Route path="/bookmark" component={BookMark} />
         </Switch>
         <Route path="/*">

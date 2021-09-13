@@ -1,7 +1,5 @@
 import React from 'react'
-import InfoCard from '@components/Layout/InfoCard'
-import { VStack, Text, Flex, Box } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
+import { VStack, Text, Flex } from '@chakra-ui/react'
 import Section from '@components/Layout/Section'
 
 interface IBookMarkProps {

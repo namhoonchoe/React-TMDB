@@ -48,7 +48,9 @@ export const personApi = {
         append_to_response: "images",
       },
     }),
-  credits: (id:number) => api.get(`person/${id}/movie_credits`),
+  movieCredits: (id:number) => api.get(`person/${id}/movie_credits`),
+  seiresCredits:(id:number) => api.get(`person/${id}/tv_credits`),
+  alsoKnownAs:(id:number) => api.get(`person/${id}/translations`),
 };
 
 export const trendingApi = {

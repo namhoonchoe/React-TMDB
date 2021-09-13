@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet";
 import LoadingSpinner from '@components/LoadingSpinner'
 import SideBar from './SideBar'
 import Main from './Main'
@@ -14,14 +15,20 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ loading, error }) => {
   return (
     <>
       { loading 
-        ? <LoadingSpinner/> 
+        ? <>
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>Kino Guide | Discover</title>
+            </Helmet>
+            <LoadingSpinner/> 
+          </>
         :<>
-        <Flex position="absolute" top="14" left="0" overflowY="hidden">
-          <SideBar />
-        </Flex>
-        <Flex justify="center" width="70%" ml="6em">
-          <Main />
-        </Flex>
+          <Flex position="absolute" top="14" left="0" overflowY="hidden">
+            <SideBar />
+          </Flex>
+          <Flex justify="center" width="70%" ml="6em">
+            <Main />
+          </Flex>
         </>
       }
           

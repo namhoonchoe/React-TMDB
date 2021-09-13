@@ -1,5 +1,7 @@
 import React from 'react'
+import { Helmet } from "react-helmet";
 import { Flex, Fade } from "@chakra-ui/react"
+import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import LoadingSpinner from "@components/LoadingSpinner"
 import DetailHeader from './DetailHeader';
 import DetailBody from './DetailBody';
@@ -13,10 +15,18 @@ interface IDetailProps {
 }
 
 const DetailPresenter:React.FC<IDetailProps> = ({ detail ,credits ,similar ,error, loading }) => {
+  const pathType = usePathTypeCheck()
+
   return (
     <>
       { loading 
-      ? <LoadingSpinner/> 
+      ? <>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>Kino Guide | {pathType === "movie" ? "Movie" : "Series"}</title>
+          </Helmet>
+          <LoadingSpinner/> 
+        </>
       : <Flex direction="column" align="center" justify="center" >        
           <DetailHeader detail={detail} loading={loading}/>
           <Fade in={loading === false}>

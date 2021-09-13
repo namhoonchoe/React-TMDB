@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet"
 import CollapseSection from "@components/Layout/CollapseSection"
 import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
@@ -15,8 +16,19 @@ interface IMovieProps {
 const MoviePresenter:React.FC<IMovieProps> = ({ nowPlaying, upComing, popular, error, loading }) => {
   return (
 	<>
-    { loading ? <LoadingSpinner/> 
+    { loading 
+    ? <>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Kino Guide | Movie</title>
+        </Helmet>
+        <LoadingSpinner/> 
+      </>
     : <> 
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Kino Guide | Movie</title>
+        </Helmet>
         <VStack spacing="3" width="90vw" mt={2}>
           { nowPlaying !== null && nowPlaying.length > 0 && 
             <>

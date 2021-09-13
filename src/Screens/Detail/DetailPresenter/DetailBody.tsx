@@ -60,7 +60,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                                 backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
                                 borderRadius="lg" 
                                 _hover={{boxShadow:"xl"}}
-                                onClick={() => toPerson(`/person/${data.id}`)}>
+                                onClick={() => toPerson(`/profile/${data.id}`)}>
                             <InfoImage
                               width="7rem" 
                               height="7rem"
@@ -96,7 +96,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
                               borderRadius="lg" 
                               _hover={{boxShadow:"xl"}}
-                              onClick={() => toPerson(`/person/${data.id}`)}>
+                              onClick={() => toPerson(`/profile/${data.id}`)}>
                           <InfoImage
                             width="7rem" 
                             height="7rem"
@@ -191,13 +191,13 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                   <Text p={1} fontWeight="semibold">Status</Text>
                   <Text p={1} fontSize="sm">{detail.status}</Text>
                 </Flex>
-                <Flex align="center">
+                <Flex align="center" justify="start">
                   <Text p={1} fontWeight="semibold">Original Language</Text>
                   <Box  px={2} py={0.5} mr={2} boxSize="max-content" borderRadius="xl" backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700"}>
                     <Text fontSize="sm">{detail.original_language}</Text>
                   </Box>
                 </Flex>
-                <Flex align="center">
+                <Flex align="center" justify="start">
                   <Text p={1} fontWeight="semibold">Language</Text>
                   <Flex align="center">
                     {detail.spoken_languages.map((language:any) =>

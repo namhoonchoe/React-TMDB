@@ -49,9 +49,9 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
         width={"27%"}
         height={"75%"}
         imageSource={detail.poster_path}/>
-      <VStack align="start" justify="space-between" spacing="3" width="25%" height="75%" ml="1em">
+      <VStack align="start" justify="space-between" spacing="3" width="35%" height="75%" ml="1em">
         <Flex direction="column">
-          <Text fontWeight="bold" fontSize="3xl" mb={"3%"}>{detail.title||detail.name}</Text>
+          <Text fontWeight="bold" fontSize="2xl" mb={"3%"}>{detail.title||detail.name}</Text>
           { detail.tagline !== "" &&
             <Text as="cite" fontWeight="semibold" mt={1}>"{detail.tagline}"</Text> } 
         </Flex>

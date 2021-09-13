@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
-import { movieApi, personApi, tvApi } from "@api"
+import { movieApi, tvApi } from "@api"
 import DetailPresenter from './DetailPresenter';
 
 const DetailContainer:React.FC = () => {
@@ -56,25 +56,6 @@ const DetailContainer:React.FC = () => {
           }
         }
         getSeriesDetail()
-      } 
-  
-      if(pathType === "person") {
-        const getPersonDetail = async () => {
-          try {
-            const { data:personDetail } = await personApi.peopleDetail(id)
-            const { data:casting } = await personApi.credits(id)
-            setDetail({...detail,
-                      detailInfo:personDetail,
-                      credits:casting,
-                      similars:null
-            })
-          } catch {
-            setError(true)
-          } finally {
-            setLoading(false)
-          }
-        }
-        getPersonDetail()
       } 
     }
     
