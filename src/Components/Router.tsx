@@ -18,20 +18,20 @@ const RootRouter:React.FC = () => {
   const redirection = useSelector(selectSearch).redirection
   return (
     <Router>
-      <Flex direction="column" align="center" overflowX="hidden">
+      <Flex direction="column" align="center">
       <Header/>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Home}/>
           <Route path="/search" component={Search}/>
-          <Route path="/discover/movie" component={Discover} />
-          <Route path="/discover/series" component={Discover} />
-          <Route path="/movie/:id" component={Detail} />
-          <Route path="/series/:id" component={Detail} />
-          <Route path="/movie" component={Movie} />
-          <Route path="/series" component={TV} />
-          <Route path="/person" component={Person} />
-          <Route path="/profile/:id" component={Profile} />
-          <Route path="/bookmark" component={BookMark} />
+          <Route path="/discover/movie" component={Discover}/>
+          <Route path="/discover/series" component={Discover}/>
+          <Route path="/movie/:id" component={Detail}/>
+          <Route path="/series/:id" component={Detail}/>
+          <Route path="/movie" component={Movie}/>
+          <Route path="/series" component={TV}/>
+          <Route path="/person" component={Person}/>
+          <Route path="/profile/:id" component={Profile}/>
+          <Route path="/bookmark" component={BookMark}/>
         </Switch>
         <Route path="/*">
           {redirection !=="" && <Redirect to="/search"/>}

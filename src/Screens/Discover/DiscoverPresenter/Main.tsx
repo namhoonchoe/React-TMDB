@@ -48,7 +48,7 @@ const Main:React.FC = () => {
   },[pathType])
 
   return (
-    <Flex direction="column" align="center" width="100%" height="90vh" mx={3} mt={2} px={3}>
+    <Flex direction="column" align="center" width="100%" height="100%" mt={2} px={3}>
       <Text fontSize="2xl" mb={3} fontWeight="semibold" alignSelf="start">Discover</Text>
         { mainInfo !== null && mainInfo.length > 0 &&
           <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" width="100%">  
@@ -58,13 +58,12 @@ const Main:React.FC = () => {
                 key={data.id}
                 title={data.title||data.name}
                 posterPath={data.poster_path||data.profile_path}
-                rating={data.vote_average}
-                />
-              </Link>
+                rating={data.vote_average}/>
+            </Link>
               ))}
           </Grid>
         }
-      <Button size="lg" my={2} p={3} alignSelf="center" onClick={()=> {getNextPage()}} height="max-content">
+      <Button size="lg" my={2} p={3} alignSelf="center" onClick={()=> getNextPage()} height="max-content">
         <Text>Next Page</Text>
       </Button>
     </Flex>  

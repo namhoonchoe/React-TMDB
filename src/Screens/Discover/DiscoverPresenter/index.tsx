@@ -22,14 +22,18 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ loading, error }) => {
             </Helmet>
             <LoadingSpinner/> 
           </>
-        :<>
-          <Flex position="absolute" top="14" left="0" overflowY="hidden">
-            <SideBar />
-          </Flex>
-          <Flex justify="center" width="70%" ml="6em">
-            <Main />
-          </Flex>
-        </>
+        :<Flex position="relative" width="100%">
+          <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" width="100%" mx="2%">
+            <GridItem rowSpan={2} colSpan={1}>
+              <Box position="sticky" top="10%">
+                <SideBar/>
+              </Box>
+            </GridItem>
+            <GridItem rowSpan={2} colSpan={4} >
+              <Main/>
+            </GridItem>
+          </Grid>
+        </Flex>
       }
           
       { error ? <p>An error has occured</p>: null }

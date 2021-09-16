@@ -32,7 +32,8 @@ const PersonContainer:React.FC = () => {
     }
     return () => {
       mounted = false
-    }},[person])
+    }},[])
+
     const { popular } = person
   return (
     <PersonPresenter 

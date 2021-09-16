@@ -34,6 +34,15 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
           </Flex>
         }
 
+        { imageType === "poster" && imageSource === null && 
+          <Flex justify="center" align="center" width={width} height={height} border="1px" borderColor="gray.300"  borderRadius={borderRadius}>
+            <BrokenPoster 
+              width={"3rem"}
+              height={"3rem"}
+              color={colorMode==="light" ? "#A0AEC0" : "#F7FAFC"}/>
+          </Flex>
+        }
+
         { imageType === "portrait" && imageSource === null && 
           <Flex justify="center" align="center" width={width} height={height} border="none"  >
             <BrokenPortrait

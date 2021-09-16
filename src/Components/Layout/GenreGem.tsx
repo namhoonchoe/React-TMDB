@@ -5,8 +5,9 @@ import { Text, Box, Fade } from "@chakra-ui/react"
 interface IGenreProps {
   genreId:number
   genreType:string
+  fontSize?:string
 }
-const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType }) => {
+const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="md" }) => {
   const [genreList, setGenreList] = useState<Array<any>>([])
   const [genre, setGenre] = useState<any>(null)
   const [error,setError] = useState<boolean>(false)
@@ -66,8 +67,9 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType }) => {
     <>
       { loading === false && 
         <Fade in={!loading} >
-          <Box mr={2} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" _hover={{backgroundColor:"gray.200"}} >
-            <Text _hover={{color:"gray.600"}} fontSize="md" fontWeight="hairline">{genre.name}</Text>
+          <Box mr={2} mt={1} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" 
+              _hover={{backgroundColor:"gray.200", color:"gray.500"}} >
+            <Text fontSize={fontSize} fontWeight="hairline">{genre.name}</Text>
           </Box>
         </Fade>
       }

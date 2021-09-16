@@ -79,7 +79,7 @@ const SideBar:React.FC = () => {
   }, [value,orderDescending])
 
   return (  
-    <Flex direction="column" justify="space-between" height="90vh" ml={2} mt={"1em"}>
+    <Flex direction="column" justify="space-between" height="90vh" width="20vw" mt={"1em"}>
       <Flex direction="row" justify="space-around" align="center" width="100%">
         <Link to="/discover/movie">
           <Flex fontSize="xl" fontWeight="semibold" align="center" px={3} borderRadius="md"
@@ -199,22 +199,22 @@ const SideBar:React.FC = () => {
             <Flex direction="column" align="start" p={2}>
               <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
                 <Radio value="1">
-                  <Text fontSize="lg">Popularity</Text>
+                  <Text fontSize="md">Popularity</Text>
                 </Radio>
               </Box>
               <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
                 <Radio value="2">
-                  <Text fontSize="lg">Release Date</Text>
+                  <Text fontSize="md">Release Date</Text>
                 </Radio>
               </Box>
               <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
                 <Radio value="3">
-                  <Text fontSize="lg">Rating</Text>
+                  <Text fontSize="md">Rating</Text>
                 </Radio>
               </Box>
               <Box _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}} width="3xs" borderRadius="lg" px={2}  mb={1}>
                 <Radio value="4">
-                  <Text fontSize="lg">Revenue</Text>
+                  <Text fontSize="md">Revenue</Text>
                 </Radio>
               </Box>
             </Flex>

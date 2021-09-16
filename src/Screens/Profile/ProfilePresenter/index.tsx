@@ -1,5 +1,9 @@
 import React from 'react'
-import { Flex, Text, Grid } from "@chakra-ui/react"
+import { Helmet } from "react-helmet"
+import { Flex } from "@chakra-ui/react"
+import LoadingSpinner from "@components/LoadingSpinner"
+import ProfileHeader from "./ProfileHeader" 
+import ProfileBody from "./ProfileBody"
 
 interface IProfileProps {
   profileInfo:any
@@ -10,12 +14,31 @@ interface IProfileProps {
 }
 
 
-const ProfilePresenter:React.FC<IProfileProps> = () =>  {
+const ProfilePresenter:React.FC<IProfileProps> = ({ loading, error, profileInfo, movieCredits, seiresCredits }) =>  {
   return (
     <>
-      <Flex>
-        <Text>Hello</Text>
-      </Flex>
+      { loading 
+      ? <>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>Kino Guide | Profile</title>
+          </Helmet>
+          <LoadingSpinner/> 
+        </>
+      : <Flex direction="column" align="center" justify="center" width="100%">        
+          <ProfileHeader 
+            profileSource={profileInfo.profile_path}
+            name={profileInfo.name}
+            bioGraphy={profileInfo.biography}/>
+          <ProfileBody
+            profileInfo={profileInfo}
+            movieCredits={movieCredits}
+            seriesCredits={seiresCredits}
+          />
+        </Flex>
+      }
+
+      { error ? <p>An error has occured</p>: null }
     </>
   )
 }
