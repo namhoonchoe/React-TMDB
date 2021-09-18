@@ -47,9 +47,11 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="md" }) =
     }
 
     const extractGenre = (genreId:number) => {
-      if(genreList !== null) {
+      if(genreId !== null && genreId !== undefined) {
         const [filtered] = genreList.filter((genre) => genre.id === genreId)
         setGenre(filtered)
+      } else {
+        setGenre(null)
       }
     } 
 
@@ -67,10 +69,11 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="md" }) =
     <>
       { loading === false && 
         <Fade in={!loading} >
-          <Box mr={2} mt={1} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" 
+          { genre !== null && genre !== undefined &&
+            <Box mr={2} mt={1} p={1.5} borderRadius="xl" boxSize="max-content" borderColor="white" border="1px" 
               _hover={{backgroundColor:"gray.200", color:"gray.500"}} >
             <Text fontSize={fontSize} fontWeight="hairline">{genre.name}</Text>
-          </Box>
+          </Box> }
         </Fade>
       }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from "react-helmet"
 import { Flex } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
+import ScrollToTop from '@components/ScrollToTop'
 import ProfileHeader from "./ProfileHeader" 
 import ProfileBody from "./ProfileBody"
 
@@ -25,7 +26,8 @@ const ProfilePresenter:React.FC<IProfileProps> = ({ loading, error, profileInfo,
           </Helmet>
           <LoadingSpinner/> 
         </>
-      : <Flex direction="column" align="center" justify="center" width="100%">        
+      : <>
+        <Flex direction="column" align="center" justify="center" width="100%">        
           <ProfileHeader 
             profileSource={profileInfo.profile_path}
             name={profileInfo.name}
@@ -36,6 +38,8 @@ const ProfilePresenter:React.FC<IProfileProps> = ({ loading, error, profileInfo,
             seriesCredits={seiresCredits}
           />
         </Flex>
+        <ScrollToTop/>
+      </>
       }
 
       { error ? <p>An error has occured</p>: null }

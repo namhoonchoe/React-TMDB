@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Flex } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 
 interface IDateProps {
   date:string
@@ -7,7 +7,7 @@ interface IDateProps {
   fontWeight?:string
 }
 
-const DateFormatter:React.FC<IDateProps> = ({ date, fontSize, fontWeight="semibold" }) => {
+const DateFormatter:React.FC<IDateProps> = ({ date="yyyy-mm-dd", fontSize, fontWeight="semibold" }) => {
 
   const target = date.split("-")
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import CreditSection from './CreditSection';
 import { Flex, Grid , GridItem, VStack, Box, Text, useColorMode } from '@chakra-ui/react'
-import InfoImage from '@components/Layout/InfoImage';
-import GenreGem from '@components/Layout/GenreGem'
-import StarRating from '@components/StarRating';
 import DateFormatter from '@components/DateFormatter';
 import MovieIcon from '@components/svgcomponents/MovieIcon'
 import SeriesIcon from '@components/svgcomponents/SeriesIcon'
@@ -49,7 +47,7 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
     return () => {
       mounted = false
     }
-  },[])
+  },[isMovie])
 
   return (
     <>
@@ -68,7 +66,6 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
                 <Text fontWeight="semibold" fontSize="md">Birthday</Text>
                 <DateFormatter date={profileInfo.birthday} fontWeight="medium" fontSize="sm" />
               </Flex> }
-
             { profileInfo.place_of_birth !== null && 
               <Flex direction="column" align="start">
                 <Text fontWeight="semibold" fontSize="md">Place of Birth </Text>
@@ -96,7 +93,7 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
                   <Text fontWeight="semibold" fontSize="lg">Cast</Text>
                 </Box>
                 <Box px={2} py={1} onClick={() => getCrew()}
-                      borderRadius="lg"backgroundColor={ creditType === "crew" ? "gray.200" : "transparent"}>
+                      borderRadius="lg" backgroundColor={ creditType === "crew" ? "gray.200" : "transparent"}>
                   <Text fontWeight="semibold" fontSize="lg">Crew</Text>
                 </Box>
               </Flex>
@@ -115,47 +112,19 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
                     </Flex>
               }
             </Flex>
-          { movieCredits.cast !== null && movieCredits.cast.length > 0 && 
-            <Grid templateColumns="repeat(auto-fit,minmax(24rem, 1fr))" columnGap="1" rowGap="6" alignItems="start" width="100%" >
-            {movieCredits.cast.slice(0,10).map((data:any) => (
-              <Flex width="24rem" height="18.6rem" align="start" p="1" borderRadius="lg" _hover={{backgroundColor:"gray.200"}}>
-                <InfoImage
-                  borderRadius={"lg"}
-                  imageType={"poster"}
-                  height={"18rem"}
-                  width={"12rem"}
-                  imageSource={data.poster_path}/>
-                <VStack p={2} width="11rem" align="start">
-                  <Box width="11rem" >
-                    { data.title.length > 20
-                      ? <Text fontSize="sm" fontWeight="semibold">{data.title}</Text>
-                      : <Text fontSize="md" fontWeight="semibold">{data.title}</Text>
-                    }
-                  </Box>
-                  { data.release_date !== "" &&
-                    <DateFormatter date={data.release_date} fontWeight="medium" fontSize="sm"/> }
-                  <Flex align="center">
-                    <StarRating rating={data.vote_average}/>
-                    <Text ml={2} fontWeight="semibold">{data.vote_average.toFixed(1)}/10</Text>
-                  </Flex>
-                  { data.character !== "" &&
-                    <Flex align="center" width="11rem">
-                      <Text fontWeight="hairline" fontSize="sm" mr="1">as</Text>
-                      <Text fontWeight="semibold" fontSize="sm">{data.character}</Text>
-                    </Flex> }
-                  <Flex align="center" justify="start" width="11rem" flexWrap="wrap" >
-                    {data.genre_ids.map((genreId:any) => (
-                    <GenreGem
-                      genreId={genreId}
-                      genreType={"movie"}
-                      fontSize="xs"
-                    />))}
-                  </Flex>
-                  
-                </VStack>
-              </Flex>
-            ))}
-            </Grid>}
+            <Grid templateColumns="repeat(auto-fit,minmax(23rem, 1fr))" columnGap="1" rowGap="6" 
+                  alignItems="start" width="100%" pb={4}>
+              <>
+              { creditType === "cast"
+                ? <CreditSection
+                    creditData={isMovie === true ? movieCredits.cast : seriesCredits.cast }
+                    mediaType={isMovie ? "movie" : "series"}/>
+                : <CreditSection
+                    creditData={isMovie === true ? movieCredits.crew : seriesCredits.crew }
+                    mediaType={isMovie ? "movie" : "series"}/>
+              }
+              </>
+            </Grid>
           </VStack>
         </GridItem>
       </Grid> 

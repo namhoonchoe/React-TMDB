@@ -11,7 +11,7 @@ interface IHeaderProps {
 const ProfileHeader:React.FC<IHeaderProps> = ({ profileSource, name, bioGraphy }) => {
   return (
     <>
-      <Flex width="100%" height="60vh" backgroundColor="cyan.400" justify="center" align="center" >
+      <Flex width="100%" height="60vh" justify="center" align="center" >
         <HStack width="80%" height="60vh">
           <InfoImage
             width="20%"

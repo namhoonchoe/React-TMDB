@@ -17,22 +17,6 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 	const [imageType, setImageType] = useState<string>("")
 	const [isLoaded, setIsLoaded] = useState(false)
 
-	const NomalTitle = () => {
-		return (
-			<Text fontSize="sm" fontWeight="semibold" pl={0.5} mt={1}>
-				{title}
-			</Text>
-		)
-	}
-
-	const ShortenedTitle = () => {
-		return (
-			<Text fontSize="sm" fontWeight="semibold" pl={0.5} mt={1}>
-				{ title.substring(0,30)}...
-			</Text>
-		)
-	}
-
 	useEffect(() => {
 		const imageTypeChecker = () => {
 			if (pathType === "person") {
@@ -89,10 +73,10 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 			</Skeleton>
 			<Flex width={"10.5rem"} justify="start" align="start" flexWrap="wrap" mt={2} px={1} >
 				<SkeletonText isLoaded={isLoaded} startColor={ colorMode === 'light' ? 'gray.300' : 'gray.600'}>
-					{title.length > 30 
-					?	<ShortenedTitle/>
-					: <NomalTitle/>
-					}
+				{ title.length > 30 
+					? <Text fontSize="xs" fontWeight="semibold">{title}</Text>
+					: <Text fontSize="sm" fontWeight="semibold">{title}</Text>
+				}
 				</SkeletonText>
 			</Flex>
 		</Flex>

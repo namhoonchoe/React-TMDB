@@ -47,7 +47,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                     </Flex>
                   { fullCast 
                   ? <SlideFade in={fullCast}>
-                      <Grid templateColumns="repeat(auto-fit,minmax(14rem, 1fr))" gap="4" width="100%">
+                      <Grid templateColumns="repeat(auto-fit,minmax(14.4rem, 1fr))" gap="3" width="100%">
                         {credits.cast.map((data:any) => (
                           <>
                             <Flex direction="column" 
@@ -55,8 +55,9 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                                 align="center" 
                                 key={data.id} 
                                 py={2} pt={3} 
-                                width="14rem" 
-                                height="max-content"
+                                width="14.4rem" 
+                                minHeight="12rem" 
+                                maxHeight="max-content"
                                 backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
                                 borderRadius="lg" 
                                 _hover={{boxShadow:"xl"}}
@@ -68,13 +69,16 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               imageType="portrait"
                               borderRadius="full"
                             />
-                            <Flex direction="column" align="center" justify="center"  py={2}>
+                            <Flex direction="column" align="center" justify="center"  py={2} width="100%">
                               <Text fontSize="sm" fontWeight="semibold">{data.name}</Text>
                               { data.character !== "" &&
                               <Flex direction="column" align="center" px={1}>
                                 <Text fontSize="xs">as</Text>
                                 <Flex justify="center" align="center" px={5}>
-                                  <Text fontSize="xs" fontWeight="semibold" wordBreak="keep-all">{data.character}</Text>
+                                { data.character.length > 20
+                                  ? <Text fontSize="xs" fontWeight="semibold" textOverflow="ellipsis">{data.character}</Text>
+                                  : <Text fontSize="sm" fontWeight="semibold">{data.character}</Text>
+                                }
                                 </Flex>
                               </Flex> }
                             </Flex>
@@ -83,7 +87,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                         ))}
                       </Grid> 
                     </SlideFade > 
-                  : <Grid templateColumns="repeat(auto-fit,minmax(14rem, 1fr))" gap="4" width="100%">
+                  : <Grid templateColumns="repeat(auto-fit,minmax(14.4rem, 1fr))" gap="4" width="100%">
                       {credits.cast.slice(0,5).map((data:any) => (
                         <>
                           <Flex direction="column" 
@@ -91,8 +95,9 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               align="center" 
                               key={data.id} 
                               py={2} pt={3} 
-                              width="14rem" 
-                              height="max-content"
+                              width="14.4rem" 
+                              minHeight="12rem" 
+                              maxHeight="max-content"
                               backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
                               borderRadius="lg" 
                               _hover={{boxShadow:"xl"}}
@@ -110,7 +115,10 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               <Flex direction="column" align="center" px={1}>
                                 <Text fontSize="xs">as</Text>
                                 <Flex justify="center" align="center" px={5}>
-                                  <Text fontSize="xs" fontWeight="semibold" wordBreak="keep-all">{data.character}</Text>
+                                { data.character.length > 20
+                                  ? <Text fontSize="xs" fontWeight="semibold" textOverflow="ellipsis">{data.character}</Text>
+                                  : <Text fontSize="sm" fontWeight="semibold">{data.character}</Text>
+                                }
                                 </Flex>
                               </Flex> }
                           </Flex>
@@ -139,11 +147,11 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                   </Flex>
                 { pathType === "movie" &&
                   <>
-                    <Flex direction="column"  align="start" >
+                    <Flex direction="column" align="start" >
                       <Text p={1}  fontWeight="semibold">Director</Text>
                       <Text p={1}>{credits.crew.filter((person:any) => person.job ==="Director").map((person:any) => person['name'])}</Text>
                     </Flex>
-                    <Flex align="center">
+                    <Flex align="center" >
                       <Text p={1} fontWeight="semibold">Runtime</Text>
                       <Text p={1} fontSize="sm">{detail.runtime}'</Text>
                     </Flex>
