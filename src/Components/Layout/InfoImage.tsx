@@ -26,7 +26,7 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
         }
         
         { imageType === "poster" && imageSource === undefined && 
-          <Flex justify="center" align="center" width={width} height={height} border="1px" borderColor="gray.300"  borderRadius={borderRadius}>
+          <Flex justify="center" align="center" width={width} height={height} border="1px"  borderColor="gray.300"  borderRadius={borderRadius}>
             <BrokenPoster 
               width={"3rem"}
               height={"3rem"}
@@ -35,7 +35,7 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
         }
 
         { imageType === "poster" && imageSource === null && 
-          <Flex justify="center" align="center" width={width} height={height} border="1px" borderColor="gray.300"  borderRadius={borderRadius}>
+          <Flex justify="center" align="center" width={width} height={height} border="1px"  borderColor="gray.300"  borderRadius={borderRadius}>
             <BrokenPoster 
               width={"3rem"}
               height={"3rem"}

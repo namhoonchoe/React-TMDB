@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import { Flex, VStack, Box, Text, useColorMode } from '@chakra-ui/react'
 import InfoImage from '@components/Layout/InfoImage';
 import GenreGem from '@components/Layout/GenreGem'
@@ -7,11 +8,11 @@ import DateFormatter from '@components/DateFormatter';
 
 interface ICreditProps {
   creditData:any
-  creditType?:string
+  creditType:string
   mediaType:string
 }
 
-const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
+const CreditSection:React.FC<ICreditProps> = ({ creditData, creditType, mediaType }) => {
   const colorMode = useColorMode().colorMode
 
   return (
@@ -21,7 +22,8 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
     {creditData.map((data:any) => (
       <>
       { mediaType === "movie"  &&
-      <Flex width="24rem" height="18.6rem" align="start" p={1} borderRadius="lg" _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}>
+      <Link to={`/movie/${data.id}`} key={data.id}>
+      <Flex width="24.4rem" height="18.6rem" align="start" p={1} borderRadius="lg" _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}>
         <InfoImage
           borderRadius={"lg"}
           imageType={"poster"}
@@ -30,10 +32,14 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
           imageSource={data.poster_path}/>
         <VStack p={2} width="11rem" align="start">
           <Box width="11rem" >
-            { data.title.length > 20
-              ? <Text fontSize="sm" fontWeight="semibold">{data.title}</Text>
-              : <Text fontSize="md" fontWeight="semibold">{data.title}</Text>
-            }
+          { data.title.length > 30 
+					? <>{ data.title.length > 40 
+						? <Text fontSize="xs" fontWeight="semibold">{data.title.substring(0,40)}...</Text>
+						: <Text fontSize="xs" fontWeight="semibold">{data.title}</Text>
+							}
+						</>
+					: <Text fontSize="sm" fontWeight="semibold">{data.title}</Text>
+				}
           </Box>
           { data.release_date !== "" &&
             <DateFormatter date={data.release_date} fontWeight="medium" fontSize="sm"/> }
@@ -41,15 +47,15 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
             <StarRating rating={data.vote_average}/>
             <Text ml={2} fontWeight="semibold">{data.vote_average.toFixed(1)}/10</Text>
           </Flex>
-          { data.character !== "" && data.character !== undefined &&
+          { data.character !== "" && data.character !== null && creditType === "cast" &&
             <Flex align="center" width="11rem">
               <Text fontWeight="hairline" fontSize="sm" mr="1">as</Text>
               { data.character.length > 20
-              ? <Text fontSize="xs" fontWeight="semibold">{data.character}</Text>
-              : <Text fontSize="sm" fontWeight="semibold">{data.character}</Text>
+                ? <Text fontSize="sm" fontWeight="semibold">{data.character}</Text>
+                : <Text fontSize="xs" fontWeight="semibold">{data.character}</Text>
               }
             </Flex> }
-          { data.department !== "" && data.department !== undefined &&
+          { data.department !== "" && creditType === "crew" &&
             <Flex align="center" width="11rem">
               <Text fontWeight="hairline" fontSize="sm" mr="1">as</Text>
               <Text fontWeight="semibold" fontSize="sm">{data.department}</Text>
@@ -67,10 +73,12 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
           }
         </VStack>
       </Flex> 
+      </Link>
       }
 
       { mediaType === "series" && 
-      <Flex width="24rem" height="18.6rem" align="start" p={1} borderRadius="lg" _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}>
+      <Link to={`/series/${data.id}`} key={data.id}>
+      <Flex width="24.4rem" height="18.6rem" align="start" p={1} borderRadius="lg" _hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}>
         <InfoImage
           borderRadius={"lg"}
           imageType={"poster"}
@@ -79,10 +87,14 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
           imageSource={data.poster_path}/>
         <VStack p={2} width="11rem" align="start">
           <Box width="11rem" >
-            { data.name.length > 20
-              ? <Text fontSize="sm" fontWeight="semibold">{data.name}</Text>
-              : <Text fontSize="md" fontWeight="semibold">{data.name}</Text>
-            }
+          { data.name.length > 30
+					? <>{ data.name.length > 40 
+						? <Text fontSize="xs" fontWeight="semibold">{data.name.substring(0,40)}...</Text>
+						: <Text fontSize="xs" fontWeight="semibold">{data.name}</Text>
+							}
+						</>
+					: <Text fontSize="sm" fontWeight="semibold">{data.name}</Text>
+				}
           </Box>
           { data.first_air_date !== "" && data.first_air_date !== undefined  &&
             <DateFormatter date={data.first_air_date} fontWeight="medium" fontSize="sm"/> }
@@ -92,16 +104,16 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
               <Text ml={2} fontWeight="semibold">{data.vote_average.toFixed(1)}/10</Text>
             </Flex>
           }
-          { data.character !== "" && data.character !== undefined &&
+          { data.character !== "" && data.character !== null && creditType === "cast" &&
             <Flex align="center" width="11rem">
               <Text fontWeight="hairline" fontSize="sm" mr="1">as</Text>
               { data.character.length > 20
-              ? <Text fontSize="xs" fontWeight="semibold">{data.character}</Text>
-              : <Text fontSize="sm" fontWeight="semibold">{data.character}</Text>
+                ? <Text fontSize="sm" fontWeight="semibold">{data.character}</Text>
+                : <Text fontSize="xs" fontWeight="semibold">{data.character}</Text>
               }
             </Flex> 
           }
-          { data.department !== "" && data.department !== undefined &&
+          { data.department !== "" && creditType === "crew" &&
             <Flex align="center" width="11rem">
               <Text fontWeight="hairline" fontSize="sm" mr="1">as</Text>
               <Text fontWeight="semibold" fontSize="sm">{data.department}</Text>
@@ -119,6 +131,7 @@ const CreditSection:React.FC<ICreditProps> = ({ creditData, mediaType }) => {
           }
       </VStack>
       </Flex>
+      </Link>
       }
     </>
     ))}

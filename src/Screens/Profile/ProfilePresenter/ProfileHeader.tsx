@@ -1,5 +1,6 @@
 import React from 'react'
-import { Flex, HStack, VStack, Text } from '@chakra-ui/react'
+import { Flex, HStack, VStack, Box, Text, useColorMode } from '@chakra-ui/react'
+import ModalBox from '@components/Layout/ModalBox'
 import InfoImage from '@components/Layout/InfoImage'
 
 interface IHeaderProps {
@@ -9,9 +10,11 @@ interface IHeaderProps {
 }
 
 const ProfileHeader:React.FC<IHeaderProps> = ({ profileSource, name, bioGraphy }) => {
+  const colorMode = useColorMode().colorMode
+
   return (
     <>
-      <Flex width="100%" height="60vh" justify="center" align="center" >
+      <Flex width="100%" height="60vh" justify="center" align="center" backgroundColor={colorMode === 'light' ? 'gray.50' : 'gray.900'} >
         <HStack width="80%" height="60vh">
           <InfoImage
             width="20%"
@@ -23,12 +26,23 @@ const ProfileHeader:React.FC<IHeaderProps> = ({ profileSource, name, bioGraphy }
           <VStack width="80%" height="80%" align="start" justify="space-between" pl="2em" pt="0.5em">
             <Text fontSize="2xl" fontWeight="semibold">{name}</Text>
             { bioGraphy !== ""  &&
-            <Flex direction="column" justify="start" mt="3em" width="35%">
-              <Text fontWeight="semibold" fontSize="lg">BioGraphy</Text>
-              <Flex>
-                <Text>{bioGraphy.substring(0,180)}...</Text>
+            <>
+            {bioGraphy.length > 200 
+            ? <Flex direction="column" align="start" width="35%">
+                <Flex direction="row" justify="space-between" align="baseline">
+                  <Text fontSize="lg" fontWeight="semibold">Biography</Text>
+                  <ModalBox modalcontent={bioGraphy}/> 
+                </Flex>
+                <Text>
+                  {bioGraphy.substring(0, 200)}...
+                </Text>
               </Flex>
-            </Flex>
+            : <Box width="35%">
+                <Text>
+                {bioGraphy}
+                </Text>
+              </Box> }    
+            </>
             }
           </VStack>
         </HStack>
@@ -36,6 +50,7 @@ const ProfileHeader:React.FC<IHeaderProps> = ({ profileSource, name, bioGraphy }
     </>
   )
 }
+
 
 
 export default ProfileHeader

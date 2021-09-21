@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Flex, VStack, Grid, GridItem, Box, Text, Button, SlideFade, useColorMode } from "@chakra-ui/react"
 import CollapseSection from "@components/Layout/CollapseSection"
@@ -16,11 +16,34 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
   const pathType = usePathTypeCheck()
   const colorMode = useColorMode().colorMode
   const [fullCast, setFullCast] = useState<boolean>(false)
+  const [director, setDirector] = useState<any>(null)
   let history = useHistory()
 
   const toPerson = (path:string) => {
-    history.replace(path)
+    history.push(path)
   }
+
+  useEffect(() => {
+    let mounted = true
+    const getDirector = () => {
+      if(pathType ==="movie") {
+        const [director] = credits.crew.filter((person:any) => person.job ==="Director")
+        setDirector(director)  
+      }  
+      
+      if(pathType ==="series") {
+        setDirector(detail.created_by[0])  
+      }
+    }
+
+    if(mounted) {
+      getDirector()
+    }
+    return () => {
+      mounted = false
+      setDirector(null)
+    }
+  },[credits.crew,detail.created_by,pathType])
 
   return (
     <>
@@ -54,7 +77,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                                 justify="stretch" 
                                 align="center" 
                                 key={data.id} 
-                                py={2} pt={3} 
+                                py={1} pt={3} 
                                 width="14.4rem" 
                                 minHeight="12rem" 
                                 maxHeight="max-content"
@@ -94,7 +117,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               justify="stretch" 
                               align="center" 
                               key={data.id} 
-                              py={2} pt={3} 
+                              py={1} pt={3} 
                               width="14.4rem" 
                               minHeight="12rem" 
                               maxHeight="max-content"
@@ -142,14 +165,18 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
               <Flex direction="column" align="start" justify="start" >
                 {/*Futher infos*/}
                   <Flex direction="column"  align="start" >
-                    <Text p={1} fontWeight="semibold" >Original Title</Text>
+                    <Text p={1} fontWeight="semibold">Original Title</Text>
                     <Text p={1}>{detail.original_title || detail.original_name}</Text>
                   </Flex>
                 { pathType === "movie" &&
                   <>
                     <Flex direction="column" align="start" >
-                      <Text p={1}  fontWeight="semibold">Director</Text>
-                      <Text p={1}>{credits.crew.filter((person:any) => person.job ==="Director").map((person:any) => person['name'])}</Text>
+                      <Text p={1} fontWeight="semibold">Director</Text>
+                      { director !== null &&
+                        <Text p={1} onClick={() => toPerson(`/profile/${director.id}`)}>
+                        {director.name}
+                        </Text>
+                      }
                     </Flex>
                     <Flex align="center" >
                       <Text p={1} fontWeight="semibold">Runtime</Text>
@@ -166,7 +193,11 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                   {detail.created_by !== null && detail.created_by.length > 0 &&
                     <Flex direction="column" align="start">
                       <Text p={1} fontWeight="semibold">Director</Text>
-                      <Text  p={1} fontSize="sm">{detail.created_by[0].name}</Text>
+                      { director !== null && 
+                        <Text p={1} onClick={() => toPerson(`/profile/${director.id}`)}>
+                          {director.name}
+                        </Text>
+                      }
                     </Flex>
                   }
                   <Flex align="center">
@@ -210,7 +241,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                   <Flex align="center">
                     {detail.spoken_languages.map((language:any) =>
                     (<Box px={2} py={0.5} mr={2} boxSize="max-content" borderRadius="xl" backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700"}>
-                      <Text fontSize="sm">  {language.iso_639_1}</Text>
+                      <Text fontSize="sm"> {language.iso_639_1}</Text>
                     </Box>))}
                   </Flex>                
                 </Flex>

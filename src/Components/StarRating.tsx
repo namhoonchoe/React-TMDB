@@ -123,6 +123,16 @@ const StarRating:React.FC<IStarRatingProps> = ({ rating }) => {
           <HalfStar/>
         </Flex> 
         }
+
+        { rating >= 10 && 
+        <Flex justify="start" align="center">
+          <StarIcon/> 
+          <StarIcon/>
+          <StarIcon/>
+          <StarIcon/>
+          <StarIcon/>
+        </Flex> 
+        }
       </>
     }
     </>

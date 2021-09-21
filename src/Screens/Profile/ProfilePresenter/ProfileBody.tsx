@@ -47,7 +47,7 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
     return () => {
       mounted = false
     }
-  },[isMovie])
+  },[])
 
   return (
     <>
@@ -89,11 +89,11 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
             <Flex justify="space-between" align="center" width="100%" mb={"1%"}>
               <Flex align="center">
                 <Box px={2} py={1} onClick={() => getCast()}
-                      borderRadius="lg" backgroundColor={ creditType === "cast" ? "gray.200" : "transparent"}>
+                      borderRadius="lg" backgroundColor={ creditType === "cast" ?  colorMode==="light" ? "gray.200" :"gray.600"  : "transparent"}>
                   <Text fontWeight="semibold" fontSize="lg">Cast</Text>
                 </Box>
                 <Box px={2} py={1} onClick={() => getCrew()}
-                      borderRadius="lg" backgroundColor={ creditType === "crew" ? "gray.200" : "transparent"}>
+                      borderRadius="lg" backgroundColor={ creditType === "crew" ?  colorMode==="light" ? "gray.200" :"gray.600" : "transparent"}>
                   <Text fontWeight="semibold" fontSize="lg">Crew</Text>
                 </Box>
               </Flex>
@@ -112,15 +112,17 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
                     </Flex>
               }
             </Flex>
-            <Grid templateColumns="repeat(auto-fit,minmax(23rem, 1fr))" columnGap="1" rowGap="6" 
+            <Grid templateColumns="repeat(auto-fit,minmax(24rem, 1fr))" columnGap="1" rowGap="6" 
                   alignItems="start" width="100%" pb={4}>
               <>
               { creditType === "cast"
                 ? <CreditSection
                     creditData={isMovie === true ? movieCredits.cast : seriesCredits.cast }
+                    creditType={creditType}
                     mediaType={isMovie ? "movie" : "series"}/>
                 : <CreditSection
                     creditData={isMovie === true ? movieCredits.crew : seriesCredits.crew }
+                    creditType={creditType}
                     mediaType={isMovie ? "movie" : "series"}/>
               }
               </>

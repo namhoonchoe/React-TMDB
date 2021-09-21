@@ -74,7 +74,11 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 			<Flex width={"10.5rem"} justify="start" align="start" flexWrap="wrap" mt={2} px={1} >
 				<SkeletonText isLoaded={isLoaded} startColor={ colorMode === 'light' ? 'gray.300' : 'gray.600'}>
 				{ title.length > 30 
-					? <Text fontSize="xs" fontWeight="semibold">{title}</Text>
+					? <>{ title.length > 50 
+						? <Text fontSize="xs" fontWeight="semibold">{title.substring(0,50)}...</Text>
+						: <Text fontSize="xs" fontWeight="semibold">{title}</Text>
+							}
+						</>
 					: <Text fontSize="sm" fontWeight="semibold">{title}</Text>
 				}
 				</SkeletonText>

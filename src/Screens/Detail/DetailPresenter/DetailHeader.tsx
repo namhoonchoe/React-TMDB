@@ -63,7 +63,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
                     <Text fontSize="lg" fontWeight="semibold">storyline</Text>
                     <ModalBox modalcontent={detail.overview}/> 
                   </Flex>
-                  <Text >
+                  <Text>
                     {detail.overview.substring(0, 100)}...
                   </Text>
                 </Flex>

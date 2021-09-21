@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Flex, Fade } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import LoadingSpinner from "@components/LoadingSpinner"
+import ScrollToTop from '@components/ScrollToTop';
 import DetailHeader from './DetailHeader';
 import DetailBody from './DetailBody';
 
@@ -27,12 +28,15 @@ const DetailPresenter:React.FC<IDetailProps> = ({ detail ,credits ,similar ,erro
           </Helmet>
           <LoadingSpinner/> 
         </>
-      : <Flex direction="column" align="center" justify="center" >        
+      : <>
+        <Flex direction="column" align="center" justify="center" >        
           <DetailHeader detail={detail} loading={loading}/>
           <Fade in={loading === false}>
             <DetailBody detail={detail} similars={similar} credits={credits}/>
           </Fade>
         </Flex>
+        <ScrollToTop/>
+        </>
       }
 
       { error ? <p>An error has occured</p>: null }
