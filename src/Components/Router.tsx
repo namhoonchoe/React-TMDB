@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectSearch } from "@redux/searchSlice"
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Flex } from "@chakra-ui/react"
 import Detail from "@screens/Detail";
 import Header from "./Layout/Header";
