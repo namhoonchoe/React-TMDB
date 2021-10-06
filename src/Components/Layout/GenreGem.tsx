@@ -7,7 +7,7 @@ interface IGenreProps {
   genreType:string
   fontSize?:string
 }
-const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="md" }) => {
+const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="sm" }) => {
   const [genreList, setGenreList] = useState<Array<any>>([])
   const [genre, setGenre] = useState<any>(null)
   const [error,setError] = useState<boolean>(false)
@@ -15,7 +15,7 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="md" }) =
 
   useEffect(() => {
     let mounted = true
-
+    
     const getGenreList = () => {
       if(genreType === "movie") {
         const getMovieGenre = async() => {

@@ -7,7 +7,7 @@ import LoadingSpinner from "@components/LoadingSpinner"
 
 
 interface IPersonProps {
-  popular:null|PersonData,
+  popular:null|Array<any>,
   error:boolean,
   loading:boolean
 }

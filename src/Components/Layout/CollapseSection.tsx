@@ -7,7 +7,7 @@ import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 interface ICollapseSectionProps {
   title:string
   sectionInfoType?:string
-  sectionInfos:MovieData
+  sectionInfos:Array<any>
 }
 
 const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sectionInfoType }) => {
@@ -53,16 +53,16 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
         <Text fontSize="2xl" mb={3} fontWeight="semibold" >{title}</Text>
           { seeAll 
             ? <Button onClick={() => toggleView()} backgroundColor="transparent">
-                <Text>Collapse </Text>
+                <Text fontSize={{lg:"md", xl:"lg"}}>Collapse </Text>
               </Button>
             : <Button onClick={() => toggleView()} backgroundColor="transparent">
-                <Text>See All </Text>
+                <Text fontSize={{lg:"md", xl:"lg"}}>See All </Text>
               </Button>
           }
       </Flex>
         {seeAll
           ? <Collapse in={seeAll}>
-              <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" >
+              <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" >
                 {sectionInfos.map((data:any) => (
                   <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                   <InfoCard
@@ -74,7 +74,7 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
                 </Grid>
             </Collapse>
           : <Fade in={!seeAll}>
-              <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" width="100%" >
+              <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" width="100%" >
                 {sectionInfos.slice(0,10).map((data:any) => (
                   <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                   <InfoCard

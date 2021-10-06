@@ -4,6 +4,13 @@ import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import { movieApi, tvApi } from "@api"
 import DetailPresenter from './DetailPresenter';
 
+
+interface IDetailInfos {
+  detailInfo:null|Array<any>,
+  credits:null|Array<any>,
+  similars:null|Array<any>,
+}
+
 const DetailContainer:React.FC = () => {
 	const pathType = usePathTypeCheck()
   const [detail,setDetail] = useState<IDetailInfos>({

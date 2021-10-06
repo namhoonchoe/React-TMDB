@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, VStack, HStack,  Box, Text, Fade } from "@chakra-ui/react"
+import { Flex, VStack, HStack,  Box, Text, Fade, useBreakpointValue } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import InfoImage from "@components/Layout/InfoImage";
 import ModalBox from "@components/Layout/ModalBox";
@@ -16,6 +16,7 @@ interface IHeaderProps {
 
 const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
   const pathType = usePathTypeCheck()
+  const responsiveDate = useBreakpointValue({lg:"md", xl:"lg"})
 
   return (
   <>
@@ -40,7 +41,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
     <Flex 
       width={"100%"} height={"70vh"}
       position="relative"
-      left="-12em"
+      left={{lg:"-10%",xl:"-20%"}}
       color="white"
       pt="3%">
       <InfoImage
@@ -49,11 +50,15 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
         width={"27%"}
         height={"75%"}
         imageSource={detail.poster_path}/>
-      <VStack align="start" justify="space-between" spacing="3" width="35%" height="75%" ml="1em">
+      <VStack align="start" justify="space-between" spacing="3" width="35%" height="75%" ml="2%">
         <Flex direction="column">
-          <Text fontWeight="bold" fontSize="2xl" mb={"3%"}>{detail.title||detail.name}</Text>
+          { detail.title !== "" || detail.name !== "" && detail.title.length || detail.name.length > 20
+            ? <Text fontWeight="bold" fontSize={"2xl"} mb={"3%"}>{detail.title||detail.name}</Text>
+            : <Text fontWeight="bold" fontSize={"xl"} mb={"3%"}>{detail.title||detail.name}</Text>
+          }
+
           { detail.tagline !== "" &&
-            <Text as="cite" fontWeight="semibold" mt={1}>"{detail.tagline}"</Text> } 
+            <Text as="cite" fontWeight="semibold" mt={1} fontSize={{lg:"sm",xl:"md"}}>"{detail.tagline}"</Text> } 
         </Flex>
           <Flex direction="column" justify="start" width="100%"  >
           <Box width="100%">
@@ -73,12 +78,14 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
                   </Text>
                 </Box> }         
           </Box>
-            <HStack justify="start"mt={1}>
+            <HStack justify="start" mt={1}>
               <VStack align="start">
-                <Flex align="baseline">
-                  <DateFormatter date={detail.release_date || detail.first_air_date} fontSize="xl"/>
-                  <Text fontWeight="medium">({detail.status})</Text>
+                { detail.release_date !== null || undefined || detail.first_air_date !== null || undefined &&
+                  <Flex align="baseline">
+                    <DateFormatter date={detail.release_date || detail.first_air_date} fontSize={responsiveDate}/>
+                    <Text fontWeight="medium" fontSize={{lg:"md", xl:"lg"}}>({detail.status})</Text>
                 </Flex>
+                }
                 <Flex justify="start" align="center">
                   <StarRating rating={detail.vote_average}/>
                   <Text ml={2}>{detail.vote_average.toFixed(1)}/10</Text>

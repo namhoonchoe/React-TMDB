@@ -7,8 +7,8 @@ import LandingPortal from "@components/Layout/LandingPortal"
 import InfoCard from "@components/Layout/InfoCard"
 
 interface IHomeProps {
-  trendingMovies:null|HomeData
-  trendingSeries:null|HomeData
+  trendingMovies:null|Array<any>
+  trendingSeries:null|Array<any>
   mediaType:string
   randomIndex:number
   error:boolean,

@@ -6,9 +6,9 @@ import LoadingSpinner from "@components/LoadingSpinner"
 import ScrollToTop from "@components/ScrollToTop";
 
 interface IMovieProps {
-  nowPlaying:null|MovieData,
-  upComing:null|MovieData,
-  popular:null|MovieData,
+  nowPlaying:null|Array<any>,
+  upComing:null|Array<any>,
+  popular:null|Array<any>,
   error:boolean,
   loading:boolean
 }

@@ -5,8 +5,8 @@ import { movieApi,tvApi } from '@api'
 import SearchPresenter from './SearchPresenter'
 
 interface ISearchData {
-  movieResults:null|SearchData,
-  seriesResults:null|SearchData
+  movieResults:null|Array<any>,
+  seriesResults:null|Array<any>
 }
 
 const SearchContainer:React.FC = () => {

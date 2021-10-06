@@ -3,11 +3,11 @@ import { Text } from "@chakra-ui/react"
 
 interface IDateProps {
   date:string
-  fontSize:string
+  fontSize?:string
   fontWeight?:string
 }
 
-const DateFormatter:React.FC<IDateProps> = ({ date="yyyy-mm-dd", fontSize, fontWeight="semibold" }) => {
+const DateFormatter:React.FC<IDateProps> = ({ date="yyyy-mm-dd", fontSize="md", fontWeight="semibold" }) => {
 
   const target = date.split("-")
 

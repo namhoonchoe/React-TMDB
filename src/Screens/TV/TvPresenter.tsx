@@ -6,9 +6,9 @@ import LoadingSpinner from "@components/LoadingSpinner"
 import ScrollToTop from "@components/ScrollToTop";
 
 interface ISerieseProps {
-  topRated:null|SeriesData,
-  airingToday:null|SeriesData,
-  popular:null|SeriesData,
+  topRated:null|Array<any>,
+  airingToday:null|Array<any>,
+  popular:null|Array<any>,
   error:boolean,
   loading:boolean
 }

@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 import { Grid ,Text, Box, Flex } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 
-type MovieData = []
 
 interface ISectionInfo {
   title?:string
   sectionInfoType?:string
-  sectionInfos:MovieData
+  sectionInfos:Array<any>
 }
 
 const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }) => {
@@ -48,8 +47,8 @@ const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }
   <>
     <Box width="100%">
       <Text fontSize="2xl" mb={3} fontWeight="semibold">{title}</Text>
-      {sectionInfos.length > 6 
-        ? <Grid templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start">
+      { sectionInfos.length > 6 
+        ? <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start">
           {sectionInfos.map((data:any) => (
             <Link to={`/${sectionType}/${data.id}`} key={data.id}>
             <InfoCard

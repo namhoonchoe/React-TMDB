@@ -25,11 +25,11 @@ const MovieContainer:React.FC = () => {
       } = await movieApi.nowPlaying();
 
     const {
-      data: { results: upComing },
+      data:{ results:upComing },
       } = await movieApi.upComing();
 
     const {
-      data: { results: popular },
+      data:{ results:popular },
       } = await movieApi.popular();
 
       setMovie({...movie,nowPlaying,upComing,popular})

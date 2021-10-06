@@ -5,8 +5,8 @@ import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 
 interface ISearchpProps {
-  movieResults:null|SearchData,
-  seriesResults:null|SearchData,
+  movieResults:null|Array<any>,
+  seriesResults:null|Array<any>,
   loading:boolean,
   error:boolean
 }

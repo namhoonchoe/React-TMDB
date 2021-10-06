@@ -55,7 +55,7 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
       <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" width="100%" px="3%" pt="2%">
         <GridItem rowSpan={1} colSpan={1}>
           {/*Personal Info*/}
-          <VStack align="start" justify="center" width="100%" mx={3} mt={2}>
+          <VStack align="start" justify="center" width="100%" mx={3} mt={2} fontSize={{lg:"xs",xl:"md"}}>
             <Text fontSize="lg" fontWeight="semibold" my={1}>Personal Infos</Text>
             <Flex direction="column" align="start">
               <Text fontWeight="semibold" fontSize="md">Known For</Text>
@@ -112,7 +112,7 @@ const ProfileBody:React.FC<IBodyProps> = ({ profileInfo, movieCredits, seriesCre
                     </Flex>
               }
             </Flex>
-            <Grid templateColumns="repeat(auto-fit,minmax(24rem, 1fr))" columnGap="1" rowGap="6" 
+            <Grid templateColumns="repeat(auto-fit,minmax(22rem, 1fr))" columnGap="1" rowGap="6" 
                   alignItems="start" width="100%" pb={4}>
               <>
               { creditType === "cast"

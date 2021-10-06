@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
-import { Flex, VStack, Grid, GridItem, Box, Text, Button, SlideFade, useColorMode } from "@chakra-ui/react"
+import { Flex, VStack, Grid, GridItem, Box, Text, Button, SlideFade, useColorMode, Tooltip } from "@chakra-ui/react"
 import CollapseSection from "@components/Layout/CollapseSection"
 import InfoImage from '@components/Layout/InfoImage'
 import DateFormatter from '@components/DateFormatter';
@@ -17,6 +17,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
   const colorMode = useColorMode().colorMode
   const [fullCast, setFullCast] = useState<boolean>(false)
   const [director, setDirector] = useState<any>(null)
+
   let history = useHistory()
 
   const toPerson = (path:string) => {
@@ -64,13 +65,13 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                       {credits.cast.length > 5 &&
                         <Button backgroundColor="transparent" onClick={() => setFullCast(!fullCast)}>
                         {fullCast === true 
-                        ? <Text fontWeight="semibold">Collapse</Text> 
-                        : <Text fontWeight="semibold">See Full Cast</Text>}
+                        ? <Text fontWeight="semibold" fontSize={{lg:"md", xl:"lg"}}>Collapse</Text> 
+                        : <Text fontWeight="semibold" fontSize={{lg:"md", xl:"lg"}}>See Full Cast</Text>}
                         </Button>}
                     </Flex>
                   { fullCast 
                   ? <SlideFade in={fullCast}>
-                      <Grid templateColumns="repeat(auto-fit,minmax(14.4rem, 1fr))" gap="3" width="100%">
+                      <Grid templateColumns="repeat(auto-fill,minmax(14.4rem, 1fr))" gap="3" width="100%">
                         {credits.cast.map((data:any) => (
                           <>
                             <Flex direction="column" 
@@ -110,7 +111,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                         ))}
                       </Grid> 
                     </SlideFade > 
-                  : <Grid templateColumns="repeat(auto-fit,minmax(14.4rem, 1fr))" gap="4" width="100%">
+                  : <Grid templateColumns="repeat(auto-fill,minmax(14.4rem, 1fr))" gap="3" width="100%">
                       {credits.cast.slice(0,5).map((data:any) => (
                         <>
                           <Flex direction="column" 
@@ -162,47 +163,55 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
             </GridItem>
             <GridItem rowSpan={2} colSpan={1} ml={6} >
               <Text fontSize="2xl" mb={3} fontWeight="semibold" >Info</Text>
-              <Flex direction="column" align="start" justify="start" >
+              <Flex direction="column" align="start" justify="start" fontSize={{lg:"xs",xl:"md"}} >
                 {/*Futher infos*/}
-                  <Flex direction="column"  align="start" >
+                  <Flex direction="column" align="start" >
                     <Text p={1} fontWeight="semibold">Original Title</Text>
                     <Text p={1}>{detail.original_title || detail.original_name}</Text>
                   </Flex>
                 { pathType === "movie" &&
                   <>
-                    <Flex direction="column" align="start" >
+                    <Tooltip label="check Director's profile">
+                      <Flex direction="column" align="start" >
                       <Text p={1} fontWeight="semibold">Director</Text>
                       { director !== null &&
-                        <Text p={1} onClick={() => toPerson(`/profile/${director.id}`)}>
-                        {director.name}
+                        <Text p={1} as="cite" onClick={() => toPerson(`/profile/${director.id}`)} 
+                              _hover={{backgroundColor:"blue.400", color:"white"}} borderRadius="xl" >
+                          {director.name}
                         </Text>
                       }
-                    </Flex>
+                      </Flex>
+                    </Tooltip>
                     <Flex align="center" >
                       <Text p={1} fontWeight="semibold">Runtime</Text>
                       <Text p={1} fontSize="sm">{detail.runtime}'</Text>
                     </Flex>
                     <Flex align="center">
                       <Text p={1} fontWeight="semibold">Release Date</Text>
-                      <DateFormatter date={detail.release_date}  fontSize="sm" fontWeight="medium"/>
+                      { detail.release_date !== null && detail.release_date !== undefined &&
+                      <DateFormatter date={detail.release_date} fontSize="sm" fontWeight="medium" />
+                      }
                     </Flex>
                   </>
                 } 
                 { pathType === "series" && 
                   <>
                   {detail.created_by !== null && detail.created_by.length > 0 &&
-                    <Flex direction="column" align="start">
+                    <Tooltip label="check Director's profile">
+                      <Flex direction="column" align="start">
                       <Text p={1} fontWeight="semibold">Director</Text>
                       { director !== null && 
-                        <Text p={1} onClick={() => toPerson(`/profile/${director.id}`)}>
+                        <Text p={1} as="cite" onClick={() => toPerson(`/profile/${director.id}`)}
+                              _hover={{backgroundColor:"blue.400", color:"white"}} borderRadius="xl">
                           {director.name}
                         </Text>
                       }
-                    </Flex>
+                      </Flex>
+                    </Tooltip>
                   }
                   <Flex align="center">
                     <Text p={1} fontWeight="semibold">Episode Runtime</Text>
-                    <Flex>
+                    <Flex align="center" wrap="wrap">
                       {detail.episode_run_time.map((runtime:any) => (
                       <Text p={1} fontSize="sm">{runtime}'</Text>
                       ))}
@@ -216,14 +225,18 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                     <Text p={1} fontWeight="semibold">Number of Episodes</Text  >
                     <Text p={1} fontSize="sm">{detail.number_of_episodes}</Text>
                   </Flex>
-                  <Flex align="center">
-                    <Text p={1} fontWeight="semibold">First Air Date</Text>
-                    <DateFormatter date={detail.first_air_date} fontSize="sm" fontWeight="medium"/>
-                  </Flex>
-                  <Flex align="center">
-                    <Text p={1} fontWeight="semibold">Last Air Date</Text>
-                    <DateFormatter date={detail.last_air_date} fontSize="sm" fontWeight="medium"/>
-                  </Flex>
+                  { detail.first_air_date !== null && detail.first_air_date !== undefined &&
+                    <Flex align="center">
+                      <Text p={1} fontWeight="semibold">First Air Date</Text>
+                      <DateFormatter date={detail.first_air_date} fontSize="sm" fontWeight="medium"/>
+                      </Flex>
+                  }                
+                  { detail.last_air_date !== null && detail.last_air_date !== undefined &&
+                    <Flex align="center">
+                      <Text p={1} fontWeight="semibold">Last Air Date</Text>
+                      <DateFormatter date={detail.last_air_date} fontSize="sm" fontWeight="medium"/>
+                    </Flex>
+                  }
                   </>
                 }  
                 <Flex align="center">

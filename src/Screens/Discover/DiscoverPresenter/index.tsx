@@ -23,7 +23,7 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ loading, error }) => {
             <LoadingSpinner/> 
           </>
         :<Flex position="relative" width="100%">
-          <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" width="100%" mx="2%">
+          <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" width="100%" mx="1%">
             <GridItem rowSpan={2} colSpan={1}>
               <Box position="sticky" top="10%">
                 <SideBar/>

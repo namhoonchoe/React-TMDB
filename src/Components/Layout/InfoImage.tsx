@@ -18,7 +18,7 @@ const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType,
     <>
       { typeof imageSource === "string" && 
         <Image
-          width={width}
+          minWidth={width}
           height={height}
           borderRadius={borderRadius}
           src={`https://image.tmdb.org/t/p/w300${imageSource}`}
