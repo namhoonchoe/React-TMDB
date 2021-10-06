@@ -4,6 +4,7 @@ import CollapseSection from "@components/Layout/CollapseSection"
 import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import ScrollToTop from "@components/ScrollToTop";
+import ErrorPopUp from "@components/ErrorPopUp"
 
 interface ISerieseProps {
   topRated:null|Array<any>,
@@ -53,7 +54,7 @@ const TvPresenter:React.FC<ISerieseProps> = ({topRated,airingToday,popular,error
       </>
     }
     
-    { error ? <p>An error has occured</p>: null }
+    { error ? <ErrorPopUp/>: null }
   </>
   )
 };

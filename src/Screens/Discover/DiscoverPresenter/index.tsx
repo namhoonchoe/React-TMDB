@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from "react-helmet";
 import LoadingSpinner from '@components/LoadingSpinner'
+import ErrorPopUp from "@components/ErrorPopUp"
 import SideBar from './SideBar'
 import Main from './Main'
 import { Grid, GridItem, Box, Flex } from "@chakra-ui/react"
@@ -36,7 +37,7 @@ const DiscoverPresenter:React.FC<IDiscoverProps> = ({ loading, error }) => {
         </Flex>
       }
           
-      { error ? <p>An error has occured</p>: null }
+      { error ? <ErrorPopUp/> : null }
     </>
   )
 }

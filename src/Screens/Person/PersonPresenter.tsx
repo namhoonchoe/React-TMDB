@@ -4,6 +4,7 @@ import InfoCard from "@components/Layout/InfoCard"
 import { Link } from "react-router-dom";
 import { Flex, Text, Grid  } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
+import ErrorPopUp from "@components/ErrorPopUp"
 
 
 interface IPersonProps {
@@ -45,7 +46,7 @@ const PersonPresenter:React.FC<IPersonProps> = ({ popular, error, loading }) => 
     </>
     }
 
-    { error ? <p>An error has occured</p>: null }
+  { error ? <ErrorPopUp/>: null }
   </>
   )
 };

@@ -5,6 +5,7 @@ import { Flex, Text, Box, VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import LandingPortal from "@components/Layout/LandingPortal"
 import InfoCard from "@components/Layout/InfoCard"
+import ErrorPopUp from "@components/ErrorPopUp"
 
 interface IHomeProps {
   trendingMovies:null|Array<any>
@@ -115,7 +116,8 @@ const HomePresenter:React.FC<IHomeProps> = ({ trendingMovies, trendingSeries, ra
           }
         </VStack>  
       </>}
-    { error ? <p>An error has occured</p>: null }
+      
+      { error ? <ErrorPopUp/> : null }
   </>
   )
 

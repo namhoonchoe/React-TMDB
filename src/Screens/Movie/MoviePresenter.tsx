@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet"
 import CollapseSection from "@components/Layout/CollapseSection"
+import ErrorPopUp from "@components/ErrorPopUp"
 import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import ScrollToTop from "@components/ScrollToTop";
@@ -55,7 +56,7 @@ const MoviePresenter:React.FC<IMovieProps> = ({ nowPlaying, upComing, popular, e
       </>
     }
 
-    { error ? <p>An error has occured</p>: null }
+    { error ? <ErrorPopUp/>: null }
 	</>
   )
 };

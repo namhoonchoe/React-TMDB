@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Section from "@components/Layout/Section"
 import { VStack } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
+import ErrorPopUp from "@components/ErrorPopUp"
 
 interface ISearchpProps {
   movieResults:null|Array<any>,
@@ -41,7 +42,7 @@ const SearchPresenter:React.FC<ISearchpProps> = ({ movieResults,seriesResults,lo
       </>
     }
 
-    { error ? <p>An error has occured</p>: null }
+    { error ? <ErrorPopUp/> : null }
   </>
   )
 };

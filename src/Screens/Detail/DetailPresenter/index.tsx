@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Flex, Fade } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 import LoadingSpinner from "@components/LoadingSpinner"
+import ErrorPopUp from "@components/ErrorPopUp"
 import ScrollToTop from '@components/ScrollToTop';
 import DetailHeader from './DetailHeader';
 import DetailBody from './DetailBody';
@@ -39,7 +40,7 @@ const DetailPresenter:React.FC<IDetailProps> = ({ detail ,credits ,similar ,erro
         </>
       }
 
-      { error ? <p>An error has occured</p>: null }
+    { error ? <ErrorPopUp/> : null }
     </>
   )
 }

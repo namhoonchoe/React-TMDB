@@ -75,7 +75,7 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
             </Collapse>
           : <Fade in={!seeAll}>
               <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" width="100%" >
-                {sectionInfos.slice(0,10).map((data:any) => (
+                {sectionInfos.slice(0,7).map((data:any) => (
                   <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                   <InfoCard
                     title={data.title||data.name}

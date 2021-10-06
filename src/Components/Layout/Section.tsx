@@ -59,7 +59,7 @@ const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }
             </Link>))}
           </Grid>
         : <Flex>
-          {sectionInfos.slice(0,5).map((data:any) => (
+          {sectionInfos.map((data:any) => (
           <Box mr={6}>
             <Link to={`/${sectionType}/${data.id}`} key={data.id}>
             <InfoCard

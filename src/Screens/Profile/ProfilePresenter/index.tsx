@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet"
 import { Flex } from "@chakra-ui/react"
 import LoadingSpinner from "@components/LoadingSpinner"
 import ScrollToTop from '@components/ScrollToTop'
+import ErrorPopUp from "@components/ErrorPopUp"
 import ProfileHeader from "./ProfileHeader" 
 import ProfileBody from "./ProfileBody"
 
@@ -42,7 +43,7 @@ const ProfilePresenter:React.FC<IProfileProps> = ({ loading, error, profileInfo,
       </>
       }
 
-      { error ? <p>An error has occured</p>: null }
+    {error ? <ErrorPopUp/>: null }
     </>
   )
 }

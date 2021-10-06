@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ErrorPopUp from '@components/ErrorPopUp'
 import { genreApi } from '@api'
 import { Text, Box, Fade } from "@chakra-ui/react"
 
@@ -76,7 +77,7 @@ const GenreGem:React.FC<IGenreProps> = ({ genreId, genreType, fontSize="sm" }) =
         </Fade>
       }
 
-      { error ? <p>An error has occured</p>: null }
+      { error ? <ErrorPopUp/>: null }
     </>
   )
 }
