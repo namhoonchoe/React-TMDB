@@ -84,7 +84,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                                 maxHeight="max-content"
                                 backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
                                 borderRadius="lg" 
-                                _hover={{boxShadow:"xl"}}
+                                _hover={{boxShadow:colorMode==="light" ? "xl" : "dark-lg"}}
                                 onClick={() => toPerson(`/profile/${data.id}`)}>
                             <InfoImage
                               width="7rem" 
@@ -124,7 +124,7 @@ const DetailBody:React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               maxHeight="max-content"
                               backgroundColor={ colorMode==="light" ? "gray.200" : "gray.700" }
                               borderRadius="lg" 
-                              _hover={{boxShadow:"xl"}}
+                              _hover={{boxShadow:colorMode==="light" ? "xl" : "dark-lg"}}
                               onClick={() => toPerson(`/profile/${data.id}`)}>
                           <InfoImage
                             width="7rem" 

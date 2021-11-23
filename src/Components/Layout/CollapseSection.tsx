@@ -19,8 +19,10 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
     setSeeAll(!seeAll)
   }
 
+
 	useEffect(() => {
     let mounted = true
+
 	  const imageTypeChecker = () => {
 		  if(pathType === "movie") {
         setSectionType("movie")
@@ -38,6 +40,7 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
         setSectionType(sectionInfoType)
       }  
     }
+
     if(mounted) {
       imageTypeChecker()
     }
@@ -62,7 +65,7 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
       </Flex>
         {seeAll
           ? <Collapse in={seeAll}>
-              <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" >
+              <Grid templateColumns="repeat(auto-fill,minmax(12rem, 1fr))" columnGap={{lg:"1", xl:"6"}}  alignItems="start" width="100%" >
                 {sectionInfos.map((data:any) => (
                   <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                   <InfoCard
@@ -74,8 +77,8 @@ const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sect
                 </Grid>
             </Collapse>
           : <Fade in={!seeAll}>
-              <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start" width="100%" >
-                {sectionInfos.slice(0,7).map((data:any) => (
+              <Grid templateColumns={`repeat(auto-fill,minmax(12rem, 1fr))`} columnGap={{lg:"1", xl:"6"}} alignItems="start" width="100%">
+                {sectionInfos.slice(0,6).map((data:any) => (
                   <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                   <InfoCard
                     title={data.title||data.name}

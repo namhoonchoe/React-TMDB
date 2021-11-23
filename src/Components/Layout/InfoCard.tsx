@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import InfoImage from './InfoImage'
 import StarRating from '@components/StarRating'
-import { Text, Flex, Box, Skeleton, SkeletonText, useColorMode } from "@chakra-ui/react"
+import { Text, Flex, Box, Skeleton, Fade, useColorMode } from "@chakra-ui/react"
 import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
 
 
@@ -18,6 +18,7 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(() => {
+		let mounted = true
 		const imageTypeChecker = () => {
 			if (pathType === "person") {
 				setImageType("portrait")
@@ -30,8 +31,15 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 			setIsLoaded(true)
 		}
 
-		imageTypeChecker()
-		skeletonController()
+		if(mounted) {
+			imageTypeChecker()
+			skeletonController()
+		}
+
+		return () => {
+			mounted = false
+		}
+
   },[pathType,colorMode])
 
 
@@ -42,18 +50,18 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 			justify="start"
 			align="center"
 			borderRadius="lg"
-			pt={3} mb={7}
+			pt={1} mb={7}
 			role="group"
 			_hover={{backgroundColor:colorMode === 'light' ? 'gray.200' : 'gray.600'}}
-			width={"11.6rem"}
+			width={"12rem"}
 			height={"19.4rem"}
 			>
 			<Skeleton isLoaded={isLoaded} startColor={ colorMode === 'light' ? 'gray.300' : 'gray.600'}>
-			<Box width={"10.5rem"} height={"15rem"} position="relative">
+			<Box width={"11em"} height={"15.4rem"} position="relative">
 				<Box _groupHover={ pathType !== "person" ? {opacity:"0.1"} : {opacity:"1"}}>
 				<InfoImage 
-					width={"10.5rem"}
-					height={"15rem"}
+					width={"11rem"}
+					height={"15.4rem"}
 					imageType={imageType}
 					borderRadius = {"md"}
 					imageSource={posterPath}/>
@@ -61,7 +69,7 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 				<>
 				{rating !== undefined && 
 					<Flex opacity="0" _groupHover={{opacity:"1"}} zIndex="10" position="absolute" top="0"
-						direction="column" align="center" justify="center" width={"10.5rem"} height={"15rem"} >
+						direction="column" align="center" justify="center" width={"11rem"} height={"15.4rem"} >
 						<Text fontWeight="semibold" mb={1}>User Score</Text>
 						<Flex align="center">
 							<StarRating rating={rating}/>
@@ -71,22 +79,25 @@ const InfoCard:React.FC<IInfoProps> =({ title, posterPath, rating })=> {
 				</>
 			</Box>
 			</Skeleton>
-			<Flex width={"10.5rem"} justify="start" align="start" flexWrap="wrap" mt={2} px={1} >
-				<SkeletonText isLoaded={isLoaded} startColor={ colorMode === 'light' ? 'gray.300' : 'gray.600'}>
-				{ title.length > 30 
-					? <>{ title.length > 50 
-						? <Text fontSize="xs" fontWeight="semibold">{title.substring(0,50)}...</Text>
-						: <Text fontSize="xs" fontWeight="semibold">{title}</Text>
-							}
+			<Fade in={isLoaded} >
+			<Flex width={"11rem"} justify="start" align="start" flexWrap="wrap" mt={2} px={1} >
+					{ title.length > 30 
+					? <>
+						{ title.length > 50 
+							? 
+								<Text fontSize="xs" fontWeight="semibold">{title.substring(0,50)}...</Text>
+							: 
+								<Text fontSize="xs" fontWeight="semibold">{title}</Text>
+						}
 						</>
-					: <Text fontSize="sm" fontWeight="semibold">{title}</Text>
+					:
+						<Text fontSize="sm" fontWeight="semibold">{title}</Text>
 				}
-				</SkeletonText>
 			</Flex>
+			</Fade >
 		</Flex>
   </>
   )
 }
-
 
 export default InfoCard

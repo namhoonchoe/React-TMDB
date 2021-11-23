@@ -41,7 +41,7 @@ const DetailHeader:React.FC<IHeaderProps> = ({ detail, loading }) => {
     <Flex 
       width={"100%"} height={"70vh"}
       position="relative"
-      left={{lg:"-10%",xl:"-20%"}}
+      left={{lg:"-10%", xl:"-20%"}}      
       color="white"
       pt="3%">
       <InfoImage

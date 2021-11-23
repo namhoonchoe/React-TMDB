@@ -48,7 +48,7 @@ const Section:React.FC<ISectionInfo> = ({ title, sectionInfos, sectionInfoType }
     <Box width="100%">
       <Text fontSize="2xl" mb={3} fontWeight="semibold">{title}</Text>
       { sectionInfos.length > 6 
-        ? <Grid templateColumns="repeat(auto-fill,minmax(10.5rem, 1fr))" columnGap="6" alignItems="start">
+        ? <Grid templateColumns="repeat(auto-fill,minmax(12rem, 1fr))" columnGap={{lg:"1", xl:"6"}} alignItems="center">
           {sectionInfos.map((data:any) => (
             <Link to={`/${sectionType}/${data.id}`} key={data.id}>
             <InfoCard

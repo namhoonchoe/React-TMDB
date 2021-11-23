@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { personApi } from "@api"
 import ProfilePresenter from './ProfilePresenter';
 
-type profileData = Array<any>
-
 interface IProfile {
   profileInfo:any
   movieCredits:any,
