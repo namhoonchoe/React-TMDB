@@ -36,11 +36,11 @@ const SearchBox:React.FC = () => {
 
   return (
   <>
-    <Flex justify="center" align="center" width="max"> 
+    <Flex justifyContent="center" alignItems="center" width="max"> 
       { clicked 
       ? <form onSubmit={onSubmit} ref={ref}>
           <ScaleFade in={clicked}>
-          <Flex justify="center" alignItems="center" h={4}>
+          <Flex justifyContent="center" alignItems="center" h={4}>
             <Input 
               value={term}
               onChange={onChange}

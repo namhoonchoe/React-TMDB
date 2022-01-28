@@ -1,96 +1,131 @@
-import React, { useState, useEffect } from 'react'
-import InfoCard from './InfoCard'
+import React, { useState, useEffect } from "react";
+import InfoCard from "./InfoCard";
 import { Link } from "react-router-dom";
-import { Button, Box, Text, Flex, Grid, Collapse, Fade } from '@chakra-ui/react'
-import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
+import {
+  Button,
+  Box,
+  chakra,
+  Text,
+  Flex,
+  Grid,
+  Collapse,
+  Fade,
+} from "@chakra-ui/react";
+import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 
 interface ICollapseSectionProps {
-  title:string
-  sectionInfoType?:string
-  sectionInfos:Array<any>
+  title: string;
+  sectionInfoType?: string;
+  sectionInfos: Array<any>;
 }
 
-const CollapseBox:React.FC<ICollapseSectionProps> = ({ title, sectionInfos, sectionInfoType }) => {
-  const [seeAll, setSeeAll] = useState<boolean>(false)
-  const [sectionType, setSectionType] = useState<string|undefined>("")
-	const pathType = usePathTypeCheck()
-	
+const CollapseBox: React.FC<ICollapseSectionProps> = ({
+  title,
+  sectionInfos,
+  sectionInfoType,
+}) => {
+  const [seeAll, setSeeAll] = useState<boolean>(false);
+  const [sectionType, setSectionType] = useState<string | undefined>("");
+  const pathType = usePathTypeCheck();
+
   const toggleView = () => {
-    setSeeAll(!seeAll)
-  }
+    setSeeAll(!seeAll);
+  };
 
+  const CollapseControl = chakra(Flex, {
+    baseStyle: {
+      width: "100%",
+      alignItems: "center",
+      justifyContent: "space-between",
+      my: "2",
+    },
+  });
 
-	useEffect(() => {
-    let mounted = true
+  const GridSection = chakra(Grid, {
+    baseStyle: {
+      gridTemplateColumns:`repeat(auto-fill,minmax(14rem, 1fr))`,
+      alignItems: "start",
+      width: "100%",
+    },
+  });
 
-	  const imageTypeChecker = () => {
-		  if(pathType === "movie") {
-        setSectionType("movie")
-      } 
-      if(pathType === "series") {
-        setSectionType("series")
-      } 
-      if(pathType === "person") {
-        setSectionType("person")
-      } 
-      if(pathType === "search") {
-        setSectionType(sectionInfoType)
+  useEffect(() => {
+    let mounted = true;
+
+    const imageTypeChecker = () => {
+      if (pathType === "movie") {
+        setSectionType("movie");
       }
-      if(pathType === "bookmark") {
-        setSectionType(sectionInfoType)
-      }  
-    }
+      if (pathType === "series") {
+        setSectionType("series");
+      }
+      if (pathType === "person") {
+        setSectionType("person");
+      }
+      if (pathType === "search") {
+        setSectionType(sectionInfoType);
+      }
+      if (pathType === "bookmark") {
+        setSectionType(sectionInfoType);
+      }
+    };
 
-    if(mounted) {
-      imageTypeChecker()
+    if (mounted) {
+      imageTypeChecker();
     }
 
     return () => {
-      mounted = false
-    }
-  },[pathType,sectionInfoType])
+      mounted = false;
+    };
+  }, [pathType, sectionInfoType]);
 
   return (
     <Box width="100%">
-      <Flex width="100%" align="center" justify="space-between" my={2} >
-        <Text fontSize="2xl" mb={3} fontWeight="semibold" >{title}</Text>
-          { seeAll 
-            ? <Button onClick={() => toggleView()} backgroundColor="transparent">
-                <Text fontSize={{lg:"md", xl:"lg"}}>Collapse </Text>
-              </Button>
-            : <Button onClick={() => toggleView()} backgroundColor="transparent">
-                <Text fontSize={{lg:"md", xl:"lg"}}>See All </Text>
-              </Button>
-          }
-      </Flex>
-        {seeAll
-          ? <Collapse in={seeAll}>
-              <Grid templateColumns="repeat(auto-fill,minmax(12rem, 1fr))" columnGap={{lg:"1", xl:"6"}}  alignItems="start" width="100%" >
-                {sectionInfos.map((data:any) => (
-                  <Link to={`/${sectionType}/${data.id}`} key={data.id}>
-                  <InfoCard
-                    title={data.title||data.name}
-                    posterPath={data.poster_path||data.profile_path}
-                    rating={data.vote_average}
-                    />
-                  </Link>))}
-                </Grid>
-            </Collapse>
-          : <Fade in={!seeAll}>
-              <Grid templateColumns={`repeat(auto-fill,minmax(12rem, 1fr))`} columnGap={{lg:"1", xl:"6"}} alignItems="start" width="100%">
-                {sectionInfos.slice(0,6).map((data:any) => (
-                  <Link to={`/${sectionType}/${data.id}`} key={data.id}>
-                  <InfoCard
-                    title={data.title||data.name}
-                    posterPath={data.poster_path||data.profile_path}
-                    rating={data.vote_average}
-                    />
-                  </Link>))}
-              </Grid>
-          </Fade>
-        }
+      <CollapseControl>
+        <Text fontSize="2xl" mb={3} fontWeight="semibold">
+          {title}
+        </Text>
+        {seeAll ? (
+          <Button onClick={() => toggleView()} backgroundColor="transparent">
+            <Text fontSize={{ lg: "md", xl: "lg" }}>Collapse </Text>
+          </Button>
+        ) : (
+          <Button onClick={() => toggleView()} backgroundColor="transparent">
+            <Text fontSize={{ lg: "md", xl: "lg" }}>See All </Text>
+          </Button>
+        )}
+      </CollapseControl>
+      {seeAll ? (
+        <Collapse in={seeAll}>
+          <GridSection>
+            {sectionInfos.map((data: any) => (
+              <Link to={`/${sectionType}/${data.id}`} key={data.id}>
+                <InfoCard
+                  title={data.title || data.name}
+                  posterPath={data.poster_path || data.profile_path}
+                  rating={data.vote_average}
+                />
+              </Link>
+            ))}
+          </GridSection>
+        </Collapse>
+      ) : (
+        <Fade in={!seeAll}>
+          <GridSection>
+            {sectionInfos.slice(0, 6).map((data: any) => (
+              <Link to={`/${sectionType}/${data.id}`} key={data.id}>
+                <InfoCard
+                  title={data.title || data.name}
+                  posterPath={data.poster_path || data.profile_path}
+                  rating={data.vote_average}
+                />
+              </Link>
+            ))}
+          </GridSection>
+        </Fade>
+      )}
     </Box>
-  )
-}
+  );
+};
 
-export default CollapseBox
+export default CollapseBox;

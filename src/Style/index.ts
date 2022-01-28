@@ -1,28 +1,27 @@
-import { extendTheme } from "@chakra-ui/react"
-import { createBreakpoints } from "@chakra-ui/theme-tools"
-import "@fontsource/open-sans"
-import "@fontsource/ubuntu"
+import { extendTheme } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
+import "@fontsource/open-sans";
+import "@fontsource/ubuntu";
 
 const breakpoints = createBreakpoints({
   sm: "320px",
   md: "768px",
   lg: "1200px",
   xl: "1400px",
-})
+});
 
 const customTheme = extendTheme({
-  config:{
-    initialColorMode:"light",
-    useSystemColorMode: false,  
-  }, 
+  config: {
+    initialColorMode: "light",
+    useSystemColorMode: false,
+  },
 
   fonts: {
-    body:"Ubuntu",
+    body: "Ubuntu",
     heading: "Open Sans",
   },
 
-  breakpoints
-
+  breakpoints,
 });
 
-export default customTheme
+export default customTheme;

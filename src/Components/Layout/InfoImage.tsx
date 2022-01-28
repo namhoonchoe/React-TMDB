@@ -1,59 +1,83 @@
-import React from 'react'
-import BrokenPoster from '../svgcomponents/BrokenPoster'
-import BrokenPortrait from '../svgcomponents/BrokenPortrait'
-import { Image, Flex, useColorMode } from "@chakra-ui/react"
+import React from "react";
+import BrokenPoster from "../svgcomponents/BrokenPoster";
+import BrokenPortrait from "../svgcomponents/BrokenPortrait";
+import { Image, Flex, useColorMode, chakra } from "@chakra-ui/react";
 
 interface IImageProps {
-  borderRadius:string,
-  imageType?:string,
-  height?:string,
-  width?:string,
-  imageSource:string|undefined|null
+  borderRadius: string;
+  imageType?: string;
+  height?: string;
+  width?: string;
+  imageSource: string | undefined | null;
 }
 
-const InfoImage:React.FC<IImageProps> = ({ borderRadius, imageSource, imageType, height ,width }) => {
-  const colorMode = useColorMode().colorMode
+const InfoImage: React.FC<IImageProps> = ({
+  borderRadius,
+  imageSource,
+  imageType,
+  height,
+  width,
+}) => {
+  const colorMode = useColorMode().colorMode;
+  const CenterBox = chakra(Flex, {
+    baseStyle: {
+      justifyContent: "center",
+      alignItems: "center",
+      width: width,
+      height: height,
+    },
+  });
 
   return (
     <>
-      { typeof imageSource === "string" && 
+      {typeof imageSource === "string" && (
         <Image
           minWidth={width}
           height={height}
           borderRadius={borderRadius}
           src={`https://image.tmdb.org/t/p/w300${imageSource}`}
+        />
+      )}
+
+      {imageType === "poster" && imageSource === undefined && (
+        <CenterBox
+          border="1px"
+          borderColor="gray.300"
+          borderRadius={borderRadius}
+        >
+          <BrokenPoster
+            width={"3rem"}
+            height={"3rem"}
+            color={colorMode === "light" ? "#A0AEC0" : "#F7FAFC"}
           />
-        }
-        
-        { imageType === "poster" && imageSource === undefined && 
-          <Flex justify="center" align="center" width={width} height={height} border="1px"  borderColor="gray.300"  borderRadius={borderRadius}>
-            <BrokenPoster 
-              width={"3rem"}
-              height={"3rem"}
-              color={colorMode==="light" ? "#A0AEC0" : "#F7FAFC"}/>
-          </Flex>
-        }
+        </CenterBox>
+      )}
 
-        { imageType === "poster" && imageSource === null && 
-          <Flex justify="center" align="center" width={width} height={height} border="1px"  borderColor="gray.300"  borderRadius={borderRadius}>
-            <BrokenPoster 
-              width={"3rem"}
-              height={"3rem"}
-              color={colorMode==="light" ? "#A0AEC0" : "#F7FAFC"}/>
-          </Flex>
-        }
+      {imageType === "poster" && imageSource === null && (
+        <CenterBox
+          border="1px"
+          borderColor="gray.300"
+          borderRadius={borderRadius}
+        >
+          <BrokenPoster
+            width={"3rem"}
+            height={"3rem"}
+            color={colorMode === "light" ? "#A0AEC0" : "#F7FAFC"}
+          />
+        </CenterBox>
+      )}
 
-        { imageType === "portrait" && imageSource === null && 
-          <Flex justify="center" align="center" width={width} height={height} border="none"  >
-            <BrokenPortrait
-              width={"3rem"}
-              height={"3rem"}
-              color={colorMode==="light" ? "#A0AEC0" : "#F7FAFC"}/>
-          </Flex> 
-        }
+      {imageType === "portrait" && imageSource === null && (
+        <CenterBox border="none">
+          <BrokenPortrait
+            width={"3rem"}
+            height={"3rem"}
+            color={colorMode === "light" ? "#A0AEC0" : "#F7FAFC"}
+          />
+        </CenterBox>
+      )}
     </>
-  )
-}
+  );
+};
 
-
-export default InfoImage
+export default InfoImage;

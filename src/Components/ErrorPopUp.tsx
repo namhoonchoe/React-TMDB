@@ -18,7 +18,7 @@ export default function ErrorPopUp() {
     onCloseComplete: () => history.go(-1),
     render: () => (
       <Flex color="white" p={3} bgColor={colorMode === 'light' ? 'gray.300' : 'gray.700'} 
-            borderRadius="lg" justify="space-between" align="center">
+            borderRadius="lg" justifyCo={"space-between" } alignItems={"center"}>
         <Text mr="5%">An Error has Ocurred.</Text>
         <Button onClick={()=>history.go(-1)}bgColor={colorMode === 'light' ? 'gray.400' : 'gray.800'}>Close</Button>
       </Flex>),

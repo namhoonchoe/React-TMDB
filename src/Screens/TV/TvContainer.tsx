@@ -1,52 +1,53 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TvPresenter from "./TvPresenter";
 import { tvApi } from "@api";
 
 interface ITvData {
-	topRated:null,
-	popular:null,
-	airingToday:null
+  topRated: null;
+  popular: null;
+  airingToday: null;
 }
 
-const TvContainer:React.FC = () => {
-  const [series,setSeries] = useState<ITvData>({ 
-    topRated:null,
-    popular:null,
-    airingToday:null
-  })
-  const [error,setError] = useState<boolean>(false)
-  const [loading,setLoading] = useState<boolean>(true)
+const TvContainer: React.FC = () => {
+  const [series, setSeries] = useState<ITvData>({
+    topRated: null,
+    popular: null,
+    airingToday: null,
+  });
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() =>{
+  useEffect(() => {
     let mounted = true;
-    const getSeriesData = async() =>{
-      try { 
-      const { 
-        data:{ results:topRated } 
+    const getSeriesData = async () => {
+      try {
+        const {
+          data: { results: topRated },
         } = await tvApi.topRated();
-  
-      const {
-        data: { results: airingToday },
+
+        const {
+          data: { results: airingToday },
         } = await tvApi.airingToday();
 
-      const {
-        data: { results: popular },
+        const {
+          data: { results: popular },
         } = await tvApi.popular();
-        
-        setSeries({...series,topRated,airingToday,popular})
-      } catch {   
-        setError(true)
+
+        setSeries({ ...series, topRated, airingToday, popular });
+      } catch {
+        setError(true);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    } 
-    if (mounted){
-      getSeriesData()
+    };
+    if (mounted) {
+      getSeriesData();
     }
     return () => {
-      mounted = false
-    }},[])
-    const {topRated,airingToday,popular} = series
+      mounted = false;
+    };
+  }, []);
+  const { topRated, airingToday, popular } = series;
 
   return (
     <TvPresenter
@@ -56,7 +57,7 @@ const TvContainer:React.FC = () => {
       error={error}
       loading={loading}
     />
-  )
-}
+  );
+};
 
-export default TvContainer
+export default TvContainer;

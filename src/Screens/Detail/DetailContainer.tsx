@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { usePathTypeCheck } from '@hooks/usePathTypeCheck'
-import { movieApi, tvApi } from "@api"
-import DetailPresenter from './DetailPresenter';
-
+import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
+import { movieApi, tvApi } from "@api";
+import DetailPresenter from "./DetailPresenter";
 
 interface IDetailInfos {
-  detailInfo:null|Array<any>,
-  credits:null|Array<any>,
-  similars:null|Array<any>,
+  detailInfo: null | Array<any>;
+  credits: null | Array<any>;
+  similars: null | Array<any>;
 }
 
-const DetailContainer:React.FC = () => {
-	const pathType = usePathTypeCheck()
-  const [detail,setDetail] = useState<IDetailInfos>({
-    detailInfo:null,
-    credits:null,
-    similars:null,
-  })
-  const [error,setError] = useState<boolean>(false)
-  const [loading,setLoading] = useState<boolean>(true)
-  let { id } = useParams() as any
+const DetailContainer: React.FC = () => {
+  const pathType = usePathTypeCheck();
+  const [detail, setDetail] = useState<IDetailInfos>({
+    detailInfo: null,
+    credits: null,
+    similars: null,
+  });
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  let { id } = useParams() as any;
 
   useEffect(() => {
     let mounted = true;
@@ -28,64 +27,70 @@ const DetailContainer:React.FC = () => {
       if (pathType === "movie") {
         const getMovieDetail = async () => {
           try {
-            const { data:movieDetail } = await movieApi.movieDetail(id)
-            const { data:casting } = await movieApi.credits(id)
-            const { data:{ results:similars } } = await movieApi.similar(id)
-            setDetail({...detail,
-                      detailInfo:movieDetail,
-                      credits:casting,
-                      similars
-            })
+            const { data: movieDetail } = await movieApi.movieDetail(id);
+            const { data: casting } = await movieApi.credits(id);
+            const {
+              data: { results: similars },
+            } = await movieApi.similar(id);
+            setDetail({
+              ...detail,
+              detailInfo: movieDetail,
+              credits: casting,
+              similars,
+            });
           } catch {
-            setError(true)
+            setError(true);
           } finally {
-            setLoading(false)
+            setLoading(false);
           }
-        }
-        getMovieDetail()
-      } 
-  
-      if(pathType === "series") {
+        };
+        getMovieDetail();
+      }
+
+      if (pathType === "series") {
         const getSeriesDetail = async () => {
           try {
-            const { data:seriesDetail } = await tvApi.tvDetail(id)
-            const { data:casting } = await tvApi.credits(id)
-            const { data:{ results:similars }} = await tvApi.similar(id)
-            setDetail({...detail,
-                      detailInfo:seriesDetail,
-                      credits:casting,
-                      similars
-            })
+            const { data: seriesDetail } = await tvApi.tvDetail(id);
+            const { data: casting } = await tvApi.credits(id);
+            const {
+              data: { results: similars },
+            } = await tvApi.similar(id);
+            setDetail({
+              ...detail,
+              detailInfo: seriesDetail,
+              credits: casting,
+              similars,
+            });
           } catch {
-            setError(true)
+            setError(true);
           } finally {
-            setLoading(false)
+            setLoading(false);
           }
-        }
-        getSeriesDetail()
-      } 
-    }
-    
-    if(mounted) {
-      getDetail()
-    }
-    
-    return () => {
-      mounted = false
-      setLoading(true)
+        };
+        getSeriesDetail();
+      }
+    };
+
+    if (mounted) {
+      getDetail();
     }
 
-  },[pathType,id])
-  const { detailInfo, credits, similars } = detail
+    return () => {
+      mounted = false;
+      setLoading(true);
+    };
+  }, [pathType, id]);
+  const { detailInfo, credits, similars } = detail;
 
   return (
-  <DetailPresenter
-    detail={detailInfo}
-    credits={credits}
-    similar={similars}
-    error={error}
-    loading={loading}/>
-  )
-}
+    <DetailPresenter
+      detail={detailInfo}
+      credits={credits}
+      similar={similars}
+      error={error}
+      loading={loading}
+    />
+  );
+};
 
-export default DetailContainer
+export default DetailContainer;

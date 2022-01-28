@@ -1,4 +1,3 @@
-import BookMarkContainer from "./BookMarkContainer"
+import BookMarkContainer from "./BookMarkContainer";
 
-
-export default BookMarkContainer
+export default BookMarkContainer;
