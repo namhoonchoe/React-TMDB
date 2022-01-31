@@ -10,6 +10,7 @@ import {
   useColorMode,
   chakra,
 } from "@chakra-ui/react";
+import { GridLayout } from "@components/Layout/BasicLayouts";
 import DateFormatter from "@components/DateFormatter";
 import MovieIcon from "@components/svgcomponents/MovieIcon";
 import SeriesIcon from "@components/svgcomponents/SeriesIcon";
@@ -63,12 +64,6 @@ const ProfileBody: React.FC<IBodyProps> = ({
       px: 2,
       py: 1,
       borderRadius: "lg",
-      backgroundColor:
-        creditType === "crew"
-          ? colorMode === "light"
-            ? "gray.200"
-            : "gray.600"
-          : "transparent",
     },
   });
 
@@ -81,6 +76,17 @@ const ProfileBody: React.FC<IBodyProps> = ({
       py: 1.5,
       borderRadius: "md",
       backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
+    },
+  });
+
+  const CreditGrid = chakra(Grid, {
+    baseStyle: {
+      gridTemplateColumns: `repeat(auto-fit,minmax(22rem, 1fr))`,
+      gridColumnGap: "1",
+      gridRowGap: "6",
+      alignContent: "start",
+      width: "100%",
+      pb: 4,
     },
   });
 
@@ -118,13 +124,7 @@ const ProfileBody: React.FC<IBodyProps> = ({
   return (
     <>
       <Flex justifyContent="center" width="100%">
-        <Grid
-          templateRows="repeat(2, 1fr)"
-          templateColumns="repeat(5, 1fr)"
-          width="100%"
-          px="3%"
-          pt="2%"
-        >
+        <GridLayout px={"3%"} pt={"2%"}>
           <GridItem rowSpan={1} colSpan={1}>
             {/*Personal Info*/}
             <PersonalInfoLayout>
@@ -177,17 +177,35 @@ const ProfileBody: React.FC<IBodyProps> = ({
                 )}
             </PersonalInfoLayout>
           </GridItem>
-          <GridItem rowSpan={2} colSpan={4}>
+          <GridItem rowSpan={2} colSpan={5}>
             {/*Credits*/}
             <VStack width="100%" justify="center" px="1%">
               <NavContainer>
                 <Flex alignItems="center">
-                  <RoleSelector onClick={() => getCast()}>
+                  <RoleSelector
+                    backgroundColor={
+                      creditType === "cast"
+                        ? colorMode === "light"
+                          ? "gray.200"
+                          : "gray.600"
+                        : "transparent"
+                    }
+                    onClick={() => getCast()}
+                  >
                     <Text fontWeight="semibold" fontSize="lg">
                       Cast
                     </Text>
                   </RoleSelector>
-                  <RoleSelector onClick={() => getCrew()}>
+                  <RoleSelector
+                    backgroundColor={
+                      creditType === "crew"
+                        ? colorMode === "light"
+                          ? "gray.200"
+                          : "gray.600"
+                        : "transparent"
+                    }
+                    onClick={() => getCrew()}
+                  >
                     <Text fontWeight="semibold" fontSize="lg">
                       Crew
                     </Text>
@@ -205,41 +223,28 @@ const ProfileBody: React.FC<IBodyProps> = ({
                   </TypeSelector>
                 )}
               </NavContainer>
-              <Grid
-                templateColumns="repeat(auto-fit,minmax(22rem, 1fr))"
-                columnGap="1"
-                rowGap="6"
-                alignItems="start"
-                width="100%"
-                pb={4}
-              >
-                <>
-                  {creditType === "cast" ? (
-                    <CreditSection
-                      creditData={
-                        isMovie === true
-                          ? movieCredits.cast
-                          : seriesCredits.cast
-                      }
-                      creditType={creditType}
-                      mediaType={isMovie ? "movie" : "series"}
-                    />
-                  ) : (
-                    <CreditSection
-                      creditData={
-                        isMovie === true
-                          ? movieCredits.crew
-                          : seriesCredits.crew
-                      }
-                      creditType={creditType}
-                      mediaType={isMovie ? "movie" : "series"}
-                    />
-                  )}
-                </>
-              </Grid>
+              <CreditGrid>
+                {creditType === "cast" ? (
+                  <CreditSection
+                    creditData={
+                      isMovie === true ? movieCredits.cast : seriesCredits.cast
+                    }
+                    creditType={creditType}
+                    mediaType={isMovie ? "movie" : "series"}
+                  />
+                ) : (
+                  <CreditSection
+                    creditData={
+                      isMovie === true ? movieCredits.crew : seriesCredits.crew
+                    }
+                    creditType={creditType}
+                    mediaType={isMovie ? "movie" : "series"}
+                  />
+                )}
+              </CreditGrid>
             </VStack>
           </GridItem>
-        </Grid>
+        </GridLayout>
       </Flex>
     </>
   );

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDiscoverInfoList, fetchMore } from "@redux/discoverSlice";
 import { Link } from "react-router-dom";
-import { Grid, Text, Flex, Button, chakra } from "@chakra-ui/react";
+import { Text, Flex, Button, chakra } from "@chakra-ui/react";
+import { AutoGridLayoutSm } from "@components/Layout/BasicLayouts"
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import InfoCard from "@components/Layout/InfoCard";
 
@@ -80,10 +81,7 @@ const Main: React.FC = () => {
     <DiscoverContainer>
       <Title>Discover</Title>
       {mainInfo !== null && mainInfo.length > 0 && (
-        <Grid
-          templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))"
-          columnGap="6"
-          width="100%"
+        <AutoGridLayoutSm
         >
           {mainInfo.map((data: any) => (
             <Link to={`/${sectionType}/${data.id}`}>
@@ -95,7 +93,7 @@ const Main: React.FC = () => {
               />
             </Link>
           ))}
-        </Grid>
+        </AutoGridLayoutSm>
       )}
       <NextPage onClick={() => getNextPage()}>
         <Text>Next Page</Text>

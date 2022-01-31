@@ -1,6 +1,7 @@
 import React from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { Text, Flex, Spacer, Collapse } from "@chakra-ui/react";
+import { Text, Spacer, Collapse } from "@chakra-ui/react";
+import { CenteredBox } from "./BasicLayouts";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 interface ICollapseBoxProps {
@@ -12,7 +13,7 @@ const CollapseBox: React.FC<ICollapseBoxProps> = ({ title, children }) => {
 
   return (
     <>
-      <Flex direction="row" align="center" justify="start" my={2} px={2}>
+      <CenteredBox my={2} px={2}>
         <Text fontSize="lg">{title}</Text>
         <Spacer />
         {isOpen ? (
@@ -20,7 +21,7 @@ const CollapseBox: React.FC<ICollapseBoxProps> = ({ title, children }) => {
         ) : (
           <ChevronDownIcon onClick={onToggle} />
         )}
-      </Flex>
+      </CenteredBox>
       <Collapse in={isOpen}>{children}</Collapse>
     </>
   );

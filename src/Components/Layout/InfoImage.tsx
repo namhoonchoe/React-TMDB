@@ -1,7 +1,8 @@
 import React from "react";
 import BrokenPoster from "../svgcomponents/BrokenPoster";
 import BrokenPortrait from "../svgcomponents/BrokenPortrait";
-import { Image, Flex, useColorMode, chakra } from "@chakra-ui/react";
+import { Image, useColorMode, chakra } from "@chakra-ui/react";
+import { CenteredBox } from "./BasicLayouts";
 
 interface IImageProps {
   borderRadius: string;
@@ -19,10 +20,9 @@ const InfoImage: React.FC<IImageProps> = ({
   width,
 }) => {
   const colorMode = useColorMode().colorMode;
-  const CenterBox = chakra(Flex, {
+
+  const CenterBox = chakra(CenteredBox, {
     baseStyle: {
-      justifyContent: "center",
-      alignItems: "center",
       width: width,
       height: height,
     },

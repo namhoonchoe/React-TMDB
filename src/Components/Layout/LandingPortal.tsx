@@ -45,7 +45,7 @@ const LandingPortal: React.FC<ILandingProps> = ({
   const GenreContainer = chakra(Flex, {
     baseStyle: {
       alignItems: "center",
-      justifyTracks: "start",
+      justifyContent: "start",
       boxSize: "max-content",
       mt: "4",
     },

@@ -2,7 +2,8 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import InfoCard from "@components/Layout/InfoCard";
 import { Link } from "react-router-dom";
-import { Flex, Text, Grid } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import { AutoGridLayoutSm } from "@components/Layout/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
 
@@ -52,11 +53,7 @@ const PersonPresenter: React.FC<IPersonProps> = ({
               Popular people
             </Text>
             {popular !== null && popular.length > 0 && (
-              <Grid
-                templateColumns="repeat(auto-fit,minmax(10.5rem, 1fr))"
-                columnGap="6"
-                width="100%"
-              >
+              <AutoGridLayoutSm>
                 {popular.map((data: any) => (
                   <Link to={`/profile/${data.id}`}>
                     <InfoCard
@@ -67,7 +64,7 @@ const PersonPresenter: React.FC<IPersonProps> = ({
                     />
                   </Link>
                 ))}
-              </Grid>
+              </AutoGridLayoutSm>
             )}
           </Flex>
         </>

@@ -13,6 +13,7 @@ import {
   Tooltip,
   chakra,
 } from "@chakra-ui/react";
+import { GridLayout } from "@components/Layout/BasicLayouts";
 import CollapseSection from "@components/Layout/CollapseSection";
 import InfoImage from "@components/Layout/InfoImage";
 import DateFormatter from "@components/DateFormatter";
@@ -35,6 +36,14 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
   const toPerson = (path: string) => {
     history.push(path);
   };
+
+  const DetailBodyContainer = chakra(Flex,{
+    baseStyle:{
+      flexDirection:"column",
+      alignItems:"start",
+      width:"92vw"
+    }
+  })
 
   const CastingSection = chakra(Flex, {
     baseStyle: {
@@ -63,6 +72,10 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
       minHeight: "12rem",
       maxHeight: "max-content",
       borderRadius: "lg",
+      backgroundColor:
+      colorMode === "light"
+        ? "gray.200"
+        : "gray.700",
       _hover: {
         boxShadow: colorMode === "light" ? "xl" : "dark-lg",
       },
@@ -78,6 +91,44 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
       width: "100%",
     },
   });
+
+  const LanguageGem = chakra(Box, {
+    baseStyle: {
+      px: 2,
+      py: 0.5,
+      mr: 2,
+      boxSize: "max-content",
+      borderRadius: "xl",
+      backgroundColor: colorMode === "light" ? "gray.200" : "gray.700",
+    },
+  });
+
+  const DirectorName = chakra(Text, {
+    baseStyle: {
+      p: 1,
+      as: "cite",
+      _hover: {
+        backgroundColor: "blue.400",
+        color: "white",
+      },
+      borderRadius: "xl",
+    },
+  });
+
+  interface IDetailsInfo {
+    title: string;
+  }
+
+  const DetailinfoContainer: React.FC<IDetailsInfo> = ({ title, children }) => {
+    return (
+      <Flex direction="column" align="start">
+        <Text p={1} fontWeight="semibold">
+          {title}
+        </Text>
+        {children}
+      </Flex>
+    );
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -106,13 +157,8 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
   return (
     <>
       {pathType !== "person" ? (
-        <>
-          <Flex direction="column" align="start" width="92vw">
-            <Grid
-              width="100%"
-              templateRows="repeat(2, 1fr)"
-              templateColumns="repeat(6, 1fr)"
-            >
+          <DetailBodyContainer>
+            <GridLayout>
               <GridItem rowSpan={2} colSpan={5}>
                 <VStack align="start">
                   {/*casting*/}
@@ -222,11 +268,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                           {credits.cast.slice(0, 5).map((data: any) => (
                             <>
                               <CastingInfoContainer
-                                backgroundColor={
-                                  colorMode === "light"
-                                    ? "gray.200"
-                                    : "gray.700"
-                                }
+                            
                                 key={data.id}
                                 onClick={() => toPerson(`/profile/${data.id}`)}
                               >
@@ -307,51 +349,34 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                   justify="start"
                   fontSize={{ lg: "xs", xl: "md" }}
                 >
-                  <Flex direction="column" align="start">
-                    <Text p={1} fontWeight="semibold">
-                      Original Title
-                    </Text>
+                  <DetailinfoContainer title={"Original Title"}>
                     <Text p={1}>
                       {detail.original_title || detail.original_name}
                     </Text>
-                  </Flex>
+                  </DetailinfoContainer>
                   {pathType === "movie" && (
                     <>
                       <Tooltip label="check Director's profile">
-                        <Flex direction="column" align="start">
-                          <Text p={1} fontWeight="semibold">
-                            Director
+                        <DetailinfoContainer title={"Director"}>
+                          <Text p={1}>
+                            {director !== null && (
+                              <DirectorName
+                                onClick={() =>
+                                  toPerson(`/profile/${director.id}`)
+                                }
+                              >
+                                {director.name}
+                              </DirectorName>
+                            )}
                           </Text>
-                          {director !== null && (
-                            <Text
-                              p={1}
-                              as="cite"
-                              onClick={() =>
-                                toPerson(`/profile/${director.id}`)
-                              }
-                              _hover={{
-                                backgroundColor: "blue.400",
-                                color: "white",
-                              }}
-                              borderRadius="xl"
-                            >
-                              {director.name}
-                            </Text>
-                          )}
-                        </Flex>
+                        </DetailinfoContainer>
                       </Tooltip>
-                      <Flex align="center">
-                        <Text p={1} fontWeight="semibold">
-                          Runtime
-                        </Text>
+                      <DetailinfoContainer title={"Runtime"}>
                         <Text p={1} fontSize="sm">
                           {detail.runtime}'
                         </Text>
-                      </Flex>
-                      <Flex align="center">
-                        <Text p={1} fontWeight="semibold">
-                          Release Date
-                        </Text>
+                      </DetailinfoContainer>
+                      <DetailinfoContainer title={"Release Date"}>
                         {detail.release_date !== null &&
                           detail.release_date !== undefined && (
                             <DateFormatter
@@ -360,7 +385,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               fontWeight="medium"
                             />
                           )}
-                      </Flex>
+                      </DetailinfoContainer>
                     </>
                   )}
                   {pathType === "series" && (
@@ -368,33 +393,16 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                       {detail.created_by !== null &&
                         detail.created_by.length > 0 && (
                           <Tooltip label="check Director's profile">
-                            <Flex direction="column" align="start">
-                              <Text p={1} fontWeight="semibold">
-                                Director
-                              </Text>
+                            <DetailinfoContainer title={"Director"}>
                               {director !== null && (
-                                <Text
-                                  p={1}
-                                  as="cite"
-                                  onClick={() =>
-                                    toPerson(`/profile/${director.id}`)
-                                  }
-                                  _hover={{
-                                    backgroundColor: "blue.400",
-                                    color: "white",
-                                  }}
-                                  borderRadius="xl"
-                                >
+                                <DirectorName  onClick={() => toPerson(`/profile/${director.id}`)}>
                                   {director.name}
-                                </Text>
+                                </DirectorName>
                               )}
-                            </Flex>
+                            </DetailinfoContainer>
                           </Tooltip>
                         )}
-                      <Flex align="center">
-                        <Text p={1} fontWeight="semibold">
-                          Episode Runtime
-                        </Text>
+                      <DetailinfoContainer title={"Episode Runtime"}>
                         <Flex align="center" wrap="wrap">
                           {detail.episode_run_time.map((runtime: any) => (
                             <Text p={1} fontSize="sm">
@@ -402,110 +410,67 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                             </Text>
                           ))}
                         </Flex>
-                      </Flex>
-                      <Flex align="center">
-                        <Text p={1} fontWeight="semibold">
-                          Number of Seasons
-                        </Text>
+                      </DetailinfoContainer>
+                      <DetailinfoContainer title={"Number of Seasons"}>
                         <Text p={1} fontSize="sm">
                           {detail.number_of_seasons}
                         </Text>
-                      </Flex>
-                      <Flex>
-                        <Text p={1} fontWeight="semibold">
-                          Number of Episodes
-                        </Text>
+                      </DetailinfoContainer>
+                      <DetailinfoContainer title={"Number of Episodes"}>
                         <Text p={1} fontSize="sm">
                           {detail.number_of_episodes}
                         </Text>
-                      </Flex>
+                      </DetailinfoContainer>
                       {detail.first_air_date !== null &&
                         detail.first_air_date !== undefined && (
-                          <Flex align="center">
-                            <Text p={1} fontWeight="semibold">
-                              First Air Date
-                            </Text>
+                          <DetailinfoContainer title={"First Air Date"}>
                             <DateFormatter
                               date={detail.first_air_date}
                               fontSize="sm"
                               fontWeight="medium"
                             />
-                          </Flex>
+                          </DetailinfoContainer>
                         )}
                       {detail.last_air_date !== null &&
                         detail.last_air_date !== undefined && (
-                          <Flex align="center">
-                            <Text p={1} fontWeight="semibold">
-                              Last Air Date
-                            </Text>
+                          <DetailinfoContainer title={"Last Air Date"}>
                             <DateFormatter
                               date={detail.last_air_date}
                               fontSize="sm"
                               fontWeight="medium"
                             />
-                          </Flex>
+                          </DetailinfoContainer>
                         )}
                     </>
                   )}
-                  <Flex align="center">
-                    <Text p={1} fontWeight="semibold">
-                      Status
-                    </Text>
+                  <DetailinfoContainer title={"Status"}>
                     <Text p={1} fontSize="sm">
                       {detail.status}
                     </Text>
-                  </Flex>
-                  <Flex align="center" justify="start">
-                    <Text p={1} fontWeight="semibold">
-                      Original Language
-                    </Text>
-                    <Box
-                      px={2}
-                      py={0.5}
-                      mr={2}
-                      boxSize="max-content"
-                      borderRadius="xl"
-                      backgroundColor={
-                        colorMode === "light" ? "gray.200" : "gray.700"
-                      }
-                    >
+                  </DetailinfoContainer>
+                  <DetailinfoContainer title={"Original Language"}>
+                    <LanguageGem>
                       <Text fontSize="sm">{detail.original_language}</Text>
-                    </Box>
-                  </Flex>
-                  <Flex align="center" justify="start">
-                    <Text p={1} fontWeight="semibold">
-                      Language
-                    </Text>
+                    </LanguageGem>
+                  </DetailinfoContainer>
+                  <DetailinfoContainer title={"Language"}>
                     <Flex align="center">
                       {detail.spoken_languages.map((language: any) => (
-                        <Box
-                          px={2}
-                          py={0.5}
-                          mr={2}
-                          boxSize="max-content"
-                          borderRadius="xl"
-                          backgroundColor={
-                            colorMode === "light" ? "gray.200" : "gray.700"
-                          }
-                        >
+                        <LanguageGem>
                           <Text fontSize="sm"> {language.iso_639_1}</Text>
-                        </Box>
+                        </LanguageGem>
                       ))}
                     </Flex>
-                  </Flex>
+                  </DetailinfoContainer>
                   {detail.revenue > 0 && (
-                    <Flex align="center">
-                      <Text p={1} fontWeight="semibold">
-                        Revenue
-                      </Text>
+                    <DetailinfoContainer title={"Revenue"}>
                       <Text p={1}>${detail.revenue}</Text>
-                    </Flex>
+                    </DetailinfoContainer>
                   )}
                 </Flex>
               </GridItem>
-            </Grid>
-          </Flex>
-        </>
+            </GridLayout>
+          </DetailBodyContainer>
       ) : null}
     </>
   );

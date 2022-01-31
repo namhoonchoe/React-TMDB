@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import CollapseSection from "@components/Layout/CollapseSection";
-import { VStack } from "@chakra-ui/react";
+import { PresenterLayout } from "@components/Layout/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ScrollToTop from "@components/ScrollToTop";
 import ErrorPopUp from "@components/ErrorPopUp";
@@ -37,7 +37,7 @@ const TvPresenter: React.FC<ISerieseProps> = ({
             <meta charSet="utf-8" />
             <title>Kino Guide | Series</title>
           </Helmet>
-          <VStack spacing="3" width="90vw" mt={2}>
+          <PresenterLayout>
             {airingToday !== null && airingToday.length > 0 && (
               <CollapseSection
                 title={"Airing Today"}
@@ -58,7 +58,7 @@ const TvPresenter: React.FC<ISerieseProps> = ({
                 sectionInfos={topRated}
               />
             )}
-          </VStack>
+          </PresenterLayout>
           {/* To the page top */}
           <ScrollToTop />
         </>

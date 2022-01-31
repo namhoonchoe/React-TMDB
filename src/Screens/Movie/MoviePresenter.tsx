@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import CollapseSection from "@components/Layout/CollapseSection";
 import ErrorPopUp from "@components/ErrorPopUp";
-import { VStack } from "@chakra-ui/react";
+import { PresenterLayout } from "@components/Layout/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ScrollToTop from "@components/ScrollToTop";
 
@@ -37,7 +37,7 @@ const MoviePresenter: React.FC<IMovieProps> = ({
             <meta charSet="utf-8" />
             <title>Kino Guide | Movie</title>
           </Helmet>
-          <VStack spacing="3" width="90vw" mt={2}>
+          <PresenterLayout>
             {nowPlaying !== null && nowPlaying.length > 0 && (
               <>
                 <CollapseSection title="NowPlaying" sectionInfos={nowPlaying} />
@@ -54,7 +54,7 @@ const MoviePresenter: React.FC<IMovieProps> = ({
                 sectionInfos={upComing}
               />
             )}
-          </VStack>
+          </PresenterLayout>
           {/* To the page top */}
           <ScrollToTop />
         </>

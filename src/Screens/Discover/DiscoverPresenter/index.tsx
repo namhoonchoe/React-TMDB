@@ -4,7 +4,8 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
 import SideBar from "./SideBar";
 import Main from "./Main";
-import { Grid, GridItem, Box, Flex } from "@chakra-ui/react";
+import { GridItem, Box, Flex } from "@chakra-ui/react";
+import { GridLayout } from "@components/Layout/BasicLayouts";
 
 interface IDiscoverProps {
   loading: boolean;
@@ -24,21 +25,16 @@ const DiscoverPresenter: React.FC<IDiscoverProps> = ({ loading, error }) => {
         </>
       ) : (
         <Flex position="relative" width="100%">
-          <Grid
-            templateRows="repeat(2, 1fr)"
-            templateColumns="repeat(5, 1fr)"
-            width="100%"
-            mx="1%"
-          >
+          <GridLayout mx="1%">
             <GridItem rowSpan={2} colSpan={1}>
               <Box position="sticky" top="10%">
                 <SideBar />
               </Box>
             </GridItem>
-            <GridItem rowSpan={2} colSpan={4}>
+            <GridItem rowSpan={2} colSpan={5}>
               <Main />
             </GridItem>
-          </Grid>
+          </GridLayout>
         </Flex>
       )}
 

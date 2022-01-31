@@ -1,9 +1,11 @@
-import { Flex,Spinner } from "@chakra-ui/react"
+import { Spinner } from "@chakra-ui/react"
+import { CenteredBox } from "./Layout/BasicLayouts"
+
 
 export default function LoadingSpinner() {
   return (
-  <Flex justifyContent={"center"} alignItems={"center"} my={32}>
+  <CenteredBox my={32}>
     <Spinner size="xl" color="blue.500" />
-  </Flex>
+  </CenteredBox>
   )
 }
