@@ -4,16 +4,16 @@ import { personApi } from "@api";
 import ProfilePresenter from "./ProfilePresenter";
 
 interface IProfile {
-  profileInfo: any;
-  movieCredits: any;
-  seiresCredits: any;
+  profileInfo: IPersonDetail ;
+  movieCredits: IMovieCreditInfo ;
+  seiresCredits: ISeriesCreditInfo ;
 }
 
 const ProfileContainer: React.FC = () => {
   const [detail, setDetail] = useState<IProfile>({
-    profileInfo: null,
-    movieCredits: null,
-    seiresCredits: null,
+    profileInfo: {} as IPersonDetail,
+    movieCredits: {} as IMovieCreditInfo,
+    seiresCredits: {} as ISeriesCreditInfo,
   });
 
   const [error, setError] = useState<boolean>(false);

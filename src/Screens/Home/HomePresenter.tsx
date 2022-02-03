@@ -8,8 +8,8 @@ import InfoCard from "@components/Layout/InfoCard";
 import ErrorPopUp from "@components/ErrorPopUp";
 
 interface IHomeProps {
-  trendingMovies: null | Array<any>;
-  trendingSeries: null | Array<any>;
+  trendingMovies: Array<IMovieData>;
+  trendingSeries: Array<ISeriesData>;
   mediaType: string;
   randomIndex: number;
   error: boolean;
@@ -41,9 +41,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
             <title>Kino Guide</title>
           </Helmet>
           <VStack mb={3} width="100%" overscroll="none">
-            {trendingMovies &&
-              trendingSeries !== null &&
-              trendingMovies.length &&
+            { trendingMovies.length &&
               trendingSeries.length > 0 && (
                 <Box width="100%" height="70vh">
                   <LandingPortal
@@ -56,7 +54,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
                 </Box>
               )}
 
-            {trendingMovies !== null && trendingMovies.length > 0 && (
+            { trendingMovies.length > 0 && (
               <VStack align="start">
                 <Flex align="flex-end" my={4}>
                   <Text fontSize="3xl" mr={2}>
@@ -101,7 +99,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
               </VStack>
             )}
 
-            {trendingSeries !== null && trendingSeries.length > 0 && (
+            {trendingSeries.length > 0 && (
               <VStack align="start">
                 <Flex align="flex-end" my={4}>
                   <Text fontSize="3xl" mr={2}>

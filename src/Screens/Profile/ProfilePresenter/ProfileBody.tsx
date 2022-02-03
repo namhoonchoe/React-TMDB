@@ -17,9 +17,9 @@ import SeriesIcon from "@components/svgcomponents/SeriesIcon";
 import { useIconColor } from "@hooks/useIconColor";
 
 interface IBodyProps {
-  profileInfo: any;
-  movieCredits: any;
-  seriesCredits: any;
+  profileInfo: IPersonDetail;
+  movieCredits: IMovieCreditInfo;
+  seriesCredits: ISeriesCreditInfo;
 }
 
 const ProfileBody: React.FC<IBodyProps> = ({

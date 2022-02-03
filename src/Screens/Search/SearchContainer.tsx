@@ -5,15 +5,15 @@ import { movieApi, tvApi } from "@api";
 import SearchPresenter from "./SearchPresenter";
 
 interface ISearchData {
-  movieResults: null | Array<any>;
-  seriesResults: null | Array<any>;
+  movieResults:  Array<ISearchMovies>;
+  seriesResults:  Array<ISearchSeries>;
 }
 
 const SearchContainer: React.FC = () => {
   const searchQuery = useSelector(selectSearch).searchQuery;
   const [results, setResults] = useState<ISearchData>({
-    movieResults: null,
-    seriesResults: null,
+    movieResults: [],
+    seriesResults: [],
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);

@@ -14,7 +14,7 @@ import StarRating from "@components/StarRating";
 import DateFormatter from "@components/DateFormatter";
 
 interface ICreditProps {
-  creditData: any;
+  creditData: Array<IMovieCast> | Array<ISeriesCast> | Array<IMovieCrew> | Array<ISeriesCrew>;
   creditType: string;
   mediaType: string;
 }
@@ -63,7 +63,6 @@ const CreditSection: React.FC<ICreditProps> = ({
     },
   });
 
-  
   const CastingContainer = chakra(Flex, {
     baseStyle: {
       alignItems: "center",
@@ -82,7 +81,7 @@ const CreditSection: React.FC<ICreditProps> = ({
 
   return (
     <>
-      {creditData !== null && creditData.length > 0 && (
+      { creditData.length > 0 && (
         <>
           {creditData.map((data: any) => (
             <>
@@ -267,8 +266,7 @@ const CreditSection: React.FC<ICreditProps> = ({
                         </CastingContainer>
                       )}
                       {data.genre_ids.length !== 0 && (
-                        <GenreContainer
-                        >
+                        <GenreContainer>
                           {data.genre_ids.slice(0, 3).map((genreId: any) => (
                             <GenreGem
                               genreId={genreId}

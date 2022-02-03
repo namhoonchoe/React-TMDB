@@ -7,9 +7,9 @@ import ScrollToTop from "@components/ScrollToTop";
 import ErrorPopUp from "@components/ErrorPopUp";
 
 interface ISerieseProps {
-  topRated: null | Array<any>;
-  airingToday: null | Array<any>;
-  popular: null | Array<any>;
+  topRated: null |  Array<ISeriesData>;
+  airingToday: null | Array<ISeriesData>;
+  popular: null | Array<ISeriesData>;
   error: boolean;
   loading: boolean;
 }

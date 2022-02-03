@@ -13,8 +13,8 @@ import InfoImage from "@components/Layout/InfoImage";
 
 interface IHeaderProps {
   name?: string;
-  profileSource?: string;
-  bioGraphy: string;
+  profileSource?: string | null ;
+  bioGraphy?: string;
 }
 
 const ProfileHeader: React.FC<IHeaderProps> = ({
@@ -75,7 +75,7 @@ const ProfileHeader: React.FC<IHeaderProps> = ({
           <Text fontSize="2xl" fontWeight="semibold">
             {name}
           </Text>
-          {bioGraphy !== "" && (
+          {bioGraphy !== "" &&  bioGraphy !== undefined && (
             <>
               {bioGraphy.length > 200 ? (
                 <BiographyLayout>

@@ -5,17 +5,17 @@ import { movieApi, tvApi } from "@api";
 import DetailPresenter from "./DetailPresenter";
 
 interface IDetailInfos {
-  detailInfo: null | Array<any>;
-  credits: null | Array<any>;
-  similars: null | Array<any>;
+  detailInfo: DetailInfo;
+  credits:  CreditInfo ;
+  similars: Array<IMovieSimilar> | Array<ISeriesSimilar>;
 }
 
 const DetailContainer: React.FC = () => {
   const pathType = usePathTypeCheck();
   const [detail, setDetail] = useState<IDetailInfos>({
-    detailInfo: null,
-    credits: null,
-    similars: null,
+    detailInfo: {} as DetailInfo,
+    credits: {} as CreditInfo,
+    similars: [],
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);

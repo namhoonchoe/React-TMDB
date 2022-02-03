@@ -3,7 +3,7 @@ import PersonPresenter from "./PersonPresenter";
 import { personApi } from "@api";
 
 interface IPersonData {
-  popular: null;
+  popular: null|Array<IPersonData>;
 }
 
 const PersonContainer: React.FC = () => {

@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@redux/store";
 
-interface IGenre {
-  info: any;
+interface IDiscoverGenre {
+  info: IGenre;
   type: string;
 }
 
 interface IDiscoverInfo {
-  discoverList: any;
-  discoverGenres: any;
+  discoverList: Array<IMovieData> & Array<ISeriesData>;
+  discoverGenres: Array<IGenre>;
 }
 
 interface IDiscoverQuery {
@@ -18,7 +18,7 @@ interface IDiscoverQuery {
   page: number;
 }
 
-type genreFilters = Array<IGenre>;
+type genreFilters = Array<IDiscoverGenre>;
 
 interface ITriggerPayload {
   sort: string | undefined;
@@ -33,7 +33,7 @@ interface IState {
 }
 
 const discoverState: IState = {
-  discoverInfo: { discoverList: null, discoverGenres: null },
+  discoverInfo: { discoverList: [], discoverGenres: [] },
 
   discoverQuery: {
     sort: undefined,
@@ -79,7 +79,7 @@ const discoverSlice = createSlice({
       };
     },
 
-    addToFilter: (state: IState, action: PayloadAction<IGenre>) => {
+    addToFilter: (state: IState, action: PayloadAction<IDiscoverGenre>) => {
       const target = state.genreFilters;
       const filterAdded = [...target, action.payload];
       return {
@@ -88,7 +88,7 @@ const discoverSlice = createSlice({
       };
     },
 
-    removeFromFilter: (state: IState, action: PayloadAction<IGenre>) => {
+    removeFromFilter: (state: IState, action: PayloadAction<IDiscoverGenre>) => {
       const target = state.genreFilters;
       const filterRemoved = target.filter(
         (genreFilter) => genreFilter.info.id !== action.payload.info.id

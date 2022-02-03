@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import MoviePresenter from "./MoviePresenter";
 import { movieApi } from "@api";
 
-interface IMovieData {
-  nowPlaying: null;
-  upComing: null;
-  popular: null;
+interface IMovieDataProps {
+  nowPlaying: Array<IMovieData>;
+  upComing: Array<IMovieData>;
+  popular: Array<IMovieData>;
 }
 
 const MovieContainer: React.FC = () => {
-  const [movie, setMovie] = useState<IMovieData>({
-    nowPlaying: null,
-    upComing: null,
-    popular: null,
+  const [movie, setMovie] = useState<IMovieDataProps>({
+    nowPlaying: [],
+    upComing: [],
+    popular: [],
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);

@@ -7,9 +7,9 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import ScrollToTop from "@components/ScrollToTop";
 
 interface IMovieProps {
-  nowPlaying: null | Array<any>;
-  upComing: null | Array<any>;
-  popular: null | Array<any>;
+  nowPlaying: Array<IMovieData>;
+  upComing: Array<IMovieData>;
+  popular: Array<IMovieData>;
   error: boolean;
   loading: boolean;
 }
@@ -38,17 +38,15 @@ const MoviePresenter: React.FC<IMovieProps> = ({
             <title>Kino Guide | Movie</title>
           </Helmet>
           <PresenterLayout>
-            {nowPlaying !== null && nowPlaying.length > 0 && (
-              <>
-                <CollapseSection title="NowPlaying" sectionInfos={nowPlaying} />
-              </>
+            {nowPlaying.length > 0 && (
+              <CollapseSection title="NowPlaying" sectionInfos={nowPlaying} />
             )}
 
-            {popular !== null && popular.length > 0 && (
+            {popular.length > 0 && (
               <CollapseSection title="Popular Movies" sectionInfos={popular} />
             )}
 
-            {upComing !== null && upComing.length > 0 && (
+            {upComing.length > 0 && (
               <CollapseSection
                 title="UpComing Movies"
                 sectionInfos={upComing}

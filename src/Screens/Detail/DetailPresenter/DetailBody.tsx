@@ -20,9 +20,9 @@ import DateFormatter from "@components/DateFormatter";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 
 interface IBodyProps {
-  detail: any;
-  credits: any;
-  similars: any;
+  detail:  DetailInfo;
+  credits: CreditInfo;
+  similars: Array<IMovieSimilar> | Array<ISeriesSimilar>;
 }
 
 const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
@@ -268,7 +268,6 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                           {credits.cast.slice(0, 5).map((data: any) => (
                             <>
                               <CastingInfoContainer
-                            
                                 key={data.id}
                                 onClick={() => toPerson(`/profile/${data.id}`)}
                               >

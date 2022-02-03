@@ -6,8 +6,8 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
 
 interface ISearchpProps {
-  movieResults: null | Array<any>;
-  seriesResults: null | Array<any>;
+  movieResults: Array<ISearchMovies>;
+  seriesResults: Array<ISearchSeries>;
   loading: boolean;
   error: boolean;
 }
@@ -31,7 +31,7 @@ const SearchPresenter: React.FC<ISearchpProps> = ({
       ) : (
         <>
           <VStack spacing="8" width="90vw">
-            {movieResults !== null && movieResults.length > 0 && (
+            { movieResults.length > 0 && (
               <Section
                 title={"Results for Movies"}
                 sectionInfos={movieResults}
@@ -39,7 +39,7 @@ const SearchPresenter: React.FC<ISearchpProps> = ({
               />
             )}
 
-            {seriesResults !== null && seriesResults.length > 0 && (
+            {seriesResults.length > 0 && (
               <Section
                 title={"Results for series"}
                 sectionInfos={seriesResults}

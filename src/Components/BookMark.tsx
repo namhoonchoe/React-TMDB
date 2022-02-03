@@ -4,7 +4,7 @@ import { addBookMark, removeBookMark, selectBookMark } from '@redux/bookMarkSlic
 import { Button, Text, useToast } from '@chakra-ui/react'
 
 interface IBookMarkProps {
-  bookMarkDetail:any
+  bookMarkDetail:DetailInfo
   bookMarkId:number
   bookMarkType:string
 }

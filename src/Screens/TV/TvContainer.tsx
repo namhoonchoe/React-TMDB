@@ -3,9 +3,9 @@ import TvPresenter from "./TvPresenter";
 import { tvApi } from "@api";
 
 interface ITvData {
-  topRated: null;
-  popular: null;
-  airingToday: null;
+  topRated: Array<ISeriesData>|null;
+  popular: Array<ISeriesData>|null;
+  airingToday: Array<ISeriesData>|null;
 }
 
 const TvContainer: React.FC = () => {

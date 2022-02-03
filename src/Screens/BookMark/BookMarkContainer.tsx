@@ -7,8 +7,8 @@ import {
 import BookMarkPresenter from "./BookMarkPresenter";
 
 interface IBookMarkInfo {
-  movieInfo: any;
-  seriesInfo: any;
+  movieInfo: Array<IMovieDetail>;
+  seriesInfo: Array<ISeriesDetail>;
 }
 
 const BookMarkContainer: React.FC = () => {

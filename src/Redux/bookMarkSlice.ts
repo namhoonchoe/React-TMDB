@@ -4,7 +4,7 @@ import { RootState } from "@redux/store";
 interface IBookMark {
   type: string;
   id: number;
-  bookMarkInfo: any;
+  bookMarkInfo: IMovieDetail & ISeriesDetail;
 }
 
 type bookMarkArray = Array<IBookMark>;

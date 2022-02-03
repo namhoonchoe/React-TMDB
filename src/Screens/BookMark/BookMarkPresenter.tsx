@@ -3,8 +3,8 @@ import { VStack, Text, Flex } from "@chakra-ui/react";
 import Section from "@components/Layout/Section";
 
 interface IBookMarkProps {
-  movieBookMark: Array<any>;
-  seriesBookMark: Array<any>;
+  movieBookMark: Array<IMovieDetail>;
+  seriesBookMark:Array<ISeriesDetail>;
 }
 
 const BookMarkPresenter: React.FC<IBookMarkProps> = ({

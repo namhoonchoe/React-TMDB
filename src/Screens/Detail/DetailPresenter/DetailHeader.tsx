@@ -18,7 +18,7 @@ import DateFormatter from "@components/DateFormatter";
 import StarRating from "@components/StarRating";
 
 interface IHeaderProps {
-  detail: any;
+  detail: DetailInfo;
   loading: boolean;
 }
 

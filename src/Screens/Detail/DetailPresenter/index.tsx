@@ -9,9 +9,9 @@ import DetailHeader from "./DetailHeader";
 import DetailBody from "./DetailBody";
 
 interface IDetailProps {
-  detail: any;
-  credits: any;
-  similar: any;
+  detail: DetailInfo;
+  credits: CreditInfo;
+  similar: Array<IMovieSimilar> | Array<ISeriesSimilar>;
   loading: boolean;
   error: boolean;
 }

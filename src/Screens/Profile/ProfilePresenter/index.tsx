@@ -8,9 +8,9 @@ import ProfileHeader from "./ProfileHeader";
 import ProfileBody from "./ProfileBody";
 
 interface IProfileProps {
-  profileInfo: any;
-  movieCredits: null | Array<any>;
-  seiresCredits: null | Array<any>;
+  profileInfo: IPersonDetail;
+  movieCredits: IMovieCreditInfo;
+  seiresCredits: ISeriesCreditInfo;
   loading: boolean;
   error: boolean;
 }

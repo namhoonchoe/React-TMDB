@@ -3,8 +3,8 @@ import HomePresenter from "./HomePresenter";
 import { trendingApi } from "@api";
 
 interface IHomeData {
-  trendingMovies: null;
-  trendingSeries: null;
+  trendingMovies: Array<IMovieData>;
+  trendingSeries: Array<ISeriesData>;
 }
 
 interface IRandoms {
@@ -14,8 +14,8 @@ interface IRandoms {
 
 const HomeContainer: React.FC = () => {
   const [home, setHome] = useState<IHomeData>({
-    trendingMovies: null,
-    trendingSeries: null,
+    trendingMovies: [],
+    trendingSeries: [],
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
