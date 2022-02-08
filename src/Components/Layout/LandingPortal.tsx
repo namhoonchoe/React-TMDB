@@ -5,9 +5,42 @@ import DateFormatter from "@components/DateFormatter";
 import StarRating from "@components/StarRating";
 import GenreGem from "@components/Layout/GenreGem";
 
+interface IMovieData {
+  poster_path: string | null;
+  adult: boolean;
+  overview: string;
+  release_date: string;
+  genre_ids: Array<number>;
+  id: number;
+  original_title: string;
+  original_language: string;
+  title: string;
+  backdrop_path: string | null;
+  popularity: number;
+  vote_count: number;
+  video: boolean;
+  vote_average: number;
+}
+
+interface ISeriesData {
+  poster_path: string | null;
+  popularity: number;
+  id: number;
+  backdrop_path: string | null;
+  vote_average: number;
+  overview: string;
+  first_air_date: string;
+  origin_country: Array<string>;
+  genre_ids: Array<number>;
+  original_language: string;
+  vote_count: number;
+  name: string;
+  original_name: string;
+}
+
 interface ILandingProps {
-  trendingMovies: null | Array<any>;
-  trendingSeries: null | Array<any>;
+  trendingMovies: Array<IMovieData>;
+  trendingSeries: Array<ISeriesData>;
   mediaType: string;
   randomIndex: number;
   loading: boolean;
@@ -20,7 +53,7 @@ const LandingPortal: React.FC<ILandingProps> = ({
   randomIndex,
   loading,
 }) => {
-  const [pickedInfo, setPickedInfo] = useState<any>(null);
+  const [pickedInfo, setPickedInfo] = useState<any>({});
 
   const InfoLayout = chakra(Flex, {
     baseStyle: {
@@ -127,7 +160,11 @@ const LandingPortal: React.FC<ILandingProps> = ({
                     <Text fontWeight="semibold" mr={2}>
                       User Score
                     </Text>
-                    <Flex justifyContent="start" alignItems="center" fontWeight="semibold">
+                    <Flex
+                      justifyContent="start"
+                      alignItems="center"
+                      fontWeight="semibold"
+                    >
                       <StarRating rating={pickedInfo.vote_average} />
                       <Text mx={1}>{pickedInfo.vote_average}/10</Text>
                       <Text>({pickedInfo.vote_count})</Text>
@@ -136,7 +173,7 @@ const LandingPortal: React.FC<ILandingProps> = ({
                   </Flex>
                 </VStack>
                 <GenreContainer>
-                  {pickedInfo.genre_ids.map((id: number) => (
+                  {pickedInfo.genre_ids && pickedInfo.genre_ids.map((id: number) => (
                     <GenreGem genreId={id} genreType={mediaType} />
                   ))}
                 </GenreContainer>

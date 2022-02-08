@@ -417,5 +417,5 @@ interface ILastEpisode {
 }
 
 type DetailInfo = IMovieDetail & ISeriesDetail
-type CreditInfo = IMovieDetailCredit | ISeriesDetailCredit
+type CreditInfo = IMovieDetailCredit & ISeriesDetailCredit
 

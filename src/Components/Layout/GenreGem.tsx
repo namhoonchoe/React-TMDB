@@ -3,6 +3,12 @@ import ErrorPopUp from "@components/ErrorPopUp";
 import { genreApi } from "@api";
 import { Text, Box, Fade, chakra } from "@chakra-ui/react";
 
+
+interface IGenre {
+  id: number;
+  name: string;
+}
+
 interface IGenreProps {
   genreId: number;
   genreType: string;
@@ -13,8 +19,8 @@ const GenreGem: React.FC<IGenreProps> = ({
   genreType,
   fontSize = "sm",
 }) => {
-  const [genreList, setGenreList] = useState<Array<any>>([]);
-  const [genre, setGenre] = useState<any>(null);
+  const [genreList, setGenreList] = useState<Array<IGenre>>([]);
+  const [genre, setGenre] = useState<IGenre|null>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 

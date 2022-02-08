@@ -4,7 +4,7 @@ import { discoverApi, genreApi } from "@api";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import {
   selectDiscoverQuery,
-  selectGenreFilters,
+  resetTrigger,
   getInfos,
 } from "@redux/discoverSlice";
 import DiscoverPresenter from "./DiscoverPresenter";
@@ -13,9 +13,7 @@ const DiscoverContainer: React.FC = () => {
   let pathType = usePathTypeCheck();
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const filter = useSelector(selectGenreFilters);
-  const { sort, genreInclude, genreExclude, page } =
-    useSelector(selectDiscoverQuery);
+  const { sort, genreInclude, genreExclude, page } = useSelector(selectDiscoverQuery);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,8 +79,9 @@ const DiscoverContainer: React.FC = () => {
 
     return () => {
       mounted = false;
+      resetTrigger()
     };
-  }, [pathType, filter, sort, genreInclude, genreExclude, page, dispatch]);
+  }, [pathType, genreExclude, genreInclude, sort, page]);
 
   return <DiscoverPresenter error={error} loading={loading} />;
 };

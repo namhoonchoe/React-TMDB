@@ -14,7 +14,7 @@ import StarRating from "@components/StarRating";
 import DateFormatter from "@components/DateFormatter";
 
 interface ICreditProps {
-  creditData: Array<IMovieCast> | Array<ISeriesCast> | Array<IMovieCrew> | Array<ISeriesCrew>;
+  creditData: Array<any>
   creditType: string;
   mediaType: string;
 }
@@ -81,7 +81,7 @@ const CreditSection: React.FC<ICreditProps> = ({
 
   return (
     <>
-      { creditData.length > 0 && (
+      {creditData.length > 0 && (
         <>
           {creditData.map((data: any) => (
             <>
@@ -176,13 +176,15 @@ const CreditSection: React.FC<ICreditProps> = ({
                       {data.genre_ids !== undefined &&
                         data.genre_ids.length > 0 && (
                           <GenreContainer>
-                            {data.genre_ids.slice(0, 3).map((genreId: any) => (
-                              <GenreGem
-                                genreId={genreId}
-                                genreType={"movie"}
-                                fontSize="xs"
-                              />
-                            ))}
+                            {data.genre_ids
+                              .slice(0, 3)
+                              .map((genreId: number) => (
+                                <GenreGem
+                                  genreId={genreId}
+                                  genreType={"movie"}
+                                  fontSize="xs"
+                                />
+                              ))}
                           </GenreContainer>
                         )}
                     </InfoContainer>
@@ -267,7 +269,7 @@ const CreditSection: React.FC<ICreditProps> = ({
                       )}
                       {data.genre_ids.length !== 0 && (
                         <GenreContainer>
-                          {data.genre_ids.slice(0, 3).map((genreId: any) => (
+                          {data.genre_ids.slice(0, 3).map((genreId: number) => (
                             <GenreGem
                               genreId={genreId}
                               genreType={"series"}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import SearchBox from "../SearchBox";
 import {
   Flex,
@@ -32,6 +32,11 @@ const Header: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const iconColor = useIconColor();
+  const matchMovie = useMatch("/movie");
+  const matchSeries = useMatch("/series");
+  const matchPerson = useMatch("/person");
+  const matchDiscover = useMatch("/discover/movie");
+  const matchCollections = useMatch("/bookmark");
 
   const HeaderLayout = chakra(Flex, {
     baseStyle: {
@@ -45,19 +50,19 @@ const Header: React.FC = () => {
       zIndex: "10",
       width: "100%",
       top: "0",
-      left: "0"
+      left: "0",
     },
   });
 
   const NavigationBox = chakra(Flex, {
     baseStyle: {
-      flexDirection:"column",
+      flexDirection: "column",
       alignItems: "center",
-      justifyContent:"center",
+      justifyContent: "center",
     },
   });
 
-  const NavigationItem = chakra(Flex, {
+  const NavigationContainer = chakra(Flex, {
     baseStyle: {
       alignItems: "center",
       width: "2xs",
@@ -78,6 +83,40 @@ const Header: React.FC = () => {
     },
   });
 
+  interface INavigation {
+    destination: string;
+    isSelected: boolean;
+  }
+
+  const Navigation: React.FC<INavigation> = ({ destination, isSelected }) => {
+    return (
+      <NavigationContainer>
+        {destination === "Movies" && (
+          <MovieIcon color={matchMovie !== null ? "#2D8FE6" : iconColor} />
+        )}
+        {destination === "Series" && (
+          <SeriesIcon color={matchSeries !== null ? "#2D8FE6" : iconColor} />
+        )}
+        {destination === "Person" && (
+          <PersonIcon color={matchPerson !== null ? "#2D8FE6" : iconColor} />
+        )}
+        {destination === "Discover" && (
+          <DiscoverIcon
+            color={matchDiscover !== null ? "#2D8FE6" : iconColor}
+          />
+        )}
+        {destination === "Collections" && (
+          <Collections
+            color={matchCollections !== null ? "#2D8FE6" : iconColor}
+          />
+        )}
+        <NavigationText color={isSelected ? "#2D8FE6" : iconColor}>
+          {destination}
+        </NavigationText>
+      </NavigationContainer>
+    );
+  };
+
   return (
     <HeaderLayout>
       <VStack justify="start">
@@ -91,34 +130,34 @@ const Header: React.FC = () => {
             <DrawerBody>
               <NavigationBox>
                 <Link to="/movie">
-                  <NavigationItem>
-                    <MovieIcon color={iconColor} />
-                    <NavigationText>Movies</NavigationText>
-                  </NavigationItem>
+                  <Navigation
+                    destination={"Movies"}
+                    isSelected={matchMovie !== null ? true : false}
+                  />
                 </Link>
                 <Link to="/series">
-                  <NavigationItem>
-                    <SeriesIcon color={iconColor} />
-                    <NavigationText>Series</NavigationText>
-                  </NavigationItem>
+                  <Navigation
+                    destination={"Series"}
+                    isSelected={matchSeries !== null ? true : false}
+                  />
                 </Link>
                 <Link to="/person">
-                  <NavigationItem>
-                    <PersonIcon color={iconColor} />
-                    <NavigationText>Person</NavigationText>
-                  </NavigationItem>
+                  <Navigation
+                    destination={"Person"}
+                    isSelected={matchPerson !== null ? true : false}
+                  />
                 </Link>
                 <Link to="/discover/movie">
-                  <NavigationItem>
-                    <DiscoverIcon color={iconColor} />
-                    <NavigationText>Discover</NavigationText>
-                  </NavigationItem>
+                  <Navigation
+                    destination={"Discover"}
+                    isSelected={matchDiscover !== null ? true : false}
+                  />
                 </Link>
                 <Link to="/bookmark">
-                  <NavigationItem>
-                    <Collections color={iconColor} />
-                    <NavigationText>Collections</NavigationText>
-                  </NavigationItem>
+                  <Navigation
+                    destination={"Collections"}
+                    isSelected={matchCollections !== null ? true : false}
+                  />
                 </Link>
               </NavigationBox>
             </DrawerBody>

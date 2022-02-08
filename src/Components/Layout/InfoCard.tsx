@@ -14,7 +14,7 @@ import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 
 interface IInfoProps {
   title: string;
-  posterPath: string | undefined;
+  posterPath: string | null |undefined;
   rating?: number;
 }
 

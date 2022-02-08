@@ -8,9 +8,11 @@ import {
   selectIncludeId,
   addToFilter,
   removeFromFilter,
-  discoverTrigger,
+  setDiscoverQuery,
   resetQuery,
   resetFilter,
+  triggerRender,
+  resetTrigger,
 } from "@redux/discoverSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -55,12 +57,17 @@ const SideBar: React.FC = () => {
   const excludeIds = useSelector(selectExcludeId);
   const includeIds = useSelector(selectIncludeId);
 
+  interface IDiscoverGenre {
+    info: IGenre;
+    type: string;
+  }
+
   const SidebarContainer = chakra(Flex, {
     baseStyle: {
       flexDirection: "column",
       justifyContent: "space-between",
       height: "90vh",
-      width: "90%",
+      width: "95%",
       mt: "1em",
     },
   });
@@ -162,9 +169,21 @@ const SideBar: React.FC = () => {
     },
   });
 
-  const resetTrigger = () => {
+  const resetCondition = () => {
     dispatch(resetFilter());
     dispatch(resetQuery());
+    dispatch(resetTrigger());
+  };
+
+  const triggerSearch = () => {
+    dispatch(
+      setDiscoverQuery({
+        sort: sortQuery,
+        genreInclude: includeIds.toString(),
+        genreExclude: excludeIds.toString(),
+      })
+    );
+    dispatch(triggerRender());
   };
 
   useEffect(() => {
@@ -225,7 +244,7 @@ const SideBar: React.FC = () => {
                   : "gray.600"
                 : "transparent"
             }
-            onClick={() => resetTrigger()}
+            onClick={() => resetCondition()}
           >
             <MovieIcon color={iconColor} />
             <Text ml={1} fontSize={{ md: "sm", lg: "md", xl: "xl" }}>
@@ -242,7 +261,7 @@ const SideBar: React.FC = () => {
                   : "gray.600"
                 : "transparent"
             }
-            onClick={() => resetTrigger()}
+            onClick={() => resetCondition()}
           >
             <SeriesIcon color={iconColor} />
             <Text ml={1} fontSize={{ md: "sm", lg: "md", xl: "xl" }}>
@@ -264,10 +283,10 @@ const SideBar: React.FC = () => {
           },
         }}
       >
-        {discoverGenres !== null && discoverGenres.length > 0 && (
+        {discoverGenres.length > 0 && (
           <CollapseBox title="Genres">
             <GenreListContainer>
-              {discoverGenres.map((genre: any) => (
+              {discoverGenres.map((genre: IGenre) => (
                 <GenreBoxContainer>
                   {includeIds.includes(genre.id) === false &&
                     excludeIds.includes(genre.id) === false && (
@@ -368,60 +387,66 @@ const SideBar: React.FC = () => {
             </GenreListContainer>
           </CollapseBox>
         )}
-        {filterList !== null && (
-          <CollapseBox title="Filters">
-            <GenreFilterLayout>
-              <VStack alignItems="start">
-                <Box>
-                  <Text fontSize="sm" as="em">
-                    Include
-                  </Text>
-                  <Flex justifyContent="start" alignItems="center" flexWrap="wrap">
-                    {includeFilter.map((filter: any) => (
-                      <GenreFilterContainer
-                        onClick={() =>
-                          dispatch(
-                            removeFromFilter({
-                              info: filter.info,
-                              type: "include",
-                            })
-                          )
-                        }
-                      >
-                        <Text fontSize="md" fontWeight="light" mx={2} my={1}>
-                          {filter.info.name}
-                        </Text>
-                      </GenreFilterContainer>
-                    ))}
-                  </Flex>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" as="em">
-                    Exclude
-                  </Text>
-                  <Flex justifyContent="start" alignItems="center" flexWrap="wrap">
-                    {excludeFilter.map((filter: any) => (
-                      <GenreFilterContainer
-                        onClick={() =>
-                          dispatch(
-                            removeFromFilter({
-                              info: filter.info,
-                              type: "exclude",
-                            })
-                          )
-                        }
-                      >
-                        <Text fontSize="md" fontWeight="light" mx={2} my={1}>
-                          {filter.info.name}
-                        </Text>
-                      </GenreFilterContainer>
-                    ))}
-                  </Flex>
-                </Box>
-              </VStack>
-            </GenreFilterLayout>
-          </CollapseBox>
-        )}
+        <CollapseBox title="Filters">
+          <GenreFilterLayout>
+            <VStack alignItems="start">
+              <Box>
+                <Text fontSize="sm" as="em">
+                  Include
+                </Text>
+                <Flex
+                  justifyContent="start"
+                  alignItems="center"
+                  flexWrap="wrap"
+                >
+                  {includeFilter.map((filter: IDiscoverGenre) => (
+                    <GenreFilterContainer
+                      onClick={() =>
+                        dispatch(
+                          removeFromFilter({
+                            info: filter.info,
+                            type: "include",
+                          })
+                        )
+                      }
+                    >
+                      <Text fontSize="md" fontWeight="light" mx={2} my={1}>
+                        {filter.info.name}
+                      </Text>
+                    </GenreFilterContainer>
+                  ))}
+                </Flex>
+              </Box>
+              <Box>
+                <Text fontSize="sm" as="em">
+                  Exclude
+                </Text>
+                <Flex
+                  justifyContent="start"
+                  alignItems="center"
+                  flexWrap="wrap"
+                >
+                  {excludeFilter.map((filter: any) => (
+                    <GenreFilterContainer
+                      onClick={() =>
+                        dispatch(
+                          removeFromFilter({
+                            info: filter.info,
+                            type: "exclude",
+                          })
+                        )
+                      }
+                    >
+                      <Text fontSize="md" fontWeight="light" mx={2} my={1}>
+                        {filter.info.name}
+                      </Text>
+                    </GenreFilterContainer>
+                  ))}
+                </Flex>
+              </Box>
+            </VStack>
+          </GenreFilterLayout>
+        </CollapseBox>
         <CollapseBox title="Sort by">
           {orderDescending ? (
             <OrderContainer
@@ -471,18 +496,7 @@ const SideBar: React.FC = () => {
       <Spacer />
       <SlideFade in={filterList.length > 0}>
         <Flex justify="center" p={1}>
-          <Button
-            width="15vw"
-            onClick={() =>
-              dispatch(
-                discoverTrigger({
-                  sort: sortQuery,
-                  genreInclude: includeIds.toString(),
-                  genreExclude: excludeIds.toString(),
-                })
-              )
-            }
-          >
+          <Button width="15vw" onClick={() => triggerSearch()}>
             <Text>Discover</Text>
           </Button>
         </Flex>

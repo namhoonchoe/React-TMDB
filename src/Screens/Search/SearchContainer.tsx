@@ -5,8 +5,8 @@ import { movieApi, tvApi } from "@api";
 import SearchPresenter from "./SearchPresenter";
 
 interface ISearchData {
-  movieResults:  Array<ISearchMovies>;
-  seriesResults:  Array<ISearchSeries>;
+  movieResults: Array<ISearchMovies>;
+  seriesResults: Array<ISearchSeries>;
 }
 
 const SearchContainer: React.FC = () => {
@@ -19,42 +19,46 @@ const SearchContainer: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
 
-  let searchRef = useRef<string>("");
+  let movieRef = useRef<Array<ISearchMovies>>([])
+  let seriesRef = useRef<Array<ISearchSeries>>([])
+
+  const getSearchResults = async () => {
+    try {
+      const {
+        data: { results: movieResults },
+      } = await movieApi.movieSearch(searchQuery);
+      const {
+        data: { results: seriesResults },
+      } = await tvApi.tvSearch(searchQuery);
+      setResults({ ...results, movieResults, seriesResults });
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     let mounted = true;
-    const getSearchResults = async () => {
-      try {
-        const {
-          data: { results: movieResults },
-        } = await movieApi.movieSearch(searchRef.current);
-        const {
-          data: { results: seriesResults },
-        } = await tvApi.tvSearch(searchRef.current);
-        setResults({ ...results, movieResults, seriesResults });
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
+
     if (mounted) {
-      searchRef.current = searchQuery;
+      dispatch(resetRedirection());
       getSearchResults();
     }
 
     return () => {
       mounted = false;
-      dispatch(resetRedirection());
+      movieRef.current = [...results.movieResults]
+      seriesRef.current = [...results.seriesResults]
     };
-  }, [searchQuery, results, dispatch]);
+  }, [searchQuery]);
 
-  const { movieResults, seriesResults } = results;
+  const { movieResults, seriesResults } = results
 
   return (
     <SearchPresenter
-      movieResults={movieResults}
-      seriesResults={seriesResults}
+      movieResults={ movieResults === [] ? movieRef.current : movieResults }
+      seriesResults={ seriesResults  === [] ? seriesRef.current : seriesResults }
       loading={loading}
       error={error}
     />

@@ -8,7 +8,7 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
 
 interface IPersonProps {
-  popular: null | Array<any>;
+  popular: Array<IPersonData>;
   error: boolean;
   loading: boolean;
 }
@@ -54,13 +54,12 @@ const PersonPresenter: React.FC<IPersonProps> = ({
             </Text>
             {popular !== null && popular.length > 0 && (
               <AutoGridLayoutSm>
-                {popular.map((data: any) => (
+                {popular.map((data: IPersonData) => (
                   <Link to={`/profile/${data.id}`}>
                     <InfoCard
                       key={data.id}
-                      title={data.title || data.name}
-                      posterPath={data.poster_path || data.profile_path}
-                      rating={data.vote_average}
+                      title={data.name}
+                      posterPath={ data.profile_path}
                     />
                   </Link>
                 ))}

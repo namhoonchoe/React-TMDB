@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import PersonPresenter from "./PersonPresenter";
 import { personApi } from "@api";
 
-interface IPersonData {
-  popular: null|Array<IPersonData>;
+interface IPersonPopular {
+  popular: Array<IPersonData>;
 }
 
 const PersonContainer: React.FC = () => {
-  const [person, setPerson] = useState<IPersonData>({
-    popular: null,
+  const [person, setPerson] = useState<IPersonPopular>({
+    popular: [],
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);

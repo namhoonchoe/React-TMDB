@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Flex,
   VStack,
@@ -25,16 +25,18 @@ interface IBodyProps {
   similars: Array<IMovieSimilar> | Array<ISeriesSimilar>;
 }
 
+type director = IMovieDetailCrew | ICreator
+
 const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
   const pathType = usePathTypeCheck();
   const colorMode = useColorMode().colorMode;
   const [fullCast, setFullCast] = useState<boolean>(false);
-  const [director, setDirector] = useState<any>(null);
+  const [director, setDirector] = useState<director|null>(null);
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const toPerson = (path: string) => {
-    history.push(path);
+    navigate(path);
   };
 
   const DetailBodyContainer = chakra(Flex,{
@@ -135,7 +137,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
     const getDirector = () => {
       if (pathType === "movie") {
         const [director] = credits.crew.filter(
-          (person: any) => person.job === "Director"
+          (person: IMovieDetailCrew) => person.job === "Director"
         );
         setDirector(director);
       }
@@ -454,7 +456,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                   </DetailinfoContainer>
                   <DetailinfoContainer title={"Language"}>
                     <Flex align="center">
-                      {detail.spoken_languages.map((language: any) => (
+                      {detail.spoken_languages.map((language: ISpokenLanguage) => (
                         <LanguageGem>
                           <Text fontSize="sm"> {language.iso_639_1}</Text>
                         </LanguageGem>

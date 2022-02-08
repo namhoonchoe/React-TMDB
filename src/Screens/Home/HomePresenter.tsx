@@ -83,12 +83,12 @@ const HomePresenter: React.FC<IHomeProps> = ({
                       },
                     }}
                   >
-                    {trendingMovies.map((data: any) => (
+                    {trendingMovies.map((data: IMovieData) => (
                       <Link to={`/${"movie"}/${data.id}`} key={data.id}>
                         <Box mx={3}>
                           <InfoCard
-                            title={data.title || data.name}
-                            posterPath={data.poster_path || data.profile_path}
+                            title={data.title}
+                            posterPath={data.poster_path }
                             rating={data.vote_average}
                           />
                         </Box>
@@ -129,12 +129,12 @@ const HomePresenter: React.FC<IHomeProps> = ({
                       },
                     }}
                   >
-                    {trendingSeries.map((data: any) => (
+                    {trendingSeries.map((data: ISeriesData) => (
                       <Link to={`/${"series"}/${data.id}`} key={data.id}>
                         <Box mx={3}>
                           <InfoCard
-                            title={data.title || data.name}
-                            posterPath={data.poster_path || data.profile_path}
+                            title={data.name}
+                            posterPath={data.poster_path}
                             rating={data.vote_average}
                           />
                         </Box>

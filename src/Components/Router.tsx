@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectSearch } from "@redux/searchSlice"
-import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import { Flex } from "@chakra-ui/react"
+import { selectSearch } from "@redux/searchSlice";
+import {
+  HashRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { Flex } from "@chakra-ui/react";
 import Detail from "@screens/Detail";
 import Header from "./Layout/Header";
 import Home from "@screens/Home";
@@ -14,31 +19,29 @@ import Discover from "@screens/Discover";
 import BookMark from "@screens/BookMark";
 import Profile from "@screens/Profile";
 
-const RootRouter:React.FC = () => {
-  const redirection = useSelector(selectSearch).redirection
+const RootRouter: React.FC = () => {
+  const redirection = useSelector(selectSearch).redirection;
   return (
     <Router>
       <Flex flexDirection="column" alignItems="center">
-      <Header/>
-        <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/search" component={Search}/>
-          <Route path="/discover/movie" component={Discover}/>
-          <Route path="/discover/series" component={Discover}/>
-          <Route path="/movie/:id" component={Detail}/>
-          <Route path="/series/:id" component={Detail}/>
-          <Route path="/movie" component={Movie}/>
-          <Route path="/series" component={TV}/>
-          <Route path="/person" component={Person}/>
-          <Route path="/profile/:id" component={Profile}/>
-          <Route path="/bookmark" component={BookMark}/>
-        </Switch>
-        <Route path="/*">
-          {redirection !=="" && <Redirect to="/search"/>}
-        </Route>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="discover/movie" element={<Discover />} />
+          <Route path="discover/series" element={<Discover />} />
+          <Route path="movie/:id" element={<Detail />} />
+          <Route path="series/:id" element={<Detail />} />
+          <Route path="movie" element={<Movie />} />
+          <Route path="series" element={<TV />} />
+          <Route path="person" element={<Person />} />
+          <Route path="profile/:id" element={<Profile />} />
+          <Route path="bookmark" element={<BookMark />} />
+          <Route path="search" element={<Search />} />
+        </Routes>
       </Flex>
+      {redirection !== "" && <Navigate to="search"/>}
     </Router>
   );
 };
 
-export default RootRouter
+export default RootRouter;

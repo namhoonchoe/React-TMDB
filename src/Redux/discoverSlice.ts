@@ -30,6 +30,7 @@ interface IState {
   discoverInfo: IDiscoverInfo;
   discoverQuery: IDiscoverQuery;
   genreFilters: genreFilters;
+  triggered:boolean
 }
 
 const discoverState: IState = {
@@ -43,6 +44,8 @@ const discoverState: IState = {
   },
 
   genreFilters: [],
+
+  triggered:false
 };
 
 const discoverSlice = createSlice({
@@ -99,7 +102,7 @@ const discoverSlice = createSlice({
       };
     },
 
-    discoverTrigger: (
+    setDiscoverQuery: (
       state: IState,
       action: PayloadAction<ITriggerPayload>
     ) => {
@@ -114,6 +117,15 @@ const discoverSlice = createSlice({
       const getNext = { ...state.discoverQuery, page: nextPage };
       return { ...state, discoverQuery: getNext };
     },
+
+    triggerRender: (state:IState) => {
+      return { ...state, triggered:true}
+    },
+
+    resetTrigger:(state:IState) => {
+      return {...state, triggered:false}
+    }
+
   },
 });
 
@@ -121,10 +133,12 @@ export const {
   getInfos,
   addToFilter,
   removeFromFilter,
-  discoverTrigger,
+  setDiscoverQuery,
   fetchMore,
   resetFilter,
   resetQuery,
+  resetTrigger,
+  triggerRender
 } = discoverSlice.actions;
 
 export const selectDiscoverInfoList = (state: RootState) =>
@@ -150,5 +164,7 @@ export const selectIncludeId = (state: RootState) =>
 
 export const selectDiscoverQuery = (state: RootState) =>
   state.discover.discoverQuery;
+
+export const selectTrigger = (state:RootState) => state.discover.triggered
 
 export default discoverSlice.reducer;

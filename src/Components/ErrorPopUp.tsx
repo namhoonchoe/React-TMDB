@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Button, Flex, Text, useToast, useColorMode } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from  "react-router-dom";
 
 export default function ErrorPopUp() {
   const toast = useToast();
-  const history = useHistory();
+  const navigate  = useNavigate();
   const colorMode = useColorMode().colorMode;
 
   const errorPopUp = () =>
@@ -15,7 +15,7 @@ export default function ErrorPopUp() {
       status: "error",
       duration: 500,
       isClosable: true,
-      onCloseComplete: () => history.go(-1),
+      onCloseComplete: () => navigate(-1),
       render: () => (
         <Flex
           color="white"
@@ -27,7 +27,7 @@ export default function ErrorPopUp() {
         >
           <Text mr="5%">An Error has Ocurred.</Text>
           <Button
-            onClick={() => history.go(-1)}
+            onClick={() => navigate(-1)}
             bgColor={colorMode === "light" ? "gray.400" : "gray.800"}
           >
             Close

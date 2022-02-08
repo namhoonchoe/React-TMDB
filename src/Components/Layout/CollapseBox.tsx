@@ -9,7 +9,7 @@ interface ICollapseBoxProps {
 }
 
 const CollapseBox: React.FC<ICollapseBoxProps> = ({ title, children }) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle} = useDisclosure()
 
   return (
     <>
@@ -17,12 +17,12 @@ const CollapseBox: React.FC<ICollapseBoxProps> = ({ title, children }) => {
         <Text fontSize="lg">{title}</Text>
         <Spacer />
         {isOpen ? (
-          <ChevronUpIcon onClick={onToggle} />
+          <ChevronDownIcon onClick={onToggle}/>
         ) : (
-          <ChevronDownIcon onClick={onToggle} />
+          <ChevronUpIcon onClick={onToggle} />
         )}
       </CenteredBox>
-      <Collapse in={isOpen}>{children}</Collapse>
+      <Collapse in={!isOpen} animateOpacity={true}>{children}</Collapse>
     </>
   );
 };

@@ -19,7 +19,7 @@ interface ICollapseSectionProps {
   sectionInfos: Array<any>;
 }
 
-const CollapseBox: React.FC<ICollapseSectionProps> = ({
+const CollapseSection: React.FC<ICollapseSectionProps> = ({
   title,
   sectionInfos,
   sectionInfoType,
@@ -128,4 +128,4 @@ const CollapseBox: React.FC<ICollapseSectionProps> = ({
   );
 };
 
-export default CollapseBox;
+export default CollapseSection;
