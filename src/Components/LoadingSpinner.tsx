@@ -1,5 +1,5 @@
 import { Spinner } from "@chakra-ui/react"
-import { CenteredBox } from "./Layout/BasicLayouts"
+import { CenteredBox } from "./Display/BasicLayouts"
 
 
 export default function LoadingSpinner() {

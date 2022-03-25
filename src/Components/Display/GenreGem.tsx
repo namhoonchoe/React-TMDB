@@ -57,7 +57,7 @@ const GenreGem: React.FC<IGenreProps> = ({
       }
 
       if (genreType === "series") {
-        const getSeiresGenre = async () => {
+        const getSeriesGenre = async () => {
           try {
             const {
               data: { genres },
@@ -69,16 +69,16 @@ const GenreGem: React.FC<IGenreProps> = ({
             setLoading(false);
           }
         };
-        getSeiresGenre();
+        getSeriesGenre();
       }
     };
 
     const extractGenre = (genreId: number) => {
       if (genreId !== null && genreId !== undefined) {
         const [filtered] = genreList.filter((genre) => genre.id === genreId);
-        setGenre(filtered);
+        return setGenre(filtered);
       } else {
-        setGenre(null);
+        return setGenre(null);
       }
     };
 

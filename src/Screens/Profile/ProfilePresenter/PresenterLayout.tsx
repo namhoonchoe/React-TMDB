@@ -10,17 +10,17 @@ import ProfileBody from "./ProfileBody";
 interface IProfileProps {
   profileInfo: IPersonDetail;
   movieCredits: IMovieCreditInfo;
-  seiresCredits: ISeriesCreditInfo;
+  seriesCredits: ISeriesCreditInfo;
   loading: boolean;
   error: boolean;
 }
 
-const ProfilePresenter: React.FC<IProfileProps> = ({
+const PresenterLayout: React.FC<IProfileProps> = ({
   loading,
   error,
   profileInfo,
   movieCredits,
-  seiresCredits,
+  seriesCredits,
 }) => {
   return (
     <>
@@ -43,7 +43,7 @@ const ProfilePresenter: React.FC<IProfileProps> = ({
             <ProfileBody
               profileInfo={profileInfo}
               movieCredits={movieCredits}
-              seriesCredits={seiresCredits}
+              seriesCredits={seriesCredits}
             />
           </Flex>
           <ScrollToTop />
@@ -55,4 +55,4 @@ const ProfilePresenter: React.FC<IProfileProps> = ({
   );
 };
 
-export default ProfilePresenter;
+export default PresenterLayout;

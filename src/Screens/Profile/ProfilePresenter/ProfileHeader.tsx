@@ -8,8 +8,8 @@ import {
   useColorMode,
   chakra,
 } from "@chakra-ui/react";
-import ModalBox from "@components/Layout/ModalBox";
-import InfoImage from "@components/Layout/InfoImage";
+import ModalBox from "@components/Display/ModalBox";
+import InfoImage from "@components/Display/InfoImage";
 
 interface IHeaderProps {
   name?: string;

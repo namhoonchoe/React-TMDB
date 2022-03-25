@@ -10,7 +10,7 @@ import {
   useColorMode,
   chakra,
 } from "@chakra-ui/react";
-import { GridLayout } from "@components/Layout/BasicLayouts";
+import { GridLayout } from "@components/Display/BasicLayouts";
 import DateFormatter from "@components/DateFormatter";
 import MovieIcon from "@components/svgcomponents/MovieIcon";
 import SeriesIcon from "@components/svgcomponents/SeriesIcon";

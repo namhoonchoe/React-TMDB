@@ -10,7 +10,7 @@ import App from "@components/App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider theme={customTheme}>
+    <ChakraProvider theme={customTheme} resetCSS={true}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistStore(store)}>
           <App />

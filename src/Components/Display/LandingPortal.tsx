@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Box, Flex, Text, VStack, Skeleton, chakra } from "@chakra-ui/react";
 import DateFormatter from "@components/DateFormatter";
 import StarRating from "@components/StarRating";
-import GenreGem from "@components/Layout/GenreGem";
+import GenreGem from "@components/Display/GenreGem";
 
 interface IMovieData {
   poster_path: string | null;
@@ -101,8 +101,8 @@ const LandingPortal: React.FC<ILandingProps> = ({
       height: "100%",
       bgSize: "cover",
       bgColor: "black",
-      boxShadow: `15px 2px 45px 3px rgba(2,2,4,1) inset`,
-      filter: "brightness(75%)",
+      boxShadow: `inset 1% 0px 1px black `,
+      filter: "brightness(65%)",
       bgPosition: "2% 1%",
       borderRadius: "sm",
       bgRepeat: "no-repeat",

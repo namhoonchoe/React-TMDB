@@ -8,8 +8,8 @@ import {
   chakra,
   useColorMode,
 } from "@chakra-ui/react";
-import InfoImage from "@components/Layout/InfoImage";
-import GenreGem from "@components/Layout/GenreGem";
+import InfoImage from "@components/Display/InfoImage";
+import GenreGem from "@components/Display/GenreGem";
 import StarRating from "@components/StarRating";
 import DateFormatter from "@components/DateFormatter";
 

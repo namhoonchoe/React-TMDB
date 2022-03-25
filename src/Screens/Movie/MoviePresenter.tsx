@@ -1,8 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import CollapseSection from "@components/Layout/CollapseSection";
+import CollapseSection from "@components/Display/CollapseSection";
 import ErrorPopUp from "@components/ErrorPopUp";
-import { PresenterLayout } from "@components/Layout/BasicLayouts";
+import { PresenterLayout } from "@components/Display/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ScrollToTop from "@components/ScrollToTop";
 

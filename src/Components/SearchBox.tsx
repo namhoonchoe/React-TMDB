@@ -8,7 +8,7 @@ import {
   ScaleFade,
   useOutsideClick,
 } from "@chakra-ui/react";
-import { CenteredBox } from "./Layout/BasicLayouts";
+import { CenteredBox } from "./Display/BasicLayouts";
 
 const SearchBox: React.FC = () => {
   const [clicked, setClicked] = useState<boolean>(false);

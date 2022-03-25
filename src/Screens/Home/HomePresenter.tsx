@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Flex, Text, Box, VStack } from "@chakra-ui/react";
 import LoadingSpinner from "@components/LoadingSpinner";
-import LandingPortal from "@components/Layout/LandingPortal";
-import InfoCard from "@components/Layout/InfoCard";
+import LandingPortal from "@components/Display/LandingPortal";
+import InfoCard from "@components/Display/InfoCard";
 import ErrorPopUp from "@components/ErrorPopUp";
 
 interface IHomeProps {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Section from "@components/Layout/Section";
+import Section from "@components/Display/Section";
 import { VStack } from "@chakra-ui/react";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";

@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import { useIconColor } from "@hooks/useIconColor";
-import CollapseBox from "@components/Layout/CollapseBox";
+import CollapseBox from "@components/Display/CollapseBox";
 import {
   Flex,
   Box,

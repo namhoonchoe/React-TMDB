@@ -5,14 +5,14 @@ import ErrorPopUp from "@components/ErrorPopUp";
 import SideBar from "./SideBar";
 import Main from "./Main";
 import { GridItem, Box, Flex } from "@chakra-ui/react";
-import { GridLayout } from "@components/Layout/BasicLayouts";
+import { GridLayout } from "@components/Display/BasicLayouts";
 
 interface IDiscoverProps {
   loading: boolean;
   error: boolean;
 }
 
-const DiscoverPresenter: React.FC<IDiscoverProps> = ({ loading, error }) => {
+const PresenterLayout: React.FC<IDiscoverProps> = ({ loading, error }) => {
   return (
     <>
       {loading ? (
@@ -43,4 +43,4 @@ const DiscoverPresenter: React.FC<IDiscoverProps> = ({ loading, error }) => {
   );
 };
 
-export default DiscoverPresenter;
+export default PresenterLayout;

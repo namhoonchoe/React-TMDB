@@ -10,10 +10,10 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
-import InfoImage from "@components/Layout/InfoImage";
-import ModalBox from "@components/Layout/ModalBox";
+import InfoImage from "@components/Display/InfoImage";
+import ModalBox from "@components/Display/ModalBox";
 import BookMark from "@components/BookMark";
-import GenreGem from "@components/Layout/GenreGem";
+import GenreGem from "@components/Display/GenreGem";
 import DateFormatter from "@components/DateFormatter";
 import StarRating from "@components/StarRating";
 
@@ -43,8 +43,8 @@ const DetailHeader: React.FC<IHeaderProps> = ({ detail, loading }) => {
       height: "100%",
       bgSize: "cover",
       bgColor: "black",
-      boxShadow: `15px 2px 45px 3px rgba(2,2,4,1) inset`,
-      filter: "brightness(70%)",
+      boxShadow:`inset 25vw 0px 3vw black`,
+      filter: "brightness(65%)",
       bgPosition: "20em 5%",
       borderRadius: "sm",
       bgRepeat: "no-repeat",

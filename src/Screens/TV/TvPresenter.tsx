@@ -1,12 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import CollapseSection from "@components/Layout/CollapseSection";
-import { PresenterLayout } from "@components/Layout/BasicLayouts";
+import CollapseSection from "@components/Display/CollapseSection";
+import { PresenterLayout } from "@components/Display/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ScrollToTop from "@components/ScrollToTop";
 import ErrorPopUp from "@components/ErrorPopUp";
 
-interface ISerieseProps {
+interface ISeriesProps {
   topRated: null |  Array<ISeriesData>;
   airingToday: null | Array<ISeriesData>;
   popular: null | Array<ISeriesData>;
@@ -14,7 +14,7 @@ interface ISerieseProps {
   loading: boolean;
 }
 
-const TvPresenter: React.FC<ISerieseProps> = ({
+const TvPresenter: React.FC<ISeriesProps> = ({
   topRated,
   airingToday,
   popular,

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectDiscoverInfoList, fetchMore } from "@redux/discoverSlice";
 import { Link } from "react-router-dom";
 import { Text, Flex, Button, chakra } from "@chakra-ui/react";
-import { AutoGridLayoutSm } from "@components/Layout/BasicLayouts"
+import { AutoGridLayoutSm } from "@components/Display/BasicLayouts"
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
-import InfoCard from "@components/Layout/InfoCard";
+import InfoCard from "@components/Display/InfoCard";
 
 const Main: React.FC = () => {
   const [sectionType, setSectionType] = useState<string | undefined>("");

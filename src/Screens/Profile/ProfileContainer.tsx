@@ -6,14 +6,14 @@ import ProfilePresenter from "./ProfilePresenter";
 interface IProfile {
   profileInfo: IPersonDetail ;
   movieCredits: IMovieCreditInfo ;
-  seiresCredits: ISeriesCreditInfo ;
+  seriesCredits: ISeriesCreditInfo ;
 }
 
 const ProfileContainer: React.FC = () => {
   const [detail, setDetail] = useState<IProfile>({
     profileInfo: {} as IPersonDetail,
     movieCredits: {} as IMovieCreditInfo,
-    seiresCredits: {} as ISeriesCreditInfo,
+    seriesCredits: {} as ISeriesCreditInfo,
   });
 
   const [error, setError] = useState<boolean>(false);
@@ -26,8 +26,8 @@ const ProfileContainer: React.FC = () => {
       try {
         const { data: profileInfo } = await personApi.peopleDetail(id);
         const { data: movieCredits } = await personApi.movieCredits(id);
-        const { data: seiresCredits } = await personApi.seiresCredits(id);
-        setDetail({ ...detail, profileInfo, movieCredits, seiresCredits });
+        const { data: seriesCredits } = await personApi.seiresCredits(id);
+        setDetail({ ...detail, profileInfo, movieCredits, seriesCredits });
       } catch {
         setError(true);
       } finally {
@@ -44,13 +44,13 @@ const ProfileContainer: React.FC = () => {
     };
   }, []);
 
-  const { profileInfo, movieCredits, seiresCredits } = detail;
+  const { profileInfo, movieCredits, seriesCredits } = detail;
 
   return (
     <ProfilePresenter
       profileInfo={profileInfo}
       movieCredits={movieCredits}
-      seiresCredits={seiresCredits}
+      seriesCredits={seriesCredits}
       loading={loading}
       error={error}
     />

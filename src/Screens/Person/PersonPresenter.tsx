@@ -1,9 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import InfoCard from "@components/Layout/InfoCard";
+import InfoCard from "@components/Display/InfoCard";
 import { Link } from "react-router-dom";
 import { Flex, Text } from "@chakra-ui/react";
-import { AutoGridLayoutSm } from "@components/Layout/BasicLayouts";
+import { AutoGridLayoutSm } from "@components/Display/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
 

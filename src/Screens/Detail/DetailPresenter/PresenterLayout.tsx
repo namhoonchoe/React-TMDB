@@ -16,7 +16,7 @@ interface IDetailProps {
   error: boolean;
 }
 
-const DetailPresenter: React.FC<IDetailProps> = ({
+const PresenterLayout: React.FC<IDetailProps> = ({
   detail,
   credits,
   similar,
@@ -58,4 +58,4 @@ const DetailPresenter: React.FC<IDetailProps> = ({
   );
 };
 
-export default DetailPresenter;
+export default PresenterLayout;

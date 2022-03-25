@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Fade, chakra } from "@chakra-ui/react";
 import { ArrowUpIcon } from "@chakra-ui/icons";
-import { CenteredBox } from "./Layout/BasicLayouts";
+import { CenteredBox } from "./Display/BasicLayouts";
 
 const ScrollToTop: React.FC = () => {
   const [positionY, setPositionY] = useState<number>(0);
