@@ -38,8 +38,7 @@ import {
   TriangleUpIcon,
   TriangleDownIcon,
 } from "@chakra-ui/icons";
-import MovieIcon from "@components/svgcomponents/MovieIcon";
-import SeriesIcon from "@components/svgcomponents/SeriesIcon";
+import { MovieIcon, SeriesIcon } from "@components/SvgIcons";
 
 const SideBar: React.FC = () => {
   const dispatch = useDispatch();

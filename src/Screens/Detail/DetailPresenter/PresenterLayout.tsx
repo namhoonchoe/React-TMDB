@@ -11,7 +11,7 @@ import DetailBody from "./DetailBody";
 interface IDetailProps {
   detail: DetailInfo;
   credits: CreditInfo;
-  similar: Array<IMovieSimilar> | Array<ISeriesSimilar>;
+  similarContents: Array<IMovieSimilar> | Array<ISeriesSimilar>;
   loading: boolean;
   error: boolean;
 }
@@ -19,7 +19,7 @@ interface IDetailProps {
 const PresenterLayout: React.FC<IDetailProps> = ({
   detail,
   credits,
-  similar,
+  similarContents,
   error,
   loading,
 }) => {
@@ -44,7 +44,7 @@ const PresenterLayout: React.FC<IDetailProps> = ({
             <Fade in={loading === false}>
               <DetailBody
                 detail={detail}
-                similars={similar}
+                similarContents={similarContents}
                 credits={credits}
               />
             </Fade>

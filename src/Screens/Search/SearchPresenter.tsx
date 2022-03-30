@@ -5,14 +5,14 @@ import { VStack } from "@chakra-ui/react";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
 
-interface ISearchpProps {
+interface ISearchProps {
   movieResults: Array<ISearchMovies>;
   seriesResults: Array<ISearchSeries>;
   loading: boolean;
   error: boolean;
 }
 
-const SearchPresenter: React.FC<ISearchpProps> = ({
+const SearchPresenter: React.FC<ISearchProps> = ({
   movieResults,
   seriesResults,
   loading,

@@ -20,13 +20,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useIconColor } from "@hooks/useIconColor";
-import PersonIcon from "@components/svgcomponents/PersonIcon";
-import MovieIcon from "../svgcomponents/MovieIcon";
-import SeriesIcon from "../svgcomponents/SeriesIcon";
-import Collections from "../svgcomponents/CollectionsIcon";
-import DiscoverIcon from "../svgcomponents/DiscoverIcon";
-import DayLightMode from "../svgcomponents/DayLightMode";
-import DarkMode from "../svgcomponents/DarkMode";
+import { PersonIcon, MovieIcon, SeriesIcon, Collections, DiscoverIcon, DayLightMode, DarkMode } from "@components/SvgIcons"
+
 
 const Header: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

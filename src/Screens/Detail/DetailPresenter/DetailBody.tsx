@@ -15,21 +15,26 @@ import {
 } from "@chakra-ui/react";
 import { GridLayout } from "@components/Display/BasicLayouts";
 import CollapseSection from "@components/Display/CollapseSection";
-import InfoImage from "@components/Display/InfoImage";
+import CarouselSlider from "@components/Display/CarouselSlider";
 import DateFormatter from "@components/DateFormatter";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
+import CreditInfo from "./CreditInfo";
 
 interface IBodyProps {
   detail: DetailInfo;
   credits: CreditInfo;
-  similars: Array<IMovieSimilar> | Array<ISeriesSimilar>;
+  similarContents: Array<IMovieSimilar> | Array<ISeriesSimilar>;
 }
 
 type director = IMovieDetailCrew | ICreator;
 
-const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
+const DetailBody: React.FC<IBodyProps> = ({
+  detail,
+  credits,
+  similarContents,
+}) => {
   const pathType = usePathTypeCheck();
-  const colorMode = useColorMode().colorMode;
+  const { colorMode } = useColorMode();
   const [fullCast, setFullCast] = useState<boolean>(false);
   const [director, setDirector] = useState<director | null>(null);
 
@@ -63,34 +68,6 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
     },
   });
 
-  const CastingInfoContainer = chakra(Flex, {
-    baseStyle: {
-      flexDirection: "column",
-      justifyContent: "stretch",
-      alignItems: "center",
-      py: 1,
-      pt: 3,
-      width: "14.4rem",
-      minHeight: "12rem",
-      maxHeight: "max-content",
-      borderRadius: "lg",
-      backgroundColor: colorMode === "light" ? "gray.200" : "gray.700",
-      _hover: {
-        boxShadow: colorMode === "light" ? "xl" : "dark-lg",
-      },
-    },
-  });
-
-  const CastingContainer = chakra(Flex, {
-    baseStyle: {
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      py: 2,
-      width: "100%",
-    },
-  });
-
   const LanguageGem = chakra(Box, {
     baseStyle: {
       px: 2,
@@ -118,7 +95,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
     title: string;
   }
 
-  const DetailinfoContainer: React.FC<IDetailsInfo> = ({ title, children }) => {
+  const DetailInfoContainer: React.FC<IDetailsInfo> = ({ title, children }) => {
     return (
       <Flex direction="column" align="start">
         <Text p={1} fontWeight="semibold">
@@ -159,7 +136,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
         <DetailBodyContainer>
           <GridLayout>
             <GridItem rowSpan={2} colSpan={5}>
-              <VStack align="start">
+              <VStack alignItems="start">
                 {/*casting*/}
                 {credits.cast !== null && credits.cast.length > 0 && (
                   <CastingSection>
@@ -198,133 +175,38 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                           width="100%"
                         >
                           {credits.cast.map((data: any) => (
-                            <>
-                              <CastingInfoContainer
-                                backgroundColor={
-                                  colorMode === "light"
-                                    ? "gray.200"
-                                    : "gray.700"
-                                }
-                                key={data.id}
-                                onClick={() => toPerson(`/profile/${data.id}`)}
-                              >
-                                <InfoImage
-                                  width="7rem"
-                                  height="7rem"
-                                  imageSource={data.profile_path}
-                                  imageType="portrait"
-                                  borderRadius="full"
-                                />
-                                <CastingContainer>
-                                  <Text fontSize="sm" fontWeight="semibold">
-                                    {data.name}
-                                  </Text>
-                                  {data.character !== "" && (
-                                    <Flex
-                                      direction="column"
-                                      align="center"
-                                      px={1}
-                                    >
-                                      <Text fontSize="xs">as</Text>
-                                      <Flex
-                                        justify="center"
-                                        align="center"
-                                        px={5}
-                                      >
-                                        {data.character.length > 20 ? (
-                                          <Text
-                                            fontSize="xs"
-                                            fontWeight="semibold"
-                                            textOverflow="ellipsis"
-                                          >
-                                            {data.character}
-                                          </Text>
-                                        ) : (
-                                          <Text
-                                            fontSize="sm"
-                                            fontWeight="semibold"
-                                          >
-                                            {data.character}
-                                          </Text>
-                                        )}
-                                      </Flex>
-                                    </Flex>
-                                  )}
-                                </CastingContainer>
-                              </CastingInfoContainer>
-                            </>
+                            <CreditInfo
+                              id={data.id}
+                              profilePath={data.profile_path}
+                              name={data.name}
+                              character={data.character}
+                            />
                           ))}
                         </Grid>
                       </SlideFade>
                     ) : (
-                      <Grid
-                        templateColumns="repeat(auto-fill,minmax(14.4rem, 1fr))"
-                        gap="3"
-                        width="100%"
-                      >
-                        {credits.cast.slice(0, 5).map((data: any) => (
-                          <>
-                            <CastingInfoContainer
-                              key={data.id}
-                              onClick={() => toPerson(`/profile/${data.id}`)}
-                            >
-                              <InfoImage
-                                width="7rem"
-                                height="7rem"
-                                imageSource={data.profile_path}
-                                imageType="portrait"
-                                borderRadius="full"
-                              />
-                              <CastingContainer>
-                                <Text fontSize="sm" fontWeight="semibold">
-                                  {data.name}
-                                </Text>
-                                {data.character !== "" && (
-                                  <Flex
-                                    direction="column"
-                                    align="center"
-                                    px={1}
-                                  >
-                                    <Text fontSize="xs">as</Text>
-                                    <Flex
-                                      justify="center"
-                                      align="center"
-                                      px={5}
-                                    >
-                                      {data.character.length > 20 ? (
-                                        <Text
-                                          fontSize="xs"
-                                          fontWeight="semibold"
-                                          textOverflow="ellipsis"
-                                        >
-                                          {data.character}
-                                        </Text>
-                                      ) : (
-                                        <Text
-                                          fontSize="sm"
-                                          fontWeight="semibold"
-                                        >
-                                          {data.character}
-                                        </Text>
-                                      )}
-                                    </Flex>
-                                  </Flex>
-                                )}
-                              </CastingContainer>
-                            </CastingInfoContainer>
-                          </>
+                      <CarouselSlider>
+                        {credits.cast.map((data: any) => (
+                          <Box mr={3}>
+                            <CreditInfo
+                              id={data.id}
+                              profilePath={data.profile_path}
+                              name={data.name}
+                              character={data.character}
+                            />
+                          </Box>
                         ))}
-                      </Grid>
+                      </CarouselSlider>
                     )}
                   </CastingSection>
                 )}
                 {/*Similars*/}
-                {similars !== null && similars.length > 0 && (
+                {similarContents !== null && similarContents.length > 0 && (
                   <CollapseSection
                     title={
                       pathType === "movie" ? "Similar Movies" : "Similar Series"
                     }
-                    sectionInfos={similars}
+                    sectionInfos={similarContents}
                     sectionInfoType={pathType === "movie" ? "movie" : "series"}
                   />
                 )}
@@ -341,16 +223,16 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                 justify="start"
                 fontSize={{ lg: "xs", xl: "md" }}
               >
-                <DetailinfoContainer title={"Original Title"}>
+                <DetailInfoContainer title={"Original Title"}>
                   <Text p={1}>
                     {detail.original_title || detail.original_name}
                   </Text>
-                </DetailinfoContainer>
+                </DetailInfoContainer>
                 {pathType === "movie" && (
                   <>
                     {director && director !== null && (
                       <Tooltip label="check Director's profile">
-                        <DetailinfoContainer title={"Director"}>
+                        <DetailInfoContainer title={"Director"}>
                           <Text p={1}>
                             <DirectorName
                               onClick={() =>
@@ -360,16 +242,16 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                               {director.name}
                             </DirectorName>
                           </Text>
-                        </DetailinfoContainer>
+                        </DetailInfoContainer>
                       </Tooltip>
                     )}
 
-                    <DetailinfoContainer title={"Runtime"}>
+                    <DetailInfoContainer title={"Runtime"}>
                       <Text p={1} fontSize="sm">
                         {detail.runtime}'
                       </Text>
-                    </DetailinfoContainer>
-                    <DetailinfoContainer title={"Release Date"}>
+                    </DetailInfoContainer>
+                    <DetailInfoContainer title={"Release Date"}>
                       {detail.release_date !== null &&
                         detail.release_date !== undefined && (
                           <DateFormatter
@@ -378,7 +260,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                             fontWeight="medium"
                           />
                         )}
-                    </DetailinfoContainer>
+                    </DetailInfoContainer>
                   </>
                 )}
                 {pathType === "series" && (
@@ -386,7 +268,7 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                     {detail.created_by !== null &&
                       detail.created_by.length > 0 && (
                         <Tooltip label="check Director's profile">
-                          <DetailinfoContainer title={"Director"}>
+                          <DetailInfoContainer title={"Director"}>
                             {director && director !== null && (
                               <DirectorName
                                 onClick={() =>
@@ -396,10 +278,10 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                                 {director.name}
                               </DirectorName>
                             )}
-                          </DetailinfoContainer>
+                          </DetailInfoContainer>
                         </Tooltip>
                       )}
-                    <DetailinfoContainer title={"Episode Runtime"}>
+                    <DetailInfoContainer title={"Episode Runtime"}>
                       <Flex align="center" wrap="wrap">
                         {detail.episode_run_time.map((runtime: any) => (
                           <Text p={1} fontSize="sm">
@@ -407,50 +289,50 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                           </Text>
                         ))}
                       </Flex>
-                    </DetailinfoContainer>
-                    <DetailinfoContainer title={"Number of Seasons"}>
+                    </DetailInfoContainer>
+                    <DetailInfoContainer title={"Number of Seasons"}>
                       <Text p={1} fontSize="sm">
                         {detail.number_of_seasons}
                       </Text>
-                    </DetailinfoContainer>
-                    <DetailinfoContainer title={"Number of Episodes"}>
+                    </DetailInfoContainer>
+                    <DetailInfoContainer title={"Number of Episodes"}>
                       <Text p={1} fontSize="sm">
                         {detail.number_of_episodes}
                       </Text>
-                    </DetailinfoContainer>
+                    </DetailInfoContainer>
                     {detail.first_air_date !== null &&
                       detail.first_air_date !== undefined && (
-                        <DetailinfoContainer title={"First Air Date"}>
+                        <DetailInfoContainer title={"First Air Date"}>
                           <DateFormatter
                             date={detail.first_air_date}
                             fontSize="sm"
                             fontWeight="medium"
                           />
-                        </DetailinfoContainer>
+                        </DetailInfoContainer>
                       )}
                     {detail.last_air_date !== null &&
                       detail.last_air_date !== undefined && (
-                        <DetailinfoContainer title={"Last Air Date"}>
+                        <DetailInfoContainer title={"Last Air Date"}>
                           <DateFormatter
                             date={detail.last_air_date}
                             fontSize="sm"
                             fontWeight="medium"
                           />
-                        </DetailinfoContainer>
+                        </DetailInfoContainer>
                       )}
                   </>
                 )}
-                <DetailinfoContainer title={"Status"}>
+                <DetailInfoContainer title={"Status"}>
                   <Text p={1} fontSize="sm">
                     {detail.status}
                   </Text>
-                </DetailinfoContainer>
-                <DetailinfoContainer title={"Original Language"}>
+                </DetailInfoContainer>
+                <DetailInfoContainer title={"Original Language"}>
                   <LanguageGem>
                     <Text fontSize="sm">{detail.original_language}</Text>
                   </LanguageGem>
-                </DetailinfoContainer>
-                <DetailinfoContainer title={"Language"}>
+                </DetailInfoContainer>
+                <DetailInfoContainer title={"Language"}>
                   <Flex align="center">
                     {detail.spoken_languages.map(
                       (language: ISpokenLanguage) => (
@@ -460,11 +342,11 @@ const DetailBody: React.FC<IBodyProps> = ({ detail, credits, similars }) => {
                       )
                     )}
                   </Flex>
-                </DetailinfoContainer>
+                </DetailInfoContainer>
                 {detail.revenue > 0 && (
-                  <DetailinfoContainer title={"Revenue"}>
+                  <DetailInfoContainer title={"Revenue"}>
                     <Text p={1}>${detail.revenue}</Text>
-                  </DetailinfoContainer>
+                  </DetailInfoContainer>
                 )}
               </Flex>
             </GridItem>

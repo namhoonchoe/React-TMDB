@@ -31,13 +31,11 @@ const InfoCard: React.FC<IInfoProps> = ({ title, posterPath, rating }) => {
       alignItems: "center",
       borderRadius: "lg",
       pt: "2",
-      mb: "7",
       _hover: {
         backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
       },
       width: "12rem",
       height: "19.4rem",
-      
     },
   });
 

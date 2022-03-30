@@ -1,5 +1,5 @@
 import React from "react";
-import { VStack, Flex, Grid, chakra } from "@chakra-ui/react";
+import { Flex, Grid, chakra } from "@chakra-ui/react";
 
 export const CenteredBox = chakra(Flex, {
   baseStyle: {
@@ -8,10 +8,11 @@ export const CenteredBox = chakra(Flex, {
   },
 });
 
-export const PresenterLayout = chakra(VStack, {
+export const PresenterLayout = chakra(Flex, {
   baseStyle: {
-    spacing: "3",
+    flexDirection:"column",
     width: "90vw",
+    height:"100%",
     mt: 2,
   },
 });

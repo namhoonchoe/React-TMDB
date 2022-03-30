@@ -1,15 +1,13 @@
 import React from "react";
 import { Flex, chakra } from "@chakra-ui/react";
-import HalfStar from "./svgcomponents/HalfStar";
-import StarIcon from "./svgcomponents/StarIcon";
-import EmpthyStar from "./svgcomponents/EmpthyStar";
+import { HalfStar, StarIcon, EmptyStar } from "./SvgIcons";
 
 interface IStarRatingProps {
   rating: number | undefined;
 }
 
 const StarRating: React.FC<IStarRatingProps> = ({ rating }) => {
-  const CenterdBox = chakra(Flex, {
+  const CenteredBox = chakra(Flex, {
     baseStyle: {
       justifyContent: "start",
       alignItems: "center",
@@ -21,123 +19,123 @@ const StarRating: React.FC<IStarRatingProps> = ({ rating }) => {
       {rating !== undefined && (
         <>
           {rating < 0.5 && (
-            <CenterdBox>
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+            <CenteredBox>
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 0.5 && rating < 1 && (
-            <CenterdBox>
+            <CenteredBox>
               <HalfStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 1 && rating < 2 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 2 && rating < 3 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <HalfStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 3 && rating < 4 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <HalfStar />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 4 && rating < 5 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
-              <EmpthyStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 5 && rating < 6 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
               <HalfStar />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 6 && rating < 7 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
               <StarIcon />
-              <EmpthyStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 7 && rating < 8 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
               <StarIcon />
               <HalfStar />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 8 && rating < 9 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
               <StarIcon />
               <StarIcon />
-              <EmpthyStar />
-            </CenterdBox>
+              <EmptyStar />
+            </CenteredBox>
           )}
 
           {rating >= 9 && rating < 10 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
               <StarIcon />
               <StarIcon />
               <HalfStar />
-            </CenterdBox>
+            </CenteredBox>
           )}
 
           {rating >= 10 && (
-            <CenterdBox>
+            <CenteredBox>
               <StarIcon />
               <StarIcon />
               <StarIcon />
               <StarIcon />
               <StarIcon />
-            </CenterdBox>
+            </CenteredBox>
           )}
         </>
       )}

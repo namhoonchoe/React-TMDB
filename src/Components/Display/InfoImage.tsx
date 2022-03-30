@@ -1,6 +1,5 @@
 import React from "react";
-import BrokenPoster from "../svgcomponents/BrokenPoster";
-import BrokenPortrait from "../svgcomponents/BrokenPortrait";
+import { BrokenPoster, BrokenPortrait } from "@components/SvgIcons";
 import { Image, useColorMode, chakra } from "@chakra-ui/react";
 import { CenteredBox } from "./BasicLayouts";
 

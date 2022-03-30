@@ -3,7 +3,7 @@ import InfoCard from "./InfoCard";
 import { Link } from "react-router-dom";
 import {
   Button,
-  Box,
+  IconButton,
   chakra,
   Text,
   Flex,
@@ -12,6 +12,7 @@ import {
   Fade,
 } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
+import CarouselSlider from "./CarouselSlider";
 
 interface ICollapseSectionProps {
   title: string;
@@ -43,7 +44,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
 
   const GridSection = chakra(Grid, {
     baseStyle: {
-      gridTemplateColumns:`repeat(auto-fill,minmax(14rem, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fill,minmax(14rem, 1fr))`,
       alignItems: "start",
       width: "100%",
     },
@@ -80,7 +81,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
   }, [pathType, sectionInfoType]);
 
   return (
-    <Box width="100%">
+    <Flex direction={"column"} width="100%" height={"max-content"}>
       <CollapseControl>
         <Text fontSize="2xl" mb={3} fontWeight="semibold">
           {title}
@@ -111,8 +112,8 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
         </Collapse>
       ) : (
         <Fade in={!seeAll}>
-          <GridSection>
-            {sectionInfos.slice(0, 6).map((data: any) => (
+          <CarouselSlider>
+            {sectionInfos.map((data: any) => (
               <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                 <InfoCard
                   title={data.title || data.name}
@@ -121,10 +122,10 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
                 />
               </Link>
             ))}
-          </GridSection>
+          </CarouselSlider>
         </Fade>
       )}
-    </Box>
+    </Flex>
   );
 };
 

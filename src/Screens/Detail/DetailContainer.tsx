@@ -7,7 +7,7 @@ import DetailPresenter from "./DetailPresenter/PresenterLayout";
 interface IDetailInfos {
   detailInfo: DetailInfo;
   credits: CreditInfo;
-  similar: Array<IMovieSimilar> | Array<ISeriesSimilar>;
+  similarContents: Array<IMovieSimilar> | Array<ISeriesSimilar>;
 }
 
 const DetailContainer: React.FC = () => {
@@ -15,7 +15,7 @@ const DetailContainer: React.FC = () => {
   const [detail, setDetail] = useState<IDetailInfos>({
     detailInfo: {} as DetailInfo,
     credits: {} as CreditInfo,
-    similar: [] as Array<IMovieSimilar> | Array<ISeriesSimilar>,
+    similarContents: [] as Array<IMovieSimilar> | Array<ISeriesSimilar>,
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,7 +35,7 @@ const DetailContainer: React.FC = () => {
             ...detail,
             detailInfo: movieDetail,
             credits: casting,
-            similar: similarMovies,
+            similarContents: similarMovies,
           });
         } catch {
           setError(true);
@@ -55,7 +55,7 @@ const DetailContainer: React.FC = () => {
             ...detail,
             detailInfo: seriesDetail,
             credits: casting,
-            similar: similarSeries,
+            similarContents: similarSeries,
           });
         } catch {
           setError(true);
@@ -80,13 +80,13 @@ const DetailContainer: React.FC = () => {
       mounted = false;
     };
   }, [id, pathType]);
-  const { detailInfo, credits, similar } = detail;
+  const { detailInfo, credits, similarContents } = detail;
 
   return (
     <DetailPresenter
       detail={detailInfo}
       credits={credits}
-      similar={similar}
+      similarContents={similarContents}
       error={error}
       loading={loading}
     />

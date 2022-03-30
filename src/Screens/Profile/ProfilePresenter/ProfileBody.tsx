@@ -12,8 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { GridLayout } from "@components/Display/BasicLayouts";
 import DateFormatter from "@components/DateFormatter";
-import MovieIcon from "@components/svgcomponents/MovieIcon";
-import SeriesIcon from "@components/svgcomponents/SeriesIcon";
+import { MovieIcon,SeriesIcon }  from "@components/SvgIcons";
 import { useIconColor } from "@hooks/useIconColor";
 
 interface IBodyProps {

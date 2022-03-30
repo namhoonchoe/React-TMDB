@@ -5,6 +5,7 @@ import { Flex, Text, Box, VStack } from "@chakra-ui/react";
 import LoadingSpinner from "@components/LoadingSpinner";
 import LandingPortal from "@components/Display/LandingPortal";
 import InfoCard from "@components/Display/InfoCard";
+import CarouselSlider from "@components/Display/CarouselSlider";
 import ErrorPopUp from "@components/ErrorPopUp";
 
 interface IHomeProps {
@@ -41,20 +42,19 @@ const HomePresenter: React.FC<IHomeProps> = ({
             <title>Kino Guide</title>
           </Helmet>
           <VStack mb={3} width="100%" overscroll="none">
-            { trendingMovies.length &&
-              trendingSeries.length > 0 && (
-                <Box width="100%" height="70vh">
-                  <LandingPortal
-                    trendingMovies={trendingMovies}
-                    trendingSeries={trendingSeries}
-                    randomIndex={randomIndex}
-                    mediaType={mediaType}
-                    loading={loading}
-                  />
-                </Box>
-              )}
+            {trendingMovies.length && trendingSeries.length > 0 && (
+              <Box width="100%" height="70vh">
+                <LandingPortal
+                  trendingMovies={trendingMovies}
+                  trendingSeries={trendingSeries}
+                  randomIndex={randomIndex}
+                  mediaType={mediaType}
+                  loading={loading}
+                />
+              </Box>
+            )}
 
-            { trendingMovies.length > 0 && (
+            {trendingMovies.length > 0 && (
               <VStack align="start">
                 <Flex align="flex-end" my={4}>
                   <Text fontSize="3xl" mr={2}>
@@ -65,36 +65,19 @@ const HomePresenter: React.FC<IHomeProps> = ({
                   </Text>
                 </Flex>
                 <Box width="96vw">
-                  <Flex
-                    width="100%"
-                    overflowX="scroll"
-                    height="fit-content"
-                    justify="start"
-                    align="start"
-                    sx={{
-                      "&::-webkit-scrollbar": {
-                        borderRadius: "16px",
-                        backgroundColor: `rgba(0, 0, 0, 0)`,
-                      },
-                      "&::-webkit-scrollbar-thumb": {
-                        scrollbarWidth: "2px",
-                        borderRadius: "16px",
-                        backgroundColor: `rgba(141,144, 150, 0.3)`,
-                      },
-                    }}
-                  >
+                  <CarouselSlider>
                     {trendingMovies.map((data: IMovieData) => (
                       <Link to={`/${"movie"}/${data.id}`} key={data.id}>
                         <Box mx={3}>
                           <InfoCard
                             title={data.title}
-                            posterPath={data.poster_path }
+                            posterPath={data.poster_path}
                             rating={data.vote_average}
                           />
                         </Box>
                       </Link>
                     ))}
-                  </Flex>
+                  </CarouselSlider>
                 </Box>
               </VStack>
             )}
@@ -110,25 +93,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
                   </Text>
                 </Flex>
                 <Box width="96vw">
-                  <Flex
-                    width="100%"
-                    overflowX="scroll"
-                    height="fit-content"
-                    justify="start"
-                    align="start"
-                    css={{
-                      "&::-webkit-scrollbar": {
-                        width: "4px",
-                      },
-                      "&::-webkit-scrollbar-track": {
-                        width: "6px",
-                      },
-                      "&::-webkit-scrollbar-thumb": {
-                        backgroundColor: `rgba(141,144, 150, 0.3)`,
-                        borderRadius: "24px",
-                      },
-                    }}
-                  >
+                  <CarouselSlider>
                     {trendingSeries.map((data: ISeriesData) => (
                       <Link to={`/${"series"}/${data.id}`} key={data.id}>
                         <Box mx={3}>
@@ -140,7 +105,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
                         </Box>
                       </Link>
                     ))}
-                  </Flex>
+                  </CarouselSlider>
                 </Box>
               </VStack>
             )}
