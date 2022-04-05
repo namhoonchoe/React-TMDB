@@ -47,7 +47,7 @@ const DiscoverContainer: React.FC = () => {
       }
 
       if (pathType === "series") {
-        const getDiscoverSeiresInfo = async () => {
+        const getDiscoverSeriesInfo = async () => {
           try {
             const {
               data: { results },
@@ -69,7 +69,7 @@ const DiscoverContainer: React.FC = () => {
             setLoading(false);
           }
         };
-        getDiscoverSeiresInfo();
+        getDiscoverSeriesInfo();
       }
     };
 

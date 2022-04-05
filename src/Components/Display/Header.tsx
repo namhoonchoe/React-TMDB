@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useMatch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useMatch, useLocation } from "react-router-dom";
 import SearchBox from "../SearchBox";
 import {
   Flex,
@@ -32,6 +32,7 @@ const Header: React.FC = () => {
   const matchPerson = useMatch("/person");
   const matchDiscover = useMatch("/discover/movie");
   const matchCollections = useMatch("/bookmark");
+  let location = useLocation().pathname
 
   const HeaderLayout = chakra(Flex, {
     baseStyle: {
@@ -111,6 +112,16 @@ const Header: React.FC = () => {
       </NavigationContainer>
     );
   };
+
+
+  useEffect(() => {
+    let mounted = true
+    onClose()
+    return () => {
+      mounted = false
+    }
+  }, [location])
+  
 
   return (
     <HeaderLayout>

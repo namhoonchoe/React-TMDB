@@ -45,7 +45,8 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
   const GridSection = chakra(Grid, {
     baseStyle: {
       gridTemplateColumns: `repeat(auto-fill,minmax(14rem, 1fr))`,
-      alignItems: "start",
+      justifyContent: "center",
+      alignContent:"start",
       width: "100%",
     },
   });
@@ -112,7 +113,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
         </Collapse>
       ) : (
         <Fade in={!seeAll}>
-          <CarouselSlider>
+          <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
             {sectionInfos.map((data: any) => (
               <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                 <InfoCard

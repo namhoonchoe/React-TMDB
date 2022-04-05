@@ -80,15 +80,15 @@ const ProfileHeader: React.FC<IHeaderProps> = ({
               {bioGraphy.length > 200 ? (
                 <BiographyLayout>
                   <BiographyContainer>
-                    <Text fontSize="lg" fontWeight="semibold">
+                    <Text fontSize={"lg"} fontWeight="semibold">
                       Biography
                     </Text>
-                    <ModalBox modalcontent={bioGraphy} />
+                    <ModalBox modalContent={bioGraphy} />
                   </BiographyContainer>
                   <Text>{bioGraphy.substring(0, 200)}...</Text>
                 </BiographyLayout>
               ) : (
-                <Box width="35%">
+                <Box width={"35%"}>
                   <Text>{bioGraphy}</Text>
                 </Box>
               )}

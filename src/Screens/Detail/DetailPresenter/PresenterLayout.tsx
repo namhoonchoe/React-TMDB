@@ -39,7 +39,7 @@ const PresenterLayout: React.FC<IDetailProps> = ({
         </>
       ) : (
         <>
-          <Flex direction="column" align="center" justify="center">
+          <Flex direction="column" alignItems={"center"} justifyContent={"center"}>
             <DetailHeader detail={detail} loading={loading} />
             <Fade in={loading === false}>
               <DetailBody

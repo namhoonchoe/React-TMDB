@@ -29,10 +29,10 @@ const CreditSection: React.FC<ICreditProps> = ({
   const InfoLayout = chakra(Flex, {
     baseStyle: {
       width: "24rem",
-      height: "18.6rem",
+      height: "19rem",
       alignItems: "start",
       px: 2,
-      py: 1,
+      py: 2,
       borderRadius: "lg",
       _hover: {
         backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
@@ -183,6 +183,7 @@ const CreditSection: React.FC<ICreditProps> = ({
                                   genreId={genreId}
                                   genreType={"movie"}
                                   fontSize="xs"
+                                  borderColor={colorMode === "light" ? "gray.300" : "white"}
                                 />
                               ))}
                           </GenreContainer>
@@ -274,6 +275,7 @@ const CreditSection: React.FC<ICreditProps> = ({
                               genreId={genreId}
                               genreType={"series"}
                               fontSize="xs"
+                              borderColor={colorMode === "light" ? "gray.300" : "white"}
                             />
                           ))}
                         </GenreContainer>

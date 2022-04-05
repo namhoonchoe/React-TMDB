@@ -229,7 +229,7 @@ const SideBar: React.FC = () => {
     return () => {
       mounted = false;
     };
-  }, [value, orderDescending]);
+  }, []);
 
   return (
     <SidebarContainer>
@@ -466,30 +466,7 @@ const SideBar: React.FC = () => {
               <TriangleUpIcon />
             </OrderContainer>
           )}
-          <RadioGroup onChange={setValue} value={value}>
-            <ConditionLayout>
-              <ConditionContainer>
-                <Radio value="1">
-                  <Text fontSize="md">Popularity</Text>
-                </Radio>
-              </ConditionContainer>
-              <ConditionContainer>
-                <Radio value="2">
-                  <Text fontSize="md">Release Date</Text>
-                </Radio>
-              </ConditionContainer>
-              <ConditionContainer>
-                <Radio value="3">
-                  <Text fontSize="md">Rating</Text>
-                </Radio>
-              </ConditionContainer>
-              <ConditionContainer>
-                <Radio value="4">
-                  <Text fontSize="md">Revenue</Text>
-                </Radio>
-              </ConditionContainer>
-            </ConditionLayout>
-          </RadioGroup>
+         
         </CollapseBox>
       </FilterContainer>
       <Spacer />

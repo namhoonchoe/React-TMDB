@@ -23,14 +23,6 @@ const Main: React.FC = () => {
     },
   });
 
-  const Title = chakra(Text, {
-    baseStyle: {
-      fontSize: "2xl",
-      mb: 3,
-      fontWeight: "semibold",
-      alignSelf: "start",
-    },
-  });
 
   const NextPage = chakra(Button, {
     baseStyle: {
@@ -79,7 +71,6 @@ const Main: React.FC = () => {
 
   return (
     <DiscoverContainer>
-      <Title>Discover</Title>
       {mainInfo !== null && mainInfo.length > 0 && (
         <AutoGridLayoutSm
         >

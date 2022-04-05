@@ -10,14 +10,14 @@ interface IBookMarkProps {
 }
 
 const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookMarkId }) => {  
-  const [isbookMarked, setIsBookMarked] = useState<boolean>(false)
+  const [isBookMarked, setIsBookMarked] = useState<boolean>(false)
   const bookMarks = useSelector(selectBookMark)
   const payload = { type:bookMarkType, id:bookMarkId, bookMarkInfo:bookMarkDetail }
   const dispatch = useDispatch()
   const toast = useToast()
 
   const toggleBookMark = () => {
-    setIsBookMarked(!isbookMarked)
+    setIsBookMarked(!isBookMarked)
   }
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
     }, [ bookMarkDetail, bookMarkType, bookMarkId, bookMarks])
 
   const bookMarkEvent = () => {
-    if(isbookMarked) {
+    if(isBookMarked) {
       toast({
         title: "BookMark Removed.",
         description: "We've removed this from bookmark.",
@@ -67,7 +67,7 @@ const BookMark:React.FC<IBookMarkProps> = ({ bookMarkDetail, bookMarkType, bookM
 
   return (
     <>
-      { isbookMarked 
+      { isBookMarked 
         ? <Button color="green.300" backgroundColor="transparent" onClick={bookMarkEvent}>
             <Text>Remove BookMark</Text>
           </Button>

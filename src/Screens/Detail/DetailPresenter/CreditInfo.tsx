@@ -32,6 +32,7 @@ const CreditInfo: React.FC<ICreditInfo> = ({
       width:"14.4rem",
       height:"12rem",
       borderRadius: "lg",
+      mt:2,
       backgroundColor: colorMode === "light" ? "gray.200" : "gray.700",
       _hover: {
         boxShadow: colorMode === "light" ? "xl" : "dark-lg",

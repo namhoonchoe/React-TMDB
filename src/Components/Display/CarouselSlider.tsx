@@ -1,13 +1,20 @@
-import React, { useRef } from 'react'
+import React, { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-
 import { motion, AnimatePresence } from "framer-motion";
-import { chakra, Flex, IconButton } from '@chakra-ui/react';
+import { chakra, Flex, IconButton } from "@chakra-ui/react";
 
-const CarouselSlider:React.FC = ({children}) => {
+interface ICarouselProps {
+  wrapperHeight: any;
+  buttonHeight?:string
+}
+
+const CarouselSlider: React.FC<ICarouselProps> = ({
+  children,
+  wrapperHeight,
+  buttonHeight
+}) => {
   const sliderRef = useRef(null);
 
-  
   const scrollToR = (
     element: any,
     speed: number,
@@ -24,7 +31,6 @@ const CarouselSlider:React.FC = ({children}) => {
     }, speed);
   };
 
-  
   const scrollTol = (
     element: any,
     speed: number,
@@ -40,11 +46,11 @@ const CarouselSlider:React.FC = ({children}) => {
       }
     }, speed);
   };
-  
+
   const Slider = chakra(Flex, {
     baseStyle: {
       overflowX: "scroll",
-      width: "94%",
+      width: "98%",
       justifyContent: "start",
       alignItems: "start",
     },
@@ -53,42 +59,54 @@ const CarouselSlider:React.FC = ({children}) => {
   const SliderWrapper = chakra(Flex, {
     baseStyle: {
       justifyContent: "start",
-      alignItems: "center",
+      alignItems: "start",
       width: "100%",
-      height: "40vh",
+      height: wrapperHeight,
+      position: "relative",
     },
   });
 
   return (
     <AnimatePresence>
-    <SliderWrapper>
-    <IconButton
-        aria-label={"To Left"}
-        icon={<ChevronLeftIcon />}
-        onClick={() => {
-          scrollTol(sliderRef.current, 25, 250, -15);
-        }}
-      />
-      <Slider
-        ref={sliderRef}
-        sx={{
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-        }}
-      >
-      {children}
-      </Slider>
-      <IconButton
-        aria-label={"To right"}
-        icon={<ChevronRightIcon />}
-        onClick={() => {
-          scrollToR(sliderRef.current, 25, 250, -15);
-        }}
-      />
-    </SliderWrapper>
-  </AnimatePresence>
-  )}
+      <SliderWrapper>
+        <IconButton
+          aria-label={"To Left"}
+          icon={<ChevronLeftIcon />}
+          onClick={() => {
+            scrollTol(sliderRef.current, 25, 250, -15);
+          }}
+          height={buttonHeight}
+          backgroundColor={"transparent"}
+          position={"absolute"}
+          top={2}
+          left={-9}
+        />
 
+        <Slider
+          ref={sliderRef}
+          sx={{
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
+          {children}
+        </Slider>
+        <IconButton
+          aria-label={"To right"}
+          icon={<ChevronRightIcon />}
+          height={buttonHeight}
+          onClick={() => {
+            scrollToR(sliderRef.current, 25, 250, -15);
+          }}
+          backgroundColor={"transparent"}
+          position={"absolute"}
+          top={2}
+          right={-5}
+        />
+      </SliderWrapper>
+    </AnimatePresence>
+  );
+};
 
-export default CarouselSlider
+export default CarouselSlider;

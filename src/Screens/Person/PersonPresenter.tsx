@@ -35,20 +35,20 @@ const PersonPresenter: React.FC<IPersonProps> = ({
             <title>Kino Guide | Person</title>
           </Helmet>
           <Flex
-            direction="column"
-            align="center"
-            justify="start"
-            width="92vw"
+            direction={"column"}
+            align={"center"}
+            justify={"start"}
+            width={"92vw"}
             mx={3}
             my={2}
             px={3}
           >
             <Text
-              fontSize="2xl"
+              fontSize={"2xl"}
               mt={1}
               mb={3}
-              fontWeight="semibold"
-              alignSelf="start"
+              fontWeight={"semibold"}
+              alignSelf={"start"}
             >
               Popular people
             </Text>
@@ -59,7 +59,7 @@ const PersonPresenter: React.FC<IPersonProps> = ({
                     <InfoCard
                       key={data.id}
                       title={data.name}
-                      posterPath={ data.profile_path}
+                      posterPath={data.profile_path}
                     />
                   </Link>
                 ))}

@@ -55,8 +55,8 @@ const HomePresenter: React.FC<IHomeProps> = ({
             )}
 
             {trendingMovies.length > 0 && (
-              <VStack align="start">
-                <Flex align="flex-end" my={4}>
+              <VStack alignItems={"start"} >
+                <Flex alignItems={"flex-end"} left={2}>
                   <Text fontSize="3xl" mr={2}>
                     Today's Trending Movies
                   </Text>
@@ -64,8 +64,8 @@ const HomePresenter: React.FC<IHomeProps> = ({
                     <Link to="/movie">Explore Movies</Link>
                   </Text>
                 </Flex>
-                <Box width="96vw">
-                  <CarouselSlider>
+                <Flex width="90vw" alignItems={"center"} justifyContent={"center"}> 
+                  <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
                     {trendingMovies.map((data: IMovieData) => (
                       <Link to={`/${"movie"}/${data.id}`} key={data.id}>
                         <Box mx={3}>
@@ -78,22 +78,22 @@ const HomePresenter: React.FC<IHomeProps> = ({
                       </Link>
                     ))}
                   </CarouselSlider>
-                </Box>
+                </Flex>
               </VStack>
             )}
 
             {trendingSeries.length > 0 && (
-              <VStack align="start">
-                <Flex align="flex-end" my={4}>
-                  <Text fontSize="3xl" mr={2}>
+              <VStack alignItems={"start"}>
+                <Flex alignItems={"flex-end"} my={4}>
+                  <Text fontSize={"3xl"} mr={2}>
                     Today's Trending Series
                   </Text>
-                  <Text pb={1.5} fontWeight="semibold" fontSize="sm">
+                  <Text pb={1.5} fontWeight={"semibold"} fontSize="sm">
                     <Link to="/series">Explore TvSeries</Link>
                   </Text>
                 </Flex>
-                <Box width="96vw">
-                  <CarouselSlider>
+                <Flex width={"90vw"} alignItems={"center"} justifyContent={"center"}>
+                  <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
                     {trendingSeries.map((data: ISeriesData) => (
                       <Link to={`/${"series"}/${data.id}`} key={data.id}>
                         <Box mx={3}>
@@ -106,7 +106,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
                       </Link>
                     ))}
                   </CarouselSlider>
-                </Box>
+                </Flex>
               </VStack>
             )}
           </VStack>

@@ -185,7 +185,7 @@ const DetailBody: React.FC<IBodyProps> = ({
                         </Grid>
                       </SlideFade>
                     ) : (
-                      <CarouselSlider>
+                      <CarouselSlider wrapperHeight={{lg:"30vh", xl: "25vh"}} buttonHeight={"12rem"}>
                         {credits.cast.map((data: any) => (
                           <Box mr={3}>
                             <CreditInfo

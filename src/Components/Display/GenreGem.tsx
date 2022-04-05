@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import ErrorPopUp from "@components/ErrorPopUp";
 import { genreApi } from "@api";
 import { Text, Box, Fade, chakra } from "@chakra-ui/react";
-
-
+ 
 interface IGenre {
   id: number;
   name: string;
@@ -13,26 +12,29 @@ interface IGenreProps {
   genreId: number;
   genreType: string;
   fontSize?: string;
+  borderColor?:string
 }
 const GenreGem: React.FC<IGenreProps> = ({
   genreId,
   genreType,
   fontSize = "sm",
+  borderColor="white"
 }) => {
   const [genreList, setGenreList] = useState<Array<IGenre>>([]);
   const [genre, setGenre] = useState<IGenre|null>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
+
   const GenreBox = chakra(Box, {
     baseStyle: {
       mr: "2",
-      mt: "1",
+      mt: "1.5",
       p: "1.5",
       boxSize: "max-content",
       border: "1px",
-      borderColor: "white",
-      borderRadius:"15px",
+      borderColor: borderColor,
+      rounded:"xl",
     },
   });
 

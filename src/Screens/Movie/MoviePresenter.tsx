@@ -39,16 +39,16 @@ const MoviePresenter: React.FC<IMovieProps> = ({
           </Helmet>
           <PresenterLayout>
             {nowPlaying.length > 0 && (
-              <CollapseSection title="NowPlaying" sectionInfos={nowPlaying} />
+              <CollapseSection title={"NowPlaying"} sectionInfos={nowPlaying} />
             )}
 
             {popular.length > 0 && (
-              <CollapseSection title="Popular Movies" sectionInfos={popular} />
+              <CollapseSection title={"Popular Movies"} sectionInfos={popular} />
             )}
 
             {upComing.length > 0 && (
               <CollapseSection
-                title="UpComing Movies"
+                title={"UpComing Movies"}
                 sectionInfos={upComing}
               />
             )}

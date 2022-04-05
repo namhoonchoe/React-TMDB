@@ -35,7 +35,7 @@ const SearchPresenter: React.FC<ISearchProps> = ({
               <Section
                 title={"Results for Movies"}
                 sectionInfos={movieResults}
-                sectionInfoType="movie"
+                sectionInfoType={"movie"}
               />
             )}
 
@@ -43,7 +43,7 @@ const SearchPresenter: React.FC<ISearchProps> = ({
               <Section
                 title={"Results for series"}
                 sectionInfos={seriesResults}
-                sectionInfoType="series"
+                sectionInfoType={"series"}
               />
             )}
           </VStack>

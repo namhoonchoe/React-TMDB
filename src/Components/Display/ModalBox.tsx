@@ -13,10 +13,10 @@ import {
 } from "@chakra-ui/react";
 
 interface IModalProps {
-  modalcontent: string;
+  modalContent: string;
 }
 
-const ModalBox: React.FC<IModalProps> = ({ modalcontent }) => {
+const ModalBox: React.FC<IModalProps> = ({ modalContent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -32,7 +32,7 @@ const ModalBox: React.FC<IModalProps> = ({ modalcontent }) => {
         <ModalContent>
           <ModalHeader>Over View</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>{modalcontent}</ModalBody>
+          <ModalBody pb={6}>{modalContent}</ModalBody>
           <ModalFooter>
             <Button onClick={onClose} backgroundColor="transparent">
               <Text>Close</Text>
