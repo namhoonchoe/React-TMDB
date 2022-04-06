@@ -151,7 +151,7 @@ const ProfileBody: React.FC<IBodyProps> = ({
               {profileInfo.place_of_birth !== null && (
                 <PersonalInfoContainer>
                   <Text fontWeight="semibold" fontSize="md">
-                    Place of Birth{" "}
+                    Place of Birth
                   </Text>
                   <Text fontSize="sm">{profileInfo.place_of_birth}</Text>
                 </PersonalInfoContainer>

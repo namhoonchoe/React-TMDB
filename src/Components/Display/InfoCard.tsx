@@ -9,6 +9,7 @@ import {
   Fade,
   useColorMode,
   chakra,
+  transition
 } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 
@@ -34,6 +35,7 @@ const InfoCard: React.FC<IInfoProps> = ({ title, posterPath, rating }) => {
       _hover: {
         backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
       },
+      transition:"0.6s",
       width: "12rem",
       height: "19.4rem",
     },
@@ -45,6 +47,7 @@ const InfoCard: React.FC<IInfoProps> = ({ title, posterPath, rating }) => {
       _groupHover:{
         opacity:"1"
       },
+      transition:"0.6s",
       zIndex: "10",
       position: "absolute",
       top: "0",

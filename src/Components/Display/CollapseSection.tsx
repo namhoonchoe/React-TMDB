@@ -8,7 +8,7 @@ import {
   Text,
   Flex,
   Grid,
-  Collapse,
+  SlideFade ,
   Fade,
 } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
@@ -98,7 +98,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
         )}
       </CollapseControl>
       {seeAll ? (
-        <Collapse in={seeAll}>
+        <SlideFade in={seeAll}>
           <GridSection>
             {sectionInfos.map((data: any) => (
               <Link to={`/${sectionType}/${data.id}`} key={data.id}>
@@ -110,7 +110,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
               </Link>
             ))}
           </GridSection>
-        </Collapse>
+        </SlideFade >
       ) : (
         <Fade in={!seeAll}>
           <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>

@@ -19,10 +19,7 @@ import { Link } from "react-router-dom";
 import CollapseBox from "@components/Display/CollapseBox";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import { TuneIcon } from "@components/SvgIcons";
-import {
-  TriangleUpIcon,
-  TriangleDownIcon,
-} from "@chakra-ui/icons";
+import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Box,
   Text,
@@ -36,7 +33,7 @@ import {
   RadioGroup,
   Radio,
   VStack,
-  SlideFade
+  SlideFade,
 } from "@chakra-ui/react";
 import { useIconColor } from "@hooks/useIconColor";
 import {
@@ -83,7 +80,6 @@ export default function Filter() {
     dispatch(addToFilter({ info, type: "exclude" }));
   };
 
-  
   const triggerSearch = () => {
     dispatch(
       setDiscoverQuery({
@@ -141,7 +137,6 @@ export default function Filter() {
     };
   }, []);
 
-
   const SelectorContainer = chakra(Flex, {
     baseStyle: {
       flexDirection: "row",
@@ -161,7 +156,6 @@ export default function Filter() {
     },
   });
 
-
   const GenreListContainer = chakra(Grid, {
     baseStyle: {
       gridTemplateColumns: "repeat(3,1fr)",
@@ -171,7 +165,6 @@ export default function Filter() {
       columnGap: 3,
     },
   });
-
 
   const GenreFilterLayout = chakra(Flex, {
     baseStyle: {
@@ -197,6 +190,7 @@ export default function Filter() {
     baseStyle: {
       boxSize: "max-content",
       my: 3,
+      ml:2,
       justifyContent: "start",
       alignItems: "center",
     },
@@ -273,7 +267,7 @@ export default function Filter() {
                     onClick={() => resetCondition()}
                   >
                     <MovieIcon color={iconColor} />
-                    <Text ml={1} fontSize={{ md: "sm", lg: "md", xl: "xl" }}>
+                    <Text ml={1} fontSize={"md"}>
                       Movies
                     </Text>
                   </TypeSelector>
@@ -290,7 +284,7 @@ export default function Filter() {
                     onClick={() => resetCondition()}
                   >
                     <SeriesIcon color={iconColor} />
-                    <Text ml={1} fontSize={{ md: "sm", lg: "md", xl: "xl" }}>
+                    <Text ml={1} fontSize={"md"}>
                       Series
                     </Text>
                   </TypeSelector>
@@ -310,7 +304,7 @@ export default function Filter() {
                                 )
                               }
                             >
-                              <GenreName>{genre.name}</GenreName>
+                              <GenreName >{genre.name}</GenreName>
                             </GenreContainer>
                           )}
 
@@ -318,16 +312,16 @@ export default function Filter() {
                           excludeIds.includes(genre.id) === false && (
                             <GenreContainer
                               onClick={() => toExClude(genre)}
-                              backgroundColor={"green.400"}
+                              backgroundColor={colorMode === "light" ? "#49c480" : "#14c965"}
                             >
-                              <GenreName>{genre.name}</GenreName>
+                              <GenreName color={"white"}>{genre.name}</GenreName>
                             </GenreContainer>
                           )}
 
                         {includeIds.includes(genre.id) === false &&
                           excludeIds.includes(genre.id) && (
                             <GenreContainer
-                              backgroundColor={"red.300"}
+                              backgroundColor={colorMode === "light" ? "red.400" : "#db4069"}
                               onClick={() =>
                                 dispatch(
                                   removeFromFilter({
@@ -337,7 +331,7 @@ export default function Filter() {
                                 )
                               }
                             >
-                              <GenreName>{genre.name}</GenreName>
+                              <GenreName color={"white"}>{genre.name}</GenreName>
                             </GenreContainer>
                           )}
                       </>
@@ -391,9 +385,9 @@ export default function Filter() {
                 </ConditionLayout>
               </RadioGroup>
             </CollapseBox>
-            <CollapseBox title="Filters">
+            <CollapseBox title={"Filters"}>
               <GenreFilterLayout>
-                <VStack alignItems="start">
+                <VStack alignItems="start" ml={"2"}>
                   <Box>
                     <Text fontSize="sm" as="em">
                       Include

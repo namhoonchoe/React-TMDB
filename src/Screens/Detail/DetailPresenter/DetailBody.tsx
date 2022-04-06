@@ -11,6 +11,7 @@ import {
   SlideFade,
   useColorMode,
   Tooltip,
+  Fade,
   chakra,
 } from "@chakra-ui/react";
 import { GridLayout } from "@components/Display/BasicLayouts";
@@ -185,18 +186,23 @@ const DetailBody: React.FC<IBodyProps> = ({
                         </Grid>
                       </SlideFade>
                     ) : (
-                      <CarouselSlider wrapperHeight={{lg:"30vh", xl: "25vh"}} buttonHeight={"12rem"}>
-                        {credits.cast.map((data: any) => (
-                          <Box mr={3}>
-                            <CreditInfo
-                              id={data.id}
-                              profilePath={data.profile_path}
-                              name={data.name}
-                              character={data.character}
-                            />
-                          </Box>
-                        ))}
-                      </CarouselSlider>
+                      <Fade in={!fullCast}>
+                        <CarouselSlider
+                          wrapperHeight={{ lg: "30vh", xl: "25vh" }}
+                          buttonHeight={"12rem"}
+                        >
+                          {credits.cast.map((data: any) => (
+                            <Box mx={1.5}>
+                              <CreditInfo
+                                id={data.id}
+                                profilePath={data.profile_path}
+                                name={data.name}
+                                character={data.character}
+                              />
+                            </Box>
+                          ))}
+                        </CarouselSlider>
+                      </Fade>
                     )}
                   </CastingSection>
                 )}
@@ -213,7 +219,7 @@ const DetailBody: React.FC<IBodyProps> = ({
               </VStack>
             </GridItem>
             {/*Futher Info */}
-            <GridItem rowSpan={2} colSpan={1} ml={6}>
+            <GridItem rowSpan={2} colSpan={1} pl={"5vw"}>
               <Text fontSize="2xl" mb={3} fontWeight="semibold">
                 Info
               </Text>

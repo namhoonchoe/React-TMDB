@@ -79,7 +79,7 @@ const CarouselSlider: React.FC<ICarouselProps> = ({
           backgroundColor={"transparent"}
           position={"absolute"}
           top={2}
-          left={-9}
+          left={-10}
         />
 
         <Slider

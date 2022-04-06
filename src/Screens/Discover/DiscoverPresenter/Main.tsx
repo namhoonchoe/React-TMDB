@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDiscoverInfoList, fetchMore } from "@redux/discoverSlice";
 import { Link } from "react-router-dom";
-import { Text, Flex, Button, chakra } from "@chakra-ui/react";
-import { AutoGridLayoutSm } from "@components/Display/BasicLayouts"
+import { Text, Flex, Button, SlideFade, chakra } from "@chakra-ui/react";
+import { AutoGridLayoutSm } from "@components/Display/BasicLayouts";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import InfoCard from "@components/Display/InfoCard";
 
 const Main: React.FC = () => {
   const [sectionType, setSectionType] = useState<string | undefined>("");
+  const [isLoaded, setIsLoaded] = useState(false);
   const mainInfo = useSelector(selectDiscoverInfoList);
   const pathType = usePathTypeCheck();
 
@@ -22,7 +23,6 @@ const Main: React.FC = () => {
       px: 3,
     },
   });
-
 
   const NextPage = chakra(Button, {
     baseStyle: {
@@ -59,8 +59,13 @@ const Main: React.FC = () => {
       }
     };
 
+    const skeletonController = () => {
+      setIsLoaded(true);
+    };
+
     if (mounted) {
       imageTypeChecker();
+      skeletonController();
     }
 
     return () => {
@@ -72,16 +77,17 @@ const Main: React.FC = () => {
   return (
     <DiscoverContainer>
       {mainInfo !== null && mainInfo.length > 0 && (
-        <AutoGridLayoutSm
-        >
+        <AutoGridLayoutSm>
           {mainInfo.map((data: any) => (
             <Link to={`/${sectionType}/${data.id}`}>
-              <InfoCard
-                key={data.id}
-                title={data.title || data.name}
-                posterPath={data.poster_path || data.profile_path}
-                rating={data.vote_average}
-              />
+              <SlideFade in={isLoaded}>
+                <InfoCard
+                  key={data.id}
+                  title={data.title || data.name}
+                  posterPath={data.poster_path || data.profile_path}
+                  rating={data.vote_average}
+                />
+              </SlideFade >
             </Link>
           ))}
         </AutoGridLayoutSm>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { Flex, Text, Box, VStack } from "@chakra-ui/react";
+import { Flex, Text, Box, VStack, chakra } from "@chakra-ui/react";
 import LoadingSpinner from "@components/LoadingSpinner";
 import LandingPortal from "@components/Display/LandingPortal";
 import InfoCard from "@components/Display/InfoCard";
@@ -25,6 +25,19 @@ const HomePresenter: React.FC<IHomeProps> = ({
   error,
   loading,
 }) => {
+
+  const ExploreLink = chakra(Text,{
+    baseStyle:{
+      pb:2,
+      fontWeight:"semibold",
+      fontSize:"sm",
+      transition:`color  0.8s`,
+      _hover: {
+        color:   "blue.400",
+      },
+    }
+  })
+
   return (
     <>
       {loading ? (
@@ -60,15 +73,15 @@ const HomePresenter: React.FC<IHomeProps> = ({
                   <Text fontSize="3xl" mr={2}>
                     Today's Trending Movies
                   </Text>
-                  <Text pb={1.5} fontWeight="semibold" fontSize="sm">
+                  <ExploreLink>
                     <Link to="/movie">Explore Movies</Link>
-                  </Text>
+                  </ExploreLink>
                 </Flex>
                 <Flex width="90vw" alignItems={"center"} justifyContent={"center"}> 
                   <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
                     {trendingMovies.map((data: IMovieData) => (
                       <Link to={`/${"movie"}/${data.id}`} key={data.id}>
-                        <Box mx={3}>
+                        <Box mx={1.5}>
                           <InfoCard
                             title={data.title}
                             posterPath={data.poster_path}
@@ -88,15 +101,15 @@ const HomePresenter: React.FC<IHomeProps> = ({
                   <Text fontSize={"3xl"} mr={2}>
                     Today's Trending Series
                   </Text>
-                  <Text pb={1.5} fontWeight={"semibold"} fontSize="sm">
+                  <ExploreLink>
                     <Link to="/series">Explore TvSeries</Link>
-                  </Text>
+                  </ExploreLink>
                 </Flex>
                 <Flex width={"90vw"} alignItems={"center"} justifyContent={"center"}>
                   <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
                     {trendingSeries.map((data: ISeriesData) => (
                       <Link to={`/${"series"}/${data.id}`} key={data.id}>
-                        <Box mx={3}>
+                        <Box mx={1.5}>
                           <InfoCard
                             title={data.name}
                             posterPath={data.poster_path}

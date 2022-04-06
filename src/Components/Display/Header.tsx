@@ -20,8 +20,15 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useIconColor } from "@hooks/useIconColor";
-import { PersonIcon, MovieIcon, SeriesIcon, Collections, DiscoverIcon, DayLightMode, DarkMode } from "@components/SvgIcons"
-
+import {
+  PersonIcon,
+  MovieIcon,
+  SeriesIcon,
+  Collections,
+  DiscoverIcon,
+  DayLightMode,
+  DarkMode,
+} from "@components/SvgIcons";
 
 const Header: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,7 +39,7 @@ const Header: React.FC = () => {
   const matchPerson = useMatch("/person");
   const matchDiscover = useMatch("/discover/movie");
   const matchCollections = useMatch("/bookmark");
-  let location = useLocation().pathname
+  let location = useLocation().pathname;
 
   const HeaderLayout = chakra(Flex, {
     baseStyle: {
@@ -41,12 +48,24 @@ const Header: React.FC = () => {
       bgColor: colorMode === "light" ? "gray.100" : "black",
       opacity: "0.9",
       px: "4",
-      py: "3",
+      py: "2",
       position: "sticky",
       zIndex: "10",
       width: "100%",
       top: "0",
       left: "0",
+    },
+  });
+
+  const IconContainer = chakra(Box, {
+    baseStyle: {
+      p: 2,
+      rounded: "full",
+      backgroundColor: "transparent",
+      _hover: {
+        backgroundColor: "gray.600",
+      },
+      transition: `0.8s`,
     },
   });
 
@@ -113,20 +132,32 @@ const Header: React.FC = () => {
     );
   };
 
-
   useEffect(() => {
-    let mounted = true
-    onClose()
+    let mounted = true;
+    onClose();
     return () => {
-      mounted = false
-    }
-  }, [location])
-  
+      mounted = false;
+    };
+  }, [location]);
 
   return (
     <HeaderLayout>
       <VStack justify="start">
-        <HamburgerIcon onClick={onOpen} width={5} height={5} mr={3} />
+        <Tooltip label="Open side bar" aria-label="A tooltip">
+          <HamburgerIcon
+            onClick={onOpen}
+            width={10}
+            height={10}
+            mr={3}
+            p={2}
+            rounded={"full"}
+            backgroundColor={"transparent"}
+            _hover={{
+              backgroundColor: colorMode === "light" ? "gray.300" : "gray.600",
+            }}
+            transition={`0.8s`}
+          />
+        </Tooltip>
         <Drawer placement="left" onClose={onClose} isOpen={isOpen} size={"xs"}>
           <DrawerOverlay />
           <DrawerContent m={3} borderRadius="lg">
@@ -179,16 +210,16 @@ const Header: React.FC = () => {
       </Link>
       <Spacer />
       {colorMode === "light" ? (
-        <Tooltip label="Dark mode" aria-label="A tooltip">
-          <Box onClick={toggleColorMode}>
+        <Tooltip label="To Dark mode" aria-label="A tooltip">
+          <IconContainer onClick={toggleColorMode}>
             <DarkMode width="2rem" height="2rem" />
-          </Box>
+          </IconContainer>
         </Tooltip>
       ) : (
-        <Tooltip label="Light mode" aria-label="A tooltip">
-          <Box onClick={toggleColorMode}>
+        <Tooltip label="To Light mode" aria-label="A tooltip">
+          <IconContainer onClick={toggleColorMode}>
             <DayLightMode width="2rem" height="2rem" />
-          </Box>
+          </IconContainer>
         </Tooltip>
       )}
     </HeaderLayout>

@@ -23,7 +23,7 @@ const RootRouter: React.FC = () => {
   const redirection = useSelector(selectSearch).redirection;
   return (
     <Router>
-      <Flex flexDirection="column" alignItems="center">
+      <Flex flexDirection="column" alignItems="center" width={"100%"}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

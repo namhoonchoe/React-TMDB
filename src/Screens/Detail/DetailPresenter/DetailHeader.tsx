@@ -43,9 +43,9 @@ const DetailHeader: React.FC<IHeaderProps> = ({ detail, loading }) => {
       height: "100%",
       bgSize: "cover",
       bgColor: "black",
-      boxShadow:`inset 25vw 0px 3vw black`,
+      boxShadow: `inset 25vw 0px 3vw black`,
       filter: "brightness(65%)",
-      bgPosition: "20em 5%",
+      bgPosition: "20vw 5%",
       borderRadius: "sm",
       bgRepeat: "no-repeat",
     },
@@ -53,11 +53,12 @@ const DetailHeader: React.FC<IHeaderProps> = ({ detail, loading }) => {
 
   const InfoLayout = chakra(Flex, {
     baseStyle: {
-      width: "100%",
+      width: "90vw",
       height: "70vh",
-      position: "relative",
-      left: { lg: "-10%", xl: "-20%" },
       color: "white",
+      position:"relative",
+      justifyContent: "start",
+      left: { lg: "-1.5vw", xl: "-1vw" },
       pt: "3%",
     },
   });
@@ -67,7 +68,7 @@ const DetailHeader: React.FC<IHeaderProps> = ({ detail, loading }) => {
       alignItems: "start",
       justifyContent: "space-between",
       spacing: "3",
-      width: "35%",
+      width: "40%",
       height: "75%",
       ml: "2%",
     },
@@ -78,118 +79,120 @@ const DetailHeader: React.FC<IHeaderProps> = ({ detail, loading }) => {
       alignItems: "center",
       justifyTracks: "start",
       boxSize: "max-content",
-      mt:2,
-      pb:3
+      mt: 2,
+      pb: 3,
     },
   });
 
   return (
-    <>
-      <Fade in={!loading}>
-        <BackdropContainer>
-          <BackdropImage
-            bgImage={
-              detail.backdrop_path !== null
-                ? `https://image.tmdb.org/t/p/original${detail.backdrop_path}`
-                : "none"
-            }
-          />
-        </BackdropContainer>
-        <InfoLayout>
-          <InfoImage
-            borderRadius={"md"}
-            imageType={"poster"}
-            width={"27%"}
-            height={"75%"}
-            imageSource={detail.poster_path}
-          />
-          <InfoContainer>
-            <Flex direction="column">
-              {detail.title !== "" ||
-              (detail.name !== "" && detail.title.length) ||
-              detail.name.length > 20 ? (
-                <Text fontWeight="bold" fontSize={"2xl"} mb={"3%"}>
-                  {detail.title || detail.name}
-                </Text>
-              ) : (
-                <Text fontWeight="bold" fontSize={"xl"} mb={"3%"}>
-                  {detail.title || detail.name}
-                </Text>
-              )}
+    <Fade in={!loading}>
+      <BackdropContainer>
+        <BackdropImage
+          bgImage={
+            detail.backdrop_path !== null
+              ? `https://image.tmdb.org/t/p/original${detail.backdrop_path}`
+              : "none"
+          }
+        />
+      </BackdropContainer>
+      <InfoLayout>
+        <InfoImage
+          borderRadius={"md"}
+          imageType={"poster"}
+          width={"15%"}
+          height={"75%"}
+          imageSource={detail.poster_path}
+        />
+        <InfoContainer>
+          <Flex direction="column">
+            {detail.title !== "" ||
+            (detail.name !== "" && detail.title.length) ||
+            detail.name.length > 20 ? (
+              <Text fontWeight={"bold"} fontSize={"2xl"} mb={"3%"}>
+                {detail.title || detail.name}
+              </Text>
+            ) : (
+              <Text fontWeight={"bold"} fontSize={"xl"} mb={"3%"}>
+                {detail.title || detail.name}
+              </Text>
+            )}
 
-              {detail.tagline !== "" && (
-                <Text
-                  as="cite"
-                  fontWeight="semibold"
-                  mt={1}
-                  fontSize={{ lg: "sm", xl: "md" }}
-                >
-                  "{detail.tagline}"
-                </Text>
+            {detail.tagline !== "" && (
+              <Text
+                as={"cite"}
+                fontWeight={"semibold"}
+                mt={1}
+                fontSize={{ lg: "sm", xl: "md" }}
+              >
+                "{detail.tagline}"
+              </Text>
+            )}
+          </Flex>
+          <Flex
+            flexDirection={"column"}
+            justifyContent={"start"}
+            width={"100%"}
+          >
+            <Box width={"100%"}>
+              {detail.overview.length > 100 ? (
+                <Flex flexDirection="column" alignItems="start">
+                  <Flex
+                    flexDirection={"row"}
+                    justifyContent={"space-between"}
+                    alignItems={"baseline"}
+                  >
+                    <Text fontSize={"lg"} fontWeight={"semibold"}>
+                      storyline
+                    </Text>
+                    <ModalBox modalContent={detail.overview} />
+                  </Flex>
+                  <Text>{detail.overview.substring(0, 100)}...</Text>
+                </Flex>
+              ) : (
+                <Box>
+                  <Text>{detail.overview}</Text>
+                </Box>
               )}
-            </Flex>
-            <Flex flexDirection="column" justifyContent="start" width="100%">
-              <Box width="100%">
-                {detail.overview.length > 100 ? (
-                  <Flex flexDirection="column" alignItems="start">
-                    <Flex
-                      flexDirection="row"
-                      justifyContent="space-between"
-                      alignItems="baseline"
-                    >
-                      <Text fontSize="lg" fontWeight="semibold">
-                        storyline
+            </Box>
+            <HStack justifyContent={"start"} mt={1}>
+              <VStack alignItems={"start"}>
+                {detail.release_date !== null ||
+                  undefined ||
+                  detail.first_air_date !== null ||
+                  (undefined && (
+                    <Flex alignItems="baseline">
+                      <DateFormatter
+                        date={detail.release_date || detail.first_air_date}
+                        fontSize={responsiveDate}
+                      />
+                      <Text
+                        fontWeight="medium"
+                        fontSize={{ lg: "md", xl: "lg" }}
+                      >
+                        ({detail.status})
                       </Text>
-                      <ModalBox modalContent={detail.overview} />
                     </Flex>
-                    <Text>{detail.overview.substring(0, 100)}...</Text>
-                  </Flex>
-                ) : (
-                  <Box>
-                    <Text>{detail.overview}</Text>
-                  </Box>
-                )}
-              </Box>
-              <HStack justifyContent="start" mt={1}>
-                <VStack alignItems="start">
-                  {detail.release_date !== null ||
-                    undefined ||
-                    detail.first_air_date !== null ||
-                    (undefined && (
-                      <Flex alignItems="baseline">
-                        <DateFormatter
-                          date={detail.release_date || detail.first_air_date}
-                          fontSize={responsiveDate}
-                        />
-                        <Text
-                          fontWeight="medium"
-                          fontSize={{ lg: "md", xl: "lg" }}
-                        >
-                          ({detail.status})
-                        </Text>
-                      </Flex>
-                    ))}
-                  <Flex justifyContent="start" alignItems="center">
-                    <StarRating rating={detail.vote_average} />
-                    <Text ml={2}>{detail.vote_average.toFixed(1)}/10</Text>
-                    <BookMark
-                      bookMarkDetail={detail}
-                      bookMarkType={pathType}
-                      bookMarkId={detail.id}
-                    />
-                  </Flex>
-                </VStack>
-              </HStack>
-              <GenreContainer>
-                {detail.genres.map((genre: IGenre) => (
-                  <GenreGem genreId={genre.id} genreType={pathType} />
-                ))}
-              </GenreContainer>
-            </Flex>
-          </InfoContainer>
-        </InfoLayout>
-      </Fade>
-    </>
+                  ))}
+                <Flex justifyContent={"start"} alignItems={"center"}>
+                  <StarRating rating={detail.vote_average} />
+                  <Text ml={2}>{detail.vote_average.toFixed(1)}/10</Text>
+                  <BookMark
+                    bookMarkDetail={detail}
+                    bookMarkType={pathType}
+                    bookMarkId={detail.id}
+                  />
+                </Flex>
+              </VStack>
+            </HStack>
+            <GenreContainer>
+              {detail.genres.map((genre: IGenre) => (
+                <GenreGem genreId={genre.id} genreType={pathType} />
+              ))}
+            </GenreContainer>
+          </Flex>
+        </InfoContainer>
+      </InfoLayout>
+    </Fade>
   );
 };
 

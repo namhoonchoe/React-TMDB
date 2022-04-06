@@ -81,7 +81,7 @@ const DiscoverContainer: React.FC = () => {
       mounted = false;
       resetTrigger()
     };
-  }, [pathType, genreExclude, genreInclude, sort, page]);
+  }, [pathType, genreExclude, genreInclude, sort, page, dispatch]);
 
   return <DiscoverPresenter error={error} loading={loading} />;
 };

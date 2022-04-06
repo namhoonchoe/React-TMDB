@@ -1,10 +1,6 @@
 import React from "react";
-import { IconButton, chakra, Flex, Text, useColorMode } from "@chakra-ui/react";
+import {  chakra, Flex, Text } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
-import { Link } from "react-router-dom";
-import { useIconColor } from "@hooks/useIconColor";
-import { MovieIcon, SeriesIcon } from "@components/SvgIcons";
-import { useSelector, useDispatch } from "react-redux";
 import Filter from "./Filter";
 
 export default function Header() {
