@@ -30,7 +30,7 @@ interface IState {
   discoverInfo: IDiscoverInfo;
   discoverQuery: IDiscoverQuery;
   genreFilters: genreFilters;
-  triggered:boolean
+  triggered: boolean;
 }
 
 const discoverState: IState = {
@@ -45,7 +45,7 @@ const discoverState: IState = {
 
   genreFilters: [],
 
-  triggered:false
+  triggered: false,
 };
 
 const discoverSlice = createSlice({
@@ -82,25 +82,15 @@ const discoverSlice = createSlice({
       };
     },
 
-    addToFilter: (state: IState, action: PayloadAction<IDiscoverGenre>) => {
+    updateFilter: (state: IState, action: PayloadAction<IDiscoverGenre>) => {
       const target = state.genreFilters;
-      const filterAdded = [...target, action.payload];
+      const filterUpdated= [...target, action.payload];
       return {
         ...state,
-        genreFilters: filterAdded,
+        genreFilters: filterUpdated,
       };
     },
 
-    removeFromFilter: (state: IState, action: PayloadAction<IDiscoverGenre>) => {
-      const target = state.genreFilters;
-      const filterRemoved = target.filter(
-        (genreFilter) => genreFilter.info.id !== action.payload.info.id
-      );
-      return {
-        ...state,
-        genreFilters: filterRemoved,
-      };
-    },
 
     setDiscoverQuery: (
       state: IState,
@@ -112,59 +102,41 @@ const discoverSlice = createSlice({
       return { ...state, discoverQuery: renewedQuery };
     },
 
-    fetchMore: (state: IState) => {
+    nextPage: (state: IState) => {
       const nextPage = state.discoverQuery.page + 1;
       const getNext = { ...state.discoverQuery, page: nextPage };
       return { ...state, discoverQuery: getNext };
     },
 
-    triggerRender: (state:IState) => {
-      return { ...state, triggered:true}
+    prevPage:(state: IState) => {
+      const nextPage = state.discoverQuery.page - 1;
+      const getNext = { ...state.discoverQuery, page: nextPage };
+      return { ...state, discoverQuery: getNext };
     },
 
-    resetTrigger:(state:IState) => {
-      return {...state, triggered:false}
-    }
+    triggerRender: (state: IState) => {
+      return { ...state, triggered: true };
+    },
 
+    resetTrigger: (state: IState) => {
+      return { ...state, triggered: false };
+    },
   },
 });
 
 export const {
   getInfos,
-  addToFilter,
-  removeFromFilter,
+  updateFilter,
   setDiscoverQuery,
-  fetchMore,
+  nextPage,
+  prevPage,
   resetFilter,
   resetQuery,
   resetTrigger,
-  triggerRender
+  triggerRender,
 } = discoverSlice.actions;
 
-export const selectDiscoverInfoList = (state: RootState) =>
-  state.discover.discoverInfo.discoverList;
-export const selectDiscoverInfoGenres = (state: RootState) =>
-  state.discover.discoverInfo.discoverGenres;
 
-export const selectGenreFilters = (state: RootState) =>
-  state.discover.genreFilters;
-export const selectExcludeFilter = (state: RootState) =>
-  state.discover.genreFilters.filter((filter) => filter.type === "exclude");
-export const selectIncludeFilter = (state: RootState) =>
-  state.discover.genreFilters.filter((filter) => filter.type === "include");
-
-export const selectExcludeId = (state: RootState) =>
-  state.discover.genreFilters
-    .filter((filter) => filter.type === "exclude")
-    .map((genre) => genre.info["id"]);
-export const selectIncludeId = (state: RootState) =>
-  state.discover.genreFilters
-    .filter((filter) => filter.type === "include")
-    .map((genre) => genre.info["id"]);
-
-export const selectDiscoverQuery = (state: RootState) =>
-  state.discover.discoverQuery;
-
-export const selectTrigger = (state:RootState) => state.discover.triggered
-
+export const selectDiscover = (state: RootState) => state.discover;
+export const selectGenreFilter = (state: RootState) => state.discover.genreFilters
 export default discoverSlice.reducer;

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { discoverApi, genreApi } from "@api";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import {
-  selectDiscoverQuery,
+  selectDiscover,
   resetTrigger,
   getInfos,
 } from "@redux/discoverSlice";
@@ -13,7 +13,7 @@ const DiscoverContainer: React.FC = () => {
   let pathType = usePathTypeCheck();
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const { sort, genreInclude, genreExclude, page } = useSelector(selectDiscoverQuery);
+  const { discoverQuery: { sort, genreInclude, genreExclude, page } } = useSelector(selectDiscover);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -79,9 +79,9 @@ const DiscoverContainer: React.FC = () => {
 
     return () => {
       mounted = false;
-      resetTrigger()
+      resetTrigger();
     };
-  }, [pathType, genreExclude, genreInclude, sort, page, dispatch]);
+  }, [pathType, page,genreExclude,genreInclude,sort]);
 
   return <DiscoverPresenter error={error} loading={loading} />;
 };

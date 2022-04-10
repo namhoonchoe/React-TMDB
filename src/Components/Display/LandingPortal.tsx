@@ -4,6 +4,7 @@ import { Box, Flex, Text, VStack, Skeleton, chakra } from "@chakra-ui/react";
 import DateFormatter from "@components/DateFormatter";
 import StarRating from "@components/StarRating";
 import GenreGem from "@components/Display/GenreGem";
+import { genreApi } from "@api";
 
 interface IMovieData {
   poster_path: string | null;
@@ -60,7 +61,7 @@ const LandingPortal: React.FC<ILandingProps> = ({
       alignItems: "start",
       borderRadius: "sm",
       width: "100%",
-      height: "75vh",
+      height: "70vh ",
     },
   });
 
@@ -174,7 +175,7 @@ const LandingPortal: React.FC<ILandingProps> = ({
                 </VStack>
                 <GenreContainer>
                   {pickedInfo.genre_ids && pickedInfo.genre_ids.map((id: number) => (
-                    <GenreGem genreId={id} genreType={mediaType} />
+                    <GenreGem genreId={id} key={id} genreType={mediaType} />
                   ))}
                 </GenreContainer>
               </InfoContainer>

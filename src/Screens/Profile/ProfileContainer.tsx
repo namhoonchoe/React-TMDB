@@ -26,7 +26,7 @@ const ProfileContainer: React.FC = () => {
       try {
         const { data: profileInfo } = await personApi.peopleDetail(id);
         const { data: movieCredits } = await personApi.movieCredits(id);
-        const { data: seriesCredits } = await personApi.seiresCredits(id);
+        const { data: seriesCredits } = await personApi.seriesCredits(id);
         setDetail({ ...detail, profileInfo, movieCredits, seriesCredits });
       } catch {
         setError(true);

@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
-import SideBar from "./SideBar";
 import Main from "./Main";
 import { Flex } from "@chakra-ui/react";
 import Header from "./Header"
