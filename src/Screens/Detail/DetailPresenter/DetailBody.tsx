@@ -145,7 +145,7 @@ const DetailBody: React.FC<IBodyProps> = ({
                       <Text fontSize="2xl" fontWeight="semibold">
                         Cast
                       </Text>
-                      {credits.cast.length > 5 && (
+                      {credits.cast.length > 4 && (
                         <Button
                           backgroundColor="transparent"
                           onClick={() => setFullCast(!fullCast)}
@@ -172,12 +172,14 @@ const DetailBody: React.FC<IBodyProps> = ({
                       <SlideFade in={fullCast}>
                         <Grid
                           templateColumns="repeat(auto-fill,minmax(14.4rem, 1fr))"
+                          justifyItems={"center"}
                           gap="3"
                           width="100%"
                         >
                           {credits.cast.map((data: any) => (
                             <CreditInfo
                               id={data.id}
+                              key={data.id}
                               profilePath={data.profile_path}
                               name={data.name}
                               character={data.character}
@@ -187,21 +189,40 @@ const DetailBody: React.FC<IBodyProps> = ({
                       </SlideFade>
                     ) : (
                       <Fade in={!fullCast}>
-                        <CarouselSlider
-                          wrapperHeight={{ lg: "30vh", xl: "25vh" }}
-                          buttonHeight={"12rem"}
-                        >
-                          {credits.cast.map((data: any) => (
-                            <Box mx={1.5}>
+                        {credits.cast.length > 4 ? (
+                          <CarouselSlider
+                            wrapperHeight={{ lg: "30vh", xl: "25vh" }}
+                            buttonHeight={"12rem"}
+                          >
+                            {credits.cast.map((data: any) => (
+                              <Box mx={1.5} key={data.id}>
+                                <CreditInfo
+                                  id={data.id}
+                                  profilePath={data.profile_path}
+                                  name={data.name}
+                                  character={data.character}
+                                />
+                              </Box>
+                            ))}
+                          </CarouselSlider>
+                        ) : (
+                          <Grid
+                            templateColumns="repeat(auto-fill,minmax(14.4rem, 1fr))"
+                            justifyItems={"center"}
+                            gap="3"
+                            width="100%"
+                          >
+                            {credits.cast.map((data: any) => (
                               <CreditInfo
                                 id={data.id}
+                                key={data.id}
                                 profilePath={data.profile_path}
                                 name={data.name}
                                 character={data.character}
                               />
-                            </Box>
-                          ))}
-                        </CarouselSlider>
+                            ))}
+                          </Grid>
+                        )}
                       </Fade>
                     )}
                   </CastingSection>
@@ -290,7 +311,7 @@ const DetailBody: React.FC<IBodyProps> = ({
                     <DetailInfoContainer title={"Episode Runtime"}>
                       <Flex align="center" wrap="wrap">
                         {detail.episode_run_time.map((runtime: any) => (
-                          <Text p={1} fontSize="sm">
+                          <Text p={1} fontSize="sm" key={runtime.id}>
                             {runtime}'
                           </Text>
                         ))}
@@ -341,8 +362,8 @@ const DetailBody: React.FC<IBodyProps> = ({
                 <DetailInfoContainer title={"Language"}>
                   <Flex align="center">
                     {detail.spoken_languages.map(
-                      (language: ISpokenLanguage) => (
-                        <LanguageGem>
+                      (language: ISpokenLanguage, index) => (
+                        <LanguageGem key={index}>
                           <Text fontSize="sm"> {language.iso_639_1}</Text>
                         </LanguageGem>
                       )

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectDiscoverInfoList, fetchMore } from "@redux/discoverSlice";
+import { selectDiscover,  nextPage, prevPage } from "@redux/discoverSlice";
 import { Link } from "react-router-dom";
-import { Text, Flex, Button, SlideFade, chakra } from "@chakra-ui/react";
+import { Text, Flex, Button, chakra } from "@chakra-ui/react";
 import { AutoGridLayoutSm } from "@components/Display/BasicLayouts";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import InfoCard from "@components/Display/InfoCard";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Main: React.FC = () => {
   const [sectionType, setSectionType] = useState<string | undefined>("");
-  const [isLoaded, setIsLoaded] = useState(false);
-  const mainInfo = useSelector(selectDiscoverInfoList);
+  const { discoverInfo:{ discoverList } }  = useSelector(selectDiscover)
   const pathType = usePathTypeCheck();
 
   const DiscoverContainer = chakra(Flex, {
@@ -24,7 +24,7 @@ const Main: React.FC = () => {
     },
   });
 
-  const NextPage = chakra(Button, {
+  const PageButton = chakra(Button, {
     baseStyle: {
       size: "lg",
       my: 2,
@@ -44,7 +44,12 @@ const Main: React.FC = () => {
   };
 
   const getNextPage = () => {
-    dispatch(fetchMore());
+    dispatch(nextPage());
+    scrollToTop();
+  };
+
+  const getPrevPage = () => {
+    dispatch(prevPage());
     scrollToTop();
   };
 
@@ -59,13 +64,8 @@ const Main: React.FC = () => {
       }
     };
 
-    const skeletonController = () => {
-      setIsLoaded(true);
-    };
-
     if (mounted) {
       imageTypeChecker();
-      skeletonController();
     }
 
     return () => {
@@ -76,25 +76,30 @@ const Main: React.FC = () => {
 
   return (
     <DiscoverContainer>
-      {mainInfo !== null && mainInfo.length > 0 && (
+      {discoverList !== null && discoverList.length > 0 && (
         <AutoGridLayoutSm>
-          {mainInfo.map((data: any) => (
-            <Link to={`/${sectionType}/${data.id}`}>
-              <SlideFade in={isLoaded}>
-                <InfoCard
-                  key={data.id}
-                  title={data.title || data.name}
-                  posterPath={data.poster_path || data.profile_path}
-                  rating={data.vote_average}
-                />
-              </SlideFade >
+          {discoverList.map((data: any) => (
+            <Link to={`/${sectionType}/${data.id}`} key={data.id}>
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <InfoCard
+                    title={data.title || data.name}
+                    posterPath={data.poster_path || data.profile_path}
+                    rating={data.vote_average}
+                  />
+                </motion.div>
+              </AnimatePresence>
             </Link>
           ))}
         </AutoGridLayoutSm>
       )}
-      <NextPage onClick={() => getNextPage()}>
+      <PageButton onClick={() => getNextPage()}>
         <Text>Next Page</Text>
-      </NextPage>
+      </PageButton>
     </DiscoverContainer>
   );
 };

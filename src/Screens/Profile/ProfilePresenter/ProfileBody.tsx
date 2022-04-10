@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { GridLayout } from "@components/Display/BasicLayouts";
 import DateFormatter from "@components/DateFormatter";
-import { MovieIcon,SeriesIcon }  from "@components/SvgIcons";
+import { MovieIcon, SeriesIcon } from "@components/SvgIcons";
 import { useIconColor } from "@hooks/useIconColor";
 
 interface IBodyProps {
@@ -164,12 +164,10 @@ const ProfileBody: React.FC<IBodyProps> = ({
                       Also Known As
                     </Text>
                     <Flex direction="column">
-                      {profileInfo.also_known_as.map((name: string) => (
-                        <>
-                          <Text my="0.5" fontSize="sm">
+                      {profileInfo.also_known_as.map((name: string, index) => (
+                          <Text my="0.5" fontSize="sm" key={index}> 
                             {name}
                           </Text>
-                        </>
                       ))}
                     </Flex>
                   </PersonalInfoContainer>
@@ -222,25 +220,30 @@ const ProfileBody: React.FC<IBodyProps> = ({
                   </TypeSelector>
                 )}
               </NavContainer>
-              <CreditGrid>
-                {creditType === "cast" ? (
-                  <CreditSection
-                    creditData={
-                      isMovie === true ? movieCredits.cast : seriesCredits.cast
-                    }
-                    creditType={creditType}
-                    mediaType={isMovie ? "movie" : "series"}
-                  />
-                ) : (
-                  <CreditSection
-                    creditData={
-                      isMovie === true ? movieCredits.crew : seriesCredits.crew
-                    }
-                    creditType={creditType}
-                    mediaType={isMovie ? "movie" : "series"}
-                  />
-                )}
-              </CreditGrid>
+              
+                <CreditGrid>
+                  {creditType === "cast" ? (
+                    <CreditSection
+                      creditData={
+                        isMovie === true
+                          ? movieCredits.cast
+                          : seriesCredits.cast
+                      }
+                      creditType={creditType}
+                      mediaType={isMovie ? "movie" : "series"}
+                    />
+                  ) : (
+                    <CreditSection
+                      creditData={
+                        isMovie === true
+                          ? movieCredits.crew
+                          : seriesCredits.crew
+                      }
+                      creditType={creditType}
+                      mediaType={isMovie ? "movie" : "series"}
+                    />
+                  )}
+                </CreditGrid>
             </VStack>
           </GridItem>
         </GridLayout>

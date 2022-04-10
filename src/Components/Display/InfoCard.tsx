@@ -9,7 +9,6 @@ import {
   Fade,
   useColorMode,
   chakra,
-  transition
 } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 

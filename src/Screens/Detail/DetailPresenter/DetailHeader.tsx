@@ -186,7 +186,7 @@ const DetailHeader: React.FC<IHeaderProps> = ({ detail, loading }) => {
             </HStack>
             <GenreContainer>
               {detail.genres.map((genre: IGenre) => (
-                <GenreGem genreId={genre.id} genreType={pathType} />
+                <GenreGem genreId={genre.id} key={genre.id} genreType={pathType} />
               ))}
             </GenreContainer>
           </Flex>

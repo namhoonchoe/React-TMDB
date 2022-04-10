@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-  selectDiscoverInfoGenres,
-  selectGenreFilters,
-  selectExcludeFilter,
-  selectIncludeFilter,
-  selectExcludeId,
-  selectIncludeId,
-  addToFilter,
-  removeFromFilter,
+  selectGenreFilter,
+  selectDiscover,
   setDiscoverQuery,
   resetQuery,
   resetFilter,
@@ -19,7 +13,6 @@ import { Link } from "react-router-dom";
 import CollapseBox from "@components/Display/CollapseBox";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
 import { TuneIcon } from "@components/SvgIcons";
-import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Box,
   Text,
@@ -34,9 +27,6 @@ import {
   Radio,
   VStack,
   SlideFade,
-} from "@chakra-ui/react";
-import { useIconColor } from "@hooks/useIconColor";
-import {
   Modal,
   ModalOverlay,
   ModalContent,
@@ -45,46 +35,69 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { useIconColor } from "@hooks/useIconColor";
 import { MovieIcon, SeriesIcon } from "@components/SvgIcons";
+import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
 
 export default function Filter() {
   const iconColor = useIconColor();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const dispatch = useDispatch();
   const [value, setValue] = useState<string>("1");
   const [orderDescending, setOrderDescending] = useState<boolean>(true);
   const [sortQuery, setSortQuery] = useState<string>("");
-  const colorMode = useColorMode().colorMode;
+  const { colorMode } = useColorMode();
   const path = usePathTypeCheck();
-
-  const discoverGenres = useSelector(selectDiscoverInfoGenres);
-  const filterList = useSelector(selectGenreFilters);
-  const excludeFilter = useSelector(selectExcludeFilter);
-  const includeFilter = useSelector(selectIncludeFilter);
-  const excludeIds = useSelector(selectExcludeId);
-  const includeIds = useSelector(selectIncludeId);
+  const dispatch = useDispatch();
+  const {
+    discoverInfo: { discoverGenres },
+  } = useSelector(selectDiscover);
+  const storeGenres = useSelector(selectGenreFilter);
 
   interface IDiscoverGenre {
     info: IGenre;
     type: string;
   }
 
+  const [genreFilters, setGenreFilters] = useState<Array<IDiscoverGenre>>([]);
+  const includeGenre = genreFilters.filter(
+    (filter) => filter.type === "include"
+  );
+  const excludedGenre = genreFilters.filter(
+    (filter) => filter.type === "exclude"
+  );
+
+  const includedIds = genreFilters
+    .filter((filter) => filter.type === "include")
+    .map((genre) => genre.info["id"]);
+  const excludeIds = genreFilters
+    .filter((filter) => filter.type === "exclude")
+    .map((genre) => genre.info["id"]);
+
+  const toExclude = (genre: IGenre) => {
+    setGenreFilters((genreFilters) =>
+      genreFilters.filter((genreFilter) => genreFilter.info.id !== genre.id)
+    );
+    setGenreFilters((genreFilters) => [
+      ...genreFilters,
+      {
+        info: genre,
+        type: "exclude",
+      },
+    ]);
+  };
+
   const resetCondition = () => {
+    setGenreFilters([]);
     dispatch(resetFilter());
     dispatch(resetQuery());
     dispatch(resetTrigger());
   };
 
-  const toExClude = (info: IGenre) => {
-    dispatch(removeFromFilter({ info, type: "include" }));
-    dispatch(addToFilter({ info, type: "exclude" }));
-  };
-
-  const triggerSearch = () => {
+  const triggerDiscover = () => {
     dispatch(
       setDiscoverQuery({
         sort: sortQuery,
-        genreInclude: includeIds.toString(),
+        genreInclude: includedIds.toString(),
         genreExclude: excludeIds.toString(),
       })
     );
@@ -93,7 +106,6 @@ export default function Filter() {
 
   useEffect(() => {
     let mounted = true;
-
     const sort = () => {
       if (orderDescending) {
         switch (value) {
@@ -135,12 +147,14 @@ export default function Filter() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [value, orderDescending]);
 
   const SelectorContainer = chakra(Flex, {
     baseStyle: {
       flexDirection: "row",
-      justifyContent: "space-around",
+      justifyContent: "start",
+      px: 2,
+      fontSize: "lg",
       alignItems: "center",
       width: "50%",
     },
@@ -148,11 +162,17 @@ export default function Filter() {
 
   const TypeSelector = chakra(Flex, {
     baseStyle: {
+      width: "7vw",
       fontSize: "xl",
       fontWeight: "semibold",
-      align: "center",
-      px: 3,
+      alignItems: "center",
+      justifyContent: "center",
       borderRadius: "md",
+      p: 2,
+      _hover: {
+        backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
+      },
+      transition: "0.3s",
     },
   });
 
@@ -190,9 +210,16 @@ export default function Filter() {
     baseStyle: {
       boxSize: "max-content",
       my: 3,
-      ml:2,
+      ml: 2,
+      px: 3,
+      py: 2,
+      borderRadius: "lg",
       justifyContent: "start",
       alignItems: "center",
+      _hover: {
+        backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
+      },
+      transition: "0.3s",
     },
   });
 
@@ -206,9 +233,6 @@ export default function Filter() {
 
   const ConditionContainer = chakra(Box, {
     baseStyle: {
-      _hover: {
-        backgroundColor: colorMode === "light" ? "gray.200" : "gray.600",
-      },
       width: "3xs",
       borderRadius: "lg",
       px: 2,
@@ -227,6 +251,7 @@ export default function Filter() {
       rounded: "lg",
       width: "90%",
       wrap: "wrap",
+      transition: "0.3s",
     },
   });
 
@@ -243,6 +268,8 @@ export default function Filter() {
       <IconButton
         aria-label={"Filter"}
         icon={<TuneIcon color={iconColor} />}
+        backgroundColor={"transparent"}
+        transition={"0.3s"}
         position={"absolute"}
         onClick={onOpen}
         right={"5"}
@@ -255,83 +282,100 @@ export default function Filter() {
           <ModalBody>
             <>
               <SelectorContainer>
-                <Link to="/discover/movie">
-                  <TypeSelector
-                    backgroundColor={
-                      path === "movie"
-                        ? colorMode === "light"
-                          ? "gray.200"
-                          : "gray.600"
-                        : "transparent"
-                    }
-                    onClick={() => resetCondition()}
-                  >
-                    <MovieIcon color={iconColor} />
-                    <Text ml={1} fontSize={"md"}>
-                      Movies
-                    </Text>
-                  </TypeSelector>
-                </Link>
-                <Link to="/discover/series">
-                  <TypeSelector
-                    backgroundColor={
-                      path === "series"
-                        ? colorMode === "light"
-                          ? "gray.200"
-                          : "gray.600"
-                        : "transparent"
-                    }
-                    onClick={() => resetCondition()}
-                  >
-                    <SeriesIcon color={iconColor} />
-                    <Text ml={1} fontSize={"md"}>
-                      Series
-                    </Text>
-                  </TypeSelector>
-                </Link>
+                <Text mr={2}>Discover</Text>
+                {path === "movie" ? (
+                  <Link to="/discover/series">
+                    <TypeSelector
+                      color={path === "movie" ? "blue.300" : iconColor}
+                      onClick={() => resetCondition()}
+                    >
+                      <MovieIcon
+                        color={path === "movie" ? "#63B3ED" : iconColor}
+                      />
+                      <Text ml={1} fontSize={"md"}>
+                        Movies
+                      </Text>
+                    </TypeSelector>
+                  </Link>
+                ) : (
+                  <Link to="/discover/movie">
+                    <TypeSelector
+                      color={path === "series" ? "blue.300" : iconColor}
+                      onClick={() => resetCondition()}
+                    >
+                      <SeriesIcon
+                        color={path === "series" ? "#63B3ED" : iconColor}
+                      />
+                      <Text ml={1} fontSize={"md"}>
+                        Series
+                      </Text>
+                    </TypeSelector>
+                  </Link>
+                )}
               </SelectorContainer>
               {discoverGenres.length > 0 && (
                 <CollapseBox title="Genres">
                   <GenreListContainer>
                     {discoverGenres.map((genre: IGenre) => (
                       <>
-                        {includeIds.includes(genre.id) === false &&
+                        {includedIds.includes(genre.id) === false &&
                           excludeIds.includes(genre.id) === false && (
                             <GenreContainer
+                              key={genre.id}
                               onClick={() =>
-                                dispatch(
-                                  addToFilter({ info: genre, type: "include" })
-                                )
+                                setGenreFilters((genreFilters) => [
+                                  ...genreFilters,
+                                  {
+                                    info: genre,
+                                    type: "include",
+                                  },
+                                ])
+                              }
+                              _hover={{
+                                backgroundColor:
+                                  colorMode === "light"
+                                    ? "gray.200"
+                                    : "gray.600",
+                              }}
+                            >
+                              <GenreName>{genre.name}</GenreName>
+                            </GenreContainer>
+                          )}
+
+                        {includedIds.includes(genre.id) &&
+                          excludeIds.includes(genre.id) === false && (
+                            <GenreContainer
+                              key={genre.id}
+                              onClick={() => toExclude(genre)}
+                              backgroundColor={
+                                colorMode === "light" ? "#49c480" : "#14c965"
                               }
                             >
-                              <GenreName >{genre.name}</GenreName>
+                              <GenreName color={"white"}>
+                                {genre.name}
+                              </GenreName>
                             </GenreContainer>
                           )}
 
-                        {includeIds.includes(genre.id) &&
-                          excludeIds.includes(genre.id) === false && (
-                            <GenreContainer
-                              onClick={() => toExClude(genre)}
-                              backgroundColor={colorMode === "light" ? "#49c480" : "#14c965"}
-                            >
-                              <GenreName color={"white"}>{genre.name}</GenreName>
-                            </GenreContainer>
-                          )}
-
-                        {includeIds.includes(genre.id) === false &&
+                        {includedIds.includes(genre.id) === false &&
                           excludeIds.includes(genre.id) && (
                             <GenreContainer
-                              backgroundColor={colorMode === "light" ? "red.400" : "#db4069"}
+                              key={genre.id}
+                              backgroundColor={
+                                colorMode === "light" ? "red.400" : "#db4069"
+                              }
                               onClick={() =>
-                                dispatch(
-                                  removeFromFilter({
-                                    info: genre,
-                                    type: "exclude",
-                                  })
+                                setGenreFilters((genreFilters) =>
+                                  genreFilters.filter(
+                                    (genreFilter) =>
+                                      genreFilter.info.id !== genre.id
+                                  )
                                 )
                               }
                             >
-                              <GenreName color={"white"}>{genre.name}</GenreName>
+                              <GenreName color={"white"}>
+                                {genre.name}
+                              </GenreName>
                             </GenreContainer>
                           )}
                       </>
@@ -345,7 +389,13 @@ export default function Filter() {
                 <OrderContainer
                   onClick={() => setOrderDescending(!orderDescending)}
                 >
-                  <Text fontWeight="thin" py={1} pr={1} mr={2}>
+                  <Text
+                    fontWeight="thin"
+                    py={1}
+                    pr={1}
+                    mr={2}
+                    htmlFor="Descending"
+                  >
                     Order Descending
                   </Text>
                   <TriangleDownIcon />
@@ -354,7 +404,13 @@ export default function Filter() {
                 <OrderContainer
                   onClick={() => setOrderDescending(!orderDescending)}
                 >
-                  <Text fontWeight="thin" py={1} pr={1} mr={2}>
+                  <Text
+                    fontWeight="thin"
+                    py={1}
+                    pr={1}
+                    mr={2}
+                    htmlFor="Ascending"
+                  >
                     Order Ascending
                   </Text>
                   <TriangleUpIcon />
@@ -397,19 +453,20 @@ export default function Filter() {
                       alignItems="center"
                       flexWrap="wrap"
                     >
-                      {includeFilter.map((filter: IDiscoverGenre) => (
+                      {includeGenre.map((genre: IDiscoverGenre, index) => (
                         <GenreFilterContainer
+                          key={index}
                           onClick={() =>
-                            dispatch(
-                              removeFromFilter({
-                                info: filter.info,
-                                type: "include",
-                              })
+                            setGenreFilters((genreFilters) =>
+                              genreFilters.filter(
+                                (genreFilter) =>
+                                  genreFilter.info.id !== genre.info.id
+                              )
                             )
                           }
                         >
                           <Text fontSize="md" fontWeight="light" mx={2} my={1}>
-                            {filter.info.name}
+                            {genre.info.name}
                           </Text>
                         </GenreFilterContainer>
                       ))}
@@ -424,19 +481,20 @@ export default function Filter() {
                       alignItems="center"
                       flexWrap="wrap"
                     >
-                      {excludeFilter.map((filter: any) => (
+                      {excludedGenre.map((genre: any, index) => (
                         <GenreFilterContainer
+                          key={index}
                           onClick={() =>
-                            dispatch(
-                              removeFromFilter({
-                                info: filter.info,
-                                type: "exclude",
-                              })
+                            setGenreFilters((genreFilters) =>
+                              genreFilters.filter(
+                                (genreFilter) =>
+                                  genreFilter.info.id !== genre.info.id
+                              )
                             )
                           }
                         >
                           <Text fontSize="md" fontWeight="light" mx={2} my={1}>
-                            {filter.info.name}
+                            {genre.info.name}
                           </Text>
                         </GenreFilterContainer>
                       ))}
@@ -448,9 +506,9 @@ export default function Filter() {
           </ModalBody>
 
           <ModalFooter>
-            <SlideFade in={filterList.length > 0}>
+            <SlideFade in={genreFilters.length > 0}>
               <Flex justify="center" p={1}>
-                <Button width="15vw" onClick={() => triggerSearch()}>
+                <Button width="10vw" onClick={() => triggerDiscover()}>
                   <Text>Discover</Text>
                 </Button>
               </Flex>

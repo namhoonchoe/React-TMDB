@@ -2,10 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import InfoCard from "@components/Display/InfoCard";
 import { Link } from "react-router-dom";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Button } from "@chakra-ui/react";
+import { selectPage, nextPage, prevPage } from "@redux/peopleSlice";
 import { AutoGridLayoutSm } from "@components/Display/BasicLayouts";
 import LoadingSpinner from "@components/LoadingSpinner";
 import ErrorPopUp from "@components/ErrorPopUp";
+import { useSelector, useDispatch } from "react-redux";
 
 interface IPersonProps {
   popular: Array<IPersonData>;
@@ -18,6 +20,8 @@ const PersonPresenter: React.FC<IPersonProps> = ({
   error,
   loading,
 }) => {
+  const { page } = useSelector(selectPage)
+  const dispatch = useDispatch()
   return (
     <>
       {loading ? (
@@ -55,9 +59,8 @@ const PersonPresenter: React.FC<IPersonProps> = ({
             {popular !== null && popular.length > 0 && (
               <AutoGridLayoutSm>
                 {popular.map((data: IPersonData) => (
-                  <Link to={`/profile/${data.id}`}>
+                  <Link to={`/profile/${data.id}`} key={data.id}>
                     <InfoCard
-                      key={data.id}
                       title={data.name}
                       posterPath={data.profile_path}
                     />
@@ -65,6 +68,10 @@ const PersonPresenter: React.FC<IPersonProps> = ({
                 ))}
               </AutoGridLayoutSm>
             )}
+            <Flex alignItems={"center"} justifyContent={"space-between"}  mt={2}>
+              {page > 1 && <Button onClick={() => dispatch(prevPage())}>Prev Page</Button>}
+              <Button onClick={() => dispatch(nextPage())} ml={1}>Next Page</Button>
+            </Flex>
           </Flex>
         </>
       )}

@@ -25,18 +25,17 @@ const HomePresenter: React.FC<IHomeProps> = ({
   error,
   loading,
 }) => {
-
-  const ExploreLink = chakra(Text,{
-    baseStyle:{
-      pb:2,
-      fontWeight:"semibold",
-      fontSize:"sm",
-      transition:`color  0.8s`,
+  const ExploreLink = chakra(Text, {
+    baseStyle: {
+      pb: 2,
+      fontWeight: "semibold",
+      fontSize: "sm",
+      transition: `color  0.8s`,
       _hover: {
-        color:   "blue.400",
+        color: "blue.400",
       },
-    }
-  })
+    },
+  });
 
   return (
     <>
@@ -68,7 +67,7 @@ const HomePresenter: React.FC<IHomeProps> = ({
             )}
 
             {trendingMovies.length > 0 && (
-              <VStack alignItems={"start"} >
+              <VStack alignItems={"start"}>
                 <Flex alignItems={"flex-end"} left={2}>
                   <Text fontSize="3xl" mr={2}>
                     Today's Trending Movies
@@ -77,8 +76,15 @@ const HomePresenter: React.FC<IHomeProps> = ({
                     <Link to="/movie">Explore Movies</Link>
                   </ExploreLink>
                 </Flex>
-                <Flex width="90vw" alignItems={"center"} justifyContent={"center"}> 
-                  <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
+                <Flex
+                  width="90vw"
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                >
+                  <CarouselSlider
+                    wrapperHeight={{ lg: "50vh", xl: "40vh" }}
+                    buttonHeight={"15.4rem"}
+                  >
                     {trendingMovies.map((data: IMovieData) => (
                       <Link to={`/${"movie"}/${data.id}`} key={data.id}>
                         <Box mx={1.5}>
@@ -105,8 +111,15 @@ const HomePresenter: React.FC<IHomeProps> = ({
                     <Link to="/series">Explore TvSeries</Link>
                   </ExploreLink>
                 </Flex>
-                <Flex width={"90vw"} alignItems={"center"} justifyContent={"center"}>
-                  <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
+                <Flex
+                  width={"90vw"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                >
+                  <CarouselSlider
+                    wrapperHeight={{ lg: "50vh", xl: "40vh" }}
+                    buttonHeight={"15.4rem"}
+                  >
                     {trendingSeries.map((data: ISeriesData) => (
                       <Link to={`/${"series"}/${data.id}`} key={data.id}>
                         <Box mx={1.5}>

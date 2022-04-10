@@ -3,15 +3,15 @@ import InfoCard from "./InfoCard";
 import { Link } from "react-router-dom";
 import {
   Button,
-  IconButton,
   chakra,
   Text,
   Flex,
   Grid,
-  SlideFade ,
+  SlideFade,
   Fade,
 } from "@chakra-ui/react";
 import { usePathTypeCheck } from "@hooks/usePathTypeCheck";
+
 import CarouselSlider from "./CarouselSlider";
 
 interface ICollapseSectionProps {
@@ -45,8 +45,8 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
   const GridSection = chakra(Grid, {
     baseStyle: {
       gridTemplateColumns: `repeat(auto-fill,minmax(14rem, 1fr))`,
-      justifyContent: "center",
-      alignContent:"start",
+      justifyItems: "center",
+      alignContent: "center",
       width: "100%",
     },
   });
@@ -82,7 +82,12 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
   }, [pathType, sectionInfoType]);
 
   return (
-    <Flex direction={"column"} width="100%" height={"max-content"}>
+    <Flex
+      direction={"column"}
+      justifyContent={"center"}
+      width="100%"
+      height={"max-content"}
+    >
       <CollapseControl>
         <Text fontSize="2xl" mb={3} fontWeight="semibold">
           {title}
@@ -110,10 +115,13 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
               </Link>
             ))}
           </GridSection>
-        </SlideFade >
+        </SlideFade>
       ) : (
         <Fade in={!seeAll}>
-          <CarouselSlider wrapperHeight={{lg:"50vh", xl: "40vh"}} buttonHeight={"15.4rem"}>
+          <CarouselSlider
+            wrapperHeight={{ lg: "50vh", xl: "40vh" }}
+            buttonHeight={"15.4rem"}
+          >
             {sectionInfos.map((data: any) => (
               <Link to={`/${sectionType}/${data.id}`} key={data.id}>
                 <InfoCard
