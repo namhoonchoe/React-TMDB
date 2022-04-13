@@ -14,6 +14,7 @@ export const PresenterLayout = chakra(Flex, {
     width: "90vw",
     height:"100%",
     mt: 2,
+    mb:4
   },
 });
 
@@ -29,6 +30,7 @@ export const AutoGridLayoutSm = chakra(Grid, {
   baseStyle: {
     gridTemplateColumns: "repeat(auto-fill,minmax(10.5rem, 1fr))",
     gridColumnGap: "6",
+    gridRowGap: "6",
     width: "100%",
   },
 });

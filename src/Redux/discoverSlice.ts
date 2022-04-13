@@ -24,6 +24,7 @@ interface ITriggerPayload {
   sort: string | undefined;
   genreInclude: string | undefined;
   genreExclude: string | undefined;
+  page:number
 }
 
 interface IState {
@@ -109,9 +110,9 @@ const discoverSlice = createSlice({
     },
 
     prevPage:(state: IState) => {
-      const nextPage = state.discoverQuery.page - 1;
-      const getNext = { ...state.discoverQuery, page: nextPage };
-      return { ...state, discoverQuery: getNext };
+      const prevPage = state.discoverQuery.page - 1;
+      const getPrev = { ...state.discoverQuery, page: prevPage };
+      return { ...state, discoverQuery: getPrev };
     },
 
     triggerRender: (state: IState) => {

@@ -56,6 +56,7 @@ const Section: React.FC<ISectionInfo> = ({
           <Grid
             templateColumns="repeat(auto-fill,minmax(12rem, 1fr))"
             columnGap={{ lg: "1", xl: "6" }}
+            rowGap={6}
             alignItems="center"
           >
             {sectionInfos.map((data: any) => (

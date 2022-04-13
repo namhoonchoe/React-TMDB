@@ -51,7 +51,6 @@ export default function Filter() {
   const {
     discoverInfo: { discoverGenres },
   } = useSelector(selectDiscover);
-  const storeGenres = useSelector(selectGenreFilter);
 
   interface IDiscoverGenre {
     info: IGenre;
@@ -99,6 +98,7 @@ export default function Filter() {
         sort: sortQuery,
         genreInclude: includedIds.toString(),
         genreExclude: excludeIds.toString(),
+        page:1
       })
     );
     dispatch(triggerRender());

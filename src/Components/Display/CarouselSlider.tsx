@@ -1,20 +1,20 @@
 import React, { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { motion, AnimatePresence } from "framer-motion";
-import { chakra, Flex, IconButton } from "@chakra-ui/react";
+import { AnimatePresence } from "framer-motion";
+import { chakra, Flex, IconButton, useColorMode } from "@chakra-ui/react";
 
 interface ICarouselProps {
   wrapperHeight: any;
-  buttonHeight?:string
+  buttonHeight?: string;
 }
 
 const CarouselSlider: React.FC<ICarouselProps> = ({
   children,
   wrapperHeight,
-  buttonHeight
+  buttonHeight,
 }) => {
-  const sliderRef = useRef(null);
-
+  const sliderRef = useRef(null) as any;
+  const { colorMode } = useColorMode();
   const scrollToR = (
     element: any,
     speed: number,
@@ -53,6 +53,7 @@ const CarouselSlider: React.FC<ICarouselProps> = ({
       width: "98%",
       justifyContent: "start",
       alignItems: "start",
+      zIndex: 10,
     },
   });
 
@@ -66,21 +67,56 @@ const CarouselSlider: React.FC<ICarouselProps> = ({
     },
   });
 
+  const ButtonWrapper = chakra(Flex, {
+    baseStyle: {
+      justifyContent: "space-between",
+      width: "100%",
+      height: wrapperHeight,
+      position: "absolute",
+      top: 0,
+      left: 0,
+    },
+  });
+
+  const SliderButton = chakra(IconButton, {
+    baseStyle: {
+      color: colorMode === "light" ? "gray.700" : "white",
+      _groupHover: {
+        backgroundColor: colorMode === "light" ? "gray.800" : "gray.600",
+        color: "white",
+      },
+      opacity: "0.8",
+      height: buttonHeight,
+      backgroundColor: "transparent",
+      transition: "0.4s",
+    },
+  });
+
   return (
     <AnimatePresence>
       <SliderWrapper>
-        <IconButton
-          aria-label={"To Left"}
-          icon={<ChevronLeftIcon />}
-          onClick={() => {
-            scrollTol(sliderRef.current, 25, 250, -15);
-          }}
-          height={buttonHeight}
-          backgroundColor={"transparent"}
-          position={"absolute"}
-          top={2}
-          left={-10}
-        />
+        <ButtonWrapper role={"group"}>
+          <SliderButton
+            aria-label={"To Left"}
+            icon={<ChevronLeftIcon fontSize={"24px"} fontWeight={"semibold"} />}
+            onClick={() => {
+              scrollTol(sliderRef.current, 25, 250, -15);
+            }}
+            top={2}
+            left={-10}
+          />
+          <SliderButton
+            aria-label={"To right"}
+            icon={
+              <ChevronRightIcon fontSize={"24px"} fontWeight={"semibold"} />
+            }
+            onClick={() => {
+              scrollToR(sliderRef.current, 25, 250, -15);
+            }}
+            top={2}
+            left={5}
+          />
+        </ButtonWrapper>
 
         <Slider
           ref={sliderRef}
@@ -92,18 +128,6 @@ const CarouselSlider: React.FC<ICarouselProps> = ({
         >
           {children}
         </Slider>
-        <IconButton
-          aria-label={"To right"}
-          icon={<ChevronRightIcon />}
-          height={buttonHeight}
-          onClick={() => {
-            scrollToR(sliderRef.current, 25, 250, -15);
-          }}
-          backgroundColor={"transparent"}
-          position={"absolute"}
-          top={2}
-          right={-5}
-        />
       </SliderWrapper>
     </AnimatePresence>
   );

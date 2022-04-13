@@ -63,16 +63,16 @@ const ProfileHeader: React.FC<IHeaderProps> = ({
 
   return (
     <HeaderLayout>
-      <HStack width="80%" height="60vh">
+      <HStack width={"80%"} height={"60vh"}>
         <InfoImage
-          width="20%"
-          height="80%"
-          imageType="portrait"
+          width={"20%"}
+          height={"80%"}
+          imageType={"portrait"}
           imageSource={profileSource}
-          borderRadius="lg"
+          borderRadius={"lg"}
         />
         <InfoLayout>
-          <Text fontSize="2xl" fontWeight="semibold">
+          <Text fontSize={"2xl"} fontWeight={"semibold"}>
             {name}
           </Text>
           {bioGraphy !== "" &&  bioGraphy !== undefined && (
@@ -80,7 +80,7 @@ const ProfileHeader: React.FC<IHeaderProps> = ({
               {bioGraphy.length > 200 ? (
                 <BiographyLayout>
                   <BiographyContainer>
-                    <Text fontSize={"lg"} fontWeight="semibold">
+                    <Text fontSize={"lg"} fontWeight={"semibold"}>
                       Biography
                     </Text>
                     <ModalBox modalContent={bioGraphy} />

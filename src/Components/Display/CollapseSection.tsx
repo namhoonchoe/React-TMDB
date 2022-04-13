@@ -45,6 +45,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
   const GridSection = chakra(Grid, {
     baseStyle: {
       gridTemplateColumns: `repeat(auto-fill,minmax(14rem, 1fr))`,
+      rowGap:10,
       justifyItems: "center",
       alignContent: "center",
       width: "100%",
@@ -89,7 +90,7 @@ const CollapseSection: React.FC<ICollapseSectionProps> = ({
       height={"max-content"}
     >
       <CollapseControl>
-        <Text fontSize="2xl" mb={3} fontWeight="semibold">
+        <Text fontSize="2xl" mb={3} pl={2} fontWeight="semibold">
           {title}
         </Text>
         {seeAll ? (

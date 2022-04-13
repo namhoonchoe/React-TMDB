@@ -24,7 +24,7 @@ const PresenterLayout: React.FC<IDiscoverProps> = ({ loading, error }) => {
           <LoadingSpinner />
         </>
       ) : (
-        <Flex flexDirection={"column"} width={"92vw"} >
+        <Flex flexDirection={"column"} width={"92vw"} mb={4}>
           <Header/>
           <Main />
         </Flex>

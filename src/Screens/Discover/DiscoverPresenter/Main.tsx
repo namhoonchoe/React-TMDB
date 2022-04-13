@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectDiscover,  nextPage, prevPage } from "@redux/discoverSlice";
+import { selectDiscover, nextPage, prevPage } from "@redux/discoverSlice";
 import { Link } from "react-router-dom";
 import { Text, Flex, Button, chakra } from "@chakra-ui/react";
 import { AutoGridLayoutSm } from "@components/Display/BasicLayouts";
@@ -10,7 +10,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Main: React.FC = () => {
   const [sectionType, setSectionType] = useState<string | undefined>("");
-  const { discoverInfo:{ discoverList } }  = useSelector(selectDiscover)
+  const {
+    discoverInfo: { discoverList },
+    discoverQuery: { page },
+  } = useSelector(selectDiscover);
   const pathType = usePathTypeCheck();
 
   const DiscoverContainer = chakra(Flex, {
@@ -97,9 +100,16 @@ const Main: React.FC = () => {
           ))}
         </AutoGridLayoutSm>
       )}
-      <PageButton onClick={() => getNextPage()}>
-        <Text>Next Page</Text>
-      </PageButton>
+      <Flex alignItems={"center"} justifyContent={"space-between"} mt={2}>
+        {page > 1 && (
+          <PageButton onClick={() => getPrevPage()} mr={2}>
+            <Text>Prev Page</Text>
+          </PageButton>
+        )}
+        <PageButton onClick={() => getNextPage()}>
+          <Text>Next Page</Text>
+        </PageButton>
+      </Flex>
     </DiscoverContainer>
   );
 };

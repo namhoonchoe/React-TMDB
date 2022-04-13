@@ -161,7 +161,7 @@ const InfoCard: React.FC<IInfoProps> = ({ title, posterPath, rating }) => {
                 )}
               </>
             ) : (
-              <TitleInfo>
+              <TitleInfo fontSize={"sm"}>
                 {title}
               </TitleInfo>
             )}
